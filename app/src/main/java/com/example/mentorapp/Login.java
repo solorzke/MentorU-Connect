@@ -33,6 +33,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Button signin = (Button) findViewById(R.id.signInBtn);
+        Button register = (Button) findViewById(R.id.registerBtn);
         TextView forgotPassword = (TextView) findViewById(R.id.forgotPwdText);
         TextView help = (TextView) findViewById(R.id.helpText);
 
@@ -108,6 +109,18 @@ public class Login extends AppCompatActivity {
             }
         });
         //~~~~~~~~~~FINISH: SIGN IN BUTTON PROCESS~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        //~~~~~~~~~~START: REGISTRATION BUTTON PROCESS~~~~~~~~~~~~~~~~~~~~~~~~~
+
+        register.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent goToRegister = new Intent(getApplicationContext(), Registration.class);
+                startActivity(goToRegister);
+            }
+        });
+
+        //~~~~~~~~~~FINISH: REGISTRATION BUTTON PROCESS~~~~~~~~~~~~~~~~~~~~~~~~~
 
         //~~~~~~~~~~START: FORGOT_PASSWORD BUTTON PROCESS~~~~~~~~~~~~~~~~~~~~~~~~~
 
