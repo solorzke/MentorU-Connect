@@ -24,7 +24,7 @@ import java.util.Map;
 
 public class Login extends AppCompatActivity {
 
-    AlertDialog alert;
+    AlertDialog alert, SERVER_ERROR;
     String ucid;
     String pw;
 
@@ -36,6 +36,27 @@ public class Login extends AppCompatActivity {
         Button register = (Button) findViewById(R.id.registerBtn);
         TextView forgotPassword = (TextView) findViewById(R.id.forgotPwdText);
         TextView help = (TextView) findViewById(R.id.helpText);
+
+        //~~~~~~~~~~CREATE AN ALERT MESSAGE~~~~~~~~~~~~~~~~~~~~~~~~~
+        alert = new AlertDialog.Builder(Login.this).create();
+        alert.setTitle("Alert");
+        alert.setMessage("You've entered the incorrect UCID/Password. Try again.");
+        alert.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which){
+                dialog.dismiss();
+            }
+        });
+
+        //~~~~~~~~~~CREATE A SERVER_ERROR MESSAGE~~~~~~~~~~~~~~~~~~~~~~~~~
+        SERVER_ERROR = new AlertDialog.Builder(Login.this).create();
+        SERVER_ERROR.setTitle("Error 500: Internal Server Error");
+        SERVER_ERROR.setMessage("Couldn't connect with the NJIT server. Try Again.");
+        SERVER_ERROR.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
 
         //~~~~~~~~~~START: 'SIGN IN' IS PRESSED, BEGIN VALIDATE/VERIFY PROCESS~~~~~~~~~~~~~~~~~~~~~~~~~
         signin.setOnClickListener(new View.OnClickListener() {
@@ -50,17 +71,6 @@ public class Login extends AppCompatActivity {
 
                 Validate validation = new Validate(ucid, pw);
 
-                //~~~~~~~~~~CREATE AN ALERT MESSAGE~~~~~~~~~~~~~~~~~~~~~~~~~
-                alert = new AlertDialog.Builder(Login.this).create();
-                alert.setTitle("Alert");
-                alert.setMessage("You've entered the incorrect UCID/Password. Try again.");
-                alert.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener(){
-                    public void onClick(DialogInterface dialog, int which){
-                        dialog.dismiss();
-                    }
-                });
-
-
                 //~~~~~~~~~~VALIDATE/VERIFY THIS LOGIN DATA~~~~~~~~~~~~~~~~~~~~~~~~~
                 if(validation.validation()){
                     RequestQueue queue = Volley.newRequestQueue(Login.this);
@@ -70,7 +80,7 @@ public class Login extends AppCompatActivity {
                         public void onResponse(String response) {
                             if(response.contains("GOODSTUDENT")){
                                 Intent goToHome = new Intent(getApplicationContext(), Home.class);
-                                goToHome.putExtra("com.example.mentorship_app.USER", "Response is: "+response);
+                                goToHome.putExtra("com.example.mentorapp.USER", "Response is: "+response);
                                 startActivity(goToHome);
                             }
                             else if(response.contains("BADSTUDENT")){
@@ -83,7 +93,7 @@ public class Login extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-
+                            SERVER_ERROR.show();
                         }
                     }){
                         @Override
