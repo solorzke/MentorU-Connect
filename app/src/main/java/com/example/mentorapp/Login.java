@@ -1,6 +1,8 @@
 package com.example.mentorapp;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -80,7 +82,10 @@ public class Login extends AppCompatActivity {
                         public void onResponse(String response) {
                             if(response.contains("GOODSTUDENT")){
                                 Intent goToHome = new Intent(getApplicationContext(), Home.class);
-                                goToHome.putExtra("com.example.mentorapp.USER", "Response is: "+response);
+                                SharedPreferences.Editor editor = getSharedPreferences("USER", MODE_PRIVATE).edit();
+                                editor.putString("ucid", ucid);
+                                editor.apply();
+                                goToHome.putExtra("com.example.mentorapp.CONFIRM", "true");
                                 startActivity(goToHome);
                             }
                             else if(response.contains("BADSTUDENT")){
