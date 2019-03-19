@@ -95,8 +95,8 @@ public class Registration extends AppCompatActivity {
                         System.out.println("******************************* HERE AFTER REQUEST START **************************************");
 
                         if (response.contains("REGISTERED")) {
-                            Intent gth = new Intent(getApplicationContext(),Home.class);
-                            gth.putExtra("com.example.mentorapp.USER",response);
+                            Intent gth = new Intent(getApplicationContext(),SideBar.class);
+                            gth.putExtra("com.example.mentorapp.CONFIRM","true");
                             startActivity(gth);
 
                         }
