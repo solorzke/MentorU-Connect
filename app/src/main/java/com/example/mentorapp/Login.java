@@ -1,5 +1,4 @@
 package com.example.mentorapp;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +19,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.model.Validate;
 
-import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,20 +75,24 @@ public class Login extends AppCompatActivity {
                 if(validation.validation()){
                     RequestQueue queue = Volley.newRequestQueue(Login.this);
                     String url = "https://web.njit.edu/~kas58/mentorDemo/login.php";
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+                    StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+                            new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
                             if(response.contains("GOODSTUDENT")){
-                                Intent goToHome = new Intent(getApplicationContext(), Home.class);
-                                SharedPreferences.Editor editor = getSharedPreferences("USER", MODE_PRIVATE).edit();
+                                Intent goToHome = new Intent(getApplicationContext(), SideBar.class);
+                                SharedPreferences.Editor editor = getSharedPreferences("USER",
+                                        MODE_PRIVATE).edit();
                                 editor.putString("ucid", ucid);
                                 editor.apply();
                                 goToHome.putExtra("com.example.mentorapp.CONFIRM", "true");
                                 startActivity(goToHome);
                             }
                             else if(response.contains("BADSTUDENT")){
-                                System.out.println("*****************CONNECTION TO PHP SCRIPT WAS SUCCESSFUL BUT RETURNED FALSE*************************");
-                                System.out.println("*****************RESPONSE: " + response + "UCID: "+ucid+" PW: "+pw+" *************************");
+                                System.out.println("*****************CONNECTION TO PHP SCRIPT WAS " +
+                                        "SUCCESSFUL BUT RETURNED FALSE*************************");
+                                System.out.println("*****************RESPONSE: " + response +
+                                        "UCID: "+ucid+" PW: "+pw+" *************************");
 
                                 alert.show();
                             }
@@ -118,7 +120,8 @@ public class Login extends AppCompatActivity {
                 }
 
                 else{
-                    System.out.println("************************VALIDATION DID NOT GO THROUGH************************");
+                    System.out.println("************************VALIDATION " +
+                            "DID NOT GO THROUGH************************");
                     alert.show();
                 }
             }
