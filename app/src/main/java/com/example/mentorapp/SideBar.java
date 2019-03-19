@@ -38,7 +38,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).commit();
-        navigationView.setCheckedItem(R.id.account);
+        navigationView.setCheckedItem(R.id.home_item);
 
 
     }
@@ -46,8 +46,13 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
-            case R.id.account:
+            case R.id.home_item:
                 title.setText("Home");
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new HomeFragment()).commit();
+                break;
+            case R.id.account:
+                title.setText("Account");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HomeFragment()).commit();
                 break;
