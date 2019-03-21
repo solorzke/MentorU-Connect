@@ -178,4 +178,10 @@ public class Login extends AppCompatActivity {
 
         //~~~~~~~~~~FINISH: HELP_CENTER BUTTON PROCESS~~~~~~~~~~~~~~~~~~~~~~~~~
     }
+
+    @Override
+    public void onBackPressed() {
+        //YOU CANNOT GO BACK TO PREVIOUS PAGES ONCE YOU 'LOG_OUT', THUS DISABLING 'BACK-BUTTON' HERE
+    }
 }
+
