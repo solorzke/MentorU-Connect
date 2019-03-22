@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -20,6 +22,14 @@ import org.w3c.dom.Text;
 
 public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+    /*
+    THIS CLASS COVERS THE SIDEBAR DRAWER OF THE APP. IT'S CONNECTED WITH BOTH SIDEBAR.XML
+    AND SIDEBAR_HEADER.XML TO CREATE THE NAVIGATION VIEW FOR IT. HERE ARE THE MENU ITEMS THAT TAKE YOU
+    TO DIFFERENT FRAGMENTS TO VISIT WHEN SELECTED.
+
+    SIDEBAR CODE IS RELEVANT WHEN THE DRAWER IS OPENED.
+     */
+
     private DrawerLayout drawer;
     TextView title, user_name, user_email;
     SharedPreferences SESSION;
@@ -31,7 +41,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
         SESSION = getSharedPreferences("USER", MODE_PRIVATE);
 
-        //POSITION THE TOOLBAR'S TITLE TO THE FAR RIGHT
+        /* POSITION THE TOOLBAR'S TITLE TO THE FAR RIGHT */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -41,7 +51,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         drawer = findViewById(R.id.drawer_layout);
         NavigationView navigationView = findViewById(R.id.nav_view);
 
-        //UPDATE HEADER NAME AND EMAIL OF THE USER IN SESSION
+        /* UPDATE HEADER NAME AND EMAIL OF THE USER IN SESSION */
         View headerView = navigationView.getHeaderView(0);
         user_name = (TextView) headerView.findViewById(R.id.header_name);
         String header_name = SESSION.getString("fname", null) + " " +
@@ -51,21 +61,20 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         String header_email = SESSION.getString("email", null);
         user_email.setText(header_email);
 
-        //SET ACTIONBAR HAMBURGER TO TOGGLE THE SIDEBAR NAVIGATION WHEN PRESSED
+        /* SET ACTION_BAR HAMBURGER TO TOGGLE THE SIDEBAR NAVIGATION WHEN PRESSED */
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        //THIS IS THE DEFAULT FRAGMENT TO OPEN INTO WHEN YOU LOGIN IN - HOME
+        /* THIS IS THE DEFAULT FRAGMENT TO OPEN INTO WHEN YOU LOGIN IN - HOME */
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).commit();
         navigationView.setCheckedItem(R.id.home_item);
-
     }
 
-    //OPEN A FRAGMENT IF A MENU ITEM IS SELECTED FROM THE SIDE BAR MENU
+    /* OPEN A FRAGMENT IF A MENU ITEM IS SELECTED FROM THE SIDE BAR MENU */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
@@ -80,8 +89,11 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                         new HomeFragment()).commit();
                 break;
             case R.id.log_out:
-                Intent i = new Intent(getApplicationContext(), Login.class);
-                startActivity(i);
+                Intent intent = new Intent(this, Login.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
+                finish();
                 break;
             case R.id.well_being:
                 title.setText("Well Being");
@@ -89,11 +101,11 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                         new HomeFragment()).commit();
                 break;
         }
-
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
 
+    /* CLOSE SIDE_BAR DRAWER IF OPENED W/ BACK_BUTTON */
     @Override
     public void onBackPressed() {
         if(drawer.isDrawerOpen(GravityCompat.START)){
@@ -102,6 +114,6 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         else{
             super.onBackPressed();
         }
-        super.onBackPressed();
     }
+
 }
