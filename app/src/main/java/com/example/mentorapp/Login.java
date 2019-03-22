@@ -88,7 +88,7 @@ public class Login extends AppCompatActivity {
                                 startActivity(goToHome);
                                 ucid_et.getText().clear();
                                 pw_et.getText().clear();
-                                finish();
+
                             }
                             else if(response.contains("BADSTUDENT")){
                                 System.out.println("*****************CONNECTION TO PHP SCRIPT WAS " +

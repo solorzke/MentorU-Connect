@@ -65,6 +65,7 @@ public class JSON extends AppCompatActivity {
                                 editor.putString("fname", student.getString("fname"));
                                 editor.putString("lname", student.getString("lname"));
                                 editor.putString("email", student.getString("email"));
+                                editor.putString("firstEntry", "true");
                                 editor.apply();
 
                             }catch (JSONException e){
@@ -83,6 +84,7 @@ public class JSON extends AppCompatActivity {
         /* 1. END */
 
         startActivity(new Intent(getApplicationContext(), SideBar.class));
+        finish();
 
     }
 

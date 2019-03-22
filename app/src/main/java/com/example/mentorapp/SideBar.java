@@ -1,7 +1,9 @@
 package com.example.mentorapp;
 
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
@@ -33,12 +35,14 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     private DrawerLayout drawer;
     TextView title, user_name, user_email;
     SharedPreferences SESSION;
+    SharedPreferences.Editor editor;
+    AlertDialog RETURN_TO_LOGIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sidebar);
-
+        NavigationView navigationView = findViewById(R.id.nav_view);
         SESSION = getSharedPreferences("USER", MODE_PRIVATE);
 
         /* POSITION THE TOOLBAR'S TITLE TO THE FAR RIGHT */
@@ -47,9 +51,6 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         title = (TextView) toolbar.findViewById(R.id.action_bar_title);
         title.setText("Home");
-
-        drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
 
         /* UPDATE HEADER NAME AND EMAIL OF THE USER IN SESSION */
         View headerView = navigationView.getHeaderView(0);
@@ -62,6 +63,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         user_email.setText(header_email);
 
         /* SET ACTION_BAR HAMBURGER TO TOGGLE THE SIDEBAR NAVIGATION WHEN PRESSED */
+        drawer = findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -108,8 +110,32 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     /* CLOSE SIDE_BAR DRAWER IF OPENED W/ BACK_BUTTON */
     @Override
     public void onBackPressed() {
-        if(drawer.isDrawerOpen(GravityCompat.START)){
+        if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+        }
+        else if (SESSION.getString("firstEntry", null).equals("true")) {
+            RETURN_TO_LOGIN = new AlertDialog.Builder(this).create();
+            RETURN_TO_LOGIN.setTitle("Alert");
+            RETURN_TO_LOGIN.setMessage("You're about to sign out back to the sign in screen. Do you " +
+                    "want to proceed?");
+            RETURN_TO_LOGIN.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes", new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                    Intent intent = new Intent(SideBar.this, Login.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent);
+                    finish();
+                }
+            });
+            RETURN_TO_LOGIN.setButton(AlertDialog.BUTTON_NEGATIVE, "No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            RETURN_TO_LOGIN.show();
         }
         else{
             super.onBackPressed();
