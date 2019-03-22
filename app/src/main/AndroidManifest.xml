@@ -17,6 +17,7 @@
         <activity android:name=".Registration" />
         <activity android:name=".HelpCenter" />
         <activity android:name=".SideBar"/>
+        <activity android:name=".model.JSON" />
         <activity
             android:name=".Login"
             android:screenOrientation="portrait">

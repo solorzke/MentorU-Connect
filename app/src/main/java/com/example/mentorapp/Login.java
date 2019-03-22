@@ -17,6 +17,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mentorapp.model.JSON;
 import com.example.mentorapp.model.Validate;
 
 import java.util.HashMap;
@@ -63,8 +64,8 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                EditText ucid_et = (EditText) findViewById(R.id.ucidText);
-                EditText pw_et = (EditText) findViewById(R.id.pwText);
+                final EditText ucid_et = (EditText) findViewById(R.id.ucidText);
+                final EditText pw_et = (EditText) findViewById(R.id.pwText);
 
                 ucid = ucid_et.getText().toString();
                 pw = pw_et.getText().toString();
@@ -80,13 +81,14 @@ public class Login extends AppCompatActivity {
                         @Override
                         public void onResponse(String response) {
                             if(response.contains("GOODSTUDENT")){
-                                Intent goToHome = new Intent(getApplicationContext(), SideBar.class);
-                                SharedPreferences.Editor editor = getSharedPreferences("USER",
-                                        MODE_PRIVATE).edit();
-                                editor.putString("ucid", ucid);
-                                editor.apply();
+                                Intent goToHome = new Intent(getApplicationContext(), JSON.class);
+
+                                goToHome.putExtra("com.example.mentorapp.UCID", ucid);
                                 goToHome.putExtra("com.example.mentorapp.CONFIRM", "true");
                                 startActivity(goToHome);
+                                ucid_et.getText().clear();
+                                pw_et.getText().clear();
+                                finish();
                             }
                             else if(response.contains("BADSTUDENT")){
                                 System.out.println("*****************CONNECTION TO PHP SCRIPT WAS " +
