@@ -37,12 +37,13 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     SharedPreferences SESSION;
     SharedPreferences.Editor editor;
     AlertDialog RETURN_TO_LOGIN;
+    NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sidebar);
-        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView = findViewById(R.id.nav_view);
         SESSION = getSharedPreferences("USER", MODE_PRIVATE);
 
         /* POSITION THE TOOLBAR'S TITLE TO THE FAR RIGHT */
@@ -72,7 +73,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
         /* THIS IS THE DEFAULT FRAGMENT TO OPEN INTO WHEN YOU LOGIN IN - HOME */
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).commit();
+                new HomeFragment()).addToBackStack(null).commit();
         navigationView.setCheckedItem(R.id.home_item);
     }
 
@@ -94,13 +95,15 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 Intent intent = new Intent(this, Login.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                getSupportFragmentManager().popBackStack();
                 startActivity(intent);
                 finish();
                 break;
+
             case R.id.well_being:
                 title.setText("Well Being");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).commit();
+                        new WBFragment()).addToBackStack(null).commit();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -137,8 +140,12 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
             RETURN_TO_LOGIN.show();
         }
-        else{
-            super.onBackPressed();
+        else {
+            if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+                getSupportFragmentManager().popBackStack();
+            } else {
+                super.onBackPressed();
+            }
         }
     }
 
