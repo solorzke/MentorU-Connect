@@ -61,12 +61,15 @@ public class JSON extends AppCompatActivity {
                                 JSONObject student = array.getJSONObject(0);
                                 SharedPreferences.Editor editor = getSharedPreferences("USER",
                                         Context.MODE_PRIVATE).edit();
+                                editor.clear();
                                 editor.putString("ucid", student.getString("ucid"));
                                 editor.putString("fname", student.getString("fname"));
                                 editor.putString("lname", student.getString("lname"));
                                 editor.putString("email", student.getString("email"));
                                 editor.putString("firstEntry", "true");
                                 editor.apply();
+                                startActivity(new Intent(getApplicationContext(), SideBar.class));
+                                finish();
 
                             }catch (JSONException e){
                                 e.printStackTrace();
@@ -82,9 +85,6 @@ public class JSON extends AppCompatActivity {
             rq.add(jReq);
         }
         /* 1. END */
-
-        startActivity(new Intent(getApplicationContext(), SideBar.class));
-        finish();
 
     }
 
