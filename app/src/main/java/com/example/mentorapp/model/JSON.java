@@ -13,6 +13,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mentorapp.R;
 import com.example.mentorapp.SideBar;
 
 import org.json.JSONArray;
@@ -33,7 +34,7 @@ public class JSON extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        setContentView(R.layout.activity_json);
 
         final String ucid = getIntent().getExtras().getString("com.example.mentorapp.UCID");
         String confirm = getIntent().getExtras().getString(

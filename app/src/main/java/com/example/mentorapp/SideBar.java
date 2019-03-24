@@ -127,6 +127,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                     Intent intent = new Intent(SideBar.this, Login.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getSupportFragmentManager().popBackStack();
                     startActivity(intent);
                     finish();
                 }
