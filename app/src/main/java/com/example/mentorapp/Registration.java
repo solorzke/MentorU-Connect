@@ -14,6 +14,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mentorapp.model.JSON;
+
 import android.content.Intent;
 
 import java.util.HashMap;
@@ -21,6 +23,7 @@ import java.util.Map;
 
 public class Registration extends AppCompatActivity {
     String nam;
+    String [] arr;
     String email;
     String id;
     String password;
@@ -76,6 +79,7 @@ public class Registration extends AppCompatActivity {
                 EditText ucid = (EditText) findViewById(R.id.UCID);
                 EditText pass = (EditText) findViewById(R.id.Pass);
                 nam = name.getText().toString();
+                arr = nam.split(" ");
                 email = em.getText().toString();
                 id = ucid.getText().toString();
                 password = pass.getText().toString();
@@ -95,8 +99,9 @@ public class Registration extends AppCompatActivity {
                         System.out.println("******************************* HERE AFTER REQUEST START **************************************");
 
                         if (response.contains("REGISTERED")) {
-                            Intent gth = new Intent(getApplicationContext(),SideBar.class);
+                            Intent gth = new Intent(getApplicationContext(), JSON.class);
                             gth.putExtra("com.example.mentorapp.CONFIRM","true");
+                            gth.putExtra("com.example.mentorapp.UCID", id);
                             startActivity(gth);
 
                         }
@@ -113,7 +118,7 @@ public class Registration extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error)
                     {
-                        System.out.println("******************************* HERE ERROR REQUEST **************************************");
+                        System.out.println(error);
                         SERVER_ERROR.show();
 
                     }
@@ -125,10 +130,10 @@ public class Registration extends AppCompatActivity {
                         Map<String, String> params = new HashMap<String, String>();
                         params.put("tableName","Students");
                         params.put("username",id);
-                        params.put("password",password);
-                        params.put("fname", "Kevin");  // <------- ERASE THE VALUE AND REPLACE WITH FNAME VARIABLE
-                        params.put("lname", "Solorzano"); //<------- ERASE THE VALUE AND REPLACE WITH LNAME VARIABLE
-                        params.put("email", "kas58@njit.edu"); //<-------ERASE THE VALUE AND REPLACE WITH EMAIL VARIABLE
+                        params.put("password", password);
+                        params.put("fname", arr[0]);  // <------- ERASE THE VALUE AND REPLACE WITH FNAME VARIABLE
+                        params.put("lname", arr[1]); //<------- ERASE THE VALUE AND REPLACE WITH LNAME VARIABLE
+                        params.put("email", email); //<-------ERASE THE VALUE AND REPLACE WITH EMAIL VARIABLE
                         return params;
                     }
                 };
