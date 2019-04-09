@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -33,7 +34,8 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
      */
 
     private DrawerLayout drawer;
-    TextView title, user_name, user_email;
+    TextView user_name, user_email;
+    ImageView calendar;
     SharedPreferences SESSION;
     SharedPreferences.Editor editor;
     AlertDialog RETURN_TO_LOGIN;
@@ -46,12 +48,11 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         navigationView = findViewById(R.id.nav_view);
         SESSION = getSharedPreferences("USER", MODE_PRIVATE);
 
-        /* POSITION THE TOOLBAR'S TITLE TO THE FAR RIGHT */
+        /* CALENDAR DROP DOWN MENU */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        title = (TextView) toolbar.findViewById(R.id.action_bar_title);
-        title.setText("Home");
+        calendar = toolbar.findViewById(R.id.calendar);
 
         /* UPDATE HEADER NAME AND EMAIL OF THE USER IN SESSION */
         View headerView = navigationView.getHeaderView(0);
@@ -82,12 +83,10 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
             case R.id.home_item:
-                title.setText("Home");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HomeFragment()).commit();
                 break;
             case R.id.account:
-                title.setText("Account");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HomeFragment()).commit();
                 break;
@@ -101,7 +100,6 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 break;
 
             case R.id.well_being:
-                title.setText("Well Being");
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new WBFragment()).addToBackStack(null).commit();
                 break;

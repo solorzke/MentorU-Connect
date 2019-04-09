@@ -40,11 +40,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        TextView name = (TextView) view.findViewById(R.id.name);
         SESSION = getActivity().getSharedPreferences("USER", Context.MODE_PRIVATE);
-
-        name.setText("Welcome Home, " + SESSION.getString("fname", null));
-
         return view;
     }
 }
