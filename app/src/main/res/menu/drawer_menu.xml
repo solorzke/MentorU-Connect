@@ -12,50 +12,47 @@
             android:id="@+id/account"
             android:icon="@drawable/ic_account"
             android:title="@string/menu_item_account" />
+        <item
+            android:id="@+id/log_out"
+            android:icon="@drawable/ic_log_out"
+            android:title="@string/menu_item_sign_out" />
     </group>
 
-    <item android:title="@string/menu_item_academics">
+    <item android:title="@string/menu_item_student_resources">
         <menu>
             <group android:checkableBehavior="single">
                 <item
-                    android:id="@+id/test_taking"
-                    android:icon="@drawable/ic_test_taking"
-                    android:title="@string/menu_item_test_taking" />
+                    android:id="@+id/academics"
+                    android:icon="@drawable/ic_academics"
+                    android:title="@string/menu_item_academics" />
                 <item
-                    android:id="@+id/note_taking"
-                    android:icon="@drawable/ic_note_taking"
-                    android:title="@string/menu_item_note_taking"/>
-                <item
-                    android:id="@+id/organizational_skills"
-                    android:icon="@drawable/ic_organizational_skills"
-                    android:title="@string/menu_item_organization"/>
-                <item
-                    android:id="@+id/well_being"
+                    android:id="@+id/personal_excel"
                     android:icon="@drawable/ic_well_being"
-                    android:title="@string/menu_item_wb" />
+                    android:title="@string/menu_item_personal_excel"/>
                 <item
-                    android:id="@+id/self_awareness"
-                    android:icon="@drawable/ic_self_awareness"
-                    android:title="@string/menu_item_self_awareness" />
-                <item
-                    android:id="@+id/motivation"
-                    android:icon="@drawable/ic_motivation"
-                    android:title="@string/menu_item_motivation" />
-                <item
-                    android:id="@+id/perseverance"
-                    android:icon="@drawable/ic_perseverance"
-                    android:title="@string/menu_item_perseverance" />
-                <item
-                    android:id="@+id/cultural_id"
-                    android:icon="@drawable/ic_cultural_id"
-                    android:title="@string/menu_item_cultural_identity" />
+                    android:id="@+id/social_capital"
+                    android:icon="@drawable/ic_clubs"
+                    android:title="@string/menu_item_social"/>
             </group>
         </menu>
     </item>
 
-    <item
-        android:id="@+id/log_out"
-        android:icon="@drawable/ic_log_out"
-        android:title="@string/menu_item_sign_out" />
+    <item android:title="@string/menu_item_media">
+        <menu>
+            <item
+                android:id="@+id/social_media"
+                android:icon="@drawable/ic_social_media"
+                android:title="@string/menu_item_social_media"/>
+            <item
+                android:id="@+id/clubs"
+                android:icon="@drawable/ic_clubs"
+                android:title="@string/menu_item_clubs"/>
+            <item
+                android:id="@+id/faq"
+                android:icon="@drawable/ic_faq"
+                android:title="@string/menu_item_faq"/>
+        </menu>
+    </item>
+
 
 </menu>

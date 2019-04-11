@@ -11,7 +11,13 @@
     <string name="menu_item_note_taking">Note-Taking Methods</string>
     <string name="menu_item_organization">Organizational Skills</string>
     <string name="menu_item_self_awareness">Self Awareness</string>
-    <string name="menu_item_motivation">Motivation</string>
+    <string name="menu_item_personal_excel">Personal Excellence</string>
     <string name="menu_item_perseverance">Perseverance</string>
+    <string name="menu_item_social">Social Capital</string>
+    <string name="menu_item_clubs">Clubs/Organizations</string>
     <string name="menu_item_cultural_identity">Cultural Identity</string>
+    <string name="menu_item_social_media">Social Media</string>
+    <string name="menu_item_student_resources">Student Resources</string>
+    <string name="menu_item_media">Media</string>
+    <string name="menu_item_faq">FAQ</string>
 </resources>
