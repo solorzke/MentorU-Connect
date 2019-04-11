@@ -7,7 +7,7 @@
 
     <ScrollView
         android:id="@+id/scrollView2"
-        android:layout_width="401dp"
+        android:layout_width="381dp"
         android:layout_height="495dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +17,7 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -28,17 +28,19 @@
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:background="@drawable/rectangle_orange" />
+                    android:layout_height="110dp"
+                    android:background="@android:drawable/dialog_holo_light_frame" />
 
                 <TextView
                     android:id="@+id/title1"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:text="Article 1"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp"
+                    android:textColor="#000000"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -46,33 +48,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title1"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="19dp"
                     android:text="Subtitles go here!"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="italic" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rl2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="5dp">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:background="@drawable/rectangle" />
+                    android:layout_height="110dp"
+                    android:background="@android:drawable/dialog_holo_light_frame" />
 
                 <TextView
                     android:id="@+id/title2"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:text="Article 2"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp"
+                    android:textColor="#000000"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -80,33 +85,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title2"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="19dp"
                     android:text="Subtitles go here!"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="italic" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rl3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="5dp">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:background="@drawable/rectangle_green" />
+                    android:layout_height="110dp"
+                    android:background="@android:drawable/dialog_holo_light_frame" />
 
                 <TextView
                     android:id="@+id/title3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:text="Article 3"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp"
+                    android:textColor="#000000"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -114,33 +122,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title3"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="19dp"
                     android:text="Subtitles go here!"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="italic" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:id="@+id/rl4"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
                 android:layout_marginBottom="5dp">
 
                 <ImageView
                     android:layout_width="match_parent"
-                    android:layout_height="170dp"
-                    android:background="@drawable/rectangle_purple" />
+                    android:layout_height="110dp"
+                    android:background="@android:drawable/dialog_holo_light_frame" />
 
                 <TextView
                     android:id="@+id/title4"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="15dp"
                     android:text="Article 4"
-                    android:textColor="#FFFFFF"
-                    android:textSize="30sp"
+                    android:textColor="#000000"
+                    android:textSize="25sp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -148,9 +159,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/title4"
-                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginTop="19dp"
                     android:text="Subtitles go here!"
-                    android:textColor="#ffffff"
+                    android:textColor="#000000"
                     android:textSize="18sp"
                     android:textStyle="italic" />
             </RelativeLayout>
@@ -169,10 +182,10 @@
         app:fontFamily="casual"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.149"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.544" />
+        app:layout_constraintVertical_bias="0.585" />
 
 
 </android.support.constraint.ConstraintLayout>
