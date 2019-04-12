@@ -99,7 +99,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 finish();
                 break;
 
-            case R.id.well_being:
+            case R.id.personal_excel:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new WBFragment()).addToBackStack(null).commit();
                 break;

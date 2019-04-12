@@ -18,7 +18,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView8"
+        android:id="@+id/checkmark2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -26,11 +26,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:src="@drawable/ic_check_circle_black_24dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView4"
+        android:src="@drawable/ic_check_circle"
+        app:layout_constraintEnd_toStartOf="@+id/goal2"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView7" />
+        app:layout_constraintTop_toBottomOf="@+id/checkmark1" />
 
     <TextView
         android:id="@+id/textView"
@@ -59,7 +59,7 @@
         app:layout_constraintVertical_bias="0.753" />
 
     <ImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/checkmark1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -67,61 +67,65 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:src="@drawable/ic_check_circle_black_24dp"
-        app:layout_constraintEnd_toStartOf="@+id/textView3"
+        android:src="@drawable/ic_check_circle"
+        app:layout_constraintEnd_toStartOf="@+id/goal1"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/goal1"
         android:layout_width="243dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="8dp"
-        android:text="Sign up for a summer internship"
-        app:layout_constraintBottom_toTopOf="@+id/textView4"
+        android:text=""
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/goal2"
         app:layout_constraintEnd_toEndOf="@+id/imageView4"
         app:layout_constraintTop_toTopOf="@+id/imageView4"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/goal2"
         android:layout_width="243dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="20dp"
-        android:text="Achieve a 3.0 GPA"
-        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        android:text=""
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/goal3"
         app:layout_constraintEnd_toEndOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/goal3"
         android:layout_width="243dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="20dp"
-        android:text="Join ACM Club"
-        app:layout_constraintBottom_toTopOf="@+id/textView6"
+        android:text=""
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/goal4"
         app:layout_constraintEnd_toEndOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/goal4"
         android:layout_width="243dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:layout_marginBottom="32dp"
-        android:text="Build a professional resume"
+        android:text=""
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
         app:layout_constraintEnd_toEndOf="@+id/imageView4" />
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/checkmark3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -130,13 +134,13 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:src="@drawable/ic_check_circle"
-        app:layout_constraintEnd_toStartOf="@+id/textView5"
+        app:layout_constraintEnd_toStartOf="@+id/goal3"
         app:layout_constraintHorizontal_bias="0.6"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+        app:layout_constraintTop_toBottomOf="@+id/checkmark2" />
 
     <ImageView
-        android:id="@+id/imageView11"
+        android:id="@+id/checkmark4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -147,10 +151,10 @@
         android:layout_marginBottom="8dp"
         android:src="@drawable/ic_check_circle"
         app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toStartOf="@+id/textView6"
+        app:layout_constraintEnd_toStartOf="@+id/goal4"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10"
+        app:layout_constraintTop_toBottomOf="@+id/checkmark3"
         app:layout_constraintVertical_bias="0.25" />
 
     <TextView
@@ -159,10 +163,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:text="Message from Mentor:"
+        android:textColor="#000000"
         app:layout_constraintEnd_toStartOf="@+id/textView8"
         app:layout_constraintHorizontal_bias="0.266"
         app:layout_constraintStart_toStartOf="parent"
@@ -172,35 +177,38 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
         android:text="Date: 04/02/19"
+        android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/feedback"
         android:layout_width="298dp"
         android:layout_height="122dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="8dp"
-        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam quis laoreet ipsum, sit amet ultrices massa. Aenean ut massa et massa pulvinar luctus eu in elit. Nulla vulputate dignissim erat, sit amet feugiat velit tincidunt et. Praesent justo eros"
+        android:gravity="center_vertical"
+        android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
+        android:textColor="#000000"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="@+id/view4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view3"
-        app:layout_constraintVertical_bias="0.142" />
+        app:layout_constraintVertical_bias="0.166" />
 
     <View
         android:id="@+id/view3"
         android:layout_width="335dp"
         android:layout_height="5dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="100dp"
         android:background="@color/colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
@@ -208,11 +216,10 @@
         android:id="@+id/view4"
         android:layout_width="335dp"
         android:layout_height="5dp"
-        android:layout_marginBottom="128dp"
+        android:layout_marginBottom="76dp"
         android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
