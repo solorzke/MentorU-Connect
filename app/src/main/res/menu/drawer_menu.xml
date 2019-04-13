@@ -39,18 +39,20 @@
 
     <item android:title="@string/menu_item_media">
         <menu>
-            <item
-                android:id="@+id/social_media"
-                android:icon="@drawable/ic_social_media"
-                android:title="@string/menu_item_social_media"/>
-            <item
-                android:id="@+id/clubs"
-                android:icon="@drawable/ic_clubs"
-                android:title="@string/menu_item_clubs"/>
-            <item
-                android:id="@+id/faq"
-                android:icon="@drawable/ic_faq"
-                android:title="@string/menu_item_faq"/>
+            <group android:checkableBehavior="single">
+                <item
+                    android:id="@+id/social_media"
+                    android:icon="@drawable/ic_social_media"
+                    android:title="@string/menu_item_social_media"/>
+                <item
+                    android:id="@+id/clubs"
+                    android:icon="@drawable/ic_clubs"
+                    android:title="@string/menu_item_clubs"/>
+                <item
+                    android:id="@+id/faq"
+                    android:icon="@drawable/ic_faq"
+                    android:title="@string/menu_item_faq"/>
+            </group>
         </menu>
     </item>
 
