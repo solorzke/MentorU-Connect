@@ -20,4 +20,8 @@
     <string name="menu_item_student_resources">Student Resources</string>
     <string name="menu_item_media">Media</string>
     <string name="menu_item_faq">FAQ</string>
+    <string name="sm_twitter">NJIT Twitter</string>
+    <string name="sm_ig">NJIT Instagram</string>
+    <string name="sm_reddit">NJIT Reddit</string>
+    <string name="sm_fb">NJIT Facebook</string>
 </resources>
