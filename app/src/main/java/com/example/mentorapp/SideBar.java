@@ -88,7 +88,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 break;
             case R.id.account:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).commit();
+                        new AccountFragment()).commit();
                 break;
             case R.id.log_out:
                 Intent intent = new Intent(this, Login.class);

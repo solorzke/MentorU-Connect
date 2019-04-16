@@ -69,7 +69,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         /* String Request to Receive Any Feedback from Mentor*/
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
-        String url = "https://web.njit.edu/~kas58/mentorDemo/test/query.php";
+        String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
         StringRequest stringRequest_1 = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
