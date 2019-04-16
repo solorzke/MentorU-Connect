@@ -15,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
-import com.example.mentorapp.WellBeing.WB_Article1;
-
 public class SMFragment extends Fragment {
 
     RelativeLayout FB, TWITTER, IG, REDDIT;
@@ -121,5 +119,16 @@ public class SMFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public static SMFragment newInstance(String text) {
+
+        SMFragment f = new SMFragment();
+        Bundle b = new Bundle();
+        b.putString("msg", text);
+
+        f.setArguments(b);
+
+        return f;
     }
 }

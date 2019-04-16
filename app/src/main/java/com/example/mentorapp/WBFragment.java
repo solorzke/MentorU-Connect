@@ -67,5 +67,16 @@ public class WBFragment extends Fragment {
 
     }
 
+    public static WBFragment newInstance(String text) {
+
+        WBFragment f = new WBFragment();
+        Bundle b = new Bundle();
+        b.putString("msg", text);
+
+        f.setArguments(b);
+
+        return f;
+    }
+
 
 }
