@@ -35,7 +35,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
     private DrawerLayout drawer;
     TextView user_name, user_email;
-    ImageView calendar;
+    ImageView calendar, AC_IMG;
     SharedPreferences SESSION;
     SharedPreferences.Editor editor;
     AlertDialog RETURN_TO_LOGIN;
@@ -48,11 +48,23 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         navigationView = findViewById(R.id.nav_view);
         SESSION = getSharedPreferences("USER", MODE_PRIVATE);
 
+
         /* CALENDAR DROP DOWN MENU */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         calendar = toolbar.findViewById(R.id.calendar);
+
+        /* Set Action Bar image to redirect user back to the home page */
+        AC_IMG = (ImageView) findViewById(R.id.ab_img);
+        AC_IMG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new HomeFragment()).addToBackStack(null).commit();
+                navigationView.setCheckedItem(R.id.home_item);
+            }
+        });
 
         /* UPDATE HEADER NAME AND EMAIL OF THE USER IN SESSION */
         View headerView = navigationView.getHeaderView(0);
