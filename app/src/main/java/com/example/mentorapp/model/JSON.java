@@ -21,7 +21,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class JSON extends AppCompatActivity {
 
@@ -57,8 +59,13 @@ public class JSON extends AppCompatActivity {
                         @Override
                         public void onResponse(JSONObject response) {
                             try{
-                                // Store user data into SESSION
+
+                                System.out.println(response);
                                 JSONArray array = response.getJSONArray("record");
+                                JSONArray courses = response.getJSONArray("courses");
+                                JSONArray m_record = response.getJSONArray("record_m");
+
+                                // Store user data into SESSION
                                 JSONObject student = array.getJSONObject(0);
                                 SharedPreferences.Editor editor = getSharedPreferences("USER",
                                         Context.MODE_PRIVATE).edit();
@@ -67,8 +74,40 @@ public class JSON extends AppCompatActivity {
                                 editor.putString("fname", student.getString("fname"));
                                 editor.putString("lname", student.getString("lname"));
                                 editor.putString("email", student.getString("email"));
+                                editor.putString("degree", student.getString("degree"));
+                                editor.putString("club", student.getString("club"));
+                                editor.putString("avi", student.getString("avi"));
                                 editor.putString("firstEntry", "true");
                                 editor.apply();
+
+                                /* Store Student Schedule Preferences */
+                                SharedPreferences.Editor courseList = getSharedPreferences("COURSES",
+                                        Context.MODE_PRIVATE).edit();
+                                courseList.clear();
+
+                                for(int i = 0; i < courses.length(); i++){
+                                    JSONObject course = courses.getJSONObject(i);
+                                    courseList.putString("id"+Integer.toString(i), course.getString("course_num"));
+                                    courseList.putString("title"+Integer.toString(i), course.getString("course_title"));
+                                }
+
+                                courseList.apply();
+
+                                /* Store Mentor Record Data */
+                                SharedPreferences.Editor MENTOR = getSharedPreferences("MENTOR", Context.MODE_PRIVATE).edit();
+                                MENTOR.clear();
+                                JSONObject mentor = m_record.getJSONObject(0);
+                                MENTOR.putString("ucid", mentor.getString("ucid"));
+                                MENTOR.putString("fname", mentor.getString("fname"));
+                                MENTOR.putString("lname", mentor.getString("lname"));
+                                MENTOR.putString("email", mentor.getString("email"));
+                                MENTOR.putString("grad_date", mentor.getString("grad_date"));
+                                MENTOR.putString("occupation", mentor.getString("occupation"));
+                                MENTOR.putString("degree", mentor.getString("degree"));
+                                MENTOR.putString("mentee", mentor.getString("mentee"));
+                                MENTOR.putString("avi", mentor.getString("avi"));
+                                MENTOR.apply();
+
                                 startActivity(new Intent(getApplicationContext(), SideBar.class));
                                 finish();
 
