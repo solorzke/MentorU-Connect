@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="392dp"
+        android:layout_height="582dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.961">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="467dp"
+                android:layout_height="229dp"
+                android:background="@android:drawable/dialog_holo_light_frame"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.146" />
+
+            <TextView
+                android:id="@+id/acc_stu_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="35dp"
+                android:layout_marginBottom="15dp"
+                android:text="Name:" />
+
+            <TextView
+                android:id="@+id/acc_stu_name_1"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/acc_stu_name"
+                android:layout_alignStart="@id/acc_stu_name"
+                android:layout_marginLeft="92dp"
+                android:layout_marginStart="92dp"
+                android:layout_marginTop="35dp"
+                android:text="your name" />
+
+            <TextView
+                android:id="@+id/acc_stu_ucid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acc_stu_name"
+                android:layout_marginStart="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginBottom="15dp"
+                android:text="UCID:" />
+
+            <TextView
+                android:id="@+id/acc_stu_ucid_1"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acc_stu_name_1"
+                android:layout_alignLeft="@id/acc_stu_ucid"
+                android:layout_alignStart="@id/acc_stu_ucid"
+                android:layout_marginLeft="92dp"
+                android:layout_marginStart="92dp"
+                android:layout_marginTop="16dp"
+                android:text="your ucid" />
+
+            <TextView
+                android:id="@+id/acc_stu_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acc_stu_ucid"
+                android:layout_marginStart="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginBottom="15dp"
+                android:text="Email:" />
+
+            <TextView
+                android:id="@+id/acc_stu_email_1"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acc_stu_ucid_1"
+                android:layout_alignLeft="@id/acc_stu_email"
+                android:layout_alignStart="@id/acc_stu_email"
+                android:layout_marginLeft="92dp"
+                android:layout_marginStart="92dp"
+                android:layout_marginTop="16dp"
+                android:text="your email" />
+
+            <TextView
+                android:id="@+id/acc_stu_degree"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acc_stu_email"
+                android:layout_marginStart="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginBottom="15dp"
+                android:text="Degree:" />
+
+            <TextView
+                android:id="@+id/acc_stu_degree_1"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acc_stu_email_1"
+                android:layout_alignLeft="@id/acc_stu_degree"
+                android:layout_alignStart="@+id/acc_stu_degree"
+                android:layout_marginStart="92dp"
+                android:layout_marginLeft="92dp"
+                android:layout_marginTop="15dp"
+                android:text="your degree" />
+
+            <TextView
+                android:id="@+id/acc_stu_club"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acc_stu_degree"
+                android:layout_marginStart="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginBottom="15dp"
+                android:text="Club:" />
+
+            <TextView
+                android:id="@+id/acc_stu_club_1"
+                android:layout_width="270dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/acc_stu_degree_1"
+                android:layout_alignLeft="@id/acc_stu_club"
+                android:layout_alignStart="@+id/acc_stu_club"
+                android:layout_marginStart="92dp"
+                android:layout_marginLeft="92dp"
+                android:layout_marginTop="13dp"
+                android:text="your club" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity=""
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="467dp"
+                android:layout_height="400dp"
+                android:background="@android:drawable/dialog_holo_light_frame"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.146" />
+
+            <TextView
+                android:id="@+id/class_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="15dp"
+                android:text="Class"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/class_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="125dp"
+                android:layout_marginStart="125dp"
+                android:layout_marginTop="25dp"
+                android:text="Title"
+                android:textSize="20sp"
+                android:layout_alignLeft="@+id/class_id"
+                android:layout_alignStart="@+id/class_id" />
+
+            <TextView
+                android:id="@+id/class_id_1"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_id"
+                android:layout_marginLeft="20dp"
+                android:maxLength="9"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_title_1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_name"
+                android:layout_alignLeft="@+id/class_id_1"
+                android:layout_marginLeft="93dp"
+                android:layout_marginTop="15dp"
+                android:maxLength="30"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_id_2"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_id_1"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
+                android:maxLength="9"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_title_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_title_1"
+                android:layout_alignLeft="@+id/class_id_2"
+                android:layout_marginLeft="93dp"
+                android:layout_marginTop="15dp"
+                android:maxLength="30"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_id_3"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_id_2"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
+                android:maxLength="9"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_title_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_title_2"
+                android:layout_alignLeft="@+id/class_id_3"
+                android:layout_marginLeft="93dp"
+                android:layout_marginTop="15dp"
+                android:maxLength="30"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_id_4"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_id_3"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
+                android:maxLength="9"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_title_4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_title_3"
+                android:layout_alignLeft="@+id/class_id_4"
+                android:layout_marginLeft="93dp"
+                android:layout_marginTop="15dp"
+                android:maxLength="30"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_id_5"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_id_4"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
+                android:maxLength="9"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_title_5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_title_4"
+                android:layout_alignLeft="@+id/class_id_5"
+                android:layout_marginLeft="93dp"
+                android:layout_marginTop="15dp"
+                android:maxLength="30"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_id_6"
+                android:layout_width="80dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_id_5"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
+                android:maxLength="9"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/class_title_6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/class_title_5"
+                android:layout_alignLeft="@+id/class_id_6"
+                android:layout_marginLeft="93dp"
+                android:layout_marginTop="16dp"
+                android:maxLength="30"
+                android:text="TextSize"
+                android:textSize="15sp" />
+
+        </RelativeLayout>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
