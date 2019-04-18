@@ -4,28 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#C1C6C8"
+    android:background="#ffffff"
     tools:context=".Registration">
+
+
+    <ImageView
+        android:id="@+id/btn_capture_photo"
+        android:layout_width="451dp"
+        android:layout_height="117dp"
+        android:src="@drawable/rectangle"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="68dp"
+        android:layout_height="74dp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_capture_photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/btn_capture_photo"
+        app:srcCompat="@drawable/njit" />
 
 
     <EditText
         android:id="@+id/Pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/degree"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/UCID"
-        app:layout_constraintVertical_bias="0.18" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/Email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="Email "
         android:inputType="textEmailAddress"
@@ -37,6 +59,7 @@
         android:id="@+id/Name"
         android:layout_width="wrap_content"
         android:layout_height="40dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:hint="Your Name"
         android:inputType="textEmailAddress"
@@ -44,32 +67,57 @@
         app:layout_constraintBottom_toTopOf="@+id/Email"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.858" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_capture_photo"
+        app:layout_constraintVertical_bias="0.818" />
 
     <EditText
         android:id="@+id/UCID"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="304dp"
+        android:layout_marginBottom="24dp"
         android:ems="10"
         android:hint="UCID"
         android:inputType="textEmailAddress"
+        app:layout_constraintBottom_toTopOf="@+id/Pass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="204dp"
+        android:layout_marginBottom="32dp"
         android:background="#071D49"
         android:text="Register"
         android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/degree"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:hint="Major"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/club"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/club"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:ems="10"
+        android:hint="Club(s)"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
