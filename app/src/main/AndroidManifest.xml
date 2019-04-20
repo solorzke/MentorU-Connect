@@ -16,6 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".Events.AddEvent"
+            android:windowSoftInputMode="adjustPan">
+        </activity>
         <activity android:name=".WellBeing.WB_Article1" />
         <activity android:name=".Registration" />
         <activity android:name=".HelpCenter" />

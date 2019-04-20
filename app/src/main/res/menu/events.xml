@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="Create Event"
+        android:id="@+id/createevent"/>
+    <item
+        android:id="@+id/requestmeeting"
+        android:title="Request Meeting"/>
+    <item
+        android:id="@+id/viewmeeting"
+        android:title="View Meetings"/>
+</menu>
