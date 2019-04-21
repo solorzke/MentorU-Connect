@@ -23,7 +23,6 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -32,7 +31,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.Login;
 import com.example.mentorapp.R;
-
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -45,7 +43,6 @@ public class AddEvent extends AppCompatActivity {
     private DatePickerDialog dialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog timePickerDialog;
-    private TimePickerDialog.OnTimeSetListener mTimeSetListener;
     private AlertDialog alert;
     private int s_hour24, s_min24, e_hour24, e_min24;
     private boolean done = false;
@@ -142,7 +139,6 @@ public class AddEvent extends AppCompatActivity {
                 event_end_time, event_purpose};
                 String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
                 String student = SESSION.getString("ucid", null);
-                String mentor = SESSION.getString("mentor", null);
                 String email = SESSION.getString("email", null);
                 String title = event_title.getText().toString();
                 String location = event_location.getText().toString();
@@ -150,7 +146,7 @@ public class AddEvent extends AppCompatActivity {
                 int [] d1 = parseDateAndTime(event_date.getText().toString(), s_hour24, s_min24);
                 int [] d2 = parseDateAndTime(event_date.getText().toString(), e_hour24, e_min24);
                 createEvent(d1, d2, title, purpose, location, email);
-                //sendEventRequest(v, url, "setEvent", event, student, mentor);
+                sendEventRequest(v, url, "addEvent", event, student);
             }
         });
 
@@ -201,8 +197,7 @@ public class AddEvent extends AppCompatActivity {
     }
 
     private void sendEventRequest(View v, String url, final String action, final EditText [] event,
-                                  final String student, final String mentor){
-
+                                  final String student){
         RequestQueue queue = Volley.newRequestQueue(v.getContext());
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -226,7 +221,6 @@ public class AddEvent extends AppCompatActivity {
                 params.put("purpose", event[5].getText().toString());
                 params.put("action", action);
                 params.put("student", student);
-                params.put("mentor", mentor);
                 return params;
             }
         };
