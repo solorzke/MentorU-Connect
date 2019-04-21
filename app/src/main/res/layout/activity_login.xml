@@ -48,24 +48,14 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="68dp"
-        android:layout_height="74dp"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_capture_photo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/btn_capture_photo"
-        app:srcCompat="@drawable/njit" />
-
-    <ImageView
         android:id="@+id/imageView2"
-        android:layout_width="289dp"
-        android:layout_height="102dp"
+        android:layout_width="147dp"
+        android:layout_height="142dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_capture_photo"
-        app:srcCompat="@drawable/njitlogo" />
+        app:srcCompat="@drawable/mentor_u_connect" />
 
     <EditText
         android:id="@+id/ucidText"
