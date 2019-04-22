@@ -12,15 +12,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.mentorapp.Academic.Article1;
 import com.example.mentorapp.WellBeing.WB_Article1;
 
-public class WBFragment extends Fragment {
+public class AcademicsFragment extends Fragment {
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.fragment_wb, container, false);
+        final View view = inflater.inflate(R.layout.fragment_academics, container, false);
 
         return view;
 
