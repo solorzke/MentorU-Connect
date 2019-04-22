@@ -6,14 +6,16 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="392dp"
-        android:layout_height="582dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.961">
+        app:layout_constraintVertical_bias="0.493">
 
         <RelativeLayout
             android:layout_width="wrap_content"
@@ -44,18 +46,25 @@
                 android:layout_marginLeft="35dp"
                 android:layout_marginTop="35dp"
                 android:layout_marginBottom="15dp"
-                android:text="Name:" />
+                android:text="Name:"
+                android:textColor="#CC0000"
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/acc_stu_name_1"
-                android:layout_width="270dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@id/acc_stu_name"
                 android:layout_alignStart="@id/acc_stu_name"
-                android:layout_marginLeft="92dp"
+                android:layout_alignLeft="@id/acc_stu_name"
                 android:layout_marginStart="92dp"
+                android:layout_marginLeft="92dp"
                 android:layout_marginTop="35dp"
-                android:text="your name" />
+                android:background="@null"
+                android:focusable="false"
+                android:text="Your Name"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/acc_stu_ucid"
@@ -65,19 +74,24 @@
                 android:layout_marginStart="35dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginBottom="15dp"
-                android:text="UCID:" />
+                android:text="UCID:"
+                android:textColor="#CC0000"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/acc_stu_ucid_1"
-                android:layout_width="270dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/acc_stu_name_1"
-                android:layout_alignLeft="@id/acc_stu_ucid"
                 android:layout_alignStart="@id/acc_stu_ucid"
-                android:layout_marginLeft="92dp"
+                android:layout_alignLeft="@id/acc_stu_ucid"
                 android:layout_marginStart="92dp"
-                android:layout_marginTop="16dp"
-                android:text="your ucid" />
+                android:layout_marginLeft="92dp"
+                android:layout_marginTop="14dp"
+                android:text="Your UCID"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/acc_stu_email"
@@ -87,19 +101,26 @@
                 android:layout_marginStart="35dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginBottom="15dp"
-                android:text="Email:" />
+                android:text="Email:"
+                android:textColor="#CC0000"
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/acc_stu_email_1"
-                android:layout_width="270dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/acc_stu_ucid_1"
-                android:layout_alignLeft="@id/acc_stu_email"
                 android:layout_alignStart="@id/acc_stu_email"
-                android:layout_marginLeft="92dp"
+                android:layout_alignLeft="@id/acc_stu_email"
                 android:layout_marginStart="92dp"
-                android:layout_marginTop="16dp"
-                android:text="your email" />
+                android:layout_marginLeft="92dp"
+                android:layout_marginTop="11dp"
+                android:background="@null"
+                android:focusable="false"
+                android:text="Your Email"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/acc_stu_degree"
@@ -109,19 +130,26 @@
                 android:layout_marginStart="35dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginBottom="15dp"
-                android:text="Degree:" />
+                android:text="Degree:"
+                android:textColor="#CC0000"
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/acc_stu_degree_1"
-                android:layout_width="270dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/acc_stu_email_1"
-                android:layout_alignLeft="@id/acc_stu_degree"
                 android:layout_alignStart="@+id/acc_stu_degree"
+                android:layout_alignLeft="@id/acc_stu_degree"
                 android:layout_marginStart="92dp"
                 android:layout_marginLeft="92dp"
                 android:layout_marginTop="15dp"
-                android:text="your degree" />
+                android:background="@null"
+                android:focusable="false"
+                android:text="Your Degree"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/acc_stu_club"
@@ -131,19 +159,48 @@
                 android:layout_marginStart="35dp"
                 android:layout_marginLeft="35dp"
                 android:layout_marginBottom="15dp"
-                android:text="Club:" />
+                android:text="Club:"
+                android:textColor="#CC0000"
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/acc_stu_club_1"
-                android:layout_width="270dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/acc_stu_degree_1"
-                android:layout_alignLeft="@id/acc_stu_club"
                 android:layout_alignStart="@+id/acc_stu_club"
+                android:layout_alignLeft="@id/acc_stu_club"
                 android:layout_marginStart="92dp"
                 android:layout_marginLeft="92dp"
-                android:layout_marginTop="13dp"
-                android:text="your club" />
+                android:layout_marginTop="16dp"
+                android:background="@null"
+                android:focusable="false"
+                android:text="Your Club"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/edit_acc_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:text="Edit"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/done_acc_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:text="Done"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
         </RelativeLayout>
 
@@ -160,7 +217,7 @@
             <ImageView
                 android:id="@+id/imageView7"
                 android:layout_width="467dp"
-                android:layout_height="400dp"
+                android:layout_height="300dp"
                 android:background="@android:drawable/dialog_holo_light_frame"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -172,47 +229,60 @@
                 android:id="@+id/class_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="25dp"
                 android:layout_marginStart="25dp"
+                android:layout_marginLeft="25dp"
                 android:layout_marginTop="25dp"
                 android:layout_marginBottom="15dp"
                 android:text="Class"
-                android:textSize="20sp" />
+                android:textColor="#CC0000"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:id="@+id/class_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="125dp"
+                android:layout_alignStart="@+id/class_id"
+                android:layout_alignLeft="@+id/class_id"
                 android:layout_marginStart="125dp"
+                android:layout_marginLeft="125dp"
                 android:layout_marginTop="25dp"
                 android:text="Title"
+                android:textColor="#CC0000"
                 android:textSize="20sp"
-                android:layout_alignLeft="@+id/class_id"
-                android:layout_alignStart="@+id/class_id" />
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/class_id_1"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/class_id"
                 android:layout_marginLeft="20dp"
                 android:maxLength="9"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter ID"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:focusable="false"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/class_title_1"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/class_name"
                 android:layout_alignLeft="@+id/class_id_1"
                 android:layout_marginLeft="93dp"
                 android:layout_marginTop="15dp"
+                android:background="@null"
+                android:focusable="false"
                 android:maxLength="30"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter Class Title"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/class_id_2"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -220,22 +290,30 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="14dp"
                 android:maxLength="9"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter ID"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:focusable="false"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/class_title_2"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/class_title_1"
                 android:layout_alignLeft="@+id/class_id_2"
                 android:layout_marginLeft="93dp"
                 android:layout_marginTop="15dp"
+                android:background="@null"
+                android:focusable="false"
                 android:maxLength="30"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter Class Title"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/class_id_3"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -243,22 +321,30 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="14dp"
                 android:maxLength="9"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter ID"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:focusable="false"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/class_title_3"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/class_title_2"
                 android:layout_alignLeft="@+id/class_id_3"
                 android:layout_marginLeft="93dp"
                 android:layout_marginTop="15dp"
+                android:background="@null"
+                android:focusable="false"
                 android:maxLength="30"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter Class Title"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/class_id_4"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -266,22 +352,30 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="14dp"
                 android:maxLength="9"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter ID"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:focusable="false"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/class_title_4"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/class_title_3"
                 android:layout_alignLeft="@+id/class_id_4"
                 android:layout_marginLeft="93dp"
                 android:layout_marginTop="15dp"
+                android:background="@null"
+                android:focusable="false"
                 android:maxLength="30"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter Class Title"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/class_id_5"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -289,22 +383,30 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="14dp"
                 android:maxLength="9"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter ID"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:focusable="false"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/class_title_5"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/class_title_4"
                 android:layout_alignLeft="@+id/class_id_5"
                 android:layout_marginLeft="93dp"
                 android:layout_marginTop="15dp"
+                android:background="@null"
+                android:focusable="false"
                 android:maxLength="30"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter Class Title"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
-            <TextView
+            <EditText
                 android:id="@+id/class_id_6"
                 android:layout_width="80dp"
                 android:layout_height="wrap_content"
@@ -312,20 +414,51 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginTop="14dp"
                 android:maxLength="9"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter ID"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:background="@null"
+                android:focusable="false"/>
 
-            <TextView
+            <EditText
                 android:id="@+id/class_title_6"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/class_title_5"
                 android:layout_alignLeft="@+id/class_id_6"
                 android:layout_marginLeft="93dp"
                 android:layout_marginTop="16dp"
+                android:background="@null"
+                android:focusable="false"
                 android:maxLength="30"
-                android:text="TextSize"
-                android:textSize="15sp" />
+                android:text="Enter Class Title"
+                android:textColor="#1c1475"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/edit_class_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:text="Edit"
+                android:textColor="@android:color/holo_blue_bright"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/done_class_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="30dp"
+                android:text="Done"
+                android:textColor="@color/colorAccent"
+                android:textStyle="bold"
+                android:visibility="invisible" />
 
         </RelativeLayout>
     </LinearLayout>

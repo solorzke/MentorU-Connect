@@ -87,6 +87,7 @@ public class JSON extends AppCompatActivity {
 
                                 for(int i = 0; i < courses.length(); i++){
                                     JSONObject course = courses.getJSONObject(i);
+                                    courseList.putString("row_id"+Integer.toString(i), course.getString("id"));
                                     courseList.putString("id"+Integer.toString(i), course.getString("course_num"));
                                     courseList.putString("title"+Integer.toString(i), course.getString("course_title"));
                                 }

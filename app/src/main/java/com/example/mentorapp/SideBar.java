@@ -16,10 +16,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.mentorapp.Events.AddEvent;
 
 import org.w3c.dom.Text;
 
@@ -35,7 +38,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
     private DrawerLayout drawer;
     TextView user_name, user_email;
-    ImageView calendar, AC_IMG;
+    ImageView AC_IMG;
     SharedPreferences SESSION;
     SharedPreferences.Editor editor;
     AlertDialog RETURN_TO_LOGIN;
@@ -53,7 +56,6 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        calendar = toolbar.findViewById(R.id.calendar);
 
         /* Set Action Bar image to redirect user back to the home page */
         AC_IMG = (ImageView) findViewById(R.id.ab_img);
@@ -88,6 +90,31 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).addToBackStack(null).commit();
         navigationView.setCheckedItem(R.id.home_item);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+
+        getMenuInflater().inflate(R.menu.events, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId()){
+            case R.id.createevent:
+                Intent go = new Intent(getApplicationContext(), AddEvent.class);
+                startActivity(go);
+                break;
+            case R.id.requestmeeting:
+                break;
+            case R.id.viewmeeting:
+                break;
+            default:
+                break;
+        }
+        return true;
     }
 
     /* OPEN A FRAGMENT IF A MENU ITEM IS SELECTED FROM THE SIDE BAR MENU */

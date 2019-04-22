@@ -28,6 +28,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
                 android:text="UCID:"
+                android:textColor="#CC0000"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -41,6 +42,7 @@
                 android:layout_marginLeft="108dp"
                 android:layout_marginTop="30dp"
                 android:text=""
+                android:textColor="#1c1475"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -53,6 +55,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
                 android:text="Grad Date:"
+                android:textColor="#CC0000"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -67,6 +70,7 @@
                 android:layout_marginLeft="108dp"
                 android:layout_marginTop="30dp"
                 android:text=""
+                android:textColor="#1c1475"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -79,6 +83,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
                 android:text="Occupation:"
+                android:textColor="#CC0000"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -93,6 +98,7 @@
                 android:layout_marginLeft="108dp"
                 android:layout_marginTop="29dp"
                 android:text=""
+                android:textColor="#1c1475"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -105,6 +111,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="31dp"
                 android:text="Degree:"
+                android:textColor="#CC0000"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -119,6 +126,7 @@
                 android:layout_marginLeft="108dp"
                 android:layout_marginTop="29dp"
                 android:text=""
+                android:textColor="#1c1475"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -131,6 +139,7 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
                 android:text="Mentee:"
+                android:textColor="#CC0000"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -145,6 +154,7 @@
                 android:layout_marginLeft="108dp"
                 android:layout_marginTop="29dp"
                 android:text=""
+                android:textColor="#1c1475"
                 android:textSize="14sp"
                 android:textStyle="bold" />
 
@@ -159,6 +169,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text=""
+        android:textColor="#1c1475"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
@@ -172,6 +183,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text=""
+        android:textColor="#1c1475"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"

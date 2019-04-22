@@ -27,6 +27,8 @@ public class Registration extends AppCompatActivity {
     String email;
     String id;
     String password;
+    String degree;
+    String club;
 
     AlertDialog al;
     AlertDialog logal;
@@ -78,12 +80,15 @@ public class Registration extends AppCompatActivity {
                 EditText em = (EditText) findViewById(R.id.Email);
                 EditText ucid = (EditText) findViewById(R.id.UCID);
                 EditText pass = (EditText) findViewById(R.id.Pass);
+                EditText dg = (EditText) findViewById(R.id.degree);
+                EditText cl = (EditText) findViewById(R.id.club);
                 nam = name.getText().toString();
                 arr = nam.split(" ");
                 email = em.getText().toString();
                 id = ucid.getText().toString();
                 password = pass.getText().toString();
-
+                degree = dg.getText().toString();
+                club = cl.getText().toString();
 
                 //--------------------
 
@@ -131,9 +136,11 @@ public class Registration extends AppCompatActivity {
                         params.put("tableName","Students");
                         params.put("username",id);
                         params.put("password", password);
-                        params.put("fname", arr[0]);  // <------- ERASE THE VALUE AND REPLACE WITH FNAME VARIABLE
-                        params.put("lname", arr[1]); //<------- ERASE THE VALUE AND REPLACE WITH LNAME VARIABLE
-                        params.put("email", email); //<-------ERASE THE VALUE AND REPLACE WITH EMAIL VARIABLE
+                        params.put("fname", arr[0]);
+                        params.put("lname", arr[1]);
+                        params.put("email", email);
+                        params.put("degree", degree);
+                        params.put("club", club);
                         return params;
                     }
                 };
