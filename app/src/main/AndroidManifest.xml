@@ -16,10 +16,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".SocialC.social_capital"></activity>
+        <activity android:name=".SocialCapital.SocialCapital" />
         <activity
             android:name=".Events.AddEvent"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan" />
         <activity android:name=".WellBeing.WB_Article1" />
         <activity android:name=".Registration" />
         <activity android:name=".HelpCenter" />
