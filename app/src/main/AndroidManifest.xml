@@ -18,8 +18,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".Events.AddEvent"
-            android:windowSoftInputMode="adjustPan">
-        </activity>
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".WellBeing.WB_Article1" />
         <activity android:name=".Registration" />
         <activity android:name=".HelpCenter" />
@@ -34,6 +33,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".RequestStatus"/>
     </application>
 
 </manifest>

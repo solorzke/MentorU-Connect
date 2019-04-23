@@ -108,8 +108,11 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 startActivity(go);
                 break;
             case R.id.requestmeeting:
+
                 break;
             case R.id.viewmeeting:
+                Intent go2 = new Intent(getApplicationContext(), RequestStatus.class);
+                startActivity(go2);
                 break;
             default:
                 break;
