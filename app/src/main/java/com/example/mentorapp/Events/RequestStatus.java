@@ -1,4 +1,4 @@
-package com.example.mentorapp;
+package com.example.mentorapp.Events;
 
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -7,6 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
+import com.example.mentorapp.Events.MeetingStatus;
+import com.example.mentorapp.R;
+import com.example.mentorapp.SMFragment;
 import com.example.mentorapp.model.TabAdapter;
 
 public class RequestStatus extends AppCompatActivity {
@@ -30,8 +33,8 @@ public class RequestStatus extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         adapter = new TabAdapter(getSupportFragmentManager());
-        adapter.addFragment(new ViewMeetings(), "Request Status");
-        adapter.addFragment(new SMFragment(), "Meeting Details");
+        adapter.addFragment(new MeetingStatus(), "Request Status");
+        adapter.addFragment(new MeetingDetails(), "Meeting Details");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);

@@ -1,4 +1,4 @@
-package com.example.mentorapp;
+package com.example.mentorapp.Events;
 
 import android.content.Intent;
 import android.media.Image;
@@ -12,9 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
+import com.example.mentorapp.R;
 import com.example.mentorapp.WellBeing.WB_Article1;
 
-public class ViewMeetings extends Fragment {
+public class MeetingStatus extends Fragment {
 
     @Nullable
     @Override
