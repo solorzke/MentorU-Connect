@@ -24,18 +24,36 @@
 
     <TextView
         android:id="@+id/textView21"
-        android:layout_width="341dp"
-        android:layout_height="298dp"
+        android:layout_width="351dp"
+        android:layout_height="171dp"
         android:layout_marginStart="35dp"
         android:layout_marginLeft="35dp"
         android:layout_marginTop="285dp"
         android:layout_marginEnd="35dp"
         android:layout_marginRight="35dp"
         android:layout_marginBottom="102dp"
-        android:text="Welcome to the page for Academics! Here you will find all the information provided to help you during your enrollment at NJIT.\n
-Below is our Google Document which has many helpful articles that can teach you about Learning Style Assessment, Learning Strategies, Test Taking Strategies, Note
-Taking Methods, and Organizational Skills, along with providing you the links to NJIT's Academic Schedule and Exam Schedule, as well as a link to the NJIT tutoring Center.\n
-Best of luck to you all!"
+        android:text="Below is our Google Document which has many helpful articles that can teach you about Learning Style Assessment, Learning Strategies, Test Taking Strategies, Note
+Taking Methods, and Organizational Skills, along with providing you the links to NJIT's Academic Schedule and Exam Schedule, as well as a link to the NJIT tutoring Center."
+        android:textColor="#000000"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.752" />
+
+    <TextView
+        android:id="@+id/textView23"
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="285dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="102dp"
+        android:text="Welcome to the page for Academics! Here you will find all the information provided to help you during your enrollment at NJIT."
         android:textColor="#000000"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,9 +64,29 @@ Best of luck to you all!"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
+        android:id="@+id/textView24"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="35dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="285dp"
+        android:layout_marginEnd="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="102dp"
+        android:text="Best of luck to you all!"
+        android:textColor="#000000"
+        android:textSize="17dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
         android:id="@+id/textView22"
-        android:layout_width="377dp"
-        android:layout_height="49dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="594dp"
@@ -57,11 +95,16 @@ Best of luck to you all!"
         android:layout_marginBottom="16dp"
         android:autoLink="all"
         android:clickable="true"
-        android:text="https://docs.google.com/document/d/1lFDVsojt0_2IVSpJsC_qhrCnKb9ur6QA3FT5tskwQog/edit?usp=sharing"
+        android:text="Link"
+        android:textColor="@color/colorAccent"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.503"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView23"

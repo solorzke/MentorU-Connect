@@ -108,8 +108,11 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 startActivity(go);
                 break;
             case R.id.requestmeeting:
+
                 break;
             case R.id.viewmeeting:
+                Intent go2 = new Intent(getApplicationContext(), RequestStatus.class);
+                startActivity(go2);
                 break;
             default:
                 break;
@@ -142,9 +145,9 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                         new WBFragment()).addToBackStack(null).commit();
                 break;
             case R.id.academics:
-                /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new <ADD_ACADEMICS_FRAGMENT_HERE>.class).addToBackStack(null).commit();
-                 */
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new AcademicsFragment()).addToBackStack(null).commit();
+
                 break;
             case R.id.social_capital:
                 /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
