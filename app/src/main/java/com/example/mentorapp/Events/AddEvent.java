@@ -43,7 +43,6 @@ public class AddEvent extends AppCompatActivity {
     private DatePickerDialog dialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog timePickerDialog;
-    private AlertDialog alert;
     private int s_hour24, s_min24, e_hour24, e_min24;
     private boolean done = false;
 
@@ -143,10 +142,13 @@ public class AddEvent extends AppCompatActivity {
                 String title = event_title.getText().toString();
                 String location = event_location.getText().toString();
                 String purpose = event_purpose.getText().toString();
-                int [] d1 = parseDateAndTime(event_date.getText().toString(), s_hour24, s_min24);
-                int [] d2 = parseDateAndTime(event_date.getText().toString(), e_hour24, e_min24);
-                createEvent(d1, d2, title, purpose, location, email);
-                sendEventRequest(v, url, "addEvent", event, student);
+                if(checkForm(event)){
+                    int [] d1 = parseDateAndTime(event_date.getText().toString(), s_hour24, s_min24);
+                    int [] d2 = parseDateAndTime(event_date.getText().toString(), e_hour24, e_min24);
+                    createEvent(d1, d2, title, purpose, location, email);
+                    sendEventRequest(v, url, "addEvent", event, student);
+                }
+                else{ sendAlert(); }
             }
         });
 
@@ -248,5 +250,34 @@ public class AddEvent extends AppCompatActivity {
         String [] d = date.split("/");
         int [] dt = {Integer.parseInt(d[2]), Integer.parseInt(d[0]), Integer.parseInt(d[1]), hour, min};
         return dt;
+    }
+
+    private void sendAlert(){
+
+        AlertDialog alert = new AlertDialog.Builder(AddEvent.this).create();
+        alert.setTitle("Incomplete Form");
+        alert.setMessage("Please complete all the fields.");
+        alert.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which){
+                dialog.dismiss();
+            }
+        });
+        alert.show();
+    }
+
+    private boolean checkForm(EditText [] event){
+
+        String title = event[0].getText().toString();
+        String loc = event[1].getText().toString();
+        String dt = event[2].getText().toString();
+        String st = event[3].getText().toString();
+        String et = event[4].getText().toString();
+        String purpose = event[5].getText().toString();
+
+        if(title.equals("") || loc.equals("") || dt.equals("") || st.equals("") || et.equals("")
+                || purpose.equals("")){
+            return false;
+        }
+        return true;
     }
 }
