@@ -107,7 +107,7 @@ Taking Methods, and Organizational Skills, along with providing you the links to
         app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/imageView23"
         android:layout_width="201dp"
         android:layout_height="185dp"
         android:layout_marginStart="79dp"
