@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
      * AFTER LOGGING IN
      */
 
-    SharedPreferences SESSION;
+    SharedPreferences SESSION, MENTOR;
     SharedPreferences.Editor editor;
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
     TextView FEEDBACK, GOAL_1, GOAL_2, GOAL_3, GOAL_4;
@@ -50,6 +50,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         SESSION = getActivity().getSharedPreferences("USER", Context.MODE_PRIVATE);
+        MENTOR = getActivity().getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
         CHECKMARK_1 = (ImageView) view.findViewById(R.id.checkmark1);
         CHECKMARK_2 = (ImageView) view.findViewById(R.id.checkmark2);
         CHECKMARK_3 = (ImageView) view.findViewById(R.id.checkmark3);
@@ -74,7 +75,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        FEEDBACK.setText(response);
+                        if(response.equals("empty")) {
+                            FEEDBACK.setText("No new feedback from " + MENTOR.getString("fname", null));
+                        }
+                        else{
+                            FEEDBACK.setText(response);
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -88,7 +94,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("action", "getFeedback");
                 params.put("ucid", SESSION.getString("ucid", null));
-                params.put("mentor", "mentor");  //Change this later <------
+                params.put("mentor", MENTOR.getString("ucid", null));  //Change this later <------
 
                 return params;
             }
@@ -98,12 +104,23 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        String [] goals = response.split("\\|");
-                        GOAL_1.setText(goals[0]);
-                        GOAL_2.setText(goals[1]);
-                        GOAL_3.setText(goals[2]);
-                        GOAL_4.setText(goals[3]);
-                        System.out.println(Arrays.toString(goals));
+                        System.out.println(response);
+                        if(response.equals("empty")) {
+                            System.out.println(response);
+                            GOAL_1.setText("No new goals from " + MENTOR.getString("fname", null));
+                            GOAL_2.setText("No new goals from " + MENTOR.getString("fname", null));
+                            GOAL_3.setText("No new goals from " + MENTOR.getString("fname", null));
+                            GOAL_4.setText("No new goals from " + MENTOR.getString("fname", null));
+                            System.out.println(response);
+                        }
+                        else{
+                            String[] goals = response.split("\\|");
+                            GOAL_1.setText(goals[0]);
+                            GOAL_2.setText(goals[1]);
+                            GOAL_3.setText(goals[2]);
+                            GOAL_4.setText(goals[3]);
+                            System.out.println(Arrays.toString(goals));
+                        }
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -117,8 +134,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                 Map<String, String>  params = new HashMap<String, String>();
                 params.put("action", "getGoals");
                 params.put("ucid", SESSION.getString("ucid", null));
-                params.put("mentor", "mentor");  //Change this later <------
-
+                params.put("mentor", MENTOR.getString("ucid", null));
                 return params;
             }
         };
