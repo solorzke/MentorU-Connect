@@ -137,7 +137,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.personal_excel:
+            case R.id.well_being:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new WBFragment()).addToBackStack(null).commit();
                 break;
@@ -147,18 +147,12 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
                 break;
             case R.id.social_capital:
-                /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new <ADD_SOCIAL_CAPITAL_FRAGMENT_HERE>.class).addToBackStack(null).commit();
-                 */
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SocialCapitalFragment()).addToBackStack(null).commit();
                 break;
             case R.id.social_media:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SMFragment()).addToBackStack(null).commit();
-                break;
-            case R.id.clubs:
-                /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new <ADD_CLUBS_FRAGMENT_HERE>.class).addToBackStack(null).commit();
-                 */
                 break;
             case R.id.faq:
                 /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,

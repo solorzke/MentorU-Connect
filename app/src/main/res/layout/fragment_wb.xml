@@ -13,7 +13,7 @@
         android:text="Well Being"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:fontFamily="casual"
+        app:fontFamily="sans-serif"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,32 +23,36 @@
         android:id="@+id/imageView5"
         android:layout_width="166dp"
         android:layout_height="178dp"
-        app:srcCompat="@drawable/well_being"
-        tools:layout_editor_absoluteX="122dp"
-        tools:layout_editor_absoluteY="82dp" />
+        app:layout_constraintBottom_toTopOf="@+id/wb_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView10"
+        app:srcCompat="@drawable/well_being" />
 
     <TextView
         android:id="@+id/wb_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Welcome to the Well Being Page! "
-        tools:layout_editor_absoluteX="109dp"
-        tools:layout_editor_absoluteY="320dp" />
-
-    <TextView
-        android:id="@+id/wb_text3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:layout_editor_absoluteX="21dp"
-        tools:layout_editor_absoluteY="501dp" />
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/wb_text2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
 
     <TextView
         android:id="@+id/wb_text2"
         android:layout_width="367dp"
         android:layout_height="152dp"
-        android:text="     In this page you will be provided many resources and links in a Google Document provided down below. The Google Document will consist of topics such as Leadership, Self-Awareness, Motivation, Resilience/Grit, Cultural / Personal Identity. These main topics will have links for you to read and watch throughout your experience at NJIT. Feel Free to click the button below to direct you to the Google Document."
-        tools:layout_editor_absoluteX="21dp"
-        tools:layout_editor_absoluteY="375dp" />
+        android:text="In this page you will be provided many resources and links in a Google Document provided down below. The Google Document will consist of topics such as Leadership, Self-Awareness, Motivation, Resilience/Grit, Cultural / Personal Identity. These main topics will have links for you to read and watch throughout your experience at NJIT. Feel Free to click the button below to direct you to the Google Document."
+        android:textColor="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/textView22"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wb_text" />
 
     <TextView
         android:id="@+id/textView22"
@@ -56,10 +60,9 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="594dp"
         android:layout_marginEnd="18dp"
         android:layout_marginRight="18dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="36dp"
         android:autoLink="all"
         android:clickable="true"
         android:text="Link"
@@ -69,9 +72,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -26,13 +26,13 @@
                     android:icon="@drawable/ic_academics"
                     android:title="@string/menu_item_academics" />
                 <item
-                    android:id="@+id/personal_excel"
+                    android:id="@+id/well_being"
                     android:icon="@drawable/ic_well_being"
-                    android:title="@string/menu_item_personal_excel"/>
+                    android:title="@string/menu_item_well_being" />
                 <item
                     android:id="@+id/social_capital"
                     android:icon="@drawable/ic_clubs"
-                    android:title="@string/menu_item_social"/>
+                    android:title="@string/menu_item_social" />
             </group>
         </menu>
     </item>
@@ -43,15 +43,11 @@
                 <item
                     android:id="@+id/social_media"
                     android:icon="@drawable/ic_social_media"
-                    android:title="@string/menu_item_social_media"/>
-                <item
-                    android:id="@+id/clubs"
-                    android:icon="@drawable/ic_clubs"
-                    android:title="@string/menu_item_clubs"/>
+                    android:title="@string/menu_item_social_media" />
                 <item
                     android:id="@+id/faq"
                     android:icon="@drawable/ic_faq"
-                    android:title="@string/menu_item_faq"/>
+                    android:title="@string/menu_item_faq" />
             </group>
         </menu>
     </item>
