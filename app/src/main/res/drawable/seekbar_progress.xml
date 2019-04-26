@@ -10,8 +10,8 @@
     <item android:id="@android:id/progress">
         <clip android:clipOrientation="horizontal" android:gravity="left">
             <shape android:shape="rectangle">
-                <stroke android:color="#ffe735" android:width="2dp" />
-                <solid android:color="#ff0d00"/>
+                <stroke android:color="#0d5416" android:width="2dp" />
+                <solid android:color="#22bf37"/>
                 <corners android:radius="10dp"/>
             </shape>
         </clip>
