@@ -20,7 +20,7 @@ import android.widget.TextView;
 
 import com.example.mentorapp.Events.AddEvent;
 import com.example.mentorapp.Events.RequestMeeting;
-import com.example.mentorapp.Events.RequestStatus;
+import com.example.mentorapp.Events.RequestActivity;
 
 public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -108,7 +108,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 startActivity(go1);
                 break;
             case R.id.viewmeeting:
-                Intent go2 = new Intent(getApplicationContext(), RequestStatus.class);
+                Intent go2 = new Intent(getApplicationContext(), RequestActivity.class);
                 startActivity(go2);
                 break;
             default:

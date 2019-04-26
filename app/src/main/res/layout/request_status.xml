@@ -27,6 +27,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/btn_capture_photo"
             app:srcCompat="@drawable/mentor_u" />
+        <TextView
+            android:id="@+id/cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Cancel Event"
+            android:layout_marginRight="10dp"
+            android:textSize="15sp"
+            android:textColor="@android:color/white"
+            android:visibility="invisible"/>
 
     </android.support.v7.widget.Toolbar>
 
