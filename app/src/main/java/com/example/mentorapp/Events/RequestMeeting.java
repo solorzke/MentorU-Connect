@@ -17,6 +17,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -34,7 +35,7 @@ public class RequestMeeting extends AppCompatActivity {
 
     EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
     private Button submit;
-    private SharedPreferences SESSION, MENTOR;
+    private SharedPreferences SESSION, OTHER_USER;
     private DatePickerDialog dialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog timePickerDialog;
@@ -44,7 +45,7 @@ public class RequestMeeting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_meeting);
         SESSION = getSharedPreferences("USER", Context.MODE_PRIVATE);
-        MENTOR = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+        OTHER_USER = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
         event_location = findViewById(R.id.event_location);
         event_title = findViewById(R.id.event_title);
         event_purpose = findViewById(R.id.event_purpose);
@@ -128,9 +129,15 @@ public class RequestMeeting extends AppCompatActivity {
                         event_end_time, event_purpose};
                 String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
                 String student = SESSION.getString("ucid", null);
-                String mentor = MENTOR.getString("ucid", null);
+                String mentor = OTHER_USER.getString("ucid", null);
                 if(checkForm(event)){
                     sendMeetingRequest(v, url, "requestMeeting", event, student, mentor);
+                    Context context = getApplicationContext();
+                    CharSequence text = "Request Sent!";
+                    int duration = Toast.LENGTH_SHORT;
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    onBackPressed();
                 }
                 else{ sendAlert(); }
             }
@@ -152,7 +159,7 @@ public class RequestMeeting extends AppCompatActivity {
     }
 
     private void sendMeetingRequest(View v, String url, final String action, final EditText [] event,
-                                  final String student, final String mentor){
+                                  final String currentUser, final String otherUser){
         RequestQueue queue = Volley.newRequestQueue(v.getContext());
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -175,8 +182,8 @@ public class RequestMeeting extends AppCompatActivity {
                 params.put("e_time", event[4].getText().toString());
                 params.put("purpose", event[5].getText().toString());
                 params.put("action", action);
-                params.put("student", student);
-                params.put("mentor", mentor);
+                params.put("currentUser", currentUser);
+                params.put("otherUser", otherUser);
                 return params;
             }
         };
