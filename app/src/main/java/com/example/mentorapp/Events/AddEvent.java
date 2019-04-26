@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -32,16 +33,19 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.Login;
 import com.example.mentorapp.R;
+import com.example.mentorapp.SideBar;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class AddEvent extends AppCompatActivity {
 
     EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
+    ImageView AC_IMG;
     private Button submit;
-    private SharedPreferences SESSION;
+    private SharedPreferences SESSION, RECEIVER;
     private DatePickerDialog dialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog timePickerDialog;
@@ -53,6 +57,7 @@ public class AddEvent extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
         SESSION = getSharedPreferences("USER", Context.MODE_PRIVATE);
+        RECEIVER = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         event_location = findViewById(R.id.event_location);
         event_title = findViewById(R.id.event_title);
@@ -61,6 +66,8 @@ public class AddEvent extends AppCompatActivity {
         event_start_time = findViewById(R.id.event_start_time);
         event_end_time = findViewById(R.id.event_end_time);
         submit = findViewById(R.id.create_event_submit);
+        AC_IMG = findViewById(R.id.ab_img);
+
 
         /* Setting the toolbar in the XML */
         setSupportActionBar(toolbar);
@@ -150,7 +157,7 @@ public class AddEvent extends AppCompatActivity {
             public void onClick(View v) {
                 EditText[] event = {event_title, event_location, event_date, event_start_time,
                         event_end_time, event_purpose};
-                String email = SESSION.getString("email", null);
+                String email = RECEIVER.getString("email", null);
                 String title = event_title.getText().toString();
                 String location = event_location.getText().toString();
                 String purpose = event_purpose.getText().toString();
@@ -161,6 +168,16 @@ public class AddEvent extends AppCompatActivity {
                 } else {
                     sendAlert();
                 }
+            }
+        });
+
+        /* Set Action Bar image to redirect user back to the home page */
+        AC_IMG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SideBar.class);
+                startActivity(intent);
+                finish();
             }
         });
 

@@ -64,16 +64,16 @@ public class MeetingDetails extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         /* Call getMeetingInfo() to receive data from web server about the meeting request
-        * SeekBar slider is used to confirm the meeting request, and listens for the progress slider to
-        * pass 95% of the way through */
+         * SeekBar slider is used to confirm the meeting request, and listens for the progress slider to
+         * pass 95% of the way through */
         getMeetingInfo(view, url, "getMeetingInfo", SESSION.getString("ucid", null));
         sb.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 /* Once the slider has completed, use confirmMeeting() to send a request to change the
-                * status of the meeting request to approved
-                * Hide SeekBar and title.*/
+                 * status of the meeting request to approved
+                 * Hide SeekBar and title.*/
                 if (seekBar.getProgress() > 95) {
                     confirmMeeting(view, url, "confirmMeeting", SESSION.getString("ucid", null));
                     seekBar.setVisibility(View.INVISIBLE);
@@ -86,7 +86,8 @@ public class MeetingDetails extends Fragment {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) { }
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
@@ -118,13 +119,13 @@ public class MeetingDetails extends Fragment {
                     meeting_with.setText(data[5]);
 
                     /* If the request status is already accepted or denied, hide SeekBar and title */
-                    if(data[6].equals("1") || data[6].equals("2")){
+                    if (data[6].equals("1") || data[6].equals("2")) {
                         sb.setVisibility(View.INVISIBLE);
                         slide_title.setVisibility(View.INVISIBLE);
                     }
 
                     /* If the current user is the sender of the meeting request, hide SeekBar and title */
-                    if(data[7].equals("sender")){
+                    if (data[7].equals("sender")) {
                         sb.setVisibility(View.INVISIBLE);
                         slide_title.setVisibility(View.INVISIBLE);
                     }
@@ -149,7 +150,7 @@ public class MeetingDetails extends Fragment {
 
     /* Sends a web server request to change the meeting request status to approved */
 
-    private void confirmMeeting(View v, String url, final String action, final String currentUser){
+    private void confirmMeeting(View v, String url, final String action, final String currentUser) {
         RequestQueue queue = Volley.newRequestQueue(v.getContext());
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -176,4 +177,5 @@ public class MeetingDetails extends Fragment {
         };
         queue.add(request);
     }
+
 }
