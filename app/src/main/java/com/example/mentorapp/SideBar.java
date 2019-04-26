@@ -103,13 +103,9 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 Intent go = new Intent(getApplicationContext(), AddEvent.class);
                 startActivity(go);
                 break;
-            case R.id.requestmeeting:
-                Intent go1 = new Intent(getApplicationContext(), RequestMeeting.class);
+            case R.id.sendEmail:
+                Intent go1 = new Intent(getApplicationContext(), SendEmail.class);
                 startActivity(go1);
-                break;
-            case R.id.viewmeeting:
-                Intent go2 = new Intent(getApplicationContext(), RequestActivity.class);
-                startActivity(go2);
                 break;
             default:
                 break;
