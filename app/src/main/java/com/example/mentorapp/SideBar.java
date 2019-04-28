@@ -1,6 +1,7 @@
 package com.example.mentorapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,7 +36,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     private DrawerLayout drawer;
     TextView user_name, user_email;
     ImageView AC_IMG;
-    SharedPreferences SESSION;
+    SharedPreferences SESSION, USER_TYPE;
     SharedPreferences.Editor editor;
     AlertDialog RETURN_TO_LOGIN;
     NavigationView navigationView;
@@ -45,8 +46,19 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sidebar);
         navigationView = findViewById(R.id.nav_view);
-        SESSION = getSharedPreferences("USER", MODE_PRIVATE);
+        USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
 
+
+        //ADD IF/ELSE STATEMENT TO CHECK IF THE PERSON SIGNED IN IS MENTOR/STUDENT TO INITIALIZE THE
+        //SESSION SHARED PREFS INSTANCE
+        if(USER_TYPE.getString("type", null).equals("student"))
+        {
+            SESSION = getSharedPreferences("STUDENT", MODE_PRIVATE);
+        }
+        else if(USER_TYPE.getString("type", null).equals("mentor"))
+        {
+            SESSION = getSharedPreferences("MENTOR", MODE_PRIVATE);
+        }
 
         /* CALENDAR DROP DOWN MENU */
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -84,7 +96,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
         /* THIS IS THE DEFAULT FRAGMENT TO OPEN INTO WHEN YOU LOGIN IN - HOME */
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).addToBackStack(null).commit();
+                new SMFragment()).addToBackStack(null).commit();
         navigationView.setCheckedItem(R.id.home_item);
     }
 
