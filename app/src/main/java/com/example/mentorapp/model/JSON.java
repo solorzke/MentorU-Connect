@@ -33,7 +33,6 @@ public class JSON extends AppCompatActivity {
     SESSION IN THE APP. THEREFORE, THERE IS NO XML/UI TIED TO THIS CLASS.
      */
 
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +47,13 @@ public class JSON extends AppCompatActivity {
         String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
 
         if(confirm.equals("student")){
+
+            SharedPreferences.Editor user_type = getSharedPreferences("USER_TYPE",
+                    Context.MODE_PRIVATE).edit();
+            user_type.clear();
+            user_type.putString("type", "student");
+            user_type.apply();
+
             RequestQueue rq = Volley.newRequestQueue(JSON.this);
 
             Map<String, String> params = new HashMap<String, String>();
@@ -69,7 +75,7 @@ public class JSON extends AppCompatActivity {
 
                                 // Store user data into SESSION
                                 JSONObject student = array.getJSONObject(0);
-                                SharedPreferences.Editor editor = getSharedPreferences("USER",
+                                SharedPreferences.Editor editor = getSharedPreferences("STUDENT",
                                         Context.MODE_PRIVATE).edit();
                                 editor.clear();
                                 editor.putString("ucid", student.getString("ucid"));
@@ -131,6 +137,11 @@ public class JSON extends AppCompatActivity {
 
         else if(confirm.equals("mentor"))
         {
+            SharedPreferences.Editor user_type = getSharedPreferences("USER_TYPE",
+                    Context.MODE_PRIVATE).edit();
+            user_type.clear();
+            user_type.putString("type", "mentor");
+            user_type.apply();
             loadAsMentor(url, ucid);
         }
 
@@ -204,9 +215,10 @@ public class JSON extends AppCompatActivity {
                             MENTOR.putString("degree", mentor.getString("degree"));
                             MENTOR.putString("mentee", mentor.getString("mentee"));
                             MENTOR.putString("avi", mentor.getString("avi"));
+                            MENTOR.putString("firstEntry", "true");
                             MENTOR.apply();
 
-                            startActivity(new Intent(getApplicationContext(), SendEmail.class));
+                            startActivity(new Intent(getApplicationContext(), SideBar.class));
                             finish();
 
                         }catch (JSONException e){
