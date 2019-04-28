@@ -14,6 +14,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.R;
+import com.example.mentorapp.SendEmail;
 import com.example.mentorapp.SideBar;
 
 import org.json.JSONArray;
@@ -44,13 +45,14 @@ public class JSON extends AppCompatActivity {
 
         /*1. START: SENDING A REQUEST TO RECEIVE A JSON ARRAY OF THE USER'S RECORD *ONLY*
          * AFTER LOGGING IN */
+        String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
 
-        if(confirm.equals("true")){
-            String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+        if(confirm.equals("student")){
             RequestQueue rq = Volley.newRequestQueue(JSON.this);
 
             Map<String, String> params = new HashMap<String, String>();
             params.put("signedIn", "true");
+            params.put("asWho", "student");
             params.put("UCID", ucid);
             JSONObject parameters = new JSONObject(params);
 
@@ -127,10 +129,99 @@ public class JSON extends AppCompatActivity {
         }
         /* 1. END */
 
+        else if(confirm.equals("mentor"))
+        {
+            loadAsMentor(url, ucid);
+        }
+
     }
 
     @Override
     public void onBackPressed() {
         /* CANNOT GO BACK TO LOGIN HERE*/
     }
+
+    private void loadAsMentor(String url, String ucid)
+    {
+        RequestQueue rq = Volley.newRequestQueue(JSON.this);
+
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("signedIn", "true");
+        params.put("asWho", "mentor");
+        params.put("UCID", ucid);
+        JSONObject parameters = new JSONObject(params);
+
+        JsonObjectRequest jReq = new JsonObjectRequest(Request.Method.POST, url, parameters, new
+                Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+
+                            System.out.println(response);
+                            JSONArray array = response.getJSONArray("record");
+                            JSONArray courses = response.getJSONArray("courses");
+                            JSONArray m_record = response.getJSONArray("record_m");
+
+                            // Store student data into SESSION
+                            JSONObject student = array.getJSONObject(0);
+                            SharedPreferences.Editor editor = getSharedPreferences("STUDENT",
+                                    Context.MODE_PRIVATE).edit();
+                            editor.clear();
+                            editor.putString("ucid", student.getString("ucid"));
+                            editor.putString("fname", student.getString("fname"));
+                            editor.putString("lname", student.getString("lname"));
+                            editor.putString("email", student.getString("email"));
+                            editor.putString("degree", student.getString("degree"));
+                            editor.putString("club", student.getString("club"));
+                            editor.putString("avi", student.getString("avi"));
+                            editor.putString("firstEntry", "true");
+                            editor.apply();
+
+                            /* Store Student Schedule Preferences */
+                            SharedPreferences.Editor courseList = getSharedPreferences("COURSES",
+                                    Context.MODE_PRIVATE).edit();
+                            courseList.clear();
+
+                            for(int i = 0; i < courses.length(); i++){
+                                JSONObject course = courses.getJSONObject(i);
+                                courseList.putString("row_id"+Integer.toString(i), course.getString("id"));
+                                courseList.putString("id"+Integer.toString(i), course.getString("course_num"));
+                                courseList.putString("title"+Integer.toString(i), course.getString("course_title"));
+                            }
+
+                            courseList.apply();
+
+                            /* Store Mentor Record Data */
+                            SharedPreferences.Editor MENTOR = getSharedPreferences("MENTOR", Context.MODE_PRIVATE).edit();
+                            MENTOR.clear();
+                            JSONObject mentor = m_record.getJSONObject(0);
+                            MENTOR.putString("ucid", mentor.getString("ucid"));
+                            MENTOR.putString("fname", mentor.getString("fname"));
+                            MENTOR.putString("lname", mentor.getString("lname"));
+                            MENTOR.putString("email", mentor.getString("email"));
+                            MENTOR.putString("grad_date", mentor.getString("grad_date"));
+                            MENTOR.putString("occupation", mentor.getString("occupation"));
+                            MENTOR.putString("degree", mentor.getString("degree"));
+                            MENTOR.putString("mentee", mentor.getString("mentee"));
+                            MENTOR.putString("avi", mentor.getString("avi"));
+                            MENTOR.apply();
+
+                            startActivity(new Intent(getApplicationContext(), SendEmail.class));
+                            finish();
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println(error);
+            }
+        });
+
+        rq.add(jReq);
+    }
+
+
 }
