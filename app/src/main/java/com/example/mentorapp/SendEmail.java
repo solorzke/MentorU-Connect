@@ -28,8 +28,8 @@ public class SendEmail extends AppCompatActivity {
         BODY = findViewById(R.id.email_body);
         send = findViewById(R.id.sendEmail);
         AC_IMG = findViewById(R.id.ab_img);
-        SESSION = getSharedPreferences("USER", Context.MODE_PRIVATE);
-        RECIPIENT = getSharedPreferences("USER", Context.MODE_PRIVATE);
+        SESSION = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+        RECIPIENT = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);

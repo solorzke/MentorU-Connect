@@ -45,7 +45,7 @@ public class AddEvent extends AppCompatActivity {
     EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
     ImageView AC_IMG;
     private Button submit;
-    private SharedPreferences SESSION, RECEIVER;
+    private SharedPreferences SESSION, RECEIVER, USER_TYPE;
     private DatePickerDialog dialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog timePickerDialog;
@@ -56,8 +56,9 @@ public class AddEvent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-        SESSION = getSharedPreferences("USER", Context.MODE_PRIVATE);
-        RECEIVER = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+        USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+        defineUserType(USER_TYPE);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         event_location = findViewById(R.id.event_location);
         event_title = findViewById(R.id.event_title);
@@ -298,5 +299,20 @@ public class AddEvent extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    /* Define who the user is to know what SharedPrefs list we use */
+    private void defineUserType(SharedPreferences type)
+    {
+        if(type.getString("type", null).equals("student"))
+        {
+            SESSION = getSharedPreferences("STUDENT", MODE_PRIVATE);
+            RECEIVER = getSharedPreferences("MENTOR", MODE_PRIVATE);
+        }
+        else if(type.getString("type", null).equals("mentor"))
+        {
+            SESSION = getSharedPreferences("MENTOR", MODE_PRIVATE);
+            RECEIVER = getSharedPreferences("STUDENT", MODE_PRIVATE);
+        }
     }
 }
