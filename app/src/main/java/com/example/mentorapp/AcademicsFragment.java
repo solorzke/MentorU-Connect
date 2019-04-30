@@ -30,16 +30,15 @@ public class AcademicsFragment extends Fragment {
 
         final View view = inflater.inflate(R.layout.fragment_academics, container, false);
         link = view.findViewById(R.id.textView22);
-        link.setText("View Resources");
-
+        link.setText("Link");
         link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String url = "https://docs.google.com/document/d/1lFDVsojt0_2IVSpJsC_qhrCnKb9ur6QA3FT5tskwQog/edit?usp=sharing";
-                Uri forgotPw = Uri.parse(url);
-                Intent goToForgotPw = new Intent(Intent.ACTION_VIEW, forgotPw);
-                if(goToForgotPw.resolveActivity(getActivity().getPackageManager()) != null){
-                    startActivity(goToForgotPw);
+                Uri u = Uri.parse(url);
+                Intent goToDrive = new Intent(Intent.ACTION_VIEW, u);
+                if(goToDrive.resolveActivity(getActivity().getPackageManager()) != null){
+                    startActivity(goToDrive);
                 }
                 else{
                     alert = new AlertDialog.Builder(view.getContext()).create();

@@ -1,6 +1,7 @@
 package com.example.mentorapp;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,7 +21,7 @@ import android.widget.TextView;
 
 import com.example.mentorapp.Events.AddEvent;
 import com.example.mentorapp.Events.RequestMeeting;
-import com.example.mentorapp.Events.RequestStatus;
+import com.example.mentorapp.Events.RequestActivity;
 
 public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -35,7 +36,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     private DrawerLayout drawer;
     TextView user_name, user_email;
     ImageView AC_IMG;
-    SharedPreferences SESSION;
+    SharedPreferences SESSION, USER_TYPE;
     SharedPreferences.Editor editor;
     AlertDialog RETURN_TO_LOGIN;
     NavigationView navigationView;
@@ -45,8 +46,12 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sidebar);
         navigationView = findViewById(R.id.nav_view);
-        SESSION = getSharedPreferences("USER", MODE_PRIVATE);
+        USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
 
+
+        //ADD IF/ELSE STATEMENT TO CHECK IF THE PERSON SIGNED IN IS MENTOR/STUDENT TO INITIALIZE THE
+        //SESSION SHARED PREFS INSTANCE
+        defineUserType(USER_TYPE);
 
         /* CALENDAR DROP DOWN MENU */
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -103,13 +108,9 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 Intent go = new Intent(getApplicationContext(), AddEvent.class);
                 startActivity(go);
                 break;
-            case R.id.requestmeeting:
-                Intent go1 = new Intent(getApplicationContext(), RequestMeeting.class);
+            case R.id.sendEmail:
+                Intent go1 = new Intent(getApplicationContext(), SendEmail.class);
                 startActivity(go1);
-                break;
-            case R.id.viewmeeting:
-                Intent go2 = new Intent(getApplicationContext(), RequestStatus.class);
-                startActivity(go2);
                 break;
             default:
                 break;
@@ -137,7 +138,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 startActivity(intent);
                 finish();
                 break;
-            case R.id.personal_excel:
+            case R.id.well_being:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new WBFragment()).addToBackStack(null).commit();
                 break;
@@ -147,23 +148,17 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
                 break;
             case R.id.social_capital:
-                /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new <ADD_SOCIAL_CAPITAL_FRAGMENT_HERE>.class).addToBackStack(null).commit();
-                 */
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new SocialCapitalFragment()).addToBackStack(null).commit();
                 break;
             case R.id.social_media:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new SMFragment()).addToBackStack(null).commit();
                 break;
-            case R.id.clubs:
+            case R.id.faq:
                 /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new <ADD_FAQ_FRAGMENT_HERE>.class).addToBackStack(null).commit();
-
                  */
-                break;
-            case R.id.faq:
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new FAQFragment()).addToBackStack(null).commit();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
@@ -207,6 +202,18 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             } else {
                 super.onBackPressed();
             }
+        }
+    }
+
+    private void defineUserType(SharedPreferences type)
+    {
+        if(type.getString("type", null).equals("student"))
+        {
+            SESSION = getSharedPreferences("STUDENT", MODE_PRIVATE);
+        }
+        else if(type.getString("type", null).equals("mentor"))
+        {
+            SESSION = getSharedPreferences("MENTOR", MODE_PRIVATE);
         }
     }
 

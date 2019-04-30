@@ -21,8 +21,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
+
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,15 +33,19 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.Login;
 import com.example.mentorapp.R;
+import com.example.mentorapp.SideBar;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class AddEvent extends AppCompatActivity {
 
     EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
+    ImageView AC_IMG;
     private Button submit;
-    private SharedPreferences SESSION;
+    private SharedPreferences SESSION, RECEIVER, USER_TYPE;
     private DatePickerDialog dialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog timePickerDialog;
@@ -50,7 +56,9 @@ public class AddEvent extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_event);
-        SESSION = getSharedPreferences("USER", Context.MODE_PRIVATE);
+        USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+        defineUserType(USER_TYPE);
+
         Toolbar toolbar = findViewById(R.id.toolbar);
         event_location = findViewById(R.id.event_location);
         event_title = findViewById(R.id.event_title);
@@ -59,11 +67,15 @@ public class AddEvent extends AppCompatActivity {
         event_start_time = findViewById(R.id.event_start_time);
         event_end_time = findViewById(R.id.event_end_time);
         submit = findViewById(R.id.create_event_submit);
+        AC_IMG = findViewById(R.id.ab_img);
 
+
+        /* Setting the toolbar in the XML */
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        /* Display a DatePicker Dialog for the user to choose a date when clicked upon */
         event_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,10 +97,11 @@ public class AddEvent extends AppCompatActivity {
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 month = month + 1;
                 event_date.setText(Integer.toString(month) + '/' + Integer.toString(dayOfMonth) + '/' +
-                Integer.toString(year));
+                        Integer.toString(year));
             }
         };
 
+        /* Display a TimePicker Dialog for the user to choose a start time when clicked upon */
         event_start_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +114,9 @@ public class AddEvent extends AppCompatActivity {
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 s_hour24 = selectedHour;
                                 s_min24 = selectedMinute;
-                                String [] data = format12HourTime(selectedHour, selectedMinute);
+
+                                /* Format the time to 12 hours to store it in the DB */
+                                String[] data = format12HourTime(selectedHour, selectedMinute);
                                 event_start_time.setText(data[0] + ":" + data[1] + " " + data[2]);
                             }
                         }, hour, min, false);
@@ -110,6 +125,7 @@ public class AddEvent extends AppCompatActivity {
             }
         });
 
+        /* Display a TimePicker Dialog for the user to choose a end time when clicked upon */
         event_end_time.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,7 +138,9 @@ public class AddEvent extends AppCompatActivity {
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 e_hour24 = selectedHour;
                                 e_min24 = selectedMinute;
-                                String [] data = format12HourTime(selectedHour, selectedMinute);
+
+                                /* Format the time to 12 hours to store it in the DB */
+                                String[] data = format12HourTime(selectedHour, selectedMinute);
                                 event_end_time.setText(data[0] + ":" + data[1] + " " + data[2]);
                             }
                         }, hour, min, false);
@@ -131,29 +149,42 @@ public class AddEvent extends AppCompatActivity {
             }
         });
 
+        /* After clicking submit, collect all the form data, validate it, parse date/time to convert
+         * to milliseconds, and use the Calendar API to exchange this data to its interface and save/create
+         * the event. The event should be created in your Calendar application.*/
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText [] event = {event_title, event_location, event_date, event_start_time,
-                event_end_time, event_purpose};
-                String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
-                String student = SESSION.getString("ucid", null);
-                String email = SESSION.getString("email", null);
+                EditText[] event = {event_title, event_location, event_date, event_start_time,
+                        event_end_time, event_purpose};
+                String email = RECEIVER.getString("email", null);
                 String title = event_title.getText().toString();
                 String location = event_location.getText().toString();
                 String purpose = event_purpose.getText().toString();
-                if(checkForm(event)){
-                    int [] d1 = parseDateAndTime(event_date.getText().toString(), s_hour24, s_min24);
-                    int [] d2 = parseDateAndTime(event_date.getText().toString(), e_hour24, e_min24);
+                if (checkForm(event)) {
+                    int[] d1 = parseDateAndTime(event_date.getText().toString(), s_hour24, s_min24);
+                    int[] d2 = parseDateAndTime(event_date.getText().toString(), e_hour24, e_min24);
                     createEvent(d1, d2, title, purpose, location, email);
-                    sendEventRequest(v, url, "addEvent", event, student);
+                } else {
+                    sendAlert();
                 }
-                else{ sendAlert(); }
+            }
+        });
+
+        /* Set Action Bar image to redirect user back to the home page */
+        AC_IMG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), SideBar.class);
+                startActivity(intent);
+                finish();
             }
         });
 
     }
 
+    /* When clicking the back button, go back to the last page. */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -166,25 +197,31 @@ public class AddEvent extends AppCompatActivity {
         }
     }
 
+    /* Once the create_event operation above is finished and returned you back to the app, head back
+     * to your previously opened page. */
+
     @Override
     protected void onResume() {
         super.onResume();
-        if(done){
+        if (done) {
             onBackPressed();
         }
     }
 
-    private void createEvent(int [] start, int [] end, String title, String purpose,
-                             String location, String email){
+    /* Function to create the Calendar event using its API. */
+    private void createEvent(int[] start, int[] end, String title, String purpose,
+                             String location, String email) {
 
+        /* Convert date/time to milliseconds */
         Calendar beginTime = Calendar.getInstance();
-        beginTime.set(start[0], start[1]-=1, start[2], start[3], start[4]);
+        beginTime.set(start[0], start[1] -= 1, start[2], start[3], start[4]);
         long startMillis = beginTime.getTimeInMillis();
 
         Calendar endTime = Calendar.getInstance();
-        endTime.set(end[0], end[1]-=1, end[2], end[3], end[4]);
+        endTime.set(end[0], end[1] -= 1, end[2], end[3], end[4]);
         long endMillis = endTime.getTimeInMillis();
 
+        /* Pass a URI Intent to the Calendar API along with the form data, to take you to its interface */
         Intent intent = new Intent(Intent.ACTION_INSERT)
                 .setData(CalendarContract.Events.CONTENT_URI)
                 .putExtra(CalendarContract.EXTRA_EVENT_BEGIN_TIME, startMillis)
@@ -198,74 +235,57 @@ public class AddEvent extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void sendEventRequest(View v, String url, final String action, final EditText [] event,
-                                  final String student){
-        RequestQueue queue = Volley.newRequestQueue(v.getContext());
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                System.out.println(response);
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("title", event[0].getText().toString());
-                params.put("location", event[1].getText().toString());
-                params.put("date", event[2].getText().toString());
-                params.put("s_time", event[3].getText().toString());
-                params.put("e_time", event[4].getText().toString());
-                params.put("purpose", event[5].getText().toString());
-                params.put("action", action);
-                params.put("student", student);
-                return params;
-            }
-        };
-        queue.add(request);
-    }
-
-    private String [] format12HourTime(int hour, int min){
+    /* For formatting time to 12hrs */
+    private String[] format12HourTime(int hour, int min) {
         int h = hour;
         String m;
         String timeset;
 
-        if(hour > 12){  h -= 12; timeset = "PM";  }
-        else if(hour == 0){  h += 12; timeset = "AM";  }
-        else if(hour == 12){  timeset = "PM";  }
-        else{  timeset = "AM";  }
+        if (hour > 12) {
+            h -= 12;
+            timeset = "PM";
+        } else if (hour == 0) {
+            h += 12;
+            timeset = "AM";
+        } else if (hour == 12) {
+            timeset = "PM";
+        } else {
+            timeset = "AM";
+        }
 
-        if(min < 10){ m = "0" + min; }
-        else{  m = String.valueOf(min);  }
+        if (min < 10) {
+            m = "0" + min;
+        } else {
+            m = String.valueOf(min);
+        }
 
-        String [] data = {Integer.toString(h), m, timeset};
+        String[] data = {Integer.toString(h), m, timeset};
         return data;
     }
 
-    private int [] parseDateAndTime(String date, int hour, int min){
-        String [] d = date.split("/");
-        int [] dt = {Integer.parseInt(d[2]), Integer.parseInt(d[0]), Integer.parseInt(d[1]), hour, min};
+    /* Parse dates, hours, mins to convert into milliseconds later */
+    private int[] parseDateAndTime(String date, int hour, int min) {
+        String[] d = date.split("/");
+        int[] dt = {Integer.parseInt(d[2]), Integer.parseInt(d[0]), Integer.parseInt(d[1]), hour, min};
         return dt;
     }
 
-    private void sendAlert(){
+    /* In case the form data wasn't properly filled out, send an alert message */
+    private void sendAlert() {
 
         AlertDialog alert = new AlertDialog.Builder(AddEvent.this).create();
         alert.setTitle("Incomplete Form");
         alert.setMessage("Please complete all the fields.");
-        alert.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int which){
+        alert.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
             }
         });
         alert.show();
     }
 
-    private boolean checkForm(EditText [] event){
+    /* Validate the form and make sure everything was filled out */
+    private boolean checkForm(EditText[] event) {
 
         String title = event[0].getText().toString();
         String loc = event[1].getText().toString();
@@ -274,10 +294,25 @@ public class AddEvent extends AppCompatActivity {
         String et = event[4].getText().toString();
         String purpose = event[5].getText().toString();
 
-        if(title.equals("") || loc.equals("") || dt.equals("") || st.equals("") || et.equals("")
-                || purpose.equals("")){
+        if (title.equals("") || loc.equals("") || dt.equals("") || st.equals("") || et.equals("")
+                || purpose.equals("")) {
             return false;
         }
         return true;
+    }
+
+    /* Define who the user is to know what SharedPrefs list we use */
+    private void defineUserType(SharedPreferences type)
+    {
+        if(type.getString("type", null).equals("student"))
+        {
+            SESSION = getSharedPreferences("STUDENT", MODE_PRIVATE);
+            RECEIVER = getSharedPreferences("MENTOR", MODE_PRIVATE);
+        }
+        else if(type.getString("type", null).equals("mentor"))
+        {
+            SESSION = getSharedPreferences("MENTOR", MODE_PRIVATE);
+            RECEIVER = getSharedPreferences("STUDENT", MODE_PRIVATE);
+        }
     }
 }

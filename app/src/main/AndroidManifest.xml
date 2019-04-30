@@ -17,16 +17,30 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
+            android:name=".SendEmail"
             android:windowSoftInputMode="adjustPan"
-            android:name=".Events.RequestMeeting"/>
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".Events.RequestMeeting"
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Events.AddEvent"
-            android:windowSoftInputMode="adjustPan" />
+            android:windowSoftInputMode="adjustPan"
+            android:screenOrientation="portrait"/>
         <activity android:name=".WellBeing.WB_Article1" />
-        <activity android:name=".Registration" />
-        <activity android:name=".HelpCenter" />
-        <activity android:name=".SideBar" />
-        <activity android:name=".model.JSON" />
+        <activity
+            android:name=".Registration"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".HelpCenter"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".SideBar"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".model.JSON"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".Login"
             android:screenOrientation="portrait">
@@ -36,7 +50,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Events.RequestStatus" />
+        <activity
+            android:name=".Events.RequestActivity"
+            android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

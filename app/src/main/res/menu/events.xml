@@ -4,9 +4,6 @@
         android:title="Create Event"
         android:id="@+id/createevent"/>
     <item
-        android:id="@+id/requestmeeting"
-        android:title="Request Meeting"/>
-    <item
-        android:id="@+id/viewmeeting"
-        android:title="View Meetings"/>
+        android:id="@+id/sendEmail"
+        android:title="Send E-Mail Msg" />
 </menu>
