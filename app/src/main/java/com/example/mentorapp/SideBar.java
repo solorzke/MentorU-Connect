@@ -157,13 +157,13 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 break;
             case R.id.clubs:
                 /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new <ADD_CLUBS_FRAGMENT_HERE>.class).addToBackStack(null).commit();
+                        new <ADD_FAQ_FRAGMENT_HERE>.class).addToBackStack(null).commit();
+
                  */
                 break;
             case R.id.faq:
-                /* getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new <ADD_FAQ_FRAGMENT_HERE>.class).addToBackStack(null).commit();
-                 */
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FAQFragment()).addToBackStack(null).commit();
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
