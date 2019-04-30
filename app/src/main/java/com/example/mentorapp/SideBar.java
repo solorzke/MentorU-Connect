@@ -89,7 +89,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
         /* THIS IS THE DEFAULT FRAGMENT TO OPEN INTO WHEN YOU LOGIN IN - HOME */
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new SMFragment()).addToBackStack(null).commit();
+                new HomeFragment()).addToBackStack(null).commit();
         navigationView.setCheckedItem(R.id.home_item);
     }
 
