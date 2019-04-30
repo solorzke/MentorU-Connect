@@ -51,14 +51,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
         //ADD IF/ELSE STATEMENT TO CHECK IF THE PERSON SIGNED IN IS MENTOR/STUDENT TO INITIALIZE THE
         //SESSION SHARED PREFS INSTANCE
-        if(USER_TYPE.getString("type", null).equals("student"))
-        {
-            SESSION = getSharedPreferences("STUDENT", MODE_PRIVATE);
-        }
-        else if(USER_TYPE.getString("type", null).equals("mentor"))
-        {
-            SESSION = getSharedPreferences("MENTOR", MODE_PRIVATE);
-        }
+        defineUserType(USER_TYPE);
 
         /* CALENDAR DROP DOWN MENU */
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -209,6 +202,18 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             } else {
                 super.onBackPressed();
             }
+        }
+    }
+
+    private void defineUserType(SharedPreferences type)
+    {
+        if(type.getString("type", null).equals("student"))
+        {
+            SESSION = getSharedPreferences("STUDENT", MODE_PRIVATE);
+        }
+        else if(type.getString("type", null).equals("mentor"))
+        {
+            SESSION = getSharedPreferences("MENTOR", MODE_PRIVATE);
         }
     }
 
