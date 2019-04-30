@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
      * AFTER LOGGING IN
      */
 
-    SharedPreferences SESSION, MENTOR;
+    SharedPreferences STUDENT, MENTOR, USER_TYPE;
     SharedPreferences.Editor editor;
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
     TextView FEEDBACK, GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER;
@@ -54,8 +54,9 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_home, container, false);
-        SESSION = getActivity().getSharedPreferences("USER", Context.MODE_PRIVATE);
+        STUDENT = getActivity().getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
         MENTOR = getActivity().getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+        USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
         CHECKMARK_1 = (ImageView) view.findViewById(R.id.checkmark1);
         CHECKMARK_2 = (ImageView) view.findViewById(R.id.checkmark2);
         CHECKMARK_3 = (ImageView) view.findViewById(R.id.checkmark3);
@@ -72,163 +73,165 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         GOAL_4 = view.findViewById(R.id.goal4);
 
         SEMESTER = view.findViewById(R.id.semester);
-        changeSemesterYear(SEMESTER);
-
         FEEDBACK = (TextView) view.findViewById(R.id.feedback);
-
-        /* String Request to Receive Any Feedback from Mentor*/
-        RequestQueue queue = Volley.newRequestQueue(view.getContext());
-        StringRequest stringRequest_1 = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        if(response.equals("empty")) {
-                            FEEDBACK.setText("No new feedback from " + MENTOR.getString("fname", null));
-                        }
-                        else{
-                            FEEDBACK.setText(response);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
-                params.put("action", "getFeedback");
-                params.put("ucid", SESSION.getString("ucid", null));
-                params.put("mentor", MENTOR.getString("ucid", null));  //Change this later <------
-
-                return params;
-            }
-        };
-
-        StringRequest stringRequest_2 = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        System.out.println(response);
-                        if(response.equals("empty")) {
-                            System.out.println(response);
-                            GOAL_1.setText("No new goals from " + MENTOR.getString("fname", null));
-                            GOAL_2.setText("No new goals from " + MENTOR.getString("fname", null));
-                            GOAL_3.setText("No new goals from " + MENTOR.getString("fname", null));
-                            GOAL_4.setText("No new goals from " + MENTOR.getString("fname", null));
-                            System.out.println(response);
-                        }
-                        else{
-                            String[] goals = response.split("\\|");
-                            loadGoal(goals[0], GOAL_1, CHECKMARK_1, c1);
-                            loadGoal(goals[1], GOAL_2, CHECKMARK_2, c2);
-                            loadGoal(goals[2], GOAL_3, CHECKMARK_3, c3);
-                            loadGoal(goals[3], GOAL_4, CHECKMARK_4, c4);
-                            System.out.println(Arrays.toString(goals));
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
-            }
-        }){
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String>  params = new HashMap<String, String>();
-                params.put("action", "getGoals");
-                params.put("ucid", SESSION.getString("ucid", null));
-                params.put("mentor", MENTOR.getString("ucid", null));
-                return params;
-            }
-        };
-
-
-        queue.add(stringRequest_1);
-        queue.add(stringRequest_2);
-
-
         return view;
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        changeSemesterYear(SEMESTER);
+
+        if(isStudent(USER_TYPE)) {
+            /* String Request to Receive Any Feedback from Mentor*/
+            RequestQueue queue = Volley.newRequestQueue(view.getContext());
+            StringRequest stringRequest_1 = new StringRequest(Request.Method.POST, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            if (response.equals("empty")) {
+                                FEEDBACK.setText("No new feedback from " + MENTOR.getString("fname", null));
+                            } else {
+                                FEEDBACK.setText(response);
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println(error);
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("action", "getFeedback");
+                    params.put("ucid", STUDENT.getString("ucid", null));
+                    params.put("mentor", MENTOR.getString("ucid", null));  //Change this later <------
+
+                    return params;
+                }
+            };
+
+            StringRequest stringRequest_2 = new StringRequest(Request.Method.POST, url,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            System.out.println(response);
+                            if (response.equals("empty")) {
+                                System.out.println(response);
+                                GOAL_1.setText("No new goals from " + MENTOR.getString("fname", null));
+                                GOAL_2.setText("No new goals from " + MENTOR.getString("fname", null));
+                                GOAL_3.setText("No new goals from " + MENTOR.getString("fname", null));
+                                GOAL_4.setText("No new goals from " + MENTOR.getString("fname", null));
+                                System.out.println(response);
+                            } else {
+                                String[] goals = response.split("\\|");
+                                loadGoal(goals[0], GOAL_1, CHECKMARK_1, c1);
+                                loadGoal(goals[1], GOAL_2, CHECKMARK_2, c2);
+                                loadGoal(goals[2], GOAL_3, CHECKMARK_3, c3);
+                                loadGoal(goals[3], GOAL_4, CHECKMARK_4, c4);
+                                System.out.println(Arrays.toString(goals));
+                            }
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    System.out.println(error);
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("action", "getGoals");
+                    params.put("ucid", STUDENT.getString("ucid", null));
+                    params.put("mentor", MENTOR.getString("ucid", null));
+                    return params;
+                }
+            };
+
+            queue.add(stringRequest_1);
+            queue.add(stringRequest_2);
+        }
+        else{
+            //If your a mentor, do this below...
+        }
+    }
+
+    @Override
     public void onClick(View v) {
+        if(isStudent(USER_TYPE)){
+            switch (v.getId()) {
+                case R.id.checkmark1:
+                    if (!c1) {
+                        CHECKMARK_1.setImageResource(R.drawable.ic_check_green);
+                        c1 = true;
+                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null), GOAL_1.getText().toString(), "1");
+                        postToast("1");
+                        break;
+                    } else {
+                        CHECKMARK_1.setImageResource(R.drawable.ic_check_circle);
+                        c1 = false;
+                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null), GOAL_1.getText().toString(), "0");
+                        postToast("0");
+                        break;
+                    }
+                case R.id.checkmark2:
+                    if (!c2) {
+                        CHECKMARK_2.setImageResource(R.drawable.ic_check_green);
+                        c2 = true;
+                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null), GOAL_2.getText().toString(), "1");
+                        postToast("1");
+                        break;
+                    } else {
+                        CHECKMARK_2.setImageResource(R.drawable.ic_check_circle);
+                        c2 = false;
+                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null), GOAL_2.getText().toString(), "0");
+                        postToast("0");
+                        break;
+                    }
 
-        switch (v.getId()) {
-            case R.id.checkmark1:
-                if(!c1){
-                    CHECKMARK_1.setImageResource(R.drawable.ic_check_green);
-                    c1 = true;
-                    changeGoalStatus(view, url, "changeGoalStatus", SESSION.getString("ucid", null),
-                            MENTOR.getString("ucid", null), GOAL_1.getText().toString(), "1");
-                    postToast("1");
+                case R.id.checkmark3:
+                    if (!c3) {
+                        CHECKMARK_3.setImageResource(R.drawable.ic_check_green);
+                        c3 = true;
+                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null), GOAL_3.getText().toString(), "1");
+                        postToast("1");
+                        break;
+                    } else {
+                        CHECKMARK_3.setImageResource(R.drawable.ic_check_circle);
+                        c3 = false;
+                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null), GOAL_3.getText().toString(), "0");
+                        postToast("0");
+                        break;
+                    }
+                case R.id.checkmark4:
+                    if (!c4) {
+                        CHECKMARK_4.setImageResource(R.drawable.ic_check_green);
+                        c4 = true;
+                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null), GOAL_4.getText().toString(), "1");
+                        postToast("1");
+                        break;
+                    } else {
+                        CHECKMARK_4.setImageResource(R.drawable.ic_check_circle);
+                        c4 = false;
+                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null), GOAL_4.getText().toString(), "0");
+                        postToast("0");
+                        break;
+                    }
+                default:
                     break;
-                }
-                else{
-                    CHECKMARK_1.setImageResource(R.drawable.ic_check_circle);
-                    c1 = false;
-                    changeGoalStatus(view, url, "changeGoalStatus", SESSION.getString("ucid", null),
-                            MENTOR.getString("ucid", null), GOAL_1.getText().toString(), "0");
-                    postToast("0");
-                    break;
-                }
-            case R.id.checkmark2:
-                if(!c2){
-                    CHECKMARK_2.setImageResource(R.drawable.ic_check_green);
-                    c2 = true;
-                    changeGoalStatus(view, url, "changeGoalStatus", SESSION.getString("ucid", null),
-                            MENTOR.getString("ucid", null), GOAL_2.getText().toString(), "1");
-                    postToast("1");
-                    break;
-                }
-                else{
-                    CHECKMARK_2.setImageResource(R.drawable.ic_check_circle);
-                    c2 = false;
-                    changeGoalStatus(view, url, "changeGoalStatus", SESSION.getString("ucid", null),
-                            MENTOR.getString("ucid", null), GOAL_2.getText().toString(), "0");
-                    postToast("0");
-                    break;
-                }
+            }
+        }
+        else{
 
-            case R.id.checkmark3:
-                if(!c3){
-                    CHECKMARK_3.setImageResource(R.drawable.ic_check_green);
-                    c3 = true;
-                    changeGoalStatus(view, url, "changeGoalStatus", SESSION.getString("ucid", null),
-                            MENTOR.getString("ucid", null), GOAL_3.getText().toString(), "1");
-                    postToast("1");
-                    break;
-                }
-                else{
-                    CHECKMARK_3.setImageResource(R.drawable.ic_check_circle);
-                    c3 = false;
-                    changeGoalStatus(view, url, "changeGoalStatus", SESSION.getString("ucid", null),
-                            MENTOR.getString("ucid", null), GOAL_3.getText().toString(), "0");
-                    postToast("0");
-                    break;
-                }
-            case R.id.checkmark4:
-                if(!c4){
-                    CHECKMARK_4.setImageResource(R.drawable.ic_check_green);
-                    c4 = true;
-                    changeGoalStatus(view, url, "changeGoalStatus", SESSION.getString("ucid", null),
-                            MENTOR.getString("ucid", null), GOAL_4.getText().toString(), "1");
-                    postToast("1");
-                    break;
-                }
-                else{
-                    CHECKMARK_4.setImageResource(R.drawable.ic_check_circle);
-                    c4 = false;
-                    changeGoalStatus(view, url, "changeGoalStatus", SESSION.getString("ucid", null),
-                            MENTOR.getString("ucid", null), GOAL_4.getText().toString(), "0");
-                    postToast("0");
-                    break;
-                }
-            default:
-                break;
         }
     }
 
@@ -310,6 +313,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         else if(4 < month || month < 8){
             semester.setText("Summer '" + year);
+        }
+    }
+
+    private boolean isStudent(SharedPreferences type) {
+        if(type.getString("type", null).equals("student"))
+        {
+            return true;
+        }
+        else{
+            return false;
         }
     }
 }
