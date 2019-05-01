@@ -34,7 +34,8 @@ public class MentorFragment extends Fragment {
     String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
     View view;
     ImageView AVI;
-    EditText MTR_NAME, MTR_EMAIL, MTR_UCID, MTR_DATE, MTR_DEGREE, MTR_OCC, MTR_MENTEE, EDIT, DONE;
+    EditText MTR_NAME, MTR_EMAIL, MTR_UCID, MTR_DATE, MTR_DEGREE, MTR_OCC, MTR_MENTEE;
+    TextView EDIT, DONE;
     EditText [] list;
 
 
