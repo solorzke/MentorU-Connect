@@ -126,10 +126,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                                 System.out.println(response);
                             } else {
                                 String[] goals = response.split("\\|");
-                                loadGoal(goals[0], GOAL_1, CHECKMARK_1, c1);
-                                loadGoal(goals[1], GOAL_2, CHECKMARK_2, c2);
-                                loadGoal(goals[2], GOAL_3, CHECKMARK_3, c3);
-                                loadGoal(goals[3], GOAL_4, CHECKMARK_4, c4);
+                                c1 = loadGoal(goals[0], GOAL_1, CHECKMARK_1);
+                                c2 = loadGoal(goals[1], GOAL_2, CHECKMARK_2);
+                                c3 = loadGoal(goals[2], GOAL_3, CHECKMARK_3);
+                                c4 = loadGoal(goals[3], GOAL_4, CHECKMARK_4);
                                 System.out.println(Arrays.toString(goals));
                             }
                         }
@@ -235,18 +235,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void loadGoal(String goal, TextView tv_goal, ImageView ck, boolean sentinel){
+    private boolean loadGoal(String goal, TextView tv_goal, ImageView ck){
 
+        boolean s = false;
         String [] data = goal.split("\\\\");
         tv_goal.setText(data[0]);
         if(data[1].equals("1")){
-            sentinel = true;
+            s = true;
             ck.setImageResource(R.drawable.ic_check_green);
         }
         else if(data[1].equals("0")){
-            sentinel = false;
+            s = false;
             ck.setImageResource(R.drawable.ic_check_circle);
         }
+
+        return s;
     }
 
     private void changeGoalStatus(View v, String url, final String action,
@@ -308,7 +311,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
 
         else if(month < 5){
-            semester.setText("Summer '" + year);
+            semester.setText("Spring '" + year);
         }
 
         else if(4 < month || month < 8){
