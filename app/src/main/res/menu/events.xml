@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:title="Create Event"
-        android:id="@+id/createevent"/>
+        android:id="@+id/createevent"
+        android:title="Request Meeting" />
     <item
         android:id="@+id/sendEmail"
         android:title="Send E-Mail Msg" />

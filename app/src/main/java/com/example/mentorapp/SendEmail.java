@@ -16,7 +16,7 @@ public class SendEmail extends AppCompatActivity {
 
     EditText TO, SUBJECT, BODY;
     ImageView send, AC_IMG;
-    SharedPreferences SESSION, RECIPIENT;
+    SharedPreferences RECIPIENT, USER_TYPE;
     boolean done = false;
 
     @Override
@@ -28,14 +28,22 @@ public class SendEmail extends AppCompatActivity {
         BODY = findViewById(R.id.email_body);
         send = findViewById(R.id.sendEmail);
         AC_IMG = findViewById(R.id.ab_img);
-        SESSION = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
-        RECIPIENT = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+
+        if(isStudent(USER_TYPE)){
+            RECIPIENT = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
+        }
+        else{
+            RECIPIENT = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+        }
     }
 
+    /* After onCreateView(), collect the form data and send an intent to their preferred email
+    * application to finish sending the email message. */
     @Override
     protected void onStart() {
         super.onStart();
@@ -60,6 +68,8 @@ public class SendEmail extends AppCompatActivity {
         });
     }
 
+    /* After completing the email process, resume here and send you back to your previous
+    * opened page */
     @Override
     protected void onResume() {
         super.onResume();
@@ -69,11 +79,9 @@ public class SendEmail extends AppCompatActivity {
     }
 
     /* Store email message info and pass over to EMAIL Application of their choice . */
-
     public void composeEmail(String address, String subject, String body) {
         Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, address);
+        intent.setData(Uri.parse("mailto:" + address)); // only email apps should handle this
         intent.putExtra(Intent.EXTRA_SUBJECT, subject);
         intent.putExtra(Intent.EXTRA_TEXT, body);
         if (intent.resolveActivity(getPackageManager()) != null) {
@@ -91,6 +99,17 @@ public class SendEmail extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /* Define who the user type is to pass their email address in the Email API */
+    private boolean isStudent(SharedPreferences type) {
+        if(type.getString("type", null).equals("student"))
+        {
+            return true;
+        }
+        else{
+            return false;
         }
     }
 }
