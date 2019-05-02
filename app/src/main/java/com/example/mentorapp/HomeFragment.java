@@ -1,12 +1,15 @@
 package com.example.mentorapp;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.Image;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mentorapp.FAB.EditMessage;
 import com.example.mentorapp.model.JSON;
 import com.example.mentorapp.model.VolleyCallback;
 
@@ -45,8 +49,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     SharedPreferences STUDENT, MENTOR, USER_TYPE;
     SharedPreferences.Editor editor;
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
+    FloatingActionButton fab;
     TextView FEEDBACK, GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER;
     String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    AlertDialog dialog;
     Boolean c1 = false, c2 = false, c3 = false, c4 = false;
     View view;
 
@@ -57,6 +63,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         STUDENT = getActivity().getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
         MENTOR = getActivity().getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
         USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+        fab  = view.findViewById(R.id.m_fab);
+
         CHECKMARK_1 = (ImageView) view.findViewById(R.id.checkmark1);
         CHECKMARK_2 = (ImageView) view.findViewById(R.id.checkmark2);
         CHECKMARK_3 = (ImageView) view.findViewById(R.id.checkmark3);
@@ -74,6 +82,21 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         SEMESTER = view.findViewById(R.id.semester);
         FEEDBACK = (TextView) view.findViewById(R.id.feedback);
+
+        dialog = new AlertDialog.Builder(getContext()).create();
+        dialog.setTitle("Choose Option");
+        dialog.setMessage("Select option to add/edit");
+        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Goals", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Message", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                startActivity(new Intent(getContext(), EditMessage.class));
+            }
+        });
         return view;
     }
 
@@ -151,8 +174,22 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
             queue.add(stringRequest_1);
             queue.add(stringRequest_2);
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.show();
+                }
+            });
         }
         else{
+            fab.show();
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.show();
+                }
+            });
             //If your a mentor, do this below...
         }
     }
