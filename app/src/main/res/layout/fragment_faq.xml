@@ -53,15 +53,15 @@
                 android:layout_height="81dp"
                 android:paddingTop="16dp"
                 android:text="Q:Why can't I login into the app?
-   Ans: Yo must be assigned a mentor before you log in."
+   Ans: You must be assigned a mentor before you log in if that's not the case then re-enter your login credentials."
                 android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="81dp"
                 android:paddingTop="16dp"
-                android:text="Q:Why can't I login into the app?
-   Ans: Yo must be assigned a mentor before you log in."
+                android:text="Q:How do I request a meeting with my mentor?
+   Ans: Click the logo button to direct the home page -> "
                 android:textStyle="bold" />
 
             <TextView
