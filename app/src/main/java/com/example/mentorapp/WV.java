@@ -2,6 +2,7 @@ package com.example.mentorapp;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -24,9 +25,8 @@ public class WV extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (webView.canGoBack()) {
-            webView.goBack();
-        } else {
+        if (webView.getVisibility() == View.VISIBLE) {
+
             super.onBackPressed();
         }
     }
