@@ -16,7 +16,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".FAB.EditMessage"></activity>
+        <activity android:name=".EditGoals"></activity>
+        <activity android:name=".FAB.EditMessage" />
         <activity
             android:name=".SendEmail"
             android:screenOrientation="portrait"
