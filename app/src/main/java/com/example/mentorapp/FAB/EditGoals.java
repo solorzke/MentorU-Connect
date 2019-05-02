@@ -1,4 +1,4 @@
-package com.example.mentorapp;
+package com.example.mentorapp.FAB;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +21,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.FAB.EditMessage;
+import com.example.mentorapp.R;
+import com.example.mentorapp.SideBar;
 
 import java.util.HashMap;
 import java.util.Map;
