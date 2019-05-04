@@ -17,6 +17,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.model.JSON;
 
 import android.content.Intent;
+import android.widget.ImageView;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,12 +34,14 @@ public class Registration extends AppCompatActivity {
     AlertDialog al;
     AlertDialog logal;
     AlertDialog SERVER_ERROR;
+    ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
         Button reg = (Button) findViewById(R.id.button) ;
+        back = findViewById(R.id.back);
 
         //Registration Error Alert
         al = new AlertDialog.Builder(Registration.this).create();
@@ -105,7 +108,7 @@ public class Registration extends AppCompatActivity {
 
                         if (response.contains("REGISTERED")) {
                             Intent gth = new Intent(getApplicationContext(), JSON.class);
-                            gth.putExtra("com.example.mentorapp.CONFIRM","true");
+                            gth.putExtra("com.example.mentorapp.CONFIRM","student");
                             gth.putExtra("com.example.mentorapp.UCID", id);
                             startActivity(gth);
 
@@ -148,5 +151,13 @@ public class Registration extends AppCompatActivity {
             }
 
         });
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
     }
 }
