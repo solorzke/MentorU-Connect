@@ -98,7 +98,7 @@
 
                     <EditText
                         android:id="@+id/g1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="301dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:maxLength="32"
@@ -130,7 +130,7 @@
 
                     <EditText
                         android:id="@+id/g2"
-                        android:layout_width="wrap_content"
+                        android:layout_width="301dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:maxLength="32"
@@ -162,7 +162,7 @@
 
                     <EditText
                         android:id="@+id/g3"
-                        android:layout_width="wrap_content"
+                        android:layout_width="301dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:maxLength="32"
@@ -194,13 +194,13 @@
 
                     <EditText
                         android:id="@+id/g4"
-                        android:layout_width="wrap_content"
+                        android:layout_width="301dp"
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:maxLength="32"
                         android:text=""
-                        android:textSize="15sp"
-                        android:textColor="@android:color/holo_red_dark"/>
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
         </LinearLayout>
