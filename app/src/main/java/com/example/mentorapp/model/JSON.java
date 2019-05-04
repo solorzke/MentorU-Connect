@@ -85,7 +85,6 @@ public class JSON extends AppCompatActivity {
                                 editor.putString("email", student.getString("email"));
                                 editor.putString("degree", student.getString("degree"));
                                 editor.putString("club", student.getString("club"));
-                                editor.putString("avi", student.getString("avi"));
                                 editor.putString("firstEntry", "true");
                                 editor.apply();
 
