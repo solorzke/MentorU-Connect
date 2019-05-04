@@ -16,7 +16,6 @@
         android:layout_marginRight="116dp"
         android:text="FAQ"
         android:textSize="50sp"
-        app:fontFamily="casual"
         app:layout_constraintBottom_toTopOf="@+id/scrollView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.783"
