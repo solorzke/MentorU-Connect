@@ -179,7 +179,7 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="36dp"
         android:layout_marginRight="36dp"
-        android:text="Date: 04/02/19"
+        android:text="Date: 05/04/19"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView4" />

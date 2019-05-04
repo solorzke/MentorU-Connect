@@ -144,6 +144,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
                             GOAL_2.setText("No new goals from " + MENTOR.getString("fname", null));
                             GOAL_3.setText("No new goals from " + MENTOR.getString("fname", null));
                             GOAL_4.setText("No new goals from " + MENTOR.getString("fname", null));
+                            CHECKMARK_1.setEnabled(false);
+                            CHECKMARK_2.setEnabled(false);
+                            CHECKMARK_3.setEnabled(false);
+                            CHECKMARK_4.setEnabled(false);
                         } else {
                             String[] goals = response.split("\\|");
                             c1 = loadGoal(goals[0], GOAL_1, CHECKMARK_1);
@@ -272,11 +276,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             tv_goal.setVisibility(View.VISIBLE);
             ck.setVisibility(View.VISIBLE);
             ck.setImageResource(R.drawable.ic_check_green);
+            ck.setEnabled(true);
         } else if (data[1].equals("0")) {
             s = false;
             tv_goal.setVisibility(View.VISIBLE);
             ck.setVisibility(View.VISIBLE);
             ck.setImageResource(R.drawable.ic_check_circle);
+            ck.setEnabled(true);
         } else if (data[1].equals("3")) {
             s = false;
             tv_goal.setVisibility(View.INVISIBLE);
