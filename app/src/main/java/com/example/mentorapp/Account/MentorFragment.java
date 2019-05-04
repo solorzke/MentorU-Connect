@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.R;
+import com.example.mentorapp.SideBar;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -147,6 +148,9 @@ public class MentorFragment extends Fragment {
         e.putString("occupation", texts[3].getText().toString());
         e.putString("degree", texts[4].getText().toString());
         e.apply();
+        SideBar bar = (SideBar) getActivity();
+        bar.user_name.setText(name[0] + " " + name[1]);
+        bar.user_email.setText(texts[1].getText().toString());
     }
 
     private void updateChanges(View v, final SharedPreferences list, String url, final String action)
