@@ -22,9 +22,9 @@
     <TextView
         android:id="@+id/textView21"
         android:layout_width="351dp"
-        android:layout_height="171dp"
-        android:text="Below is our Google Document which has many helpful articles that can teach you about Learning Style Assessment, Learning Strategies, Test Taking Strategies, Note
-Taking Methods, and Organizational Skills, along with providing you the links to NJIT's Academic Schedule and Exam Schedule, as well as a link to the NJIT tutoring Center."
+        android:layout_height="129dp"
+        android:text="Social Capital Seeks to expand student’s social resources; whether is on or outside the campus community. Social Capital embraces the interpersonal relationships of social, human, financial, cultural or physical factors to contribute to the students’ well-being.
+"
         android:textColor="#000000"
         android:textSize="17dp"
         app:layout_constraintBottom_toTopOf="@+id/textView24"
@@ -37,7 +37,7 @@ Taking Methods, and Organizational Skills, along with providing you the links to
         android:id="@+id/textView23"
         android:layout_width="340dp"
         android:layout_height="wrap_content"
-        android:text="Welcome to the page for Academics! Here you will find all the information provided to help you during your enrollment at NJIT."
+        android:text="Welcome to the page for Social Capital! Here you will find all the information provided to help you during your enrollment at NJIT."
         android:textColor="#000000"
         android:textSize="17dp"
         app:layout_constraintBottom_toTopOf="@+id/textView21"

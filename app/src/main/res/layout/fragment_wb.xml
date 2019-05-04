@@ -44,9 +44,10 @@
 
     <TextView
         android:id="@+id/wb_text2"
-        android:layout_width="367dp"
+        android:layout_width="354dp"
         android:layout_height="152dp"
-        android:text="In this page you will be provided many resources and links in a Google Document provided down below. The Google Document will consist of topics such as Leadership, Self-Awareness, Motivation, Resilience/Grit, Cultural / Personal Identity. These main topics will have links for you to read and watch throughout your experience at NJIT. Feel Free to click the button below to direct you to the Google Document."
+        android:text="This page provides a range of support to help you develop the resources and skills you need to navigate the challenges and opportunities of college and beyond. A staff member or mentor will present and discuss a variety of topics in relationship to positive psychology highlighted by self-awareness, motivation and resilience.
+"
         android:textColor="#000000"
         app:layout_constraintBottom_toTopOf="@+id/textView22"
         app:layout_constraintEnd_toEndOf="parent"
