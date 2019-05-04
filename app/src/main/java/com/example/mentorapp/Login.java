@@ -166,7 +166,8 @@ public class Login extends AppCompatActivity {
         forgotPassword.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri forgotPw = Uri.parse(url);
+                String link = "http://myucid.njit.edu";
+                Uri forgotPw = Uri.parse(link);
                 Intent goToForgotPw = new Intent(Intent.ACTION_VIEW, forgotPw);
                 if (goToForgotPw.resolveActivity(getPackageManager()) != null) {
                     startActivity(goToForgotPw);
