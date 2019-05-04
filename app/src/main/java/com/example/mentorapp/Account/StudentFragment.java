@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -25,6 +26,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.R;
+import com.example.mentorapp.SideBar;
 import com.example.mentorapp.WellBeing.WB_Article1;
 
 import java.util.HashMap;
@@ -34,18 +36,19 @@ import java.util.Set;
 public class StudentFragment extends Fragment {
 
     String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
-    SharedPreferences SESSION, CL;
+    SharedPreferences SESSION, CL, USER_TYPE;
     SharedPreferences.Editor EDITOR, EDITOR2;
     TextView EDIT_CL_BTN, DONE_CL_BTN, EDIT_ACC_BTN, DONE_ACC_BTN, STU_UCID;
     EditText STU_NAME, STU_EMAIL, STU_DEGREE, STU_CLUB, C1_ID, C1_T, C2_ID, C2_T, C3_ID,
             C3_T, C4_ID, C4_T, C5_ID, C5_T, C6_ID, C6_T;
+    View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.account_student, container, false);
-        SESSION = getActivity().getSharedPreferences("USER", Context.MODE_PRIVATE);
+        view = inflater.inflate(R.layout.account_student, container, false);
+        SESSION = getActivity().getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
         EDITOR = SESSION.edit();
         CL = getActivity().getSharedPreferences("COURSES", Context.MODE_PRIVATE);
         EDITOR2 = CL.edit();
@@ -60,6 +63,8 @@ public class StudentFragment extends Fragment {
         STU_EMAIL = view.findViewById(R.id.acc_stu_email_1);
         STU_DEGREE = view.findViewById(R.id.acc_stu_degree_1);
         STU_CLUB = view.findViewById(R.id.acc_stu_club_1);
+        USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+
 
         C1_ID = view.findViewById(R.id.class_id_1);
         C1_T = view.findViewById(R.id.class_title_1);
@@ -94,52 +99,67 @@ public class StudentFragment extends Fragment {
         C6_ID.setText(CL.getString("id5", null));
         C6_T.setText(CL.getString("title5", null));
 
-        EDIT_ACC_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EDIT_ACC_BTN.setVisibility(View.INVISIBLE);
-                DONE_ACC_BTN.setVisibility(View.VISIBLE);
-                enableEditAccText(STU_NAME, STU_EMAIL, STU_DEGREE, STU_CLUB);
-            }
-        });
-
-        DONE_ACC_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DONE_ACC_BTN.setVisibility(View.INVISIBLE);
-                EDIT_ACC_BTN.setVisibility(View.VISIBLE);
-                disableEditAccText(STU_NAME, STU_EMAIL, STU_DEGREE, STU_CLUB);
-                updateUserSession(EDITOR, STU_NAME, STU_EMAIL, STU_DEGREE, STU_CLUB);
-                sendAccRequest(view, url, "updateRecord", SESSION);
-            }
-        });
-
-        EDIT_CL_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                EDIT_CL_BTN.setVisibility(View.INVISIBLE);
-                DONE_CL_BTN.setVisibility(View.VISIBLE);
-                enableEditClassText(C1_ID, C1_T, C2_ID, C2_T, C3_ID,
-                        C3_T, C4_ID, C4_T, C5_ID, C5_T, C6_ID, C6_T);
-
-            }
-        });
-
-        DONE_CL_BTN.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DONE_CL_BTN.setVisibility(View.INVISIBLE);
-                EDIT_CL_BTN.setVisibility(View.VISIBLE);
-                disableEditClassText(C1_ID, C1_T, C2_ID, C2_T, C3_ID,
-                        C3_T, C4_ID, C4_T, C5_ID, C5_T, C6_ID, C6_T);
-                updateClassList(EDITOR2, C1_ID, C1_T, C2_ID, C2_T, C3_ID,
-                        C3_T, C4_ID, C4_T, C5_ID, C5_T, C6_ID, C6_T);
-                sendClassRequest(view, url, "updateClasses",CL,
-                        SESSION.getString("ucid", null));
-            }
-        });
-
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        if(isStudent(USER_TYPE)){
+            EDIT_ACC_BTN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EDIT_ACC_BTN.setVisibility(View.INVISIBLE);
+                    DONE_ACC_BTN.setVisibility(View.VISIBLE);
+                    enableEditAccText(STU_NAME, STU_EMAIL, STU_DEGREE, STU_CLUB);
+                }
+            });
+
+            DONE_ACC_BTN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DONE_ACC_BTN.setVisibility(View.INVISIBLE);
+                    EDIT_ACC_BTN.setVisibility(View.VISIBLE);
+                    disableEditAccText(STU_NAME, STU_EMAIL, STU_DEGREE, STU_CLUB);
+                    updateUserSession(EDITOR, STU_NAME, STU_EMAIL, STU_DEGREE, STU_CLUB);
+                    sendAccRequest(view, url, "updateRecord", SESSION);
+                    postToast("Account Updated");
+                }
+            });
+
+            EDIT_CL_BTN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    EDIT_CL_BTN.setVisibility(View.INVISIBLE);
+                    DONE_CL_BTN.setVisibility(View.VISIBLE);
+                    enableEditClassText(C1_ID, C1_T, C2_ID, C2_T, C3_ID,
+                            C3_T, C4_ID, C4_T, C5_ID, C5_T, C6_ID, C6_T);
+
+                }
+            });
+
+            DONE_CL_BTN.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DONE_CL_BTN.setVisibility(View.INVISIBLE);
+                    EDIT_CL_BTN.setVisibility(View.VISIBLE);
+                    disableEditClassText(C1_ID, C1_T, C2_ID, C2_T, C3_ID,
+                            C3_T, C4_ID, C4_T, C5_ID, C5_T, C6_ID, C6_T);
+                    updateClassList(EDITOR2, C1_ID, C1_T, C2_ID, C2_T, C3_ID,
+                            C3_T, C4_ID, C4_T, C5_ID, C5_T, C6_ID, C6_T);
+                    sendClassRequest(view, url, "updateClasses",CL,
+                            SESSION.getString("ucid", null));
+                    postToast("Classes Updated");
+                }
+            });
+        }
+        else{
+            DONE_CL_BTN.setVisibility(View.INVISIBLE);
+            EDIT_CL_BTN.setVisibility(View.INVISIBLE);
+            EDIT_ACC_BTN.setVisibility(View.INVISIBLE);
+            DONE_ACC_BTN.setVisibility(View.INVISIBLE);
+        }
+
     }
 
     private void disableEditAccText(EditText STU_NAME, EditText STU_EMAIL,
@@ -194,62 +214,50 @@ public class StudentFragment extends Fragment {
         C1_ID.setFocusableInTouchMode(false);
         C1_ID.setEnabled(false);
         C1_ID.setCursorVisible(false);
-        C1_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C1_T.setFocusableInTouchMode(false);
         C1_T.setEnabled(false);
         C1_T.setCursorVisible(false);
-        C1_T.setBackgroundColor(Color.TRANSPARENT);
 
         C2_ID.setFocusableInTouchMode(false);
         C2_ID.setEnabled(false);
         C2_ID.setCursorVisible(false);
-        C2_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C2_T.setFocusableInTouchMode(false);
         C2_T.setEnabled(false);
         C2_T.setCursorVisible(false);
-        C2_T.setBackgroundColor(Color.TRANSPARENT);
 
         C3_ID.setFocusableInTouchMode(false);
         C3_ID.setEnabled(false);
         C3_ID.setCursorVisible(false);
-        C3_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C3_T.setFocusableInTouchMode(false);
         C3_T.setEnabled(false);
         C3_T.setCursorVisible(false);
-        C3_T.setBackgroundColor(Color.TRANSPARENT);
 
         C4_ID.setFocusableInTouchMode(false);
         C4_ID.setEnabled(false);
         C4_ID.setCursorVisible(false);
-        C4_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C4_T.setFocusableInTouchMode(false);
         C4_T.setEnabled(false);
         C4_T.setCursorVisible(false);
-        C4_T.setBackgroundColor(Color.TRANSPARENT);
 
         C5_ID.setFocusableInTouchMode(false);
         C5_ID.setEnabled(false);
         C5_ID.setCursorVisible(false);
-        C5_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C5_T.setFocusableInTouchMode(false);
         C5_T.setEnabled(false);
         C5_T.setCursorVisible(false);
-        C5_T.setBackgroundColor(Color.TRANSPARENT);
 
         C6_ID.setFocusableInTouchMode(false);
         C6_ID.setEnabled(false);
         C6_ID.setCursorVisible(false);
-        C6_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C6_T.setFocusableInTouchMode(false);
         C6_T.setEnabled(false);
         C6_T.setCursorVisible(false);
-        C6_T.setBackgroundColor(Color.TRANSPARENT);
     }
 
     private void enableEditClassText(EditText C1_ID, EditText C1_T, EditText C2_ID, EditText C2_T,
@@ -258,62 +266,50 @@ public class StudentFragment extends Fragment {
         C1_ID.setFocusableInTouchMode(true);
         C1_ID.setEnabled(true);
         C1_ID.setCursorVisible(true);
-        C1_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C1_T.setFocusableInTouchMode(true);
         C1_T.setEnabled(true);
         C1_T.setCursorVisible(true);
-        C1_T.setBackgroundColor(Color.TRANSPARENT);
 
         C2_ID.setFocusableInTouchMode(true);
         C2_ID.setEnabled(true);
         C2_ID.setCursorVisible(true);
-        C2_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C2_T.setFocusableInTouchMode(true);
         C2_T.setEnabled(true);
         C2_T.setCursorVisible(true);
-        C2_T.setBackgroundColor(Color.TRANSPARENT);
 
         C3_ID.setFocusableInTouchMode(true);
         C3_ID.setEnabled(true);
         C3_ID.setCursorVisible(true);
-        C3_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C3_T.setFocusableInTouchMode(true);
         C3_T.setEnabled(true);
         C3_T.setCursorVisible(true);
-        C3_T.setBackgroundColor(Color.TRANSPARENT);
 
         C4_ID.setFocusableInTouchMode(true);
         C4_ID.setEnabled(true);
         C4_ID.setCursorVisible(true);
-        C4_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C4_T.setFocusableInTouchMode(true);
         C4_T.setEnabled(true);
         C4_T.setCursorVisible(true);
-        C4_T.setBackgroundColor(Color.TRANSPARENT);
 
         C5_ID.setFocusableInTouchMode(true);
         C5_ID.setEnabled(true);
         C5_ID.setCursorVisible(true);
-        C5_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C5_T.setFocusableInTouchMode(true);
         C5_T.setEnabled(true);
         C5_T.setCursorVisible(true);
-        C5_T.setBackgroundColor(Color.TRANSPARENT);
 
         C6_ID.setFocusableInTouchMode(true);
         C6_ID.setEnabled(true);
         C6_ID.setCursorVisible(true);
-        C6_ID.setBackgroundColor(Color.TRANSPARENT);
 
         C6_T.setFocusableInTouchMode(true);
         C6_T.setEnabled(true);
         C6_T.setCursorVisible(true);
-        C6_T.setBackgroundColor(Color.TRANSPARENT);
 
     }
 
@@ -326,6 +322,9 @@ public class StudentFragment extends Fragment {
         editor.putString("degree", STU_DEGREE.getText().toString());
         editor.putString("club", STU_CLUB.getText().toString());
         editor.apply();
+        SideBar bar = (SideBar) getActivity();
+        bar.user_name.setText(name[0] + " " + name[1]);
+        bar.user_email.setText(STU_EMAIL.getText().toString());
     }
 
     private void updateClassList(SharedPreferences.Editor editor, EditText C1_ID, EditText C1_T,
@@ -425,6 +424,26 @@ public class StudentFragment extends Fragment {
 
         };
         queue.add(request);
+    }
+
+    private void postToast(String msg)
+    {
+        Context context = getContext();
+        CharSequence text = msg;
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+    }
+
+    private boolean isStudent(SharedPreferences type)
+    {
+        if(type.getString("type", null).equals("student"))
+        {
+            return true;
+        }
+        else{
+            return false;
+        }
     }
 
 }
