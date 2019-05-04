@@ -34,7 +34,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
      */
 
     private DrawerLayout drawer;
-    TextView user_name, user_email;
+    public TextView user_name, user_email;
     ImageView AC_IMG;
     SharedPreferences SESSION, USER_TYPE;
     SharedPreferences.Editor editor;
@@ -91,6 +91,16 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFragment()).addToBackStack(null).commit();
         navigationView.setCheckedItem(R.id.home_item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String header_name = SESSION.getString("fname", null) + " " +
+                SESSION.getString("lname", null);
+        user_name.setText(header_name);
+        String header_email = SESSION.getString("email", null);
+        user_email.setText(header_email);
     }
 
     @Override
