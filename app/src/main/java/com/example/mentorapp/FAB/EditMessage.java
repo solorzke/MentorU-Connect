@@ -71,7 +71,7 @@ public class EditMessage extends AppCompatActivity {
             }
         });
         mentee_name.setText(fname + " " + lname);
-        Picasso.get().load(mentee.getString("avi", null)).into(avi);
+        Picasso.get().load("https://tinyurl.com/yyt8bga6").into(avi);
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
