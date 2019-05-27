@@ -22,6 +22,7 @@ import android.widget.TextView;
 import com.example.mentorapp.Events.AddEvent;
 import com.example.mentorapp.Events.RequestMeeting;
 import com.example.mentorapp.Events.RequestActivity;
+import com.example.mentorapp.Home.HomeFrag;
 
 public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -64,7 +65,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).addToBackStack(null).commit();
+                        new HomeFrag()).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.home_item);
             }
         });
@@ -89,7 +90,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
         /* THIS IS THE DEFAULT FRAGMENT TO OPEN INTO WHEN YOU LOGIN IN - HOME */
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFragment()).addToBackStack(null).commit();
+                new HomeFrag()).addToBackStack(null).commit();
         navigationView.setCheckedItem(R.id.home_item);
     }
 
@@ -138,7 +139,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         switch (menuItem.getItemId()){
             case R.id.home_item:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFragment()).commit();
+                        new HomeFrag()).commit();
                 break;
             case R.id.account:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -229,6 +230,10 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         {
             SESSION = getSharedPreferences("MENTOR", MODE_PRIVATE);
         }
+    }
+
+    private void useCamera(){
+
     }
 
 }
