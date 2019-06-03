@@ -27,6 +27,7 @@ import com.example.mentorapp.AccountFragment;
 import com.example.mentorapp.FAB.EditMessage;
 import com.example.mentorapp.FAQFragment;
 import com.example.mentorapp.R;
+import com.example.mentorapp.Report.ReportActivity;
 import com.example.mentorapp.SendEmail;
 import com.example.mentorapp.SideBar;
 import com.example.mentorapp.model.DateTimeFormat;
@@ -73,6 +74,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         contact_user.setOnClickListener(this);
         account_info.setOnClickListener(this);
         help_center.setOnClickListener(this);
+        report.setOnClickListener(this);
 
         if(isStudent(USER_TYPE)){
             String fname = MENTOR.getString("fname", null);
@@ -209,7 +211,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.report:
-
+                startActivity(new Intent(getActivity(), ReportActivity.class));
+                break;
 
             default:
                 break;
