@@ -33,5 +33,4 @@ dependencies {
     implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
 
 
-
 }
