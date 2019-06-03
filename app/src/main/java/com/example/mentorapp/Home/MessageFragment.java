@@ -67,7 +67,6 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
-        getMessage(STUDENT, MENTOR, view);
         FAB.setOnClickListener(this);
         thumbs_up.setOnClickListener(this);
         thumbs_down.setOnClickListener(this);
@@ -80,24 +79,48 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
             String fname = MENTOR.getString("fname", null);
             String lname = MENTOR.getString("lname", null);
             messenger.setText(fname + " " + lname);
+            getMessage(STUDENT, MENTOR, view);
         }
         else{
             String fname = STUDENT.getString("fname", null);
             String lname = STUDENT.getString("lname", null);
             messenger.setText(fname + " " + lname);
+            getMessage(MENTOR, STUDENT, view);
         }
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getMessage(STUDENT, MENTOR, view);
+        if(isStudent(USER_TYPE)){
+            String fname = MENTOR.getString("fname", null);
+            String lname = MENTOR.getString("lname", null);
+            messenger.setText(fname + " " + lname);
+            getMessage(STUDENT, MENTOR, view);
+        }
+        else{
+            String fname = STUDENT.getString("fname", null);
+            String lname = STUDENT.getString("lname", null);
+            messenger.setText(fname + " " + lname);
+            getMessage(MENTOR, STUDENT, view);
+        }
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        getMessage(STUDENT, MENTOR, view);
+        if(isStudent(USER_TYPE)){
+            String fname = MENTOR.getString("fname", null);
+            String lname = MENTOR.getString("lname", null);
+            messenger.setText(fname + " " + lname);
+            getMessage(STUDENT, MENTOR, view);
+        }
+        else{
+            String fname = STUDENT.getString("fname", null);
+            String lname = STUDENT.getString("lname", null);
+            messenger.setText(fname + " " + lname);
+            getMessage(MENTOR, STUDENT, view);
+        }
     }
 
     private boolean isStudent(SharedPreferences type) {
@@ -108,15 +131,16 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void getMessage(final SharedPreferences STUDENT, final SharedPreferences MENTOR, View view){
+    private void getMessage(final SharedPreferences RECEIVER, final SharedPreferences SENDER, View view){
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
         StringRequest stringRequest_1 = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        System.out.println(response);
                         String [] reply = response.split("\\|");
                         if (reply[0].equals("empty")) {
-                            FEEDBACK.setText("No new feedback from " + MENTOR.getString("fname", null));
+                            FEEDBACK.setText("No new feedback from " + SENDER.getString("fname", null));
                             date.setText("Date: N/A");
 
                         } else {
@@ -136,8 +160,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("action", "getFeedback");
-                params.put("ucid", STUDENT.getString("ucid", null));
-                params.put("mentor", MENTOR.getString("ucid", null));  //Change this later <------
+                params.put("receiver", RECEIVER.getString("ucid", null));
+                params.put("sender", SENDER.getString("ucid", null));  //Change this later <------
 
                 return params;
             }
