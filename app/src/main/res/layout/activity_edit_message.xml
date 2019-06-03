@@ -104,7 +104,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="15dp"
-                        android:text="Mentee Name"
+                        android:text="Recipient Name"
                         android:textColor="@android:color/holo_red_dark"
                         android:textSize="18sp" />
 
@@ -146,11 +146,11 @@
                 android:layout_height="150dp"
                 android:layout_margin="10dp"
                 android:gravity="top|left"
-                android:hint="Enter Message: Max 50 Chars"
+                android:hint="Enter Message: Max 80 Chars"
                 android:inputType="textMultiLine"
-                android:lines="3"
-                android:maxLength="50"
-                android:maxLines="3"
+                android:lines="4"
+                android:maxLength="80"
+                android:maxLines="5"
                 android:minLines="1"
                 android:scrollbars="vertical"
                 android:textSize="20sp" />
