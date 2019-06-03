@@ -32,8 +32,8 @@ public class HomeFrag extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         adapter = new TabAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(new HomeFragment(), "Goals");
-        adapter.addFragment(new HomeFragment(), "Messages");
+        adapter.addFragment(new Goals(), "Goals");
+        adapter.addFragment(new MessageFragment(), "Messages");
         adapter.addFragment(new VectorFeedFragment(), "Feed");
         viewPager.setAdapter(adapter);
         viewPager.setPageTransformer(true, new CubeOutTransformer());
