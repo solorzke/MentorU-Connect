@@ -35,7 +35,7 @@ public class RequestActivity extends AppCompatActivity {
             R.drawable.ic_organizational_skills,
     };
     TextView cancel;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences SESSION;
     Timer timer;
 

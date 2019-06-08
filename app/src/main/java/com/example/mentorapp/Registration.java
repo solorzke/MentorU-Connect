@@ -100,10 +100,11 @@ public class Registration extends AppCompatActivity {
 
                 RequestQueue rq = Volley.newRequestQueue(Registration.this);
 
-                String url = "https://web.njit.edu/~kas58/mentorDemo/register.php";
+                String url = "https://web.njit.edu/~kas58/mentorDemo/Model/register.php";
                 StringRequest sq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+                        System.out.println(response);
                         System.out.println("******************************* HERE AFTER REQUEST START **************************************");
 
                         if (response.contains("REGISTERED")) {

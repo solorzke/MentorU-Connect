@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
     AlertDialog alert, SERVER_ERROR;
     String ucid;
     String pw;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/login.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/login.php";
     boolean asAMentor = false;
 
     @Override
@@ -101,6 +101,7 @@ public class Login extends AppCompatActivity {
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
+                                        System.out.println(response);
                                         if (response.contains("GOODSTUDENT")) {
                                             Intent goToHome = new Intent(getApplicationContext(), JSON.class);
 

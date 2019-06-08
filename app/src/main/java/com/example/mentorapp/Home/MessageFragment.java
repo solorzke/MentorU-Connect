@@ -40,7 +40,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     FloatingActionButton FAB;
     TextView FEEDBACK, messenger, date, contact_user, account_info, help_center, report;
     ImageView messenger_img, thumbs_up, thumbs_down;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     View view;
     boolean up = false, down = false;
 

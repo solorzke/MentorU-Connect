@@ -45,7 +45,7 @@ public class JSON extends AppCompatActivity {
 
         /*1. START: SENDING A REQUEST TO RECEIVE A JSON ARRAY OF THE USER'S RECORD *ONLY*
          * AFTER LOGGING IN */
-        String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+        String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
 
         if(confirm.equals("student")){
 

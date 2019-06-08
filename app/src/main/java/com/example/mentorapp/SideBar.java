@@ -20,9 +20,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mentorapp.Events.AddEvent;
-import com.example.mentorapp.Events.RequestMeeting;
-import com.example.mentorapp.Events.RequestActivity;
 import com.example.mentorapp.Home.HomeFrag;
+import com.example.mentorapp.Report.ReportActivity;
 
 public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -40,7 +39,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     SharedPreferences SESSION, USER_TYPE;
     SharedPreferences.Editor editor;
     AlertDialog RETURN_TO_LOGIN;
-    NavigationView navigationView;
+    public static NavigationView navigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +106,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
 
-        getMenuInflater().inflate(R.menu.events, menu);
+        getMenuInflater().inflate(R.menu.mini_menu, menu);
         return true;
     }
 
@@ -126,6 +125,9 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.roadmap:
                 Intent go2 = new Intent(getApplicationContext(), WV.class);
                 startActivity(go2);
+                break;
+            case R.id.report:
+                startActivity(new Intent(getApplicationContext(), ReportActivity.class));
                 break;
             default:
                 break;

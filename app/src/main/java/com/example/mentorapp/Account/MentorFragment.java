@@ -32,7 +32,7 @@ public class MentorFragment extends Fragment {
 
     SharedPreferences MENTOR, USER_TYPE;
     SharedPreferences.Editor editor;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     View view;
     ImageView AVI;
     EditText MTR_NAME, MTR_EMAIL, MTR_UCID, MTR_DATE, MTR_DEGREE, MTR_OCC, MTR_MENTEE;

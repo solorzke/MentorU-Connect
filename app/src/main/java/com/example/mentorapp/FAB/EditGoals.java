@@ -32,7 +32,7 @@ public class EditGoals extends AppCompatActivity {
     EditText g1, g2, g3, g4;
     TextView cancel, save;
     ImageView logo;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     RelativeLayout r1, r2, r3, r4;
     String[] goals = new String [4];
     EditText[] group;

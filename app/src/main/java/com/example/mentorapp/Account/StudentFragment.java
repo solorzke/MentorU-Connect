@@ -35,7 +35,7 @@ import java.util.Set;
 
 public class StudentFragment extends Fragment {
 
-    String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences SESSION, CL, USER_TYPE;
     SharedPreferences.Editor EDITOR, EDITOR2;
     TextView EDIT_CL_BTN, DONE_CL_BTN, EDIT_ACC_BTN, DONE_ACC_BTN, STU_UCID;

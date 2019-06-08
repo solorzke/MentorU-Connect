@@ -43,7 +43,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
     FloatingActionButton fab;
     TextView FEEDBACK, GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER, GOALS, M_TITLE;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     AlertDialog dialog;
     Boolean c1 = false, c2 = false, c3 = false, c4 = false;
     View view;

@@ -127,7 +127,7 @@ public class RequestMeeting extends AppCompatActivity {
             public void onClick(View v) {
                 EditText [] event = {event_title, event_location, event_date, event_start_time,
                         event_end_time, event_purpose};
-                String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+                String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
                 String student = SESSION.getString("ucid", null);
                 String mentor = OTHER_USER.getString("ucid", null);
                 if(checkForm(event)){

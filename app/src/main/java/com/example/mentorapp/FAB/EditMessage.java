@@ -31,7 +31,7 @@ public class EditMessage extends AppCompatActivity {
     TextView char_count, recipient, cancel, add;
     ImageView avi, logo;
     EditText msg;
-    String fname, lname, url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String fname, lname, url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences mentee, mentor, USER_TYPE;
 
     @Override

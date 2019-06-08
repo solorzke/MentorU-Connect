@@ -34,7 +34,7 @@ public class AccountFragment extends Fragment {
             R.drawable.ic_mentor,
     };
     TextView cancel;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences SESSION;
     Timer timer;
 

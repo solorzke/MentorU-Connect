@@ -9,4 +9,7 @@
     <item
         android:id="@+id/roadmap"
         android:title="Road Map" />
+    <item
+        android:id="@+id/report"
+        android:title="Report" />
 </menu>

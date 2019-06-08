@@ -35,7 +35,7 @@ public class MeetingStatus extends Fragment {
 
     String status, type;
     View view;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences SESSION, OTHER_USER;
     ImageView state;
     ProgressBar pending;

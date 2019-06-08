@@ -36,7 +36,7 @@ public class MeetingDetails extends Fragment {
 
     SeekBar sb;
     SharedPreferences SESSION;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/query.php";
+    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     TextView title, location, purpose, date, time, meeting_with, slide_title;
     View view;
 
