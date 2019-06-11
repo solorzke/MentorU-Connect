@@ -50,6 +50,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     SharedPreferences.Editor editor;
     AlertDialog RETURN_TO_LOGIN;
     public static NavigationView navigationView;
+    public static int position;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,6 +102,19 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                 new HomeFrag()).addToBackStack(null).commit();
         navigationView.setCheckedItem(R.id.home_item);
+
+        /* Switch to another specific fragment if the intent comes from an activity. */
+        position = getIntent().getIntExtra("pos", 0);
+        switch (position)
+        {
+            case 1:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new FAQFragment()).addToBackStack(null).commit();
+                navigationView.setCheckedItem(R.id.faq);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
