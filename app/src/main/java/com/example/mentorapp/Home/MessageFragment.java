@@ -235,7 +235,12 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.report:
-                startActivity(new Intent(getActivity(), ReportActivity.class));
+                Intent intent = new Intent(getActivity(), ReportActivity.class);
+                String msg = FEEDBACK.getText().toString();
+                String name = messenger.getText().toString();
+                intent.putExtra("com.example.mentorapp.Report.activity", msg);
+                intent.putExtra("com.example.mentorapp.Report.name", name);
+                startActivity(intent);
                 break;
 
             default:
