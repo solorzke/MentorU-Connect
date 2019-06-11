@@ -305,11 +305,11 @@ public class Goals extends Fragment implements View.OnClickListener {
         System.out.println(year);
 
         if (month > 7) {
-            semester.setText("Fall '" + year);
+            semester.setText("Fall " + year);
         } else if (month < 5) {
-            semester.setText("Spring '" + year);
+            semester.setText("Spring " + year);
         } else if (4 < month || month < 8) {
-            semester.setText("Summer '" + year);
+            semester.setText("Summer " + year);
         }
     }
 
