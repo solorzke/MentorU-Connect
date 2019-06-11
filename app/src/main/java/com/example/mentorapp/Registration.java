@@ -24,57 +24,20 @@ import java.util.Map;
 
 public class Registration extends AppCompatActivity {
     String nam;
-    String [] arr;
+    String[] arr;
     String email;
     String id;
     String password;
     String degree;
     String club;
-
-    AlertDialog al;
-    AlertDialog logal;
-    AlertDialog SERVER_ERROR;
     ImageView back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        Button reg = (Button) findViewById(R.id.button) ;
+        Button reg = (Button) findViewById(R.id.button);
         back = findViewById(R.id.back);
-
-        //Registration Error Alert
-        al = new AlertDialog.Builder(Registration.this).create();
-        al.setTitle("Alert");
-        al.setMessage("UCID Not Found, Please see HelpDesk");
-        al.setButton(AlertDialog.BUTTON_NEUTRAL, "Okay", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        //Second Alert Message
-        logal = new AlertDialog.Builder(Registration.this).create();
-        logal.setTitle("Alert");
-        logal.setMessage("Account Already Exists. Return To Login Page");
-        logal.setButton(AlertDialog.BUTTON_NEUTRAL, "Okay", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-
-        //~~~~~~~~~~CREATE A SERVER_ERROR MESSAGE~~~~~~~~~~~~~~~~~~~~~~~~~
-        SERVER_ERROR = new AlertDialog.Builder(Registration.this).create();
-        SERVER_ERROR.setTitle("Error 500: Internal Server Error");
-        SERVER_ERROR.setMessage("Couldn't connect with the NJIT server. Try Again.");
-        SERVER_ERROR.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
 
         reg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,50 +58,47 @@ public class Registration extends AppCompatActivity {
 
                 //--------------------
 
-                System.out.println("******************************* HERE B4 REQUEST **************************************");
-
-
                 RequestQueue rq = Volley.newRequestQueue(Registration.this);
-
                 String url = "https://web.njit.edu/~kas58/mentorDemo/Model/register.php";
                 StringRequest sq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
-                        System.out.println("******************************* HERE AFTER REQUEST START **************************************");
+                        System.out.println("Server response: "+response);
 
                         if (response.contains("REGISTERED")) {
                             Intent gth = new Intent(getApplicationContext(), JSON.class);
-                            gth.putExtra("com.example.mentorapp.CONFIRM","student");
+                            gth.putExtra("com.example.mentorapp.CONFIRM", "student");
                             gth.putExtra("com.example.mentorapp.UCID", id);
                             startActivity(gth);
 
-                        }
-                        else if (response.contains("STUDENT_EXISTS")
-                        ) {
-                            System.out.println("******************************* "+ response+" **************************************");
-                            logal.show();
-                        }
+                        } else if (response.contains("STUDENT_EXISTS")) {
+                            String message = "Account Already Exists. Return To Login Page";
+                            alertMessage("Alert", message, "OK");
 
+                        } else if (response.contains("NO_MENTOR_ASSIGNED")) {
+                            String message = "You aren't assigned to a mentor yet. Contact MentorU for more information.";
+                            alertMessage("Alert", message, "OK");
+
+                        } else if (response.contains("AUTHENTICATION_FAIL")) {
+                            String message = "UCID Not Found, Please see HelpDesk";
+                            alertMessage("Alert", message, "OK");
+                        }
                     }
-                } ,new Response.ErrorListener ()
-
-                {
+                }, new Response.ErrorListener() {
                     @Override
-                    public void onErrorResponse(VolleyError error)
-                    {
-                        System.out.println(error);
-                        SERVER_ERROR.show();
+                    public void onErrorResponse(VolleyError error) {
+                        System.out.println("Volley Error: "+error);
+                        String message = "Couldn't connect with the NJIT server. Try Again.";
+                        alertMessage("Error 500: Internal Server Error", message, "OK");
 
                     }
 
                 }) {
                     @Override
-                    protected Map <String, String> getParams()
-                    {
+                    protected Map<String, String> getParams() {
                         Map<String, String> params = new HashMap<String, String>();
-                        params.put("tableName","Students");
-                        params.put("username",id);
+                        params.put("tableName", "Students");
+                        params.put("username", id);
                         params.put("password", password);
                         params.put("fname", arr[0]);
                         params.put("lname", arr[1]);
@@ -160,5 +120,19 @@ public class Registration extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void alertMessage(String title, String message, String button) {
+        AlertDialog alert = new AlertDialog.Builder(Registration.this).create();
+        alert.setTitle(title);
+        alert.setMessage(message);
+        alert.setButton(AlertDialog.BUTTON_NEUTRAL, button, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                onBackPressed();
+            }
+        });
+        alert.show();
     }
 }
