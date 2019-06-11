@@ -2,7 +2,6 @@ package com.example.mentorapp;
 
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,12 +11,7 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import com.example.mentorapp.Academic.Article1;
-import com.example.mentorapp.WellBeing.WB_Article1;
 
 public class AcademicsFragment extends Fragment {
 
