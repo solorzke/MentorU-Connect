@@ -17,11 +17,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.Events.AddEvent;
 import com.example.mentorapp.Home.HomeFrag;
 import com.example.mentorapp.Report.ReportActivity;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -151,6 +161,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 Intent intent = new Intent(this, Login.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                signOutRequest(SESSION);
                 getSupportFragmentManager().popBackStack();
                 startActivity(intent);
                 finish();
@@ -196,6 +207,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             RETURN_TO_LOGIN.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
+                    signOutRequest(SESSION);
                     Intent intent = new Intent(SideBar.this, Login.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -234,8 +246,32 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
-    private void useCamera(){
+    private void signOutRequest(SharedPreferences USER)
+    {
+        final String user = USER.getString("ucid", null);
+        String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
 
+        RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("Server Response: "+response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Volley Error: "+error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("user", user);
+                params.put("action", "sign_out");
+                return params;
+            }
+        };
+        queue.add(request);
     }
 
 }
