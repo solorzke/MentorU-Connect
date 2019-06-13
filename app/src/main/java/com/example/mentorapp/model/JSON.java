@@ -69,7 +69,7 @@ public class JSON extends AppCompatActivity {
                         public void onResponse(JSONObject response) {
                             try{
 
-                                System.out.println(response);
+                                System.out.println("Server Response: "+response);
                                 JSONArray array = response.getJSONArray("record");
                                 JSONArray courses = response.getJSONArray("courses");
                                 JSONArray m_record = response.getJSONArray("record_m");
@@ -127,7 +127,7 @@ public class JSON extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    System.out.println(error);
+                    System.out.println("Volley Error: "+error);
                 }
             });
 
@@ -168,7 +168,7 @@ public class JSON extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try{
 
-                            System.out.println(response);
+                            System.out.println("Server Response: "+response);
                             JSONArray array = response.getJSONArray("record");
                             JSONArray courses = response.getJSONArray("courses");
                             JSONArray m_record = response.getJSONArray("record_m");
@@ -228,7 +228,7 @@ public class JSON extends AppCompatActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                System.out.println("Volley Error: "+error);
             }
         });
 

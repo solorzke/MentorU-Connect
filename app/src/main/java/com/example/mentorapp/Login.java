@@ -101,7 +101,7 @@ public class Login extends AppCompatActivity {
                                 new Response.Listener<String>() {
                                     @Override
                                     public void onResponse(String response) {
-                                        System.out.println(response);
+                                        System.out.println("Server response: "+response);
                                         if (response.contains("GOODSTUDENT")) {
                                             Intent goToHome = new Intent(getApplicationContext(), JSON.class);
 
@@ -113,11 +113,8 @@ public class Login extends AppCompatActivity {
                                             finish();
 
                                         } else if (response.contains("BADSTUDENT")) {
-                                            System.out.println("*****************CONNECTION TO PHP SCRIPT WAS " +
-                                                    "SUCCESSFUL BUT RETURNED FALSE*************************");
-                                            System.out.println("*****************RESPONSE: " + response +
-                                                    "UCID: " + ucid + " PW: " + pw + " *************************");
-
+                                            System.out.println("Connection to PHP script was " +
+                                                    "sucessful but returned false");
                                             alert.show();
                                         }
                                     }
@@ -142,8 +139,8 @@ public class Login extends AppCompatActivity {
                     }
 
                 } else {
-                    System.out.println("************************VALIDATION " +
-                            "DID NOT GO THROUGH************************");
+                    System.out.println("Validation " +
+                            "did not go through");
                     alert.show();
                 }
             }
@@ -227,7 +224,7 @@ public class Login extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                System.out.println("Volley Error: "+error);
                 err2.show();
             }
         }) {

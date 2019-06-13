@@ -99,9 +99,8 @@ public class Goals extends Fragment implements View.OnClickListener {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
+                        System.out.println("Server Response: "+response);
                         if (response.equals("empty")) {
-                            System.out.println(response);
                             GOAL_1.setText("No new goals from " + MENTOR.getString("fname", null));
                             GOAL_2.setText("No new goals from " + MENTOR.getString("fname", null));
                             GOAL_3.setText("No new goals from " + MENTOR.getString("fname", null));
@@ -122,7 +121,7 @@ public class Goals extends Fragment implements View.OnClickListener {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                System.out.println("Volley Error: "+error);
             }
         }) {
             @Override
@@ -258,12 +257,12 @@ public class Goals extends Fragment implements View.OnClickListener {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println(response);
+                System.out.println("Server Response: "+response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                System.out.println("Volley Error: "+error);
             }
         }) {
             @Override
@@ -302,7 +301,7 @@ public class Goals extends Fragment implements View.OnClickListener {
         Calendar cal = Calendar.getInstance();
         int month = cal.get(Calendar.MONTH);
         String year = Integer.toString(cal.get(Calendar.YEAR));
-        System.out.println(year);
+        System.out.println("Current Year: "+year);
 
         if (month > 7) {
             semester.setText("Fall " + year);

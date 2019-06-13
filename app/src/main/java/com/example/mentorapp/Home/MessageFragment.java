@@ -137,7 +137,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
+                        System.out.println("Server Response: "+response);
                         String [] reply = response.split("\\|");
                         if (reply[0].equals("empty")) {
                             FEEDBACK.setText("No new feedback from " + SENDER.getString("fname", null));
@@ -153,7 +153,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                System.out.println("Volley Error: "+error);
             }
         }) {
             @Override
@@ -273,12 +273,12 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println(response);
+                        System.out.println("Server Response: "+response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println(error);
+                System.out.println("Volley Error: "+error);
             }
         }) {
             @Override
