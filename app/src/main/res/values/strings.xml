@@ -25,4 +25,18 @@
     <string name="sm_reddit">NJIT Reddit</string>
     <string name="sm_fb">NJIT Facebook</string>
     <string name="butt">Button</string>
+    <string name="q1">Why can\'t I login into the app?</string>
+    <string name="a1">You must be assigned a mentor before you log in. If that\'s not the case then re-enter your login credentials.</string>
+    <string name="q2">How do I request a meeting with my mentor?</string>
+    <string name="a2">Click on the button located at the right corner of the dashboard -> Dropdown menu will appear -> then click Request Meeting.</string>
+    <string name="q3">Is the Mentor Connect app for Android only?</string>
+    <string name="a3">Yes, it is but in the near future we will have an iOS version open to the public as well.</string>
+    <string name="q4">How do I view my Profile?</string>
+    <string name="a4">Click on the dropdown menu on the left corner of your screen -> Then click on the Account tab.</string>
+    <string name="q5">How do I signup as a Faculty Mentor?</string>
+    <string name="a5">Click on the register button in the mainpage and enter your credentials -> After you registered, enter your login credentials and click on the slide button under the password field to sign in as a Mentor.</string>
+    <string name="q6">How was Mentor U Connect developed?</string>
+    <string name="a6">Mentor U Connect was created with input from both students and faculty, all seeking more invested mentoring relationships at NJIT. Mentor U Connect allows students to search for mentors in dimensions that are not strictly academic or scholastic.</string>
+    <string name="q7">I have a question that was not answered here. How do I contact the Mentor Connect team?</string>
+    <string name="a7">You can contact the team at mentoruconnect@njit.edu for any other questions/concerns you may have with the app/program.</string>
 </resources>
