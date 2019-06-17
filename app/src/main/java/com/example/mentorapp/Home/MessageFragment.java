@@ -39,7 +39,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     SharedPreferences STUDENT, MENTOR, USER_TYPE;
     FloatingActionButton FAB;
     TextView FEEDBACK, messenger, date, contact_user, account_info, help_center, report;
-    ImageView messenger_img, thumbs_up, thumbs_down;
+    ImageView messenger_img, thumbs_up, thumbs_down, share;
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     View view;
     boolean up = false, down = false;
@@ -60,6 +60,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         help_center = view.findViewById(R.id.help);
         FEEDBACK = view.findViewById(R.id.feedback);
         report = view.findViewById(R.id.report);
+        share = view.findViewById(R.id.share);
 
         return view;
     }
@@ -74,6 +75,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         account_info.setOnClickListener(this);
         help_center.setOnClickListener(this);
         report.setOnClickListener(this);
+        share.setOnClickListener(this);
 
         if(isStudent(USER_TYPE)){
             String fname = MENTOR.getString("fname", null);
@@ -241,6 +243,14 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 intent.putExtra("com.example.mentorapp.Report.activity", msg);
                 intent.putExtra("com.example.mentorapp.Report.name", name);
                 startActivity(intent);
+                break;
+
+            case R.id.share:
+                String message = FEEDBACK.getText().toString();
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.putExtra(Intent.EXTRA_TEXT, message);
+                startActivity(Intent.createChooser(share, "Choose Social Media Platform"));
                 break;
 
             default:
