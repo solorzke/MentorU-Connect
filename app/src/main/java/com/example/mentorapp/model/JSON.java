@@ -84,7 +84,10 @@ public class JSON extends AppCompatActivity {
                                 editor.putString("lname", student.getString("lname"));
                                 editor.putString("email", student.getString("email"));
                                 editor.putString("degree", student.getString("degree"));
-                                editor.putString("club", student.getString("club"));
+                                editor.putString("age", student.getString("age"));
+                                editor.putString("birthday", student.getString("birthday"));
+                                editor.putString("grade", student.getString("grade"));
+                                editor.putString("grad_date", student.getString("grad_date"));
                                 editor.putString("firstEntry", "true");
                                 editor.apply();
 
@@ -183,7 +186,10 @@ public class JSON extends AppCompatActivity {
                             editor.putString("lname", student.getString("lname"));
                             editor.putString("email", student.getString("email"));
                             editor.putString("degree", student.getString("degree"));
-                            editor.putString("club", student.getString("club"));
+                            editor.putString("age", student.getString("age"));
+                            editor.putString("birthday", student.getString("birthday"));
+                            editor.putString("grade", student.getString("grade"));
+                            editor.putString("grad_date", student.getString("grad_date"));
                             editor.putString("avi", student.getString("avi"));
                             editor.putString("firstEntry", "true");
                             editor.apply();
