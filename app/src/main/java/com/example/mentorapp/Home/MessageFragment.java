@@ -223,7 +223,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 transaction.addToBackStack(null);
                 // Commit the transaction
                 transaction.commit();
-                SideBar.navigationView.setCheckedItem(R.id.account);
+                //SideBar.navigationView.setCheckedItem(R.id.account);
                 break;
 
             case R.id.help:

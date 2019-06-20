@@ -47,8 +47,8 @@ public class AccountFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         adapter = new TabAdapter(getActivity().getSupportFragmentManager());
-        adapter.addFragment(new StudentFragment(), "Student");
-        adapter.addFragment(new MentorFragment(), "Mentor");
+        //adapter.addFragment(new StudentFragment(), "Student");
+        //adapter.addFragment(new MentorFragment(), "Mentor");
         viewPager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
