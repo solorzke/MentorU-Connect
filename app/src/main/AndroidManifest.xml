@@ -34,6 +34,10 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
+            android:name=".Account.MentorFragment"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
             android:name=".model.CameraPreview"
             android:screenOrientation="portrait" />
         <activity
