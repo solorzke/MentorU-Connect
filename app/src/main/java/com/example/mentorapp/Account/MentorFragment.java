@@ -1,15 +1,21 @@
 package com.example.mentorapp.Account;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -23,65 +29,122 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.R;
 import com.example.mentorapp.SideBar;
+import com.example.mentorapp.model.DateTimeFormat;
 import com.squareup.picasso.Picasso;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MentorFragment extends Fragment {
+public class MentorFragment extends AppCompatActivity  {
 
     SharedPreferences MENTOR, USER_TYPE;
     SharedPreferences.Editor editor;
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
-    View view;
-    ImageView AVI;
-    EditText MTR_NAME, MTR_EMAIL, MTR_UCID, MTR_DATE, MTR_DEGREE, MTR_OCC, MTR_MENTEE;
-    TextView EDIT, DONE;
+    ImageView AVI, ab_img;
+    EditText MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY;
+    TextView EDIT, DONE, MTR_UCID, full_name, MTR_MENTEE;
     EditText [] list;
+    Calendar calendar;
+    DatePickerDialog date;
 
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.account_mentor);
+        MENTOR = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+        USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
 
-        view = inflater.inflate(R.layout.account_mentor, container, false);
-        MENTOR = getActivity().getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
-        USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+        AVI = findViewById(R.id.picasso);
+        MTR_NAME = findViewById(R.id.acc_mtr_name);
+        MTR_EMAIL = findViewById(R.id.acc_mtr_email);
+        MTR_UCID = findViewById(R.id.mtr_ucid1);
+        MTR_DATE = findViewById(R.id.mtr_date1);
+        MTR_DEGREE = findViewById(R.id.mtr_degree1);
+        MTR_OCC = findViewById(R.id.mtr_occ1);
+        MTR_MENTEE = findViewById(R.id.mtr_mentee1);
+        EDIT = findViewById(R.id.m_edit);
+        DONE = findViewById(R.id.m_done);
+        AGE = findViewById(R.id.age);
+        BDAY = findViewById(R.id.bday);
+        ab_img = findViewById(R.id.ab_img);
+        full_name = findViewById(R.id.fullname);
 
-        AVI = view.findViewById(R.id.picasso);
-        MTR_NAME = view.findViewById(R.id.acc_mtr_name);
-        MTR_EMAIL = view.findViewById(R.id.acc_mtr_email);
-        MTR_UCID = view.findViewById(R.id.mtr_ucid1);
-        MTR_DATE = view.findViewById(R.id.mtr_date1);
-        MTR_DEGREE = view.findViewById(R.id.mtr_degree1);
-        MTR_OCC = view.findViewById(R.id.mtr_occ1);
-        MTR_MENTEE = view.findViewById(R.id.mtr_mentee1);
-        EDIT = view.findViewById(R.id.m_edit);
-        DONE = view.findViewById(R.id.m_done);
-
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         Picasso.get().load(MENTOR.getString("avi", null)).into(AVI);
         MTR_NAME.setText(MENTOR.getString("fname", null) + " " + MENTOR.getString(
                 "lname", null));
+        full_name.setText(MENTOR.getString("fname", null) + " " + MENTOR.getString(
+                "lname", null));
         MTR_EMAIL.setText(MENTOR.getString("email", null));
         MTR_UCID.setText(MENTOR.getString("ucid", null));
-        MTR_DATE.setText(MENTOR.getString("grad_date", null));
+        MTR_DATE.setText(DateTimeFormat.formatDate(MENTOR.getString("grad_date", null)));
         MTR_DEGREE.setText(MENTOR.getString("degree", null));
         MTR_OCC.setText(MENTOR.getString("occupation", null));
         MTR_MENTEE.setText(MENTOR.getString("mentee", null));
+        AGE.setText(MENTOR.getString("age", null));
+        BDAY.setText(DateTimeFormat.formatDate(MENTOR.getString("birthday", null)));
 
-        list = new EditText [] {MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC};
-        return view;
+        list = new EditText [] {MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY};
     }
 
     @Override
     public void onStart()
     {
         super.onStart();
+
+        ab_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), SideBar.class));
+            }
+        });
+
         if(isMentor(USER_TYPE))
         {
             EDIT.setVisibility(View.VISIBLE);
             DONE.setVisibility(View.INVISIBLE);
+
+            BDAY.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    calendar = Calendar.getInstance();
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    int month = calendar.get(Calendar.MONTH);
+                    int year = calendar.get(Calendar.YEAR);
+
+                    date = new DatePickerDialog(MentorFragment.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            BDAY.setText((month + 1)+"/"+dayOfMonth+"/"+year);
+                        }
+                    }, year, month, day);
+                    date.show();
+                }
+            });
+
+            MTR_DATE.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    calendar = Calendar.getInstance();
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    int month = calendar.get(Calendar.MONTH);
+                    int year = calendar.get(Calendar.YEAR);
+
+                    date = new DatePickerDialog(MentorFragment.this, new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            MTR_DATE.setText((month + 1)+"/"+dayOfMonth+"/"+year);
+                        }
+                    }, year, month, day);
+                    date.show();
+                }
+            });
 
             EDIT.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -99,7 +162,7 @@ public class MentorFragment extends Fragment {
                     EDIT.setVisibility(View.VISIBLE);
                     editText(list, false);
                     updateSharedPrefs(editor, list);
-                    updateChanges(view, MENTOR, url, "updateMentorRecord");
+                    updateChanges(MENTOR, url, "updateMentorRecord");
                     postToast();
                 }
             });
@@ -107,6 +170,21 @@ public class MentorFragment extends Fragment {
         else{
             EDIT.setVisibility(View.INVISIBLE);
             DONE.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    /* When clicking the back button, go back to the last page. */
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
+            case android.R.id.home:
+                onBackPressed();
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 
@@ -144,18 +222,21 @@ public class MentorFragment extends Fragment {
         e.putString("fname", name[0]);
         e.putString("lname", name[1]);
         e.putString("email", texts[1].getText().toString());
-        e.putString("grad_date", texts[2].getText().toString());
+        e.putString("grad_date", DateTimeFormat.formatDateSQL(texts[2].getText().toString()));
         e.putString("occupation", texts[3].getText().toString());
         e.putString("degree", texts[4].getText().toString());
+        e.putString("age", texts[5].getText().toString());
+        e.putString("birthday", DateTimeFormat.formatDateSQL(texts[6].getText().toString()));
         e.apply();
-        SideBar bar = (SideBar) getActivity();
-        bar.user_name.setText(name[0] + " " + name[1]);
-        bar.user_email.setText(texts[1].getText().toString());
+        full_name.setText(name[0] + " " + name[1]);
     }
 
-    private void updateChanges(View v, final SharedPreferences list, String url, final String action)
+    private void updateChanges(final SharedPreferences list, String url, final String action)
     {
-        RequestQueue queue = Volley.newRequestQueue(v.getContext());
+        final String format_b = list.getString("birthday", null);
+        final String format_g = list.getString("grad_date", null);
+
+        RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -175,9 +256,11 @@ public class MentorFragment extends Fragment {
                 params.put("fname", list.getString("fname", null));
                 params.put("lname", list.getString("lname", null));
                 params.put("email", list.getString("email", null));
-                params.put("grad_date", list.getString("grad_date", null));
+                params.put("grad_date", format_g);
                 params.put("occupation", list.getString("occupation", null));
                 params.put("degree", list.getString("degree", null));
+                params.put("age", list.getString("age", null));
+                params.put("bday", format_b);
                 return params;
             }
         };
@@ -186,10 +269,9 @@ public class MentorFragment extends Fragment {
 
     private void postToast()
     {
-        Context context = getContext();
         CharSequence text = "Updated Changes.";
         int duration = Toast.LENGTH_SHORT;
-        Toast toast = Toast.makeText(context, text, duration);
+        Toast toast = Toast.makeText(this, text, duration);
         toast.show();
     }
 }
