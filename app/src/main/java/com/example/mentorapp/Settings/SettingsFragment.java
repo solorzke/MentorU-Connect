@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+
+import com.example.mentorapp.Account.MentorFragment;
 import com.example.mentorapp.Account.StudentFragment;
 import com.example.mentorapp.R;
 
@@ -65,7 +67,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.mentor:
-                startActivity(new Intent(getContext(), Activity.class));
+                startActivity(new Intent(getContext(), MentorFragment.class));
                 break;
 
             case R.id.office:
