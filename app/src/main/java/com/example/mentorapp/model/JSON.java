@@ -117,6 +117,8 @@ public class JSON extends AppCompatActivity {
                                 MENTOR.putString("occupation", mentor.getString("occupation"));
                                 MENTOR.putString("degree", mentor.getString("degree"));
                                 MENTOR.putString("mentee", mentor.getString("mentee"));
+                                MENTOR.putString("age", mentor.getString("age"));
+                                MENTOR.putString("birthday", mentor.getString("birthday"));
                                 MENTOR.putString("avi", mentor.getString("avi"));
                                 MENTOR.apply();
 
@@ -220,6 +222,8 @@ public class JSON extends AppCompatActivity {
                             MENTOR.putString("occupation", mentor.getString("occupation"));
                             MENTOR.putString("degree", mentor.getString("degree"));
                             MENTOR.putString("mentee", mentor.getString("mentee"));
+                            MENTOR.putString("age", mentor.getString("age"));
+                            MENTOR.putString("birthday", mentor.getString("birthday"));
                             MENTOR.putString("avi", mentor.getString("avi"));
                             MENTOR.putString("firstEntry", "true");
                             MENTOR.apply();
