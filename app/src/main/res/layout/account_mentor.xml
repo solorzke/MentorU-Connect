@@ -6,237 +6,399 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="379dp"
-        android:layout_height="300dp"
-        android:layout_marginBottom="16dp"
-        android:background="@android:drawable/dialog_holo_light_frame"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <RelativeLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#CC0000"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <ImageView
+                android:id="@+id/ab_img"
+                android:layout_width="48dp"
+                android:layout_height="54dp"
+                android:layout_gravity="center"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_capture_photo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/btn_capture_photo"
+                app:srcCompat="@drawable/mentor_u" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginRight="5dp">
+
+                <TextView
+                    android:id="@+id/m_edit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Edit"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/open_sans" />
+
+                <TextView
+                    android:id="@+id/m_done"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:text="Done"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
+                    android:visibility="invisible"
+                    app:fontFamily="@font/open_sans" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/mtr_ucid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
-                android:text="UCID:"
-                android:textColor="#CC0000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/mtr_ucid1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/mtr_ucid"
-                android:layout_alignLeft="@id/mtr_ucid"
-                android:layout_marginStart="109dp"
-                android:layout_marginLeft="109dp"
-                android:layout_marginTop="15dp"
-                android:enabled="false"
-                android:text=""
-                android:textColor="#1c1475"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/mtr_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/mtr_ucid"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
-                android:text="Grad Date:"
-                android:textColor="#CC0000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="Mentor U Connect"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/open_sans" />
+                </RelativeLayout>
 
-            <EditText
-                android:id="@+id/mtr_date1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mtr_ucid1"
-                android:layout_alignStart="@+id/mtr_date"
-                android:layout_alignLeft="@id/mtr_date"
-                android:layout_marginStart="109dp"
-                android:layout_marginLeft="109dp"
-                android:layout_marginTop="10dp"
-                android:enabled="false"
-                android:text=""
-                android:textColor="#1c1475"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:background="#424242">
 
-            <TextView
-                android:id="@+id/mtr_occ"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/mtr_date"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
-                android:text="Occupation:"
-                android:textColor="#CC0000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                    <ImageView
+                        android:id="@+id/picasso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@android:drawable/sym_def_app_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.498"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.359" />
 
-            <EditText
-                android:id="@+id/mtr_occ1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mtr_date1"
-                android:layout_alignStart="@+id/mtr_occ"
-                android:layout_alignLeft="@id/mtr_occ"
-                android:layout_marginStart="109dp"
-                android:layout_marginLeft="109dp"
-                android:layout_marginTop="12dp"
-                android:enabled="false"
-                android:text=""
-                android:textColor="#1c1475"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/fullname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@android:"
+                        android:gravity="center_horizontal"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="20dp"
+                        android:text="John Doe"
+                        android:textColor="@android:color/background_light"
+                        android:textSize="25sp"
+                        android:textStyle="bold"
+                        app:fontFamily="@font/open_sans"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/picasso" />
 
-            <TextView
-                android:id="@+id/mtr_degree"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/mtr_occ"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="31dp"
-                android:text="Degree:"
-                android:textColor="#CC0000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                </android.support.constraint.ConstraintLayout>
 
-            <EditText
-                android:id="@+id/mtr_degree1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mtr_occ1"
-                android:layout_alignStart="@+id/mtr_degree"
-                android:layout_alignLeft="@id/mtr_degree"
-                android:layout_marginStart="109dp"
-                android:layout_marginLeft="109dp"
-                android:layout_marginTop="8dp"
-                android:enabled="false"
-                android:text=""
-                android:textColor="#1c1475"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/mtr_mentee"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/mtr_degree"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="30dp"
-                android:text="Mentee:"
-                android:textColor="#CC0000"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Name: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
 
-            <EditText
-                android:id="@+id/mtr_mentee1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mtr_degree1"
-                android:layout_alignStart="@+id/mtr_mentee"
-                android:layout_alignLeft="@id/mtr_mentee"
-                android:layout_marginStart="109dp"
-                android:layout_marginLeft="109dp"
-                android:layout_marginTop="5dp"
-                android:enabled="false"
-                android:text=""
-                android:textColor="#1c1475"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                    <EditText
+                        android:id="@+id/acc_mtr_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="John Doe"
+                        android:textSize="20sp"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Age: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
+
+                    <EditText
+                        android:id="@+id/age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="00"
+                        android:inputType="number"
+                        android:textSize="20sp"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="UCID: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
+
+                    <TextView
+                        android:id="@+id/mtr_ucid1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Mentee: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
+
+                    <TextView
+                        android:id="@+id/mtr_mentee1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Mentee"
+                        android:textSize="20sp"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
 
 
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Birthday: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
+
+                    <EditText
+                        android:id="@+id/bday"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:hint="MM/DD/YYYY"
+                        android:textSize="20sp"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
+
+                    <EditText
+                        android:id="@+id/acc_mtr_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="email@njit.edu"
+                        android:textSize="20sp"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Degree: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
+
+                    <EditText
+                        android:id="@+id/mtr_degree1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Current Degree"
+                        android:textSize="20sp"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Occupation: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp" />
+
+                    <EditText
+                        android:id="@+id/mtr_occ1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textSize="20sp"
+                        android:enabled="false"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Grad Date: "
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
+
+                    <EditText
+                        android:id="@+id/mtr_date1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:cursorVisible="false"
+                        android:focusableInTouchMode="false"
+                        android:enabled="false"
+                        android:hint="MM/YYYY"
+                        android:textSize="20sp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+        </ScrollView>
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/acc_mtr_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:enabled="false"
-        android:textColor="#1c1475"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/picasso" />
-
-    <EditText
-        android:id="@+id/acc_mtr_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:enabled="false"
-        android:text=""
-        android:textColor="#1c1475"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.501"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/acc_mtr_name"
-        app:layout_constraintVertical_bias="0.073" />
-
-    <ImageView
-        android:id="@+id/picasso"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="24dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:color/holo_blue_bright" />
-
-    <TextView
-        android:id="@+id/m_done"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Done"
-        android:textColor="@color/colorAccent"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.931"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.431" />
-
-    <TextView
-        android:id="@+id/m_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Edit"
-        android:textColor="#4CAF50"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.932"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.431" />
 </android.support.constraint.ConstraintLayout>
