@@ -45,7 +45,7 @@ public class StudentFragment extends AppCompatActivity implements AdapterView.On
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences account, CL, USER_TYPE;
     SharedPreferences.Editor editor;
-    TextView edit, done, ucid;
+    TextView edit, done, ucid, full_name;
     EditText name, email, degree, age, bday, grad_date;
     ImageView avi, ab_img;
     EditText [] editable = new EditText[6];
@@ -74,6 +74,8 @@ public class StudentFragment extends AppCompatActivity implements AdapterView.On
         Toolbar toolbar = findViewById(R.id.toolbar);
         spinner = findViewById(R.id.spinner);
         ab_img = findViewById(R.id.ab_img);
+        full_name = findViewById(R.id.fullname);
+
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.grade_level, android.R.layout.simple_spinner_item);
@@ -84,10 +86,12 @@ public class StudentFragment extends AppCompatActivity implements AdapterView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         String fname = account.getString("fname", null);
         String lname = account.getString("lname", null);
         String fullname = fname + " " + lname;
         name.setText(fullname);
+        full_name.setText(fullname);
         ucid.setText(account.getString("ucid", null));
         email.setText(account.getString("email", null));
         degree.setText(account.getString("degree", null));
@@ -175,6 +179,7 @@ public class StudentFragment extends AppCompatActivity implements AdapterView.On
             });
         }
         else {
+            disableEditAccText(editable);
             edit.setVisibility(View.INVISIBLE);
             done.setVisibility(View.INVISIBLE);
         }
@@ -238,6 +243,7 @@ public class StudentFragment extends AppCompatActivity implements AdapterView.On
         editor.putString("grade", spinner.getSelectedItem().toString());
         editor.putString("grad_date", DateTimeFormat.formatDateSQL(grad_date.getText().toString()));
         editor.apply();
+        full_name.setText(name[0] + " " + name[1]);
     }
 
     private void sendAccRequest(String url, final String action, final SharedPreferences ACC)
