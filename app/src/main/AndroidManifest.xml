@@ -17,9 +17,22 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Report.ConfirmActivity"></activity>
-        <activity android:name=".Report.VerifyReportActivity" />
-        <activity android:name=".Report.ReportActivity" />
+        <activity
+            android:name=".Report.ConfirmActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Report.VerifyReportActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Report.ReportActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".Account.StudentFragment"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".model.CameraPreview"
             android:screenOrientation="portrait" />
