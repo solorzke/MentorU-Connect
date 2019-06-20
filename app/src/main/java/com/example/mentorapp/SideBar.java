@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.Events.AddEvent;
 import com.example.mentorapp.Home.HomeFrag;
 import com.example.mentorapp.Report.ReportActivity;
+import com.example.mentorapp.Settings.SettingsFragment;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -167,9 +168,9 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HomeFrag()).commit();
                 break;
-            case R.id.account:
+            case R.id.settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new AccountFragment()).commit();
+                        new SettingsFragment()).commit();
                 break;
             case R.id.log_out:
                 Intent intent = new Intent(this, Login.class);
