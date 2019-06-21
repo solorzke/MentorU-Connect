@@ -20,6 +20,7 @@ public class LogFragment extends Fragment
     ArrayAdapter adapter;
     View view;
 
+
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.fragment_coaching_log, container, false);
