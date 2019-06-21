@@ -1,5 +1,6 @@
 package com.example.mentorapp.Account;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -9,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -21,6 +24,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.R;
+import com.example.mentorapp.model.Validate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -37,6 +41,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
     SharedPreferences.Editor e;
     String fname, lname;
     EditText c_num, c_title;
+    EditText new_id,new_title;
     boolean toggle = false;
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php", row_id;
 
@@ -83,6 +88,15 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         cancel.setOnClickListener(this);
         changeSemesterYear(semester);
         loadCourses(loadHashMap());
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String course_id = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
+                String course_title = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
+                showInputBox(course_id, course_title);
+            }
+        });
     }
 
     /* Click listener for 'add', 'cancel' */
@@ -113,11 +127,27 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                     String id = c_num.getText().toString();
                     c_num.setVisibility(View.GONE);
                     c_title.setVisibility(View.GONE);
-                    addNewCourse(id, title, e);
-                    addCourseToDB(id,title,row_id);
-                    loadCourses(loadHashMap());
-                    c_num.getText().clear();
-                    c_title.getText().clear();
+                    if(Validate.isBlank(title) || Validate.isBlank(id))
+                    {
+                        final AlertDialog alert = new AlertDialog.Builder(Courses.this).create();
+                        alert.setTitle("Blank Fields");
+                        alert.setMessage("Please don't leave blanks and fill in the fields before adding.");
+                        alert.setButton(AlertDialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                alert.dismiss();
+                            }
+                        });
+                        alert.show();
+                    }
+
+                    else
+                    {
+                        addNewCourse(id, title, e);
+                        loadCourses(loadHashMap());
+                        c_num.getText().clear();
+                        c_title.getText().clear();
+                    }
                 }
                 break;
             /* Cancel the add-class procedure and erase any input text the user typed in */
@@ -166,6 +196,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                 e.putString("id"+Integer.toString(i), c_id);
                 e.putString("title"+Integer.toString(i), c_title);
                 e.apply();
+                addCourseToDB(c_id, c_title, this.row_id);
                 break;
             }
 
@@ -273,4 +304,82 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         }
         this.list.setAdapter(adapter);
     }
+
+    /* Display the dialog layout for editing an existing course item in the list view.
+     * Save the changes, update the SharedPrefs, update the DB, and reload the List view.  */
+    public void showInputBox(final String old_id, String old_title)
+    {
+        final Dialog dialog = new Dialog(Courses.this);
+        dialog.setTitle("Edit Course");
+        dialog.setContentView(R.layout.custom_dialog);
+
+        new_id = dialog.findViewById(R.id.c_id);
+        new_title = dialog.findViewById(R.id.c_title);
+        Button bt = dialog.findViewById(R.id.btdone);
+
+        new_id.setText(old_id);
+        new_title.setText(old_title);
+
+        bt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(Validate.isBlank(new_id.getText().toString()) || Validate.isBlank(new_title.getText().toString()))
+                {
+                    dialog.dismiss();
+                    final AlertDialog alert = new AlertDialog.Builder(Courses.this).create();
+                    alert.setTitle("Blank Fields");
+                    alert.setMessage("Please don't leave blanks and fill in the fields before saving.");
+                    alert.setButton(AlertDialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            alert.dismiss();
+                        }
+                    });
+                    alert.show();
+                }
+
+                else
+                {
+                    String row_id = getRowId(courses, old_id);
+                    updateCourse(new_id.getText().toString(), new_title.getText().toString(), row_id, e);
+                    addCourseToDB(new_id.getText().toString(), new_title.getText().toString(), row_id);
+                    loadCourses(loadHashMap());
+                    dialog.dismiss();
+                }
+            }
+        });
+        dialog.show();
+    }
+
+    /* Getting the row_id from SharedPrefs based on the course_id it's associated with */
+    private String getRowId(SharedPreferences prefs, String c_id)
+    {
+        for(int i = 0; i < 6; i++)
+        {
+            if (c_id.equals(prefs.getString("id"+Integer.toString(i), null)))
+            {
+                return prefs.getString("row_id"+Integer.toString(i), null);
+            }
+        }
+
+        return null;
+    }
+
+    /* Update course item by using the row_id associated with the item to update the title and course id  */
+    private void updateCourse(String c_id, String c_title, String row_id, SharedPreferences.Editor e)
+    {
+        e = courses.edit();
+        for(int i = 0; i < 6; i++)
+        {
+            if(this.courses.getString("row_id"+Integer.toString(i), null).equals(row_id))
+            {
+                e.putString("id"+Integer.toString(i), c_id);
+                e.putString("title"+Integer.toString(i), c_title);
+                e.apply();
+                break;
+            }
+        }
+    }
+
 }
