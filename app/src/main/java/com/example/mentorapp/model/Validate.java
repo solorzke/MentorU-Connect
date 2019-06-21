@@ -64,4 +64,29 @@ public class Validate {
         boolean found = matcher.find();
         return found;
     }
+
+    /* Check if the string is blank or has nothing except whitespaces */
+    public static boolean isBlank(String str)
+    {
+        /* If the character length is zero, it is blank. */
+        if(str.length() < 1)
+        {
+            return true;
+        }
+
+        /* If it has a character or more, check if it only has whitespaces */
+        else
+        {
+            for(int i = 0; i < str.length(); i++)
+            {
+                /* If the character isn't a whitespace, it isn't blank */
+                if(str.charAt(i) != ' ')
+                {
+                    return false;
+                }
+            }
+            /* At the end of the loop without finding a real character, then it is blank */
+            return true;
+        }
+    }
 }
