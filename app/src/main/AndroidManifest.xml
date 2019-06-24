@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".Settings.TermsAndConditions"></activity>
+        <activity android:name=".Settings.PrivacyPolicy" />
+        <activity android:name=".Settings.ContactOffice" />
         <activity
             android:name=".Account.Courses"
             android:screenOrientation="portrait"

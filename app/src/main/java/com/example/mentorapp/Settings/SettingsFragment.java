@@ -72,15 +72,15 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.office:
-                startActivity(new Intent(getContext(), Activity.class));
+                startActivity(new Intent(getContext(), ContactOffice.class));
                 break;
 
             case R.id.terms:
-                startActivity(new Intent(getContext(), Activity.class));
+                startActivity(new Intent(getContext(), TermsAndConditions.class));
                 break;
 
             case R.id.privacy:
-                startActivity(new Intent(getContext(), Activity.class));
+                startActivity(new Intent(getContext(), PrivacyPolicy.class));
                 break;
 
             default:
