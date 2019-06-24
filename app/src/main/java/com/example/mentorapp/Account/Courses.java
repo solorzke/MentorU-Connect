@@ -282,6 +282,22 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         queue.add(request);
     }
 
+    /* Remove course from the shared prefs */
+    private void removeCourse(SharedPreferences.Editor e, String row_id)
+    {
+        e = courses.edit();
+        for (int i = 0; i < 6; i++)
+        {
+            if(this.courses.getString("row_id"+Integer.toString(i), null).equals(row_id))
+            {
+                e.putString("id" + Integer.toString(i), "");
+                e.putString("title" + Integer.toString(i), "");
+                e.apply();
+                break;
+            }
+        }
+    }
+
     /* Change the TextView displaying the semester & year based on the current time */
     private void changeSemesterYear(TextView semester)
     {
