@@ -49,47 +49,15 @@
                     android:layout_height="25dp"
                     android:src="@drawable/ic_clear"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="2dp"/>
+                    android:layout_marginRight="10dp" />
 
                 <ImageView
                     android:id="@+id/add"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
                     android:src="@drawable/ic_add"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginTop="2dp"/>
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginRight="5dp">
-
-                    <TextView
-                        android:id="@+id/m_edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:text="Edit"
-                        android:textColor="@android:color/white"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans" />
-
-                    <TextView
-                        android:id="@+id/m_done"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="end"
-                        android:text="Done"
-                        android:textColor="@android:color/white"
-                        android:textSize="20sp"
-                        android:visibility="invisible"
-                        app:fontFamily="@font/open_sans" />
-
-                </RelativeLayout>
-
+                    android:layout_marginRight="10dp" />
 
             </LinearLayout>
 
@@ -155,7 +123,7 @@
                 android:layout_margin="10dp"
                 android:text="Fall 2019"
                 android:textSize="17sp"
-                app:fontFamily="@font/open_sans"/>
+                app:fontFamily="@font/open_sans" />
 
             <View
                 android:layout_width="match_parent"
@@ -172,7 +140,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:hint="Course ID: i.e. CS 100"/>
+            android:hint="Course ID: i.e. CS 100" />
 
         <EditText
             android:id="@+id/c_title"
@@ -180,13 +148,13 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
-            android:hint="Course Title: i.e. Intro to Computer Science"/>
+            android:hint="Course Title: i.e. Intro to Computer Science" />
 
         <ListView
             android:id="@+id/courses"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="10dp"/>
+            android:layout_margin="10dp" />
 
 
     </LinearLayout>

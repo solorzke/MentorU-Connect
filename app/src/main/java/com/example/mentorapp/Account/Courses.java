@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -77,6 +78,9 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         mte = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
         fname = mte.getString("fname", null);
         lname = mte.getString("lname", null);
+
+        /* Register the context menu for editing/removal list item when performing long clicks */
+        registerForContextMenu(list);
     }
 
     @Override
@@ -88,15 +92,45 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         cancel.setOnClickListener(this);
         changeSemesterYear(semester);
         loadCourses(loadHashMap());
+    }
 
-        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.course_edit, menu);
+    }
+
+    /* Retrive the information from the list item selected, present a context menu with options 'edit' or
+     * 'remove' and perform the relative actions for each one if clicked. */
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId())
+        {
+            /* Allow the user to edit the current course id and title */
+            case R.id.edit:
+                View view = info.targetView;
                 String course_id = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
                 String course_title = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
                 showInputBox(course_id, course_title);
-            }
-        });
+                return false;
+
+            /* Allow the user to remove the course from the listview */
+            case R.id.remove:
+                View view2 = info.targetView;
+                String remove_id = ((TextView)(view2.findViewById(R.id.text1))).getText().toString();
+                String id = getRowId(courses, remove_id);
+                removeCourse(e, id);
+                updateCourseDB("", "", id);
+                loadCourses(loadHashMap());
+                return false;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     /* Click listener for 'add', 'cancel' */
@@ -196,7 +230,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                 e.putString("id"+Integer.toString(i), c_id);
                 e.putString("title"+Integer.toString(i), c_title);
                 e.apply();
-                addCourseToDB(c_id, c_title, this.row_id);
+                updateCourseDB(c_id, c_title, this.row_id);
                 break;
             }
 
@@ -221,7 +255,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
     }
 
     /* Submit the new added course to the DB to update the list */
-    private void addCourseToDB(final String c_id, final String c_title, final String row_id)
+    private void updateCourseDB(final String c_id, final String c_title, final String row_id)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -238,7 +272,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("action", "addCourse");
+                params.put("action", "updateCourses");
                 params.put("c_id", c_id);
                 params.put("c_title", c_title);
                 params.put("id", row_id);
@@ -343,7 +377,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                 {
                     String row_id = getRowId(courses, old_id);
                     updateCourse(new_id.getText().toString(), new_title.getText().toString(), row_id, e);
-                    addCourseToDB(new_id.getText().toString(), new_title.getText().toString(), row_id);
+                    updateCourseDB(new_id.getText().toString(), new_title.getText().toString(), row_id);
                     loadCourses(loadHashMap());
                     dialog.dismiss();
                 }
