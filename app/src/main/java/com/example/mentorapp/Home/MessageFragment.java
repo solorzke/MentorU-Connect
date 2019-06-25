@@ -1,7 +1,6 @@
 package com.example.mentorapp.Home;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -10,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +21,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.mentorapp.AccountFragment;
+import com.example.mentorapp.Account.MentorActivity;
+import com.example.mentorapp.Account.StudentActivity;
 import com.example.mentorapp.FAB.EditMessage;
 import com.example.mentorapp.FAQFragment;
 import com.example.mentorapp.R;
@@ -217,13 +216,14 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
                 break;
 
             case R.id.acc_info:
-                Fragment account = new AccountFragment();
-                FragmentTransaction transaction = getFragmentManager().beginTransaction();
-                transaction.replace(R.id.fragment_container, account);
-                transaction.addToBackStack(null);
-                // Commit the transaction
-                transaction.commit();
-                //SideBar.navigationView.setCheckedItem(R.id.account);
+                if(isStudent(USER_TYPE))
+                {
+                    startActivity(new Intent(getActivity(), MentorActivity.class));
+                }
+                else
+                {
+                    startActivity(new Intent(getActivity(), StudentActivity.class));
+                }
                 break;
 
             case R.id.help:
