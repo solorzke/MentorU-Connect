@@ -36,7 +36,7 @@ public class Goals extends Fragment implements View.OnClickListener {
     SharedPreferences STUDENT, MENTOR, USER_TYPE;
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
     FloatingActionButton fab;
-    TextView GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER, GOALS, M_TITLE;
+    TextView GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER, GOALS, M_TITLE, WEEKS, ACCOUNT, EMAIL, PERCENT;
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     AlertDialog dialog;
     Boolean c1 = false, c2 = false, c3 = false, c4 = false;
@@ -66,6 +66,13 @@ public class Goals extends Fragment implements View.OnClickListener {
         GOAL_3 = view.findViewById(R.id.goal3);
         GOAL_4 = view.findViewById(R.id.goal4);
         SEMESTER = view.findViewById(R.id.semester);
+        WEEKS = view.findViewById(R.id.weeks);
+        ACCOUNT = view.findViewById(R.id.account);
+        EMAIL = view.findViewById(R.id.sendEmail);
+        PERCENT = view.findViewById(R.id.percent);
+
+        ACCOUNT.setOnClickListener(this);
+        EMAIL.setOnClickListener(this);
 
         dialog = new AlertDialog.Builder(getContext()).create();
         dialog.setTitle("Choose Option");
@@ -145,6 +152,8 @@ public class Goals extends Fragment implements View.OnClickListener {
                 }
             });
         }
+
+        remainingWeeks(WEEKS);
     }
 
     @Override
@@ -318,6 +327,49 @@ public class Goals extends Fragment implements View.OnClickListener {
         } else {
             return false;
         }
+    }
+
+    /* Set remaining amount of weeks left until the semester's conclusion */
+    private void remainingWeeks(TextView weeks)
+    {
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(Calendar.MONTH);
+
+        /* Current month (Sept - Dec) Fall Semester */
+        if (month > 7)
+        {
+            String wk = Integer.toString(DateTimeFormat.getFullWeeks(11));
+            weeks.setText( wk+ " Weeks");
+        }
+        /* Current month (Jan - May) Spring Semester */
+        else if (month < 5)
+        {
+            String wk = Integer.toString(DateTimeFormat.getFullWeeks(5));
+            weeks.setText( wk+ " Weeks");
+        }
+        /* Current month (June - Aug) Summer Semester */
+        else if (4 < month || month < 8)
+        {
+            String wk = Integer.toString(DateTimeFormat.getFullWeeks(8));
+            weeks.setText( wk+ " Weeks");
+        }
+    }
+
+    /* Set the percentage of goals completed, update real-time as user updates their status */
+    private void percentageComplete(TextView percent)
+    {
+        boolean [] checks = {c1, c2, c3, c4};
+        int p = 0;
+
+        for(boolean check : checks)
+        {
+            if(check)
+            {
+                p += 25;
+            }
+        }
+        String per = Integer.toString(p);
+        percent.setText(" " + per + " %");
     }
 }
 
