@@ -22,16 +22,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mentorapp.Account.MentorActivity;
 import com.example.mentorapp.FAB.EditGoals;
 import com.example.mentorapp.FAB.EditMessage;
 import com.example.mentorapp.R;
+import com.example.mentorapp.SendEmail;
+import com.example.mentorapp.model.DateTimeFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Goals extends Fragment implements View.OnClickListener {
-
+public class Goals extends Fragment implements View.OnClickListener
+{
 
     SharedPreferences STUDENT, MENTOR, USER_TYPE;
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
@@ -44,7 +47,8 @@ public class Goals extends Fragment implements View.OnClickListener {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         view = inflater.inflate(R.layout.fragment_goals, container, false);
         STUDENT = getActivity().getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
         MENTOR = getActivity().getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
@@ -123,6 +127,7 @@ public class Goals extends Fragment implements View.OnClickListener {
                             c3 = loadGoal(goals[2], GOAL_3, CHECKMARK_3);
                             c4 = loadGoal(goals[3], GOAL_4, CHECKMARK_4);
                             System.out.println(Arrays.toString(goals));
+                            percentageComplete(PERCENT);
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -164,6 +169,7 @@ public class Goals extends Fragment implements View.OnClickListener {
                     if (!c1) {
                         CHECKMARK_1.setImageResource(R.drawable.ic_check_green);
                         c1 = true;
+                        percentageComplete(PERCENT);
                         changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
                                 MENTOR.getString("ucid", null), GOAL_1.getText().toString(), "1");
                         postToast("1");
@@ -171,6 +177,7 @@ public class Goals extends Fragment implements View.OnClickListener {
                     } else {
                         CHECKMARK_1.setImageResource(R.drawable.ic_check_circle);
                         c1 = false;
+                        percentageComplete(PERCENT);
                         changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
                                 MENTOR.getString("ucid", null), GOAL_1.getText().toString(), "0");
                         postToast("0");
@@ -180,6 +187,7 @@ public class Goals extends Fragment implements View.OnClickListener {
                     if (!c2) {
                         CHECKMARK_2.setImageResource(R.drawable.ic_check_green);
                         c2 = true;
+                        percentageComplete(PERCENT);
                         changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
                                 MENTOR.getString("ucid", null), GOAL_2.getText().toString(), "1");
                         postToast("1");
@@ -187,6 +195,7 @@ public class Goals extends Fragment implements View.OnClickListener {
                     } else {
                         CHECKMARK_2.setImageResource(R.drawable.ic_check_circle);
                         c2 = false;
+                        percentageComplete(PERCENT);
                         changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
                                 MENTOR.getString("ucid", null), GOAL_2.getText().toString(), "0");
                         postToast("0");
@@ -197,6 +206,7 @@ public class Goals extends Fragment implements View.OnClickListener {
                     if (!c3) {
                         CHECKMARK_3.setImageResource(R.drawable.ic_check_green);
                         c3 = true;
+                        percentageComplete(PERCENT);
                         changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
                                 MENTOR.getString("ucid", null), GOAL_3.getText().toString(), "1");
                         postToast("1");
@@ -204,6 +214,7 @@ public class Goals extends Fragment implements View.OnClickListener {
                     } else {
                         CHECKMARK_3.setImageResource(R.drawable.ic_check_circle);
                         c3 = false;
+                        percentageComplete(PERCENT);
                         changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
                                 MENTOR.getString("ucid", null), GOAL_3.getText().toString(), "0");
                         postToast("0");
@@ -213,6 +224,7 @@ public class Goals extends Fragment implements View.OnClickListener {
                     if (!c4) {
                         CHECKMARK_4.setImageResource(R.drawable.ic_check_green);
                         c4 = true;
+                        percentageComplete(PERCENT);
                         changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
                                 MENTOR.getString("ucid", null), GOAL_4.getText().toString(), "1");
                         postToast("1");
@@ -220,11 +232,21 @@ public class Goals extends Fragment implements View.OnClickListener {
                     } else {
                         CHECKMARK_4.setImageResource(R.drawable.ic_check_circle);
                         c4 = false;
+                        percentageComplete(PERCENT);
                         changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
                                 MENTOR.getString("ucid", null), GOAL_4.getText().toString(), "0");
                         postToast("0");
                         break;
                     }
+
+                case R.id.account:
+                    startActivity(new Intent(getContext(), MentorActivity.class));
+                    break;
+
+                case R.id.sendEmail:
+                    startActivity(new Intent(getContext(), SendEmail.class));
+                    break;
+
                 default:
                     break;
             }
@@ -233,24 +255,30 @@ public class Goals extends Fragment implements View.OnClickListener {
         }
     }
 
-    private boolean loadGoal(String goal, TextView tv_goal, ImageView ck) {
-
+    /* Display the goal and check mark status */
+    private boolean loadGoal(String goal, TextView tv_goal, ImageView ck)
+    {
         boolean s = false;
         String[] data = goal.split("\\\\");
         tv_goal.setText(data[0]);
-        if (data[1].equals("1")) {
+        if (data[1].equals("1"))
+        {
             s = true;
             tv_goal.setVisibility(View.VISIBLE);
             ck.setVisibility(View.VISIBLE);
             ck.setImageResource(R.drawable.ic_check_green);
             ck.setEnabled(true);
-        } else if (data[1].equals("0")) {
+        }
+        else if (data[1].equals("0"))
+        {
             s = false;
             tv_goal.setVisibility(View.VISIBLE);
             ck.setVisibility(View.VISIBLE);
             ck.setImageResource(R.drawable.ic_check_circle);
             ck.setEnabled(true);
-        } else if (data[1].equals("3")) {
+        }
+        else if (data[1].equals("3"))
+        {
             s = false;
             tv_goal.setVisibility(View.INVISIBLE);
             ck.setVisibility(View.INVISIBLE);
@@ -259,8 +287,10 @@ public class Goals extends Fragment implements View.OnClickListener {
         return s;
     }
 
+    /* Send a server request to update the goal status (complete/incomplete)  */
     private void changeGoalStatus(View v, String url, final String action,
-                                  final String currentUser, final String otherUser, final String goal, final String status) {
+                                  final String currentUser, final String otherUser, final String goal, final String status)
+    {
 
         RequestQueue queue = Volley.newRequestQueue(v.getContext());
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -288,15 +318,19 @@ public class Goals extends Fragment implements View.OnClickListener {
         queue.add(request);
     }
 
-    private void postToast(String status) {
-
-        if (status.equals("0")) {
+    /* Post a toast message after toggling the check marks */
+    private void postToast(String status)
+    {
+        if (status.equals("0"))
+        {
             Context context = getContext();
             CharSequence text = "Goal Incomplete";
             int duration = Toast.LENGTH_SHORT;
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-        } else if (status.equals("1")) {
+        }
+        else if (status.equals("1"))
+        {
             Context context = getContext();
             CharSequence text = "Goal Complete";
             int duration = Toast.LENGTH_SHORT;
@@ -306,25 +340,36 @@ public class Goals extends Fragment implements View.OnClickListener {
 
     }
 
-    private void changeSemesterYear(TextView semester) {
+    /* Adjust the year and semester given the current time of year */
+    private void changeSemesterYear(TextView semester)
+    {
         Calendar cal = Calendar.getInstance();
         int month = cal.get(Calendar.MONTH);
         String year = Integer.toString(cal.get(Calendar.YEAR));
         System.out.println("Current Year: "+year);
 
-        if (month > 7) {
+        if (month > 7)
+        {
             semester.setText("Fall " + year);
-        } else if (month < 5) {
+        }
+        else if (month < 5)
+        {
             semester.setText("Spring " + year);
-        } else if (4 < month || month < 8) {
+        }
+        else if (4 < month || month < 8)
+        {
             semester.setText("Summer " + year);
         }
     }
 
-    private boolean isStudent(SharedPreferences type) {
-        if (type.getString("type", null).equals("student")) {
+    /* Verify the user type who's viewing this page */
+    private boolean isStudent(SharedPreferences type)
+    {
+        if (type.getString("type", null).equals("student"))
+        {
             return true;
-        } else {
+        }
+        else {
             return false;
         }
     }
