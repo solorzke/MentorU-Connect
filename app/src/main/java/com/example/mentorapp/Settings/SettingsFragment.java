@@ -1,6 +1,5 @@
 package com.example.mentorapp.Settings;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -13,8 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.example.mentorapp.Account.Courses;
-import com.example.mentorapp.Account.MentorFragment;
-import com.example.mentorapp.Account.StudentFragment;
+import com.example.mentorapp.Account.MentorActivity;
+import com.example.mentorapp.Account.StudentActivity;
 import com.example.mentorapp.R;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener
@@ -60,7 +59,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.mentee:
-                startActivity(new Intent(getContext(), StudentFragment.class));
+                startActivity(new Intent(getContext(), StudentActivity.class));
                 break;
 
             case R.id.courses:
@@ -68,7 +67,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.mentor:
-                startActivity(new Intent(getContext(), MentorFragment.class));
+                startActivity(new Intent(getContext(), MentorActivity.class));
                 break;
 
             case R.id.office:

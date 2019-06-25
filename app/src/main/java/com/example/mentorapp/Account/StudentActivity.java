@@ -6,15 +6,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
@@ -30,17 +25,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.R;
-import com.example.mentorapp.Registration;
 import com.example.mentorapp.SideBar;
 import com.example.mentorapp.model.DateTimeFormat;
-import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StudentFragment extends AppCompatActivity implements AdapterView.OnItemSelectedListener
+public class StudentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences account, CL, USER_TYPE;
@@ -125,7 +117,7 @@ public class StudentFragment extends AppCompatActivity implements AdapterView.On
                     int month = calendar.get(Calendar.MONTH);
                     int year = calendar.get(Calendar.YEAR);
 
-                    date = new DatePickerDialog(StudentFragment.this, new DatePickerDialog.OnDateSetListener() {
+                    date = new DatePickerDialog(StudentActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             bday.setText((month + 1)+"/"+dayOfMonth+"/"+year);
@@ -143,7 +135,7 @@ public class StudentFragment extends AppCompatActivity implements AdapterView.On
                     int month = calendar.get(Calendar.MONTH);
                     int year = calendar.get(Calendar.YEAR);
 
-                    date = new DatePickerDialog(StudentFragment.this, new DatePickerDialog.OnDateSetListener() {
+                    date = new DatePickerDialog(StudentActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             grad_date.setText((month + 1)+"/"+dayOfMonth+"/"+year);

@@ -5,16 +5,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.constraint.ConstraintLayout;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -36,7 +30,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MentorFragment extends AppCompatActivity  {
+public class MentorActivity extends AppCompatActivity  {
 
     SharedPreferences MENTOR, USER_TYPE;
     SharedPreferences.Editor editor;
@@ -118,7 +112,7 @@ public class MentorFragment extends AppCompatActivity  {
                     int month = calendar.get(Calendar.MONTH);
                     int year = calendar.get(Calendar.YEAR);
 
-                    date = new DatePickerDialog(MentorFragment.this, new DatePickerDialog.OnDateSetListener() {
+                    date = new DatePickerDialog(MentorActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             BDAY.setText((month + 1)+"/"+dayOfMonth+"/"+year);
@@ -136,7 +130,7 @@ public class MentorFragment extends AppCompatActivity  {
                     int month = calendar.get(Calendar.MONTH);
                     int year = calendar.get(Calendar.YEAR);
 
-                    date = new DatePickerDialog(MentorFragment.this, new DatePickerDialog.OnDateSetListener() {
+                    date = new DatePickerDialog(MentorActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             MTR_DATE.setText((month + 1)+"/"+dayOfMonth+"/"+year);
