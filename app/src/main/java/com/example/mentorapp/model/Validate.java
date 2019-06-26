@@ -1,5 +1,7 @@
 package com.example.mentorapp.model;
 
+import android.widget.EditText;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -88,5 +90,47 @@ public class Validate {
             /* At the end of the loop without finding a real character, then it is blank */
             return true;
         }
+    }
+
+    /* Validate for forms with EditText arrays */
+    public static boolean checkForm(EditText[] events)
+    {
+
+        for(EditText event : events)
+        {
+            String data = event.getText().toString();
+
+            /* If the character length is zero, it is blank. */
+            if(data.length() < 1)
+            {
+                return false;
+            }
+
+            /* If it has a character or more, check if it only has whitespaces */
+            else
+            {
+                boolean sentinel = false;
+                for(int j = 0; j < data.length(); j++)
+                {
+                    /* If the character isn't a whitespace, it isn't blank */
+                    if(data.charAt(j) != ' ')
+                    {
+                        sentinel = true;
+                        break;
+                    }
+                    else if(j == data.length()-1)
+                    {
+                        sentinel = false;
+                        break;
+                    }
+                }
+                if(!sentinel)
+                {
+                    return false;
+                }
+            }
+        }
+
+        return true;
     }
 }
