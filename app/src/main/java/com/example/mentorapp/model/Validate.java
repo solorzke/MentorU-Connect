@@ -1,5 +1,6 @@
 package com.example.mentorapp.model;
 
+import android.content.SharedPreferences;
 import android.widget.EditText;
 
 import java.util.regex.Matcher;
@@ -132,5 +133,34 @@ public class Validate {
         }
 
         return true;
+    }
+
+    public static boolean isStudent(SharedPreferences type)
+    {
+        if (type.getString("type", null).equals("student"))
+        {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public static String [] format12HourTime(int hour, int min)
+    {
+        int h = hour;
+        String m;
+        String timeset;
+
+        if(hour > 12){  h -= 12; timeset = "PM";  }
+        else if(hour == 0){  h += 12; timeset = "AM";  }
+        else if(hour == 12){  timeset = "PM";  }
+        else{  timeset = "AM";  }
+
+        if(min < 10){ m = "0" + min; }
+        else{  m = String.valueOf(min);  }
+
+        String [] data = {Integer.toString(h), m, timeset};
+        return data;
     }
 }
