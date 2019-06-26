@@ -9,6 +9,10 @@
             android:icon="@drawable/ic_home"
             android:title="@string/menu_item_home" />
         <item
+            android:id="@+id/coachinglog"
+            android:icon="@drawable/ic_log"
+            android:title="@string/menu_item_coachinglog" />
+        <item
             android:id="@+id/settings"
             android:icon="@android:drawable/ic_menu_manage"
             android:title="@string/menu_item_settings" />

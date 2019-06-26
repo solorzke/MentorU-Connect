@@ -26,6 +26,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mentorapp.CoachingLog.LogFragment;
 import com.example.mentorapp.Events.AddEvent;
 import com.example.mentorapp.Home.HomeFrag;
 import com.example.mentorapp.Report.ReportActivity;
@@ -167,6 +168,10 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.home_item:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new HomeFrag()).commit();
+                break;
+            case R.id.coachinglog:
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
+                        new LogFragment()).commit();
                 break;
             case R.id.settings:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
