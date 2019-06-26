@@ -1,4 +1,4 @@
-package com.example.mentorapp.Events;
+package com.example.mentorapp.CoachingLog;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;

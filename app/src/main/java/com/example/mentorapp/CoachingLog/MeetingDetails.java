@@ -1,4 +1,4 @@
-package com.example.mentorapp.Events;
+package com.example.mentorapp.CoachingLog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
