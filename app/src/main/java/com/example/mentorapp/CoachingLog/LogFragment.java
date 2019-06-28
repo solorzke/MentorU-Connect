@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.example.mentorapp.CoachingLog.RequestStatusLog.RequestMeetingsList;
 import com.example.mentorapp.R;
 
 public class LogFragment extends Fragment implements View.OnClickListener
@@ -44,11 +46,11 @@ public class LogFragment extends Fragment implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.requestmeeting:
-                startActivity(new Intent(getContext(), Activity.class));
+                startActivity(new Intent(getContext(), RequestMeeting.class));
                 break;
 
             case R.id.status:
-                startActivity(new Intent(getContext(), Activity.class));
+                startActivity(new Intent(getContext(), RequestMeetingsList.class));
                 break;
 
             case R.id.logs:

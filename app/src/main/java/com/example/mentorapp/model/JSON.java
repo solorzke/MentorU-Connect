@@ -172,7 +172,6 @@ public class JSON extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         try{
-
                             System.out.println("Server Response: "+response);
                             JSONArray array = response.getJSONArray("record");
                             JSONArray courses = response.getJSONArray("courses");

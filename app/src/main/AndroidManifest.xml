@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Settings.TermsAndConditions"></activity>
+        <activity android:name=".CoachingLog.RequestStatusLog.RequestMeetingsList"></activity>
+        <activity android:name=".Settings.TermsAndConditions" />
         <activity android:name=".Settings.PrivacyPolicy" />
         <activity android:name=".Settings.ContactOffice" />
         <activity
@@ -93,7 +94,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CoachingLog.RequestActivity"
+            android:name=".CoachingLog.RequestStatusLog.RequestActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
