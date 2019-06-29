@@ -18,7 +18,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.mentorapp.Account.Courses;
 import com.example.mentorapp.R;
 import com.example.mentorapp.model.Validate;
 import org.json.JSONArray;
@@ -79,7 +78,7 @@ public class RequestMeetingsList extends AppCompatActivity
             {
                 String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
                 String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Courses.class);
+                Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
                 intent.putStringArrayListExtra("meeting_details", findArrayList(title, purpose));
                 startActivity(intent);
             }
@@ -93,7 +92,7 @@ public class RequestMeetingsList extends AppCompatActivity
             {
                 String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
                 String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Courses.class);
+                Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
                 intent.putExtra("meeting_details", findArrayList(title, purpose));
                 startActivity(intent);
             }

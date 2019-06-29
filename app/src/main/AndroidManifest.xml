@@ -21,6 +21,7 @@
         <activity android:name=".Settings.TermsAndConditions" />
         <activity android:name=".Settings.PrivacyPolicy" />
         <activity android:name=".Settings.ContactOffice" />
+        <activity android:name=".CoachingLog.RequestStatusLog.RequestTabLayout"/>
         <activity
             android:name=".Account.Courses"
             android:screenOrientation="portrait"

@@ -1,4 +1,4 @@
-package com.example.mentorapp.CoachingLog;
+package com.example.mentorapp.CoachingLog.RequestStatusLog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -54,16 +54,16 @@ public class MeetingStatus extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        receiveStatus(view, url, "checkStatus", SESSION.getString("ucid", null),
-                OTHER_USER.getString("ucid", null));
+        //receiveStatus(view, url, "checkStatus", SESSION.getString("ucid", null),
+                //OTHER_USER.getString("ucid", null));
     }
 
     /* When you come back into focus of the fragment, resend a status check request. */
     @Override
     public void onResume() {
         super.onResume();
-        receiveStatus(view, url, "checkStatus", SESSION.getString("ucid", null),
-                OTHER_USER.getString("ucid", null));
+        //receiveStatus(view, url, "checkStatus", SESSION.getString("ucid", null),
+                //OTHER_USER.getString("ucid", null));
     }
 
     /* Retrieves status info about the meeting request */

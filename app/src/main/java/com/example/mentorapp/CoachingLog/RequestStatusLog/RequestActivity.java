@@ -1,4 +1,4 @@
-package com.example.mentorapp.CoachingLog;
+package com.example.mentorapp.CoachingLog.RequestStatusLog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -37,7 +37,6 @@ public class RequestActivity extends AppCompatActivity {
     TextView cancel;
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences SESSION;
-    Timer timer;
 
     /* This activity controls the two fragments used to view meeting request statuses and details.
     Initialize necessary objects when activity is created */
@@ -51,9 +50,7 @@ public class RequestActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        timer = new Timer();
         SESSION = getSharedPreferences("USER", Context.MODE_PRIVATE);
-        cancel = (TextView) findViewById(R.id.cancel_btn);
         viewPager = (ViewPager) findViewById(R.id.viewPager);
         tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         adapter = new TabAdapter(getSupportFragmentManager());
@@ -72,42 +69,39 @@ public class RequestActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
 
             /* If the current user is viewing the second fragment, run a timer and continuously send
-            * requests to the web server to check if the status of the meeting request has changed.
-            * */
+             * requests to the web server to check if the status of the meeting request has changed.
+             * */
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                if(tab.getPosition() == 1){
-                    timer.schedule( new TimerTask() {
-                        public void run() {
-                            getMeetingInfo(url, "getMeetingInfo", SESSION.getString("ucid", null));
-                        }
-                    }, 0, 1*1000);
+                if (tab.getPosition() == 1) {
+                    getMeetingInfo(url, "getMeetingInfo", SESSION.getString("ucid", null));
+
 
                     /* If the cancel btn is clicked, cancel the meeting, stop the timer, and return
-                    * to the home page*/
+                     * to the home page*/
                     cancel.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             cancelMeeting(url, "cancelMeeting", SESSION.getString("ucid", null));
                             cancel.setVisibility(View.INVISIBLE);
-                            timer.cancel();
                             onBackPressed();
                         }
                     });
                 }
 
                 /* If current user is viewing the first fragment, hide the cancel btn */
-                else{
+                else {
                     cancel.setVisibility(View.INVISIBLE);
-                    timer.cancel();
                 }
             }
 
             @Override
-            public void onTabUnselected(TabLayout.Tab tab) { }
+            public void onTabUnselected(TabLayout.Tab tab) {
+            }
 
             @Override
-            public void onTabReselected(TabLayout.Tab tab) { }
+            public void onTabReselected(TabLayout.Tab tab) {
+            }
         });
     }
 
@@ -128,7 +122,6 @@ public class RequestActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        timer.cancel();
     }
 
     /* Retrieves meeting request info */
@@ -143,11 +136,9 @@ public class RequestActivity extends AppCompatActivity {
                 if (response.equals("empty")) ;
                 else {
                     String[] data = response.split("\\|");
-                    if(data[6].equals("1") || data[6].equals("2")){
+                    if (data[6].equals("1") || data[6].equals("2")) {
                         cancel.setVisibility(View.INVISIBLE);
-                        timer.cancel();
-                    }
-                    else{
+                    } else {
                         cancel.setVisibility(View.VISIBLE);
                     }
                 }
@@ -170,8 +161,8 @@ public class RequestActivity extends AppCompatActivity {
     }
 
     /* Send a web request to change the status of the meeting request to declined  & return back to
-    * home page */
-    private void cancelMeeting(String url, final String action, final String currentUser){
+     * home page */
+    private void cancelMeeting(String url, final String action, final String currentUser) {
         RequestQueue queue = Volley.newRequestQueue(RequestActivity.this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
