@@ -26,6 +26,8 @@ import com.example.mentorapp.model.Validate;
 import java.util.HashMap;
 import java.util.Map;
 
+import me.ibrahimsn.particle.ParticleView;
+
 public class Login extends AppCompatActivity {
 
     AlertDialog alert, SERVER_ERROR;
@@ -33,6 +35,7 @@ public class Login extends AppCompatActivity {
     String pw;
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/login.php";
     boolean asAMentor = false;
+    ParticleView particleView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class Login extends AppCompatActivity {
         TextView forgotPassword = (TextView) findViewById(R.id.forgotPwdText);
         TextView help = (TextView) findViewById(R.id.helpText);
         Switch toggle = (Switch) findViewById(R.id.simpleSwitch); // initiate Switch
+        particleView = findViewById(R.id.particleView);
         //~~~~~~~~~~CREATE AN ALERT MESSAGE~~~~~~~~~~~~~~~~~~~~~~~~~
         alert = new AlertDialog.Builder(Login.this).create();
         alert.setTitle("Alert");
@@ -240,5 +244,16 @@ public class Login extends AppCompatActivity {
         queue.add(request);
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        particleView.resume();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        particleView.pause();
+    }
 }
 
