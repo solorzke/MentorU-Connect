@@ -32,6 +32,8 @@ dependencies {
     implementation "com.android.support:exifinterface:28.0.0"
     implementation 'com.ToxicBakery.viewpager.transforms:view-pager-transforms:1.2.32@aar'
     implementation 'com.github.ybq:Android-SpinKit:1.2.0'
+    implementation 'com.github.cdflynn:checkview:v1.1'
+    implementation 'com.github.ibrahimsn98:android-particles:1.6'
 
 
 }

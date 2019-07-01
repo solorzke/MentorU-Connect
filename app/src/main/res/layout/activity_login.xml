@@ -34,6 +34,16 @@
         app:layout_constraintTop_toBottomOf="@+id/signInBtn"
         app:layout_constraintVertical_bias="0.019" />
 
+    <me.ibrahimsn.particle.ParticleView
+        android:id="@+id/particleView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:particleCount="20"
+        app:minParticleRadius="5"
+        app:maxParticleRadius="12"
+        app:particleColor="@android:color/holo_red_dark"
+        app:backgroundColor="@android:color/white" />
+
 
     <ImageView
         android:id="@+id/btn_capture_photo"
