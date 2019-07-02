@@ -31,6 +31,18 @@
             app:layout_constraintTop_toTopOf="@+id/btn_capture_photo"
             app:srcCompat="@drawable/mentor_u" />
 
+        <TextView
+            android:id="@+id/addCalendar"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add To Calendar"
+            android:textColor="@android:color/white"
+            app:fontFamily="@font/open_sans"
+            android:layout_gravity="end"
+            android:layout_marginRight="15dp"
+            android:textSize="15sp"/>
+
     </android.support.v7.widget.Toolbar>
 
     <android.support.design.widget.TabLayout
