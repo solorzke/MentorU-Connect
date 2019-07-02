@@ -49,4 +49,45 @@ public class DateTimeFormat {
 
         return weeks;
     }
+
+    public static String [] format12HourTime(int hour, int min)
+    {
+        int h = hour;
+        String m;
+        String timeset;
+
+        if(hour > 12){  h -= 12; timeset = "PM";  }
+        else if(hour == 0){  h += 12; timeset = "AM";  }
+        else if(hour == 12){  timeset = "PM";  }
+        else{  timeset = "AM";  }
+
+        if(min < 10){ m = "0" + min; }
+        else{  m = String.valueOf(min);  }
+
+        String [] data = {Integer.toString(h), m, timeset};
+        return data;
+    }
+
+    public static String format12HourTimeAsString(String str)
+    {
+        String [] date = str.split(":");
+        int hour = Integer.parseInt(date[0]);
+        int min = Integer.parseInt(date[1]);
+        int h = hour;
+
+        String m;
+        String timeset;
+
+        if(hour > 12){  h -= 12; timeset = "PM";  }
+        else if(hour == 0){  h += 12; timeset = "AM";  }
+        else if(hour == 12){  timeset = "PM";  }
+        else{  timeset = "AM";  }
+
+        if(min < 10){ m = "0" + min; }
+        else{  m = String.valueOf(min);  }
+
+        String [] data = {Integer.toString(h), m, timeset};
+        return data[0] + ":" + data[1] + " " + timeset;
+
+    }
 }
