@@ -90,4 +90,11 @@ public class DateTimeFormat {
         return data[0] + ":" + data[1] + " " + timeset;
 
     }
+
+    /* Parse dates, hours, mins to convert into milliseconds later */
+    public static int[] parseDateAndTime(String date, int hour, int min) {
+        String[] d = date.split("/");
+        int[] dt = {Integer.parseInt(d[2]), Integer.parseInt(d[0]), Integer.parseInt(d[1]), hour, min};
+        return dt;
+    }
 }

@@ -34,6 +34,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.Login;
 import com.example.mentorapp.R;
 import com.example.mentorapp.SideBar;
+import com.example.mentorapp.model.DateTimeFormat;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -116,7 +117,7 @@ public class AddEvent extends AppCompatActivity {
                                 s_min24 = selectedMinute;
 
                                 /* Format the time to 12 hours to store it in the DB */
-                                String[] data = format12HourTime(selectedHour, selectedMinute);
+                                String[] data = DateTimeFormat.format12HourTime(selectedHour, selectedMinute);
                                 event_start_time.setText(data[0] + ":" + data[1] + " " + data[2]);
                             }
                         }, hour, min, false);
@@ -140,7 +141,7 @@ public class AddEvent extends AppCompatActivity {
                                 e_min24 = selectedMinute;
 
                                 /* Format the time to 12 hours to store it in the DB */
-                                String[] data = format12HourTime(selectedHour, selectedMinute);
+                                String[] data = DateTimeFormat.format12HourTime(selectedHour, selectedMinute);
                                 event_end_time.setText(data[0] + ":" + data[1] + " " + data[2]);
                             }
                         }, hour, min, false);
@@ -163,8 +164,8 @@ public class AddEvent extends AppCompatActivity {
                 String location = event_location.getText().toString();
                 String purpose = event_purpose.getText().toString();
                 if (checkForm(event)) {
-                    int[] d1 = parseDateAndTime(event_date.getText().toString(), s_hour24, s_min24);
-                    int[] d2 = parseDateAndTime(event_date.getText().toString(), e_hour24, e_min24);
+                    int[] d1 = DateTimeFormat.parseDateAndTime(event_date.getText().toString(), s_hour24, s_min24);
+                    int[] d2 = DateTimeFormat.parseDateAndTime(event_date.getText().toString(), e_hour24, e_min24);
                     createEvent(d1, d2, title, purpose, location, email);
                 } else {
                     sendAlert();
@@ -233,41 +234,6 @@ public class AddEvent extends AppCompatActivity {
                 .putExtra(Intent.EXTRA_EMAIL, email);
         this.done = true;
         startActivity(intent);
-    }
-
-    /* For formatting time to 12hrs */
-    private String[] format12HourTime(int hour, int min) {
-        int h = hour;
-        String m;
-        String timeset;
-
-        if (hour > 12) {
-            h -= 12;
-            timeset = "PM";
-        } else if (hour == 0) {
-            h += 12;
-            timeset = "AM";
-        } else if (hour == 12) {
-            timeset = "PM";
-        } else {
-            timeset = "AM";
-        }
-
-        if (min < 10) {
-            m = "0" + min;
-        } else {
-            m = String.valueOf(min);
-        }
-
-        String[] data = {Integer.toString(h), m, timeset};
-        return data;
-    }
-
-    /* Parse dates, hours, mins to convert into milliseconds later */
-    private int[] parseDateAndTime(String date, int hour, int min) {
-        String[] d = date.split("/");
-        int[] dt = {Integer.parseInt(d[2]), Integer.parseInt(d[0]), Integer.parseInt(d[1]), hour, min};
-        return dt;
     }
 
     /* In case the form data wasn't properly filled out, send an alert message */
