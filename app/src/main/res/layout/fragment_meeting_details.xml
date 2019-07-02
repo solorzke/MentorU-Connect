@@ -31,8 +31,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Meeting With: "
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         app:fontFamily="@font/open_sans"
+                        android:paddingLeft="10dp"
                         android:textColor="@android:color/background_dark"/>
 
                     <TextView
@@ -40,7 +41,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="User #2"
-                        android:textSize="15sp"
+                        android:textSize="20sp"
                         app:fontFamily="@font/open_sans"
                         android:textColor="@android:color/holo_red_dark"/>
 
@@ -132,12 +133,6 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#dbdde0"
-                    android:layout_margin="10dp"/>
-
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -159,12 +154,6 @@
                         android:enabled="false"
                         app:fontFamily="@font/open_sans"/>
                 </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#dbdde0"
-                    android:layout_margin="10dp"/>
             </LinearLayout>
 
             <Button
@@ -172,7 +161,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Respond"
-                android:background="@android:color/holo_blue_bright"
+                android:background="#50c878"
                 android:textColor="@android:color/background_light"
                 android:layout_margin="10dp"
                 android:textSize="15sp"
