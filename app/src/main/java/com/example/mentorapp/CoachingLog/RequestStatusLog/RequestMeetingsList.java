@@ -63,13 +63,16 @@ public class RequestMeetingsList extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getRequests();
     }
 
     @Override
     protected void onStart()
     {
         super.onStart();
+        pendingArray.clear();
+        receivingArray.clear();
+        getRequests();
+        System.out.println("On Start");
         /* ListView (pending) listening for a list item clicked. */
         pendingList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
