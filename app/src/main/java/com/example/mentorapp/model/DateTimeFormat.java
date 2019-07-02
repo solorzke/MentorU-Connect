@@ -25,10 +25,10 @@ public class DateTimeFormat {
     {
         Calendar start = Calendar.getInstance();
         int year = start.get(Calendar.YEAR);
-        start.set(year, start.get(Calendar.MONTH), start.get(Calendar.DAY_OF_MONTH));
+        start.set(year, start.get(Calendar.MONTH), start.get(Calendar.MONDAY));
 
         Calendar end = Calendar.getInstance();
-        end.set(year, month, 01);
+        end.set(year, month, 7);
 
         return getNrWeeksBetween(start, end);
     }
