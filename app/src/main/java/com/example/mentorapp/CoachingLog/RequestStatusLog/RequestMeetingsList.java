@@ -80,6 +80,7 @@ public class RequestMeetingsList extends AppCompatActivity
                 String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
                 Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
                 intent.putStringArrayListExtra("meeting_details", findArrayList(title, purpose));
+                intent.putExtra("type", "sender");
                 startActivity(intent);
             }
         });
@@ -94,6 +95,7 @@ public class RequestMeetingsList extends AppCompatActivity
                 String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
                 Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
                 intent.putExtra("meeting_details", findArrayList(title, purpose));
+                intent.putExtra("type", "receiver");
                 startActivity(intent);
             }
         });

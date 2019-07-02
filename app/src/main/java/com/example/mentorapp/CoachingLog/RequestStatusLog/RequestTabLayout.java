@@ -21,7 +21,6 @@ public class RequestTabLayout extends AppCompatActivity
             R.drawable.ic_check_red,
             R.drawable.ic_message_red,
     };
-
     ArrayList <String> row = new ArrayList<>();
 
     @Override
