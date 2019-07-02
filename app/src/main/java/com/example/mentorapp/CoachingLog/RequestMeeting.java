@@ -105,7 +105,7 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                String [] data = Validate.format12HourTime(selectedHour, selectedMinute);
+                                String [] data = DateTimeFormat.format12HourTime(selectedHour, selectedMinute);
                                 event_start_time.setText(data[0] + ":" + data[1] + " " + data[2]);
                             }
                         }, hour, min, false);
@@ -121,7 +121,7 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
                         new TimePickerDialog.OnTimeSetListener() {
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
-                                String [] data = Validate.format12HourTime(selectedHour, selectedMinute);
+                                String [] data = DateTimeFormat.format12HourTime(selectedHour, selectedMinute);
                                 event_end_time.setText(data[0] + ":" + data[1] + " " + data[2]);
                             }
                         }, hour, min, false);
