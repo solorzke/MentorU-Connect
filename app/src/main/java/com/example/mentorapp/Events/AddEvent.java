@@ -45,7 +45,7 @@ public class AddEvent extends AppCompatActivity {
 
     EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
     ImageView AC_IMG;
-    private Button submit;
+    TextView add_event, cancel;
     private SharedPreferences SESSION, RECEIVER, USER_TYPE;
     private DatePickerDialog dialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
@@ -67,7 +67,8 @@ public class AddEvent extends AppCompatActivity {
         event_date = findViewById(R.id.event_date);
         event_start_time = findViewById(R.id.event_start_time);
         event_end_time = findViewById(R.id.event_end_time);
-        submit = findViewById(R.id.create_event_submit);
+        add_event = findViewById(R.id.create_event_submit);
+        cancel = findViewById(R.id.cancel);
         AC_IMG = findViewById(R.id.ab_img);
 
 
@@ -154,7 +155,7 @@ public class AddEvent extends AppCompatActivity {
          * to milliseconds, and use the Calendar API to exchange this data to its interface and save/create
          * the event. The event should be created in your Calendar application.*/
 
-        submit.setOnClickListener(new View.OnClickListener() {
+        add_event.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 EditText[] event = {event_title, event_location, event_date, event_start_time,
@@ -173,6 +174,13 @@ public class AddEvent extends AppCompatActivity {
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
         /* Set Action Bar image to redirect user back to the home page */
         AC_IMG.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,22 +193,8 @@ public class AddEvent extends AppCompatActivity {
 
     }
 
-    /* When clicking the back button, go back to the last page. */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                finish();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
     /* Once the create_event operation above is finished and returned you back to the app, head back
      * to your previously opened page. */
-
     @Override
     protected void onResume() {
         super.onResume();
