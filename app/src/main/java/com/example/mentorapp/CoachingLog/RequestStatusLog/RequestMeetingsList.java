@@ -79,12 +79,15 @@ public class RequestMeetingsList extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
-                String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
-                Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
-                intent.putStringArrayListExtra("meeting_details", findArrayList(title, purpose));
-                intent.putExtra("type", "sender");
-                startActivity(intent);
+                if(!((TextView)(view.findViewById(R.id.text1))).getText().toString().equals("No New Meeting Requests"))
+                {
+                    String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
+                    String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
+                    Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
+                    intent.putStringArrayListExtra("meeting_details", findArrayList(title, purpose));
+                    intent.putExtra("type", "sender");
+                    startActivity(intent);
+                }
             }
         });
 
@@ -94,12 +97,15 @@ public class RequestMeetingsList extends AppCompatActivity
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id)
             {
-                String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
-                String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
-                Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
-                intent.putExtra("meeting_details", findArrayList(title, purpose));
-                intent.putExtra("type", "receiver");
-                startActivity(intent);
+                if(!((TextView)(view.findViewById(R.id.text1))).getText().toString().equals("No New Meeting Requests"))
+                {
+                    String title = ((TextView) (view.findViewById(R.id.text1))).getText().toString();
+                    String purpose = ((TextView) (view.findViewById(R.id.text2))).getText().toString();
+                    Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
+                    intent.putExtra("meeting_details", findArrayList(title, purpose));
+                    intent.putExtra("type", "receiver");
+                    startActivity(intent);
+                }
             }
         });
     }
