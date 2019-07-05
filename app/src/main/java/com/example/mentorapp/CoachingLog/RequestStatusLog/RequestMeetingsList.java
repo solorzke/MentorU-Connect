@@ -63,6 +63,7 @@ public class RequestMeetingsList extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Request Meeting List");
     }
 
     @Override

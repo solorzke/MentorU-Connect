@@ -63,6 +63,7 @@ public class RequestTabLayout extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Request Details");
     }
 
     /* When clicking the back button, go back to the last page. */

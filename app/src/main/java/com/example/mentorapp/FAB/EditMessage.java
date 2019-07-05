@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
@@ -26,16 +27,17 @@ import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditMessage extends AppCompatActivity {
-
+public class EditMessage extends AppCompatActivity
+{
     TextView char_count, recipient, cancel, add;
-    ImageView avi, logo;
+    ImageView avi;
     EditText msg;
     String fname, lname, url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences mentee, mentor, USER_TYPE;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_message);
         mentee = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
@@ -46,8 +48,11 @@ public class EditMessage extends AppCompatActivity {
         cancel = findViewById(R.id.cancel);
         add = findViewById(R.id.add);
         avi = findViewById(R.id.avi);
-        logo = findViewById(R.id.ab_img);
         msg = findViewById(R.id.message);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        toolbar.setTitle("Send Message");
     }
 
     @Override
@@ -100,13 +105,6 @@ public class EditMessage extends AppCompatActivity {
                 postToast();
                 onBackPressed();
                 finish();
-            }
-        });
-
-        logo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SideBar.class));
             }
         });
     }

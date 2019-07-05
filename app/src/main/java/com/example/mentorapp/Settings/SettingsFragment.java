@@ -15,6 +15,7 @@ import com.example.mentorapp.Account.Courses;
 import com.example.mentorapp.Account.MentorActivity;
 import com.example.mentorapp.Account.StudentActivity;
 import com.example.mentorapp.R;
+import com.example.mentorapp.SideBar;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener
 {
@@ -32,6 +33,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
         office = view.findViewById(R.id.office);
         terms = view.findViewById(R.id.terms);
         privacy = view.findViewById(R.id.privacy);
+        SideBar bar = (SideBar) getActivity();
+        bar.toolbar.setTitle("Settings");
         return view;
     }
 

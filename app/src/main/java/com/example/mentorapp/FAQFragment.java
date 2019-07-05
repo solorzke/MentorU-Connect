@@ -8,23 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class FAQFragment extends Fragment {
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-
+public class FAQFragment extends Fragment
+{
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         final View view = inflater.inflate(R.layout.fragment_faq, container, false);
-
+        SideBar side = (SideBar) getActivity();
+        side.toolbar.setTitle("FAQ");
         return view;
-
     }
-
-    public static FAQFragment newInstance(String text) {
-
-        FAQFragment f = new FAQFragment();
-        Bundle b = new Bundle();
-        b.putString("msg", text);
-        f.setArguments(b);
-
-        return f;
-    }
-
 }

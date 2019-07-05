@@ -3,9 +3,9 @@ package com.example.mentorapp.Report;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
-
 import com.example.mentorapp.R;
 import com.example.mentorapp.SideBar;
 
@@ -22,6 +22,11 @@ public class ConfirmActivity extends AppCompatActivity
         exit = findViewById(R.id.exit);
         confirm_no = findViewById(R.id.confirmation_no);
         contact_info = findViewById(R.id.contact_office);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Confirmation");
         //confirmation_no = getIntent().getExtras().getString("confirmNo");
     }
 

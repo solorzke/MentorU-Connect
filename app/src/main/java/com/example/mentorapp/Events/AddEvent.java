@@ -44,7 +44,6 @@ import java.util.Set;
 public class AddEvent extends AppCompatActivity {
 
     EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
-    ImageView AC_IMG;
     TextView add_event, cancel;
     private SharedPreferences SESSION, RECEIVER, USER_TYPE;
     private DatePickerDialog dialog;
@@ -69,13 +68,6 @@ public class AddEvent extends AppCompatActivity {
         event_end_time = findViewById(R.id.event_end_time);
         add_event = findViewById(R.id.create_event_submit);
         cancel = findViewById(R.id.cancel);
-        AC_IMG = findViewById(R.id.ab_img);
-
-
-        /* Setting the toolbar in the XML */
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         /* Display a DatePicker Dialog for the user to choose a date when clicked upon */
         event_date.setOnClickListener(new View.OnClickListener() {
@@ -180,17 +172,6 @@ public class AddEvent extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-        /* Set Action Bar image to redirect user back to the home page */
-        AC_IMG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SideBar.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-
     }
 
     /* Once the create_event operation above is finished and returned you back to the app, head back

@@ -7,20 +7,19 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.mentorapp.FAB.EditMessage;
 import com.example.mentorapp.R;
 import com.example.mentorapp.SideBar;
 
@@ -31,7 +30,6 @@ public class EditGoals extends AppCompatActivity {
 
     EditText g1, g2, g3, g4;
     TextView cancel, save;
-    ImageView logo;
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     RelativeLayout r1, r2, r3, r4;
     String[] goals = new String [4];
@@ -54,9 +52,12 @@ public class EditGoals extends AppCompatActivity {
         r4 = findViewById(R.id.r4);
         cancel = findViewById(R.id.cancel);
         save = findViewById(R.id.save);
-        logo = findViewById(R.id.ab_img);
         MENTOR = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
         STUDENT = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        toolbar.setTitle("Edit Goals");
     }
 
     @Override
@@ -87,14 +88,6 @@ public class EditGoals extends AppCompatActivity {
                 updateGoals(url, "updateGoals", mentor, student, goals);
                 postToast();
                 onBackPressed();
-                finish();
-            }
-        });
-
-        logo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SideBar.class));
                 finish();
             }
         });

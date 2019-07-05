@@ -8,8 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
-import com.example.mentorapp.HomeFragment;
 import com.example.mentorapp.R;
+import com.example.mentorapp.SideBar;
 import com.example.mentorapp.model.TabAdapter;
 
 public class HomeFrag extends Fragment {
@@ -24,11 +24,9 @@ public class HomeFrag extends Fragment {
     };
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
         View view = inflater.inflate(R.layout.fragment_home_page, container, false);
-
         viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         tabLayout = (TabLayout) view.findViewById(R.id.tabLayout);
         adapter = new TabAdapter(getActivity().getSupportFragmentManager());
@@ -41,9 +39,9 @@ public class HomeFrag extends Fragment {
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
         tabLayout.getTabAt(2).setIcon(tabIcons[2]);
-
+        SideBar bar = (SideBar) getActivity();
+        bar.toolbar.setTitle("Home");
         return view;
-
     }
 
 }

@@ -35,7 +35,7 @@ import java.util.Map;
 
 public class Courses extends AppCompatActivity implements View.OnClickListener
 {
-    ImageView ab_img, add, cancel;
+    ImageView add, cancel;
     TextView semester, mentee;
     ListView list;
     SharedPreferences courses, mte;
@@ -57,10 +57,10 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Courses");
 
         /* Set the UI components to their respective ID's */
         mentee = findViewById(R.id.mentee);
-        ab_img = findViewById(R.id.ab_img);
         add = findViewById(R.id.add);
         semester = findViewById(R.id.semester);
         list = findViewById(R.id.courses);

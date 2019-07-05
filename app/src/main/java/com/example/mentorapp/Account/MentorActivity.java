@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -35,7 +34,7 @@ public class MentorActivity extends AppCompatActivity  {
     SharedPreferences MENTOR, USER_TYPE;
     SharedPreferences.Editor editor;
     String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
-    ImageView AVI, ab_img;
+    ImageView AVI;
     EditText MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY;
     TextView EDIT, DONE, MTR_UCID, full_name, MTR_MENTEE;
     EditText [] list;
@@ -62,13 +61,13 @@ public class MentorActivity extends AppCompatActivity  {
         DONE = findViewById(R.id.m_done);
         AGE = findViewById(R.id.age);
         BDAY = findViewById(R.id.bday);
-        ab_img = findViewById(R.id.ab_img);
         full_name = findViewById(R.id.fullname);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Mentor");
 
         Picasso.get().load(MENTOR.getString("avi", null)).into(AVI);
         MTR_NAME.setText(MENTOR.getString("fname", null) + " " + MENTOR.getString(
@@ -91,14 +90,6 @@ public class MentorActivity extends AppCompatActivity  {
     public void onStart()
     {
         super.onStart();
-
-        ab_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SideBar.class));
-            }
-        });
-
         if(isMentor(USER_TYPE))
         {
             EDIT.setVisibility(View.VISIBLE);

@@ -31,14 +31,6 @@
                 android:textSize="15sp"
                 android:layout_gravity="start"/>
 
-            <ImageView
-                android:contentDescription="@android:string/untitled"
-                android:id="@+id/imageView"
-                android:layout_width="48dp"
-                android:layout_height="54dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/mentor_u" />
-
             <TextView
                 android:id="@+id/create_event_submit"
                 android:layout_width="wrap_content"

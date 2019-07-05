@@ -25,6 +25,8 @@ public class SocialCapitalFragment extends Fragment {
         webView.loadUrl("https://web.njit.edu/~kas58/mentorDemo/social-capital/index.html");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        SideBar side = (SideBar) getActivity();
+        side.toolbar.setTitle("Social Capital");
         return view;
     }
 }

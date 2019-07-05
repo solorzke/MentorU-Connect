@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 
 import com.example.mentorapp.CoachingLog.RequestStatusLog.RequestMeetingsList;
 import com.example.mentorapp.R;
+import com.example.mentorapp.SideBar;
 
 public class LogFragment extends Fragment implements View.OnClickListener
 {
@@ -26,6 +27,8 @@ public class LogFragment extends Fragment implements View.OnClickListener
         status = view.findViewById(R.id.status);
         logs = view.findViewById(R.id.logs);
         howTo = view.findViewById(R.id.howto);
+        SideBar bar = (SideBar) getActivity();
+        bar.toolbar.setTitle("Logs");
         return view;
     }
 

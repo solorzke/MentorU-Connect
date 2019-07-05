@@ -20,13 +20,6 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-            <ImageView
-                android:id="@+id/ab_img"
-                android:layout_width="48dp"
-                android:layout_height="54dp"
-                android:layout_gravity="center"
-                app:srcCompat="@drawable/mentor_u" />
-
         </android.support.v7.widget.Toolbar>
 
         <WebView

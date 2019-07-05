@@ -25,6 +25,8 @@ public class WBFragment extends Fragment {
         webView.loadUrl("https://web.njit.edu/~kas58/mentorDemo/wellbeing/index.html");
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        SideBar side = (SideBar) getActivity();
+        side.toolbar.setTitle("Well Being");
         return view;
     }
 }

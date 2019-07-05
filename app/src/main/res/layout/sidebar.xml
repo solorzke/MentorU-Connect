@@ -25,17 +25,6 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-            <ImageView
-                android:id="@+id/ab_img"
-                android:layout_width="48dp"
-                android:layout_height="54dp"
-                android:layout_gravity="center"
-                app:layout_constraintBottom_toBottomOf="@+id/btn_capture_photo"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/btn_capture_photo"
-                app:srcCompat="@drawable/mentor_u" />
-
         </android.support.v7.widget.Toolbar>
 
 

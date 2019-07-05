@@ -29,6 +29,8 @@ public class SMFragment extends Fragment {
         IG = view.findViewById(R.id.rl_ig);
         TWITTER = view.findViewById(R.id.rl_twitter);
         REDDIT = view.findViewById(R.id.rl_reddit);
+        SideBar side = (SideBar) getActivity();
+        side.toolbar.setTitle("Social Media");
 
         FB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,16 +121,5 @@ public class SMFragment extends Fragment {
         });
 
         return view;
-    }
-
-    public static SMFragment newInstance(String text) {
-
-        SMFragment f = new SMFragment();
-        Bundle b = new Bundle();
-        b.putString("msg", text);
-
-        f.setArguments(b);
-
-        return f;
     }
 }

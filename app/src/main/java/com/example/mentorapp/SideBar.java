@@ -16,10 +16,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.Switch;
 import android.widget.TextView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -31,7 +28,6 @@ import com.example.mentorapp.Events.AddEvent;
 import com.example.mentorapp.Home.HomeFrag;
 import com.example.mentorapp.Report.ReportActivity;
 import com.example.mentorapp.Settings.SettingsFragment;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -47,10 +43,10 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
     private DrawerLayout drawer;
     public TextView user_name, user_email;
-    ImageView AC_IMG;
     SharedPreferences SESSION, USER_TYPE;
     SharedPreferences.Editor editor;
     AlertDialog RETURN_TO_LOGIN;
+    public Toolbar toolbar;
     public static NavigationView navigationView;
     public static int position;
 
@@ -61,26 +57,15 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         navigationView = findViewById(R.id.nav_view);
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
 
-
         //ADD IF/ELSE STATEMENT TO CHECK IF THE PERSON SIGNED IN IS MENTOR/STUDENT TO INITIALIZE THE
         //SESSION SHARED PREFS INSTANCE
         defineUserType(USER_TYPE);
 
         /* CALENDAR DROP DOWN MENU */
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-
-        /* Set Action Bar image to redirect user back to the home page */
-        AC_IMG = (ImageView) findViewById(R.id.ab_img);
-        AC_IMG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                        new HomeFrag()).addToBackStack(null).commit();
-                navigationView.setCheckedItem(R.id.home_item);
-            }
-        });
+        toolbar.setTitle("Home");
 
         /* UPDATE HEADER NAME AND EMAIL OF THE USER IN SESSION */
         View headerView = navigationView.getHeaderView(0);

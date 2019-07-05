@@ -15,7 +15,7 @@ import android.widget.ImageView;
 public class SendEmail extends AppCompatActivity {
 
     EditText TO, SUBJECT, BODY;
-    ImageView send, AC_IMG;
+    ImageView send;
     SharedPreferences RECIPIENT, USER_TYPE;
     boolean done = false;
 
@@ -27,11 +27,11 @@ public class SendEmail extends AppCompatActivity {
         SUBJECT = findViewById(R.id.email_subject);
         BODY = findViewById(R.id.email_body);
         send = findViewById(R.id.sendEmail);
-        AC_IMG = findViewById(R.id.ab_img);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Send Email");
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
 
         if(isStudent(USER_TYPE)){
@@ -55,15 +55,6 @@ public class SendEmail extends AppCompatActivity {
                 String mess = BODY.getText().toString();
                 composeEmail(r_email, sub, mess);
                 done = true;
-            }
-        });
-        /* Set Action Bar image to redirect user back to the home page */
-        AC_IMG.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), SideBar.class);
-                startActivity(intent);
-                finish();
             }
         });
     }

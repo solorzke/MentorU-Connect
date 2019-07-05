@@ -17,7 +17,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
 
     TextView NEXT, CANCEL, REPORTED_USER, ACTIVITY, HELP_CENTER;
     EditText user_input;
-    ImageView HOME, th_1, th_2, th_3, th_other;
+    ImageView th_1, th_2, th_3, th_other;
     LinearLayout reason_1, reason_2, reason_3, other;
     boolean r1, r2, r3, oth;
     String intentExtras, name;
@@ -28,7 +28,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         setContentView(R.layout.activity_report);
         NEXT = findViewById(R.id.next);
         CANCEL = findViewById(R.id.cancel);
-        HOME = findViewById(R.id.ab_img);
         REPORTED_USER = findViewById(R.id.reported_user);
         ACTIVITY = findViewById(R.id.activity);
         HELP_CENTER = findViewById(R.id.help_center);
@@ -56,7 +55,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         user_input.setVisibility(View.GONE);
         REPORTED_USER.setText(name);
         ACTIVITY.setText(intentExtras);
-        HOME.setOnClickListener(this);
         NEXT.setOnClickListener(this);
         CANCEL.setOnClickListener(this);
         reason_1.setOnClickListener(this);
@@ -69,10 +67,6 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.ab_img:
-                startActivity(new Intent(getApplicationContext(), SideBar.class));
-                finish();
-                break;
 
             case R.id.next:
                 boolean [] list = {r1, r2, r3, oth};

@@ -39,7 +39,7 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
     SharedPreferences.Editor editor;
     TextView edit, done, ucid, full_name;
     EditText name, email, degree, age, bday, grad_date;
-    ImageView avi, ab_img;
+    ImageView avi;
     EditText [] editable = new EditText[6];
     Calendar calendar;
     DatePickerDialog date;
@@ -65,7 +65,6 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         avi = findViewById(R.id.avi);
         Toolbar toolbar = findViewById(R.id.toolbar);
         spinner = findViewById(R.id.spinner);
-        ab_img = findViewById(R.id.ab_img);
         full_name = findViewById(R.id.fullname);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -78,6 +77,7 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Mentee");
 
         String fname = account.getString("fname", null);
         String lname = account.getString("lname", null);
@@ -99,14 +99,6 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
     {
         super.onStart();
         editable = new EditText[]{name, email, degree, age, bday, grad_date};
-
-        ab_img.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(), SideBar.class));
-            }
-        });
-
         if(isStudent(USER_TYPE))
         {
             bday.setOnClickListener(new View.OnClickListener() {

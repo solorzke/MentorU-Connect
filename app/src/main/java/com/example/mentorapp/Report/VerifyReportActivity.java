@@ -1,6 +1,5 @@
 package com.example.mentorapp.Report;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,13 +18,12 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.mentorapp.R;
-
 import java.util.HashMap;
 import java.util.Map;
 
 public class VerifyReportActivity extends AppCompatActivity implements View.OnClickListener
 {
-    ImageView ab_img, q_1, q_2;
+    ImageView q_1, q_2;
     EditText desc;
     TextView help_center, confirm, name;
     String reported_user, msg;
@@ -40,7 +37,6 @@ public class VerifyReportActivity extends AppCompatActivity implements View.OnCl
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_report);
-        ab_img = findViewById(R.id.ab_img);
         q_1 = findViewById(R.id.q_1);
         q_2 = findViewById(R.id.q_2);
         desc = findViewById(R.id.desc);
@@ -55,6 +51,7 @@ public class VerifyReportActivity extends AppCompatActivity implements View.OnCl
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setTitle("Verify Report");
         q1 = false;
         q2 = false;
         sharedPrefs[0] = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
