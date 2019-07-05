@@ -54,7 +54,7 @@ public class LogFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.logs:
-                startActivity(new Intent(getContext(), Activity.class));
+                startActivity(new Intent(getContext(), CoachingLog.class));
                 break;
 
             case R.id.howto:
