@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,8 +18,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.mentorapp.CoachingLog.RequestStatusLog.RequestTabLayout;
 import com.example.mentorapp.R;
 import com.example.mentorapp.model.Validate;
 import org.json.JSONArray;
@@ -56,6 +57,9 @@ public class CoachingLog extends AppCompatActivity
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Coaching Log");
+
+        /* Register the context menu for editing/removal list item when performing long clicks */
+        registerForContextMenu(listview);
     }
 
     @Override
@@ -63,7 +67,7 @@ public class CoachingLog extends AppCompatActivity
     {
         super.onStart();
         meetings.clear();
-        getRequests();
+        getMeetings();
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -79,7 +83,7 @@ public class CoachingLog extends AppCompatActivity
     }
 
     /* Send a request to the DB to get all the meeting requests rows */
-    private void getRequests()
+    private void getMeetings()
     {
         RequestQueue rq = Volley.newRequestQueue(this);
         Map<String, String> params = new HashMap<String, String>();
@@ -114,6 +118,66 @@ public class CoachingLog extends AppCompatActivity
         });
 
         rq.add(jReq);
+    }
+
+    /* Remove a meeting from the Coaching Log via DB */
+    private void deleteMeeting(ArrayList<String> list)
+    {
+        final String id = list.get(0);
+        RequestQueue queue = Volley.newRequestQueue(this);
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                System.out.println("Server Response: "+response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                System.out.println("Volley Error: "+error);
+                error.printStackTrace();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("action", "deleteMeeting");
+                params.put("id", id);
+                return params;
+            }
+        };
+        queue.add(request);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
+    {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        getMenuInflater().inflate(R.menu.delete_menu, menu);
+    }
+
+    /* Retrieve the information from the list item selected, present a context menu with option
+     * 'remove' and perform the actions if clicked. */
+    @Override
+    public boolean onContextItemSelected(MenuItem item)
+    {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+
+        switch (item.getItemId())
+        {
+            /* Allow the user to remove the course from the listview */
+            case R.id.remove:
+                View view = info.targetView;
+                String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
+                String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
+                deleteMeeting(findArrayList(title, purpose));
+                meetings.clear();
+                getMeetings();
+                return false;
+
+            default:
+                return super.onContextItemSelected(item);
+        }
     }
 
     /* When clicking the back button, go back to the last page. */
