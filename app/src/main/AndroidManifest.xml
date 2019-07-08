@@ -17,7 +17,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".CoachingLog.CoachingLog"></activity>
+        <activity android:name=".CoachingLog.HowTo"></activity>
+        <activity android:name=".CoachingLog.CoachingLog" />
         <activity android:name=".CoachingLog.RequestStatusLog.RequestMeetingsList" />
         <activity android:name=".Settings.TermsAndConditions" />
         <activity android:name=".Settings.PrivacyPolicy" />
@@ -99,6 +100,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
