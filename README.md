@@ -1,7 +1,6 @@
-<<<<<<< HEAD
-# Mentor-App
-Repository for commits on the mentoring application.
+# Mentor U Connect - App Repository for commits on the mentoring application.
 =======
 # MentorU-Connect
-MentorU Connect - A mentorship application in Android developed for NJIT students and Alumni. 
->>>>>>> 425614aba333e6035aa1ba3e0bd882008c521638
+MentorU Connect - A mentoring application in Android developed for NJIT students and Alumni. 
+
+<a href="https://imgflip.com/gif/357pyw"><img src="https://i.imgflip.com/357pyw.gif" title="made at imgflip.com"/></a>
