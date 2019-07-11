@@ -10,7 +10,7 @@
 
     <ImageView
         android:layout_width="83dp"
-        android:layout_height="73dp"
+        android:layout_height="83dp"
         android:background="@drawable/stockphoto" />
 
     <TextView
