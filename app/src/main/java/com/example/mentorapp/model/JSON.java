@@ -1,18 +1,22 @@
 package com.example.mentorapp.model;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.mentorapp.Login;
 import com.example.mentorapp.R;
 import com.example.mentorapp.SMFragment;
 import com.example.mentorapp.SendEmail;
@@ -137,6 +141,33 @@ public class JSON extends AppCompatActivity {
             });
 
             rq.add(jReq);
+            jReq.setRetryPolicy(new RetryPolicy() {
+                @Override
+                public int getCurrentTimeout() {
+                    return 50000;
+                }
+
+                @Override
+                public int getCurrentRetryCount() {
+                    return 50000;
+                }
+
+                @Override
+                public void retry(VolleyError error) throws VolleyError
+                {
+                    error.printStackTrace();
+                    AlertDialog alert = new AlertDialog.Builder(JSON.this).create();
+                    alert.setTitle("Timeout Period Ran Out");
+                    alert.setMessage("Request timed out. Heading back to Login page.");
+                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            startActivity(new Intent(getApplicationContext(), Login.class));
+                            finish();
+                        }
+                    });
+                }
+            });
         }
         /* 1. END */
 
