@@ -71,7 +71,7 @@ public class MeetingDetails extends Fragment
         date.setText(DateTimeFormat.formatDate(meeting_request.get(4)));
         s_time.setText(DateTimeFormat.format12HourTimeAsString(meeting_request.get(5)));
         e_time.setText(DateTimeFormat.format12HourTimeAsString(meeting_request.get(6)));
-        meeting_with.setText(meeting_request.get(2));
+        meeting_with.setText(meeting_request.get(2) + " & " + meeting_request.get(1));
 
         if(meeting_request.get(9).equals("3") && type.equals("receiver"))
         {
