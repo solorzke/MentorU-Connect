@@ -17,79 +17,90 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.njit.mentorapp.CoachingLog.HowTo"></activity>
-        <activity android:name="com.njit.mentorapp.CoachingLog.CoachingLog" />
-        <activity android:name="com.njit.mentorapp.CoachingLog.RequestStatusLog.RequestMeetingsList" />
-        <activity android:name="com.njit.mentorapp.Settings.TermsAndConditions" />
-        <activity android:name="com.njit.mentorapp.Settings.PrivacyPolicy" />
-        <activity android:name="com.njit.mentorapp.Settings.ContactOffice" />
-        <activity android:name="com.njit.mentorapp.CoachingLog.RequestStatusLog.RequestTabLayout" />
+        <activity android:name=".FirebaseTest"></activity>
+
+        <service
+            android:name=".model.ReceiveMessages"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <activity android:name=".CoachingLog.HowTo" />
+        <activity android:name=".CoachingLog.CoachingLog" />
+        <activity android:name=".CoachingLog.RequestStatusLog.RequestMeetingsList" />
+        <activity android:name=".Settings.TermsAndConditions" />
+        <activity android:name=".Settings.PrivacyPolicy" />
+        <activity android:name=".Settings.ContactOffice" />
+        <activity android:name=".CoachingLog.RequestStatusLog.RequestTabLayout" />
         <activity
-            android:name="com.njit.mentorapp.CoachingLog.Meeting"
+            android:name=".CoachingLog.Meeting"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.Account.Courses"
+            android:name=".Account.Courses"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.Report.ConfirmActivity"
+            android:name=".Report.ConfirmActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.Report.VerifyReportActivity"
+            android:name=".Report.VerifyReportActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.Report.ReportActivity"
+            android:name=".Report.ReportActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.Account.StudentActivity"
+            android:name=".Account.StudentActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.Account.MentorActivity"
+            android:name=".Account.MentorActivity"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.FAB.EditMessage"
+            android:name=".FAB.EditMessage"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.FAB.EditGoals"
+            android:name=".FAB.EditGoals"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.WV"
+            android:name=".WV"
             android:exported="true"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.njit.mentorapp.SendEmail"
+            android:name=".SendEmail"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.CoachingLog.RequestMeeting"
+            android:name=".CoachingLog.RequestMeeting"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.Events.AddEvent"
+            android:name=".Events.AddEvent"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name="com.njit.mentorapp.Registration"
+            android:name=".Registration"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.njit.mentorapp.HelpCenter"
+            android:name=".HelpCenter"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.njit.mentorapp.SideBar"
+            android:name=".SideBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.njit.mentorapp.model.JSON"
+            android:name=".model.JSON"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.njit.mentorapp.Login"
+            android:name=".Login"
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
