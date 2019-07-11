@@ -188,6 +188,10 @@ public class RequestMeetingsList extends AppCompatActivity
     public boolean onContextItemSelected(MenuItem item)
     {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        View v = info.targetView;
+        String t = ((TextView)(v.findViewById(R.id.text1))).getText().toString();
+        if(t.equals("No New Meeting Requests"))
+            return super.onContextItemSelected(item);
 
         switch (item.getItemId())
         {
