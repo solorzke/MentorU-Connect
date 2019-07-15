@@ -38,7 +38,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#a6a6a6" />
+                android:background="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,7 +75,7 @@
                 android:id="@+id/view2"
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#a6a6a6" />
+                android:background="@android:color/black"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -111,7 +111,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#a6a6a6" />
+                android:background="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -147,7 +147,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#a6a6a6" />
+                android:background="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -185,7 +185,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="2dp"
-                android:background="#a6a6a6" />
+                android:background="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -224,7 +224,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Weeks until semester is over: "
+                    android:text="Semester ends in "
                     android:textColor="@android:color/background_dark"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
@@ -256,7 +256,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Percentage of goals completed:"
+                    android:text="Goals completed:"
                     android:textColor="@android:color/background_dark"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
@@ -310,7 +310,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Have questions about the goals?"
-                    android:textColor="@android:color/background_dark"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
             </LinearLayout>
@@ -334,7 +335,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View Mentor Account"
-                    android:textColor="@android:color/background_dark"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/holo_blue_bright"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
             </LinearLayout>

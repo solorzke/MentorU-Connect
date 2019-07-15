@@ -122,7 +122,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
 
             /* Head to FAQ page for questions and answers */
             case R.id.helpText:
-                Intent goToHelpCenter = new Intent(getApplicationContext(), HelpCenter.class);
+                Intent goToHelpCenter = new Intent(getApplicationContext(), FirebaseTest.class);
                 startActivity(goToHelpCenter);
                 break;
 
