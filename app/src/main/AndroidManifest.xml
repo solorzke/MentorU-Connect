@@ -18,14 +18,7 @@
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".Settings.AboutUs"></activity>
-
-        <service
-            android:name=".model.Service.GettingDeviceTokenService"
-            android:enabled="true"
-            android:exported="true" />
-
         <activity android:name=".FirebaseTest" />
-
         <service
             android:name=".model.Service.FireBaseInstanceService"
             android:enabled="true"
@@ -34,7 +27,6 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <activity android:name=".CoachingLog.HowTo" />
         <activity android:name=".CoachingLog.CoachingLog" />
         <activity android:name=".CoachingLog.RequestStatusLog.RequestMeetingsList" />
