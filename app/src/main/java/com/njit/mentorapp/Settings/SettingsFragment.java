@@ -20,7 +20,7 @@ import com.njit.mentorapp.SideBar;
 public class SettingsFragment extends Fragment implements View.OnClickListener
 {
     View view;
-    LinearLayout mentor, mentee, courses, office, terms, privacy;
+    LinearLayout mentor, mentee, courses, office, terms, privacy, about;
     Switch notifications;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -33,6 +33,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
         office = view.findViewById(R.id.office);
         terms = view.findViewById(R.id.terms);
         privacy = view.findViewById(R.id.privacy);
+        about = view.findViewById(R.id.about);
         SideBar bar = (SideBar) getActivity();
         bar.toolbar.setTitle("Settings");
         return view;
@@ -49,6 +50,7 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
         office.setOnClickListener(this);
         terms.setOnClickListener(this);
         privacy.setOnClickListener(this);
+        about.setOnClickListener(this);
     }
 
     @Override
@@ -75,6 +77,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
 
             case R.id.office:
                 startActivity(new Intent(getContext(), ContactOffice.class));
+                break;
+
+            case R.id.about:
+                startActivity(new Intent(getContext(), AboutUs.class));
                 break;
 
             case R.id.terms:

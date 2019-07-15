@@ -17,10 +17,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".FirebaseTest"></activity>
+        <activity android:name=".Settings.AboutUs"></activity>
 
         <service
-            android:name=".model.ReceiveMessages"
+            android:name=".model.Service.GettingDeviceTokenService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".FirebaseTest" />
+
+        <service
+            android:name=".model.Service.FireBaseInstanceService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
