@@ -25,14 +25,15 @@ public class FireBaseInstanceService extends FirebaseMessagingService
                 remoteMessage.getNotification().getTitle(),
                 remoteMessage.getNotification().getBody()
             );
-        else
+        else {
             showNotification(remoteMessage.getData());
+        }
     }
 
     private void showNotification(Map<String, String> data)
     {
         String title = data.get("title").toString();
-        String body = data.get("body").toString();
+        String body = data.get("message").toString();
 
         NotificationManager manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         String NOTIFICATION_CHANNEL_ID = "com.njit.mentorapp.model.test";
