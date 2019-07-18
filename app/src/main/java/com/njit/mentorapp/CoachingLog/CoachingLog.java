@@ -22,7 +22,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.Service.WebServer;
-import com.njit.mentorapp.model.Validate;
+import com.njit.mentorapp.model.Tools.Validate;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

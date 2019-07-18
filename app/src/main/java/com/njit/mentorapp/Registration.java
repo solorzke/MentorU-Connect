@@ -18,8 +18,8 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.njit.mentorapp.model.DateTimeFormat;
-import com.njit.mentorapp.model.JSON;
+import com.njit.mentorapp.model.Tools.DateTimeFormat;
+import com.njit.mentorapp.model.Tools.JSON;
 import com.njit.mentorapp.model.Service.WebServer;
 
 import android.content.Intent;

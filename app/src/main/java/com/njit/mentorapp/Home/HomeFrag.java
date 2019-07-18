@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.SideBar;
-import com.njit.mentorapp.model.TabAdapter;
+import com.njit.mentorapp.model.Tools.TabAdapter;
 
 public class HomeFrag extends Fragment {
 

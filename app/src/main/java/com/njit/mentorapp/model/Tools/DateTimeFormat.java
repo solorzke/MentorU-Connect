@@ -1,4 +1,4 @@
-package com.njit.mentorapp.model;
+package com.njit.mentorapp.model.Tools;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;

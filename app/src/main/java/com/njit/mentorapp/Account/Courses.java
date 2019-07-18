@@ -26,7 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.Service.WebServer;
-import com.njit.mentorapp.model.Validate;
+import com.njit.mentorapp.model.Tools.Validate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;

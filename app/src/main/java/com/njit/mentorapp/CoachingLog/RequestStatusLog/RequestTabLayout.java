@@ -14,8 +14,8 @@ import android.view.View;
 import android.widget.TextView;
 import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.model.DateTimeFormat;
-import com.njit.mentorapp.model.TabAdapter;
+import com.njit.mentorapp.model.Tools.DateTimeFormat;
+import com.njit.mentorapp.model.Tools.TabAdapter;
 import java.util.ArrayList;
 import java.util.Calendar;
 

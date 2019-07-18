@@ -20,7 +20,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.model.DateTimeFormat;
+import com.njit.mentorapp.model.Tools.DateTimeFormat;
 
 import java.util.Calendar;
 

@@ -29,7 +29,7 @@ import com.njit.mentorapp.R;
 import com.njit.mentorapp.Report.ReportActivity;
 import com.njit.mentorapp.SendEmail;
 import com.njit.mentorapp.SideBar;
-import com.njit.mentorapp.model.DateTimeFormat;
+import com.njit.mentorapp.model.Tools.DateTimeFormat;
 import com.njit.mentorapp.model.Service.WebServer;
 
 import java.util.HashMap;

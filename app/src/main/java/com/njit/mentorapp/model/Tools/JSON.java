@@ -4,7 +4,7 @@
  * rather than sending Volley requests in every other class that'll need it.
  */
 
-package com.njit.mentorapp.model;
+package com.njit.mentorapp.model.Tools;
 
 import android.content.Context;
 import android.content.DialogInterface;

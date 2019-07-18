@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.model.DateTimeFormat;
+import com.njit.mentorapp.model.Tools.DateTimeFormat;
 import java.util.ArrayList;
 
 public class Meeting extends AppCompatActivity

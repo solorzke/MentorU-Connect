@@ -96,7 +96,7 @@
             android:name=".SideBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".model.JSON"
+            android:name=".model.Tools.JSON"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Login"
