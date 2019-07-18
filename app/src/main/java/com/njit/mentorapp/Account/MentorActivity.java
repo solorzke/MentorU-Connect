@@ -21,6 +21,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.DateTimeFormat;
+import com.njit.mentorapp.model.Service.WebServer;
 import com.squareup.picasso.Picasso;
 
 import java.util.Calendar;
@@ -31,7 +32,6 @@ public class MentorActivity extends AppCompatActivity  {
 
     SharedPreferences MENTOR, USER_TYPE;
     SharedPreferences.Editor editor;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     ImageView AVI;
     EditText MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY;
     TextView EDIT, DONE, MTR_UCID, full_name, MTR_MENTEE;
@@ -145,7 +145,7 @@ public class MentorActivity extends AppCompatActivity  {
                     EDIT.setVisibility(View.VISIBLE);
                     editText(list, false);
                     updateSharedPrefs(editor, list);
-                    updateChanges(MENTOR, url, "updateMentorRecord");
+                    updateChanges(MENTOR, WebServer.getQueryLink(), "updateMentorRecord");
                     postToast();
                 }
             });

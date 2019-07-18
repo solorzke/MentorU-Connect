@@ -28,6 +28,8 @@ import com.njit.mentorapp.FAB.EditMessage;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.SendEmail;
 import com.njit.mentorapp.model.DateTimeFormat;
+import com.njit.mentorapp.model.Service.WebServer;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -40,7 +42,7 @@ public class Goals extends Fragment implements View.OnClickListener
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
     FloatingActionButton fab;
     TextView GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER, GOALS, M_TITLE, WEEKS, ACCOUNT, EMAIL, PERCENT;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
+    String url = WebServer.getQueryLink();
     AlertDialog dialog;
     Boolean c1 = false, c2 = false, c3 = false, c4 = false;
     View view;

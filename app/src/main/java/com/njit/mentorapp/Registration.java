@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.model.DateTimeFormat;
 import com.njit.mentorapp.model.JSON;
+import com.njit.mentorapp.model.Service.WebServer;
 
 import android.content.Intent;
 import android.widget.ImageView;
@@ -142,8 +143,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         final String format_b = DateTimeFormat.formatDateSQL(bday);
         final String format_g = DateTimeFormat.formatDateSQL(grad_date);
         RequestQueue rq = Volley.newRequestQueue(this);
-        String url = "https://web.njit.edu/~kas58/mentorDemo/Model/register.php";
-        StringRequest sq = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest sq = new StringRequest(Request.Method.POST, WebServer.getRegisterLink(),
+                new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("Server response: "+response);

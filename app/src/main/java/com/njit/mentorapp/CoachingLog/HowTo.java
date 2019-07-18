@@ -8,6 +8,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.Service.WebServer;
 
 public class HowTo extends AppCompatActivity
 {
@@ -20,7 +21,7 @@ public class HowTo extends AppCompatActivity
         setContentView(R.layout.activity_how_to);
         webview = findViewById(R.id.webview);
         webview.setWebViewClient(new WebViewClient());
-        webview.loadUrl("https://web.njit.edu/~kas58/mentorDemo/academics/how_to.html");
+        webview.loadUrl(WebServer.getHowToLink());
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
 

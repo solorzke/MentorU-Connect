@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.Service.WebServer;
 
 public class TermsAndConditions extends AppCompatActivity
 {
@@ -48,7 +49,7 @@ public class TermsAndConditions extends AppCompatActivity
     {
         super.onStart();
         webview.setWebViewClient(new WebViewClient());
-        webview.loadUrl("https://web.njit.edu/~kas58/mentorDemo/academics/terms.html");
+        webview.loadUrl(WebServer.getTermsAndConditionsLink());
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
     }

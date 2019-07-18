@@ -24,6 +24,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.DateTimeFormat;
+import com.njit.mentorapp.model.Service.WebServer;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -31,7 +33,7 @@ import java.util.Map;
 
 public class MeetingDetails extends Fragment
 {
-    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php", type;
+    String type;
     EditText title, location, purpose, date, s_time, e_time;
     TextView meeting_with;
     View view;
@@ -124,7 +126,7 @@ public class MeetingDetails extends Fragment
         alert.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "Accept",
                 new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                confirmMeeting(view, url, meeting_request.get(0), "1");
+                confirmMeeting(view, WebServer.getQueryLink(), meeting_request.get(0), "1");
                 respond.setVisibility(View.GONE);
                 toast = Toast.makeText(getContext(), "Meeting Accepted", Toast.LENGTH_SHORT);
                 toast.show();
@@ -137,7 +139,7 @@ public class MeetingDetails extends Fragment
                 new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                confirmMeeting(view, url, meeting_request.get(0), "2");
+                confirmMeeting(view, WebServer.getQueryLink(), meeting_request.get(0), "2");
                 respond.setVisibility(View.GONE);
                 toast = Toast.makeText(getContext(), "Meeting Declined", Toast.LENGTH_SHORT);
                 toast.show();

@@ -25,6 +25,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.Service.WebServer;
 import com.njit.mentorapp.model.Validate;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -44,7 +45,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
     EditText c_num, c_title;
     EditText new_id,new_title;
     boolean toggle = false;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php", row_id;
+    String row_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -258,7 +259,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
     private void updateCourseDB(final String c_id, final String c_title, final String row_id)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("Server Response: "+response);

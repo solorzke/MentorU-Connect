@@ -1,3 +1,9 @@
+/*
+ * This class covers the sidebar drawer of the application. It's layout uses both Sidebar.xml and
+ * Sidebar_header.xml to create the navigation view. The menu items below take the user to various
+ * pages and serves as the main point of navigation across the application.
+ */
+
 package com.njit.mentorapp;
 
 import android.app.AlertDialog;
@@ -28,19 +34,13 @@ import com.njit.mentorapp.Events.AddEvent;
 import com.njit.mentorapp.Home.HomeFrag;
 import com.njit.mentorapp.Report.ReportActivity;
 import com.njit.mentorapp.Settings.SettingsFragment;
+import com.njit.mentorapp.model.Service.WebServer;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
-
-    /*
-    THIS CLASS COVERS THE SIDEBAR DRAWER OF THE APP. IT'S CONNECTED WITH BOTH SIDEBAR.XML
-    AND SIDEBAR_HEADER.XML TO CREATE THE NAVIGATION VIEW FOR IT. HERE ARE THE MENU ITEMS THAT TAKE YOU
-    TO DIFFERENT FRAGMENTS TO VISIT WHEN SELECTED.
-
-    SIDEBAR CODE IS RELEVANT WHEN THE DRAWER IS OPENED.
-     */
-
+public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
+{
     private DrawerLayout drawer;
     public TextView user_name, user_email;
     SharedPreferences SESSION, USER_TYPE;
@@ -51,7 +51,8 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     public static int position;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sidebar);
         navigationView = findViewById(R.id.nav_view);
@@ -254,10 +255,9 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     private void signOutRequest(SharedPreferences USER)
     {
         final String user = USER.getString("ucid", null);
-        String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("Server Response: "+response);

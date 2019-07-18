@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.model.JSON;
+import com.njit.mentorapp.model.Service.WebServer;
 import com.njit.mentorapp.model.Validate;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +32,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private String pw;
     private TextView forgotPassword, help;
     private Button signin, register;
-    private String url = "https://web.njit.edu/~kas58/mentorDemo/Model/login.php";
     boolean asAMentor = false;
     private Switch toggle;
     private EditText ucid_et, pw_et;
@@ -134,7 +134,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private void signIn(final String user_type, final String extras)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, WebServer.getLoginLink(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

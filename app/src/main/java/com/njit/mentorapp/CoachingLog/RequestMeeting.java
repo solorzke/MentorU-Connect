@@ -25,6 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.DateTimeFormat;
+import com.njit.mentorapp.model.Service.WebServer;
 import com.njit.mentorapp.model.Validate;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -136,13 +137,12 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
             case R.id.create_event_submit:
                 EditText [] event = {event_title, event_location, event_date, event_start_time,
                         event_end_time, event_purpose};
-                String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
                 String student = sender.getString("ucid", null);
                 String mentor = receiver.getString("ucid", null);
 
                 if(Validate.checkForm(event))
                 {
-                    sendMeetingRequest(url, "requestMeeting", event, student, mentor);
+                    sendMeetingRequest(WebServer.getQueryLink(), "requestMeeting", event, student, mentor);
                     CharSequence text = "Request Sent!";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(RequestMeeting.this, text, duration);

@@ -19,24 +19,23 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.Service.WebServer;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class EditGoals extends AppCompatActivity {
-
+public class EditGoals extends AppCompatActivity
+{
     EditText g1, g2, g3, g4;
     TextView cancel, save;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     RelativeLayout r1, r2, r3, r4;
     String[] goals = new String [4];
     EditText[] group;
     SharedPreferences MENTOR, STUDENT;
 
-
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_goals);
         g1 = findViewById(R.id.g1);
@@ -58,7 +57,8 @@ public class EditGoals extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
+    protected void onStart()
+    {
         super.onStart();
         g1.setText(getIntent().getExtras().getString("goal1"));
         g2.setText(getIntent().getExtras().getString("goal2"));
@@ -82,7 +82,7 @@ public class EditGoals extends AppCompatActivity {
                 }
                 String mentor = MENTOR.getString("ucid", null);
                 String student = STUDENT.getString("ucid", null);
-                updateGoals(url, "updateGoals", mentor, student, goals);
+                updateGoals("updateGoals", mentor, student, goals);
                 postToast();
                 onBackPressed();
                 finish();
@@ -120,10 +120,10 @@ public class EditGoals extends AppCompatActivity {
 
     }
 
-    private void updateGoals(String url, final String action, final String mentor, final String student, final String[] goals) {
-
+    private void updateGoals(final String action, final String mentor, final String student, final String[] goals)
+    {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("Server response: " + response);
@@ -150,8 +150,8 @@ public class EditGoals extends AppCompatActivity {
         queue.add(request);
     }
 
-    private void alertMsg(final EditText cur_goal, final EditText goal1, final EditText goal2, final EditText goal3) {
-
+    private void alertMsg(final EditText cur_goal, final EditText goal1, final EditText goal2, final EditText goal3)
+    {
         AlertDialog dialog = new AlertDialog.Builder(this).create();
         dialog.setTitle("Goal Action");
         dialog.setMessage("Select option to edit/remove");
@@ -173,8 +173,8 @@ public class EditGoals extends AppCompatActivity {
         dialog.show();
     }
 
-    private void postToast() {
-
+    private void postToast()
+    {
         Context context = getApplicationContext();
         CharSequence text = "Goal Changes Saved";
         int duration = Toast.LENGTH_SHORT;

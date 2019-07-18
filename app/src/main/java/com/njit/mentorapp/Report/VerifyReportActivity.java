@@ -18,6 +18,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.Service.WebServer;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -142,10 +144,8 @@ public class VerifyReportActivity extends AppCompatActivity implements View.OnCl
         final String reportingUser = array[0];
         final String reportedUser = array[1];
 
-        String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
-
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("Server Response: "+response);

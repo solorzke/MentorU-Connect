@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.Service.WebServer;
 
 public class PrivacyPolicy extends AppCompatActivity
 {
@@ -49,7 +50,7 @@ public class PrivacyPolicy extends AppCompatActivity
     {
         super.onStart();
         webview.setWebViewClient(new WebViewClient());
-        webview.loadUrl("https://web.njit.edu/~kas58/mentorDemo/academics/privacy.html");
+        webview.loadUrl(WebServer.getPrivacyPolicyLink());
         WebSettings webSettings = webview.getSettings();
         webSettings.setJavaScriptEnabled(true);
     }

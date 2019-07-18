@@ -21,6 +21,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.Service.WebServer;
 import com.njit.mentorapp.model.Validate;
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -35,7 +36,6 @@ public class RequestMeetingsList extends AppCompatActivity
 {
     ListView pendingList, receivedList;
     TextView p_none, r_none;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     ArrayList<ArrayList<String>> pendingArray = new ArrayList<>();
     ArrayList<ArrayList<String>> receivingArray = new ArrayList<>();
     SharedPreferences user;
@@ -126,7 +126,7 @@ public class RequestMeetingsList extends AppCompatActivity
         params.put("user", user.getString("ucid", null));
         JSONObject parameters = new JSONObject(params);
 
-        JsonObjectRequest jReq = new JsonObjectRequest(Request.Method.POST, url, parameters, new
+        JsonObjectRequest jReq = new JsonObjectRequest(Request.Method.POST, WebServer.getQueryLink(), parameters, new
                 Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -300,7 +300,9 @@ public class RequestMeetingsList extends AppCompatActivity
     {
         final String id = list.get(0);
         RequestQueue queue = Volley.newRequestQueue(this);
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(
+                Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>()
+        {
             @Override
             public void onResponse(String response) {
                 System.out.println("Server Response: "+response);

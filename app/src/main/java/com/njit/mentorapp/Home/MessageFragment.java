@@ -30,20 +30,22 @@ import com.njit.mentorapp.Report.ReportActivity;
 import com.njit.mentorapp.SendEmail;
 import com.njit.mentorapp.SideBar;
 import com.njit.mentorapp.model.DateTimeFormat;
+import com.njit.mentorapp.model.Service.WebServer;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class MessageFragment extends Fragment implements View.OnClickListener {
-
+public class MessageFragment extends Fragment implements View.OnClickListener
+{
     SharedPreferences STUDENT, MENTOR, USER_TYPE;
     FloatingActionButton FAB;
     TextView FEEDBACK, messenger, date, contact_user, account_info, help_center, report;
     ImageView messenger_img, thumbs_up, thumbs_down, share;
-    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     View view;
     boolean up = false, down = false;
 
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+    {
         view = inflater.inflate(R.layout.fragment_message, container, false);
         STUDENT = getActivity().getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
         MENTOR = getActivity().getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
@@ -65,7 +67,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onStart() {
+    public void onStart()
+    {
         super.onStart();
         FAB.setOnClickListener(this);
         thumbs_up.setOnClickListener(this);
@@ -76,13 +79,15 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         report.setOnClickListener(this);
         share.setOnClickListener(this);
 
-        if(isStudent(USER_TYPE)){
+        if(isStudent(USER_TYPE))
+        {
             String fname = MENTOR.getString("fname", null);
             String lname = MENTOR.getString("lname", null);
             messenger.setText(fname + " " + lname);
             getMessage(STUDENT, MENTOR, view);
         }
-        else{
+        else
+            {
             String fname = STUDENT.getString("fname", null);
             String lname = STUDENT.getString("lname", null);
             messenger.setText(fname + " " + lname);
@@ -91,15 +96,17 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onResume() {
+    public void onResume()
+    {
         super.onResume();
-        if(isStudent(USER_TYPE)){
+        if(isStudent(USER_TYPE))
+        {
             String fname = MENTOR.getString("fname", null);
             String lname = MENTOR.getString("lname", null);
             messenger.setText(fname + " " + lname);
             getMessage(STUDENT, MENTOR, view);
         }
-        else{
+        else {
             String fname = STUDENT.getString("fname", null);
             String lname = STUDENT.getString("lname", null);
             messenger.setText(fname + " " + lname);
@@ -108,15 +115,17 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
-        if(isStudent(USER_TYPE)){
+        if(isStudent(USER_TYPE))
+        {
             String fname = MENTOR.getString("fname", null);
             String lname = MENTOR.getString("lname", null);
             messenger.setText(fname + " " + lname);
             getMessage(STUDENT, MENTOR, view);
         }
-        else{
+        else {
             String fname = STUDENT.getString("fname", null);
             String lname = STUDENT.getString("lname", null);
             messenger.setText(fname + " " + lname);
@@ -124,7 +133,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private boolean isStudent(SharedPreferences type) {
+    private boolean isStudent(SharedPreferences type)
+    {
         if (type.getString("type", null).equals("student")) {
             return true;
         } else {
@@ -132,9 +142,10 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void getMessage(final SharedPreferences RECEIVER, final SharedPreferences SENDER, View view){
+    private void getMessage(final SharedPreferences RECEIVER, final SharedPreferences SENDER, View view)
+    {
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
-        StringRequest stringRequest_1 = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest_1 = new StringRequest(Request.Method.POST, WebServer.getQueryLink(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -172,7 +183,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v)
+    {
         switch (v.getId()){
 
             case R.id.m_fab:
@@ -258,8 +270,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    private void postToast(String type) {
-
+    private void postToast(String type)
+    {
         if (type.equals("up")) {
             Context context = getContext();
             CharSequence text = "Liked this post!";
@@ -273,13 +285,13 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
         }
-
     }
 
     private void likeOrDislike(final SharedPreferences STUDENT, final SharedPreferences MENTOR, View view,
-                               final String status, final TextView msg){
+                               final String status, final TextView msg)
+    {
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, WebServer.getQueryLink(),
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -307,21 +319,25 @@ public class MessageFragment extends Fragment implements View.OnClickListener {
         queue.add(stringRequest);
     }
 
-    private void setLiking(String status){
-        if(status.equals("0")){
+    private void setLiking(String status)
+    {
+        if(status.equals("0"))
+        {
             this.thumbs_up.setImageResource(R.drawable.ic_thumb_up);
             this.thumbs_down.setImageResource(R.drawable.ic_thumb_down);
             this.up = false;
             this.down = false;
         }
-        else if(status.equals("1")){
+        else if(status.equals("1"))
+        {
             this.thumbs_up.setImageResource(R.drawable.ic_thumb_up_green);
             this.thumbs_down.setImageResource(R.drawable.ic_thumb_down);
             this.up = true;
             this.down = false;
         }
 
-        else if(status.equals("2")){
+        else if(status.equals("2"))
+        {
             this.thumbs_up.setImageResource(R.drawable.ic_thumb_up);
             this.thumbs_down.setImageResource(R.drawable.ic_thumb_down_red);
             this.up = false;

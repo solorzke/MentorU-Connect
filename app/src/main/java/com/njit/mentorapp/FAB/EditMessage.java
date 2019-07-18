@@ -12,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,8 +19,8 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.Service.WebServer;
 import com.squareup.picasso.Picasso;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -30,7 +29,7 @@ public class EditMessage extends AppCompatActivity
     TextView char_count, recipient, cancel, add;
     ImageView avi;
     EditText msg;
-    String fname, lname, url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
+    String fname, lname;
     SharedPreferences mentee, mentor, USER_TYPE;
 
     @Override
@@ -112,7 +111,7 @@ public class EditMessage extends AppCompatActivity
         final String receiver = rec.getString("ucid", null);
 
         RequestQueue queue = Volley.newRequestQueue(EditMessage.this);
-        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 System.out.println("Server Response: "+response);

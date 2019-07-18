@@ -11,6 +11,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.njit.mentorapp.model.Service.WebServer;
+
 public class WBFragment extends Fragment {
 
     WebView webView;
@@ -22,7 +24,7 @@ public class WBFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_wb, container, false);
         webView = (WebView) view.findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://web.njit.edu/~kas58/mentorDemo/wellbeing/index.html");
+        webView.loadUrl(WebServer.getWellBeingLink());
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         SideBar side = (SideBar) getActivity();

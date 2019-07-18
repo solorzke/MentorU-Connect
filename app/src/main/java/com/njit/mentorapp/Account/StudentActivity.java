@@ -25,6 +25,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.DateTimeFormat;
+import com.njit.mentorapp.model.Service.WebServer;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -32,7 +33,6 @@ import java.util.Map;
 
 public class StudentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
-    String url = "https://web.njit.edu/~kas58/mentorDemo/Model/index.php";
     SharedPreferences account, CL, USER_TYPE;
     SharedPreferences.Editor editor;
     TextView edit, done, ucid, full_name;
@@ -155,7 +155,7 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                     edit.setVisibility(View.VISIBLE);
                     disableEditAccText(editable);
                     updateUserSession(editor);
-                    sendAccRequest(url, "updateRecord", account);
+                    sendAccRequest(WebServer.getQueryLink(), "updateRecord", account);
                     postToast("Account Updated");
                 }
             });

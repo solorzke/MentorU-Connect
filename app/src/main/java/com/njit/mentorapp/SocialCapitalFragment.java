@@ -11,6 +11,8 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.njit.mentorapp.model.Service.WebServer;
+
 public class SocialCapitalFragment extends Fragment {
 
     WebView webView;
@@ -22,7 +24,7 @@ public class SocialCapitalFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_socialcapital, container, false);
         webView = (WebView) view.findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("https://web.njit.edu/~kas58/mentorDemo/social-capital/index.html");
+        webView.loadUrl(WebServer.getSocialCapitalLink());
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         SideBar side = (SideBar) getActivity();
