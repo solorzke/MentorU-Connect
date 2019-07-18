@@ -12,6 +12,7 @@ public class WebServer
     public static String getLoginLink() {
         return ROOT + "Model/login.php";
     }
+
     public static String getRegisterLink() {
         return ROOT + "Model/register.php";
     }
