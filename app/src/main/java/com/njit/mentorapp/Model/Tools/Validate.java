@@ -1,4 +1,4 @@
-package com.njit.mentorapp.model.Tools;
+package com.njit.mentorapp.Model.Tools;
 
 import android.content.SharedPreferences;
 import android.widget.EditText;

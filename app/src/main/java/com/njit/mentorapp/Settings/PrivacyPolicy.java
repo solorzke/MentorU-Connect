@@ -9,7 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.model.Service.WebServer;
+import com.njit.mentorapp.Model.Service.WebServer;
 
 public class PrivacyPolicy extends AppCompatActivity
 {

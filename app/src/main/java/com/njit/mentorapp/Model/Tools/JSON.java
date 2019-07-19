@@ -4,7 +4,7 @@
  * rather than sending Volley requests in every other class that'll need it.
  */
 
-package com.njit.mentorapp.model.Tools;
+package com.njit.mentorapp.Model.Tools;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,12 +20,11 @@ import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.Login;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.SideBar;
-import com.njit.mentorapp.model.Service.MySingleton;
-import com.njit.mentorapp.model.Service.WebServer;
+import com.njit.mentorapp.Model.Service.MySingleton;
+import com.njit.mentorapp.Model.Service.WebServer;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

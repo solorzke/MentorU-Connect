@@ -20,7 +20,7 @@
         <activity android:name=".Settings.AboutUs"></activity>
         <activity android:name=".FirebaseTest" />
         <service
-            android:name=".model.Service.FireBaseInstanceService"
+            android:name=".Model.Service.FireBaseInstanceService"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
@@ -96,7 +96,7 @@
             android:name=".SideBar"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".model.Tools.JSON"
+            android:name=".Model.Tools.JSON"
             android:screenOrientation="portrait" />
         <activity
             android:name=".Login"

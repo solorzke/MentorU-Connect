@@ -1,4 +1,4 @@
-package com.njit.mentorapp.model.Tools;
+package com.njit.mentorapp.Model.Tools;
 
 import android.content.Intent;
 import android.graphics.Bitmap;

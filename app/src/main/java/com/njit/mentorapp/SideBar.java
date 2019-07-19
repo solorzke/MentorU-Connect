@@ -35,7 +35,7 @@ import com.njit.mentorapp.Events.AddEvent;
 import com.njit.mentorapp.Home.HomeFrag;
 import com.njit.mentorapp.Report.ReportActivity;
 import com.njit.mentorapp.Settings.SettingsFragment;
-import com.njit.mentorapp.model.Service.WebServer;
+import com.njit.mentorapp.Model.Service.WebServer;
 import java.util.HashMap;
 import java.util.Map;
 

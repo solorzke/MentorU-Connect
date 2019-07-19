@@ -1,4 +1,4 @@
-package com.njit.mentorapp.model.Service;
+package com.njit.mentorapp.Model.Service;
 
 import android.content.Context;
 import com.android.volley.Request;

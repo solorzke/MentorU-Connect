@@ -30,8 +30,8 @@ import com.njit.mentorapp.R;
 import com.njit.mentorapp.Report.ReportActivity;
 import com.njit.mentorapp.SendEmail;
 import com.njit.mentorapp.SideBar;
-import com.njit.mentorapp.model.Tools.DateTimeFormat;
-import com.njit.mentorapp.model.Service.WebServer;
+import com.njit.mentorapp.Model.Tools.DateTimeFormat;
+import com.njit.mentorapp.Model.Service.WebServer;
 import java.util.HashMap;
 import java.util.Map;
 
