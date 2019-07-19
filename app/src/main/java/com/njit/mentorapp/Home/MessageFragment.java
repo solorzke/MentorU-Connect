@@ -9,6 +9,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +32,6 @@ import com.njit.mentorapp.SendEmail;
 import com.njit.mentorapp.SideBar;
 import com.njit.mentorapp.model.Tools.DateTimeFormat;
 import com.njit.mentorapp.model.Service.WebServer;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -149,7 +149,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Server Response: "+response);
+                        Log.d("DEBUG_OUTPUT","Server Response: "+response);
                         String [] reply = response.split("\\|");
                         if (reply[0].equals("empty")) {
                             FEEDBACK.setText("No new feedback from " + SENDER.getString("fname", null));
@@ -165,7 +165,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
             }
         }) {
             @Override
@@ -295,12 +295,12 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Server Response: "+response);
+                        Log.d("DEBUG_OUTPUT","Server Response: "+response);
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
             }
         }) {
             @Override

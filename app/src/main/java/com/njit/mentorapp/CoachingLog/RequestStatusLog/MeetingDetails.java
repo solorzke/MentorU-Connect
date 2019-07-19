@@ -9,6 +9,7 @@ import android.provider.CalendarContract;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,12 +98,12 @@ public class MeetingDetails extends Fragment
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("Server response: "+response);
+                Log.d("DEBUG_OUTPUT","Server Response: "+response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: " + error);
+                Log.d("DEBUG_OUTPUT","Volley Error: " + error);
                 error.printStackTrace();
             }
         }) {

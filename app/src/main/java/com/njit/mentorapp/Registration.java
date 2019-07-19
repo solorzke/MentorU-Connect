@@ -5,13 +5,13 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.RequestQueue;
@@ -21,12 +21,10 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.model.Tools.DateTimeFormat;
 import com.njit.mentorapp.model.Tools.JSON;
 import com.njit.mentorapp.model.Service.WebServer;
-
 import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
-
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -147,7 +145,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("Server response: "+response);
+                Log.d("DEBUG_OUTPUT","Server Response: "+response);
 
                 if (response.contains("REGISTERED")) {
                     Intent gth = new Intent(getApplicationContext(), JSON.class);
@@ -171,7 +169,7 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
                 String message = "Couldn't connect with the NJIT server. Try Again.";
                 alertMessage("Error 500: Internal Server Error", message, "OK");
 

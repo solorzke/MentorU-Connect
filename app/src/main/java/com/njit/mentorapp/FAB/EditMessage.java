@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -114,12 +115,12 @@ public class EditMessage extends AppCompatActivity
         StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("Server Response: "+response);
+                Log.d("DEBUG_OUTPUT","Server Response: "+response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
             }
         }) {
             @Override

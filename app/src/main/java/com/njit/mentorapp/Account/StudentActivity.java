@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -237,12 +238,12 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("Server Response: "+response);
+                Log.d("DEBUG_OUTPUT","Server Response: "+response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
             }
         }) {
             @Override

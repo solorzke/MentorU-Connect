@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -262,12 +263,12 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("Server Response: "+response);
+                Log.d("DEBUG_OUTPUT","Server Response: "+response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
             }
         }) {
             @Override
@@ -305,7 +306,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         Calendar cal = Calendar.getInstance();
         int month = cal.get(Calendar.MONTH);
         String year = Integer.toString(cal.get(Calendar.YEAR));
-        System.out.println("Current Year: "+year);
+        Log.d("DEBUG_OUTPUT","Current Year: "+year);
 
         if (month > 7) {
             semester.setText("Fall " + year);

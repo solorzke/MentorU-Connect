@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
@@ -23,7 +24,6 @@ import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.Tools.DateTimeFormat;
 import com.njit.mentorapp.model.Service.WebServer;
 import com.squareup.picasso.Picasso;
-
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -223,12 +223,12 @@ public class MentorActivity extends AppCompatActivity  {
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("Server Response: "+response);
+                Log.d("DEBUG_OUTPUT","Server Response: "+response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
             }
         }) {
             @Override

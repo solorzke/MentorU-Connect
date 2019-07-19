@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
@@ -79,7 +80,6 @@ public class RequestMeetingsList extends AppCompatActivity
         pendingArray.clear();
         receivingArray.clear();
         getRequests();
-        System.out.println("On Start");
         /* ListView (pending) listening for a list item clicked. */
         pendingList.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
@@ -152,7 +152,7 @@ public class RequestMeetingsList extends AppCompatActivity
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: " + error);
+                Log.d("DEBUG_OUTPUT","Volley Error: " + error);
             }
         });
 
@@ -305,12 +305,12 @@ public class RequestMeetingsList extends AppCompatActivity
         {
             @Override
             public void onResponse(String response) {
-                System.out.println("Server Response: "+response);
+                Log.d("DEBUG_OUTPUT","Server Response: "+response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
                 error.printStackTrace();
             }
         }) {

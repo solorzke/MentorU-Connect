@@ -14,11 +14,13 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.Login;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.SideBar;
@@ -88,7 +90,7 @@ public class JSON extends AppCompatActivity
                     public void onResponse(JSONObject response) {
                         try{
 
-                            System.out.println("Server Response: "+response);
+                            Log.d("DEBUG_OUTPUT","Server Response: "+response);
                             JSONArray array = response.getJSONArray("record");
                             JSONArray courses = response.getJSONArray("courses");
                             JSONArray m_record = response.getJSONArray("record_m");
@@ -151,7 +153,7 @@ public class JSON extends AppCompatActivity
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
             }
         });
 

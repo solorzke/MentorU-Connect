@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -19,6 +20,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.database.core.utilities.Validation;
 import com.njit.mentorapp.model.Tools.JSON;
 import com.njit.mentorapp.model.Service.WebServer;
 import com.njit.mentorapp.model.Tools.Validate;
@@ -99,7 +101,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 }
                 else
                 {
-                    System.out.println("Validation " + "did not go through");
+                    Log.d("DEBUG_OUTPUT","Validation did not go through");
                     alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
                 }
                 break;
@@ -138,7 +140,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Server response: "+response);
+                        Log.d("DEBUG_OUTPUT","Server Response: "+response);
                         if (response.contains("GOODSTUDENT") || response.contains("GOODMENTOR"))
                         {
                             Intent goToHome = new Intent(getApplicationContext(), JSON.class);
@@ -151,7 +153,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         }
                         else if (response.contains("BADSTUDENT") || response.contains("BADMENTOR"))
                         {
-                            System.out.println("Server Response: Connection to PHP script was " +
+                            Log.d("DEBUG_OUTPUT","Server Response: Connection to PHP script was " +
                                     "successful but returned false");
                             alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
                         }

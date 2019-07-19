@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,6 @@ import com.njit.mentorapp.R;
 import com.njit.mentorapp.SendEmail;
 import com.njit.mentorapp.model.Tools.DateTimeFormat;
 import com.njit.mentorapp.model.Service.WebServer;
-
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -112,7 +112,7 @@ public class Goals extends Fragment implements View.OnClickListener
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        System.out.println("Server Response: "+response);
+                        Log.d("DEBUG_OUTPUT","Server Response: "+response);
                         if (response.equals("empty")) {
                             GOAL_1.setText("No new goals from " + MENTOR.getString("fname", null));
                             GOAL_2.setText("No new goals from " + MENTOR.getString("fname", null));
@@ -128,14 +128,14 @@ public class Goals extends Fragment implements View.OnClickListener
                             c2 = loadGoal(goals[1], GOAL_2, CHECKMARK_2);
                             c3 = loadGoal(goals[2], GOAL_3, CHECKMARK_3);
                             c4 = loadGoal(goals[3], GOAL_4, CHECKMARK_4);
-                            System.out.println(Arrays.toString(goals));
+                            Log.d("DEBUG_OUTPUT","Server Response: "+Arrays.toString(goals));
                             percentageComplete(PERCENT);
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
             }
         }) {
             @Override
@@ -298,12 +298,12 @@ public class Goals extends Fragment implements View.OnClickListener
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                System.out.println("Server Response: "+response);
+                Log.d("DEBUG_OUTPUT","Server Response: "+response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                System.out.println("Volley Error: "+error);
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
             }
         }) {
             @Override
@@ -348,7 +348,7 @@ public class Goals extends Fragment implements View.OnClickListener
         Calendar cal = Calendar.getInstance();
         int month = cal.get(Calendar.MONTH);
         String year = Integer.toString(cal.get(Calendar.YEAR));
-        System.out.println("Current Year: "+year);
+        Log.d("DEBUG_OUTPUT","Current Year: "+year);
 
         if (month > 7)
         {
