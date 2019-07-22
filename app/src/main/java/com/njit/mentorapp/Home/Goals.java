@@ -160,7 +160,7 @@ public class Goals extends Fragment implements View.OnClickListener
             });
         }
 
-        remainingWeeks(WEEKS);
+        weeksLeft(SEMESTER);
     }
 
     @Override
@@ -293,7 +293,6 @@ public class Goals extends Fragment implements View.OnClickListener
     private void changeGoalStatus(View v, String url, final String action,
                                   final String currentUser, final String otherUser, final String goal, final String status)
     {
-
         RequestQueue queue = Volley.newRequestQueue(v.getContext());
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -376,32 +375,6 @@ public class Goals extends Fragment implements View.OnClickListener
         }
     }
 
-    /* Set remaining amount of weeks left until the semester's conclusion */
-    private void remainingWeeks(TextView weeks)
-    {
-        Calendar cal = Calendar.getInstance();
-        int month = cal.get(Calendar.MONTH);
-
-        /* Current month (Sept - Dec) Fall Semester */
-        if (month > 7)
-        {
-            String wk = Integer.toString(DateTimeFormat.getFullWeeks(11));
-            weeks.setText( wk+ " Weeks");
-        }
-        /* Current month (Jan - May) Spring Semester */
-        else if (month < 5)
-        {
-            String wk = Integer.toString(DateTimeFormat.getFullWeeks(5));
-            weeks.setText( wk+ " Weeks");
-        }
-        /* Current month (June - Aug) Summer Semester */
-        else if (4 < month || month < 8)
-        {
-            String wk = Integer.toString(DateTimeFormat.getFullWeeks(8));
-            weeks.setText( wk+ " Weeks");
-        }
-    }
-
     /* Set the percentage of goals completed, update real-time as user updates their status */
     private void percentageComplete(TextView percent)
     {
@@ -417,6 +390,37 @@ public class Goals extends Fragment implements View.OnClickListener
         }
         String per = Integer.toString(p);
         percent.setText(" " + per + " %");
+    }
+
+    /* Set remaining amount of weeks left until the semester's conclusion */
+    private void weeksLeft(TextView semester)
+    {
+        final String date = DateTimeFormat.lastWeekRemaining(semester);
+        RequestQueue queue = Volley.newRequestQueue(view.getContext());
+        StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Log.d("DEBUG_OUTPUT","Server Response: "+response);
+                String weeks = response + " Weeks";
+                WEEKS.setText(weeks);
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("action", "weeksLeft");
+                params.put("date", date);
+                return params;
+            }
+        };
+        queue.add(request);
+
     }
 }
 
