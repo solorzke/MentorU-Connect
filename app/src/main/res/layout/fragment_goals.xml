@@ -310,8 +310,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Have questions about the goals?"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/holo_blue_bright"
+                    android:textColor="#1b9af7"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
             </LinearLayout>
@@ -335,8 +334,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="View Mentor Account"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/holo_blue_bright"
+                    android:textColor="#1b9af7"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
             </LinearLayout>

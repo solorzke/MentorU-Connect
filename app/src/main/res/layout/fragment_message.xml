@@ -242,8 +242,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="Contact User"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="25sp"
+                    android:textColor="#1b9af7"
+                    android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
 
                 <TextView
@@ -252,8 +252,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="Account Information"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="25sp"
+                    android:textColor="#1b9af7"
+                    android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
 
                 <TextView
@@ -262,8 +262,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:text="Help Center"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="25sp"
+                    android:textColor="#1b9af7"
+                    android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
 
             </LinearLayout>
