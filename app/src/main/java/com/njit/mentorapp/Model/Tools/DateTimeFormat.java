@@ -1,5 +1,6 @@
 package com.njit.mentorapp.Model.Tools;
 
+import android.widget.TextView;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -119,5 +120,18 @@ public class DateTimeFormat {
             h = 0;
 
         return new int[]{h, min};
+    }
+
+    public static String lastWeekRemaining(TextView text)
+    {
+        String semester = text.getText().toString().split(" ")[0];
+        String year = text.getText().toString().split(" ")[1];
+        if(semester.contains("Summer"))
+            return "09/01/" + year;
+        else if(semester.contains("Fall"))
+            return "12/25/" + year;
+        else
+            return "05/20/" + year;
+
     }
 }
