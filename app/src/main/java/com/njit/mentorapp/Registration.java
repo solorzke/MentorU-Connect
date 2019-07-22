@@ -18,6 +18,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.njit.mentorapp.Model.Service.FireBaseServer;
 import com.njit.mentorapp.Model.Tools.DateTimeFormat;
 import com.njit.mentorapp.Model.Tools.JSON;
 import com.njit.mentorapp.Model.Service.WebServer;
@@ -146,8 +147,9 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onResponse(String response) {
                 Log.d("DEBUG_OUTPUT","Server Response: "+response);
-
                 if (response.contains("REGISTERED")) {
+                    String mentor = response.split("\\|")[1];
+                    FireBaseServer.registerToDB(ucid, mentor);
                     Intent gth = new Intent(getApplicationContext(), JSON.class);
                     gth.putExtra("com.example.mentorapp.CONFIRM", "student");
                     gth.putExtra("com.example.mentorapp.UCID", ucid);
