@@ -26,6 +26,8 @@ import com.njit.mentorapp.Account.MentorActivity;
 import com.njit.mentorapp.Account.StudentActivity;
 import com.njit.mentorapp.FAB.EditMessage;
 import com.njit.mentorapp.FAQFragment;
+import com.njit.mentorapp.Model.Service.NotificationText;
+import com.njit.mentorapp.Model.Service.PushMessageToFCM;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.Report.ReportActivity;
 import com.njit.mentorapp.SendEmail;
@@ -38,6 +40,7 @@ import java.util.Map;
 public class MessageFragment extends Fragment implements View.OnClickListener
 {
     SharedPreferences STUDENT, MENTOR, USER_TYPE;
+    String [] notifyLikesText, notifyDislikesText;
     FloatingActionButton FAB;
     TextView FEEDBACK, messenger, date, contact_user, account_info, help_center, report;
     ImageView messenger_img, thumbs_up, thumbs_down, share;
@@ -83,14 +86,20 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         {
             String fname = MENTOR.getString("fname", null);
             String lname = MENTOR.getString("lname", null);
+            String ucid = STUDENT.getString("ucid", null);
             messenger.setText(fname + " " + lname);
+            notifyLikesText = NotificationText.likes(ucid);
+            notifyDislikesText = NotificationText.dislikes(ucid);
             getMessage(STUDENT, MENTOR, view);
         }
         else
             {
             String fname = STUDENT.getString("fname", null);
             String lname = STUDENT.getString("lname", null);
+            String ucid = MENTOR.getString("ucid", null);
             messenger.setText(fname + " " + lname);
+            notifyLikesText = NotificationText.likes(ucid);
+            notifyDislikesText = NotificationText.dislikes(ucid);
             getMessage(MENTOR, STUDENT, view);
         }
     }
@@ -204,6 +213,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                     thumbs_up.setImageResource(R.drawable.ic_thumb_up_green);
                     postToast("up");
                     likeOrDislike(STUDENT, MENTOR, view, "1", FEEDBACK);
+                    PushMessageToFCM.send(getContext(), notifyLikesText[0], notifyLikesText[1]);
                 }
                 break;
 
@@ -220,6 +230,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                     thumbs_down.setImageResource(R.drawable.ic_thumb_down_red);
                     postToast("down");
                     likeOrDislike(STUDENT, MENTOR, view, "2", FEEDBACK);
+                    PushMessageToFCM.send(getContext(), notifyDislikesText[0], notifyDislikesText[1]);
                 }
                 break;
 

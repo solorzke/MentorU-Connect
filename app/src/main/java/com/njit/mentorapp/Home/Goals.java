@@ -1,6 +1,7 @@
 package com.njit.mentorapp.Home;
 
 import android.app.AlertDialog;
+import android.app.Notification;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -26,6 +27,9 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.Account.MentorActivity;
 import com.njit.mentorapp.FAB.EditGoals;
 import com.njit.mentorapp.FAB.EditMessage;
+import com.njit.mentorapp.Model.Service.FireBaseServer;
+import com.njit.mentorapp.Model.Service.NotificationText;
+import com.njit.mentorapp.Model.Service.PushMessageToFCM;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.SendEmail;
 import com.njit.mentorapp.Model.Tools.DateTimeFormat;
@@ -37,12 +41,12 @@ import java.util.Map;
 
 public class Goals extends Fragment implements View.OnClickListener
 {
-
     SharedPreferences STUDENT, MENTOR, USER_TYPE;
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
     FloatingActionButton fab;
     TextView GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER, GOALS, M_TITLE, WEEKS, ACCOUNT, EMAIL, PERCENT;
     String url = WebServer.getQueryLink();
+    String [] notifyText;
     AlertDialog dialog;
     Boolean c1 = false, c2 = false, c3 = false, c4 = false;
     View view;
@@ -56,6 +60,7 @@ public class Goals extends Fragment implements View.OnClickListener
         MENTOR = getActivity().getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
         USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
         fab = view.findViewById(R.id.m_fab);
+        notifyText = NotificationText.goal(STUDENT.getString("ucid", null));
 
         CHECKMARK_1 = (ImageView) view.findViewById(R.id.checkmark1);
         CHECKMARK_2 = (ImageView) view.findViewById(R.id.checkmark2);
@@ -172,16 +177,29 @@ public class Goals extends Fragment implements View.OnClickListener
                         CHECKMARK_1.setImageResource(R.drawable.ic_check_green);
                         c1 = true;
                         percentageComplete(PERCENT);
-                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null), GOAL_1.getText().toString(), "1");
+                        changeGoalStatus(
+                                view,
+                                url,
+                                "changeGoalStatus",
+                                STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null),
+                                GOAL_1.getText().toString(), "1"
+                        );
+                        PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
                         postToast("1");
                         break;
                     } else {
                         CHECKMARK_1.setImageResource(R.drawable.ic_check_circle);
                         c1 = false;
                         percentageComplete(PERCENT);
-                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null), GOAL_1.getText().toString(), "0");
+                        changeGoalStatus(
+                                view,
+                                url,
+                                "changeGoalStatus",
+                                STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null),
+                                GOAL_1.getText().toString(), "0"
+                        );
                         postToast("0");
                         break;
                     }
@@ -190,16 +208,29 @@ public class Goals extends Fragment implements View.OnClickListener
                         CHECKMARK_2.setImageResource(R.drawable.ic_check_green);
                         c2 = true;
                         percentageComplete(PERCENT);
-                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null), GOAL_2.getText().toString(), "1");
+                        changeGoalStatus(
+                                view,
+                                url,
+                                "changeGoalStatus",
+                                STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null),
+                                GOAL_2.getText().toString(), "1"
+                        );
+                        PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
                         postToast("1");
                         break;
                     } else {
                         CHECKMARK_2.setImageResource(R.drawable.ic_check_circle);
                         c2 = false;
                         percentageComplete(PERCENT);
-                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null), GOAL_2.getText().toString(), "0");
+                        changeGoalStatus(
+                                view,
+                                url,
+                                "changeGoalStatus",
+                                STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null),
+                                GOAL_2.getText().toString(), "0"
+                        );
                         postToast("0");
                         break;
                     }
@@ -209,16 +240,29 @@ public class Goals extends Fragment implements View.OnClickListener
                         CHECKMARK_3.setImageResource(R.drawable.ic_check_green);
                         c3 = true;
                         percentageComplete(PERCENT);
-                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null), GOAL_3.getText().toString(), "1");
+                        changeGoalStatus(
+                                view,
+                                url,
+                                "changeGoalStatus",
+                                STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null),
+                                GOAL_3.getText().toString(), "1"
+                        );
+                        PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
                         postToast("1");
                         break;
                     } else {
                         CHECKMARK_3.setImageResource(R.drawable.ic_check_circle);
                         c3 = false;
                         percentageComplete(PERCENT);
-                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null), GOAL_3.getText().toString(), "0");
+                        changeGoalStatus(
+                                view,
+                                url,
+                                "changeGoalStatus",
+                                STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null),
+                                GOAL_3.getText().toString(), "0"
+                        );
                         postToast("0");
                         break;
                     }
@@ -227,16 +271,29 @@ public class Goals extends Fragment implements View.OnClickListener
                         CHECKMARK_4.setImageResource(R.drawable.ic_check_green);
                         c4 = true;
                         percentageComplete(PERCENT);
-                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null), GOAL_4.getText().toString(), "1");
+                        changeGoalStatus(
+                                view,
+                                url,
+                                "changeGoalStatus",
+                                STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null),
+                                GOAL_4.getText().toString(), "1"
+                        );
+                        PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
                         postToast("1");
                         break;
                     } else {
                         CHECKMARK_4.setImageResource(R.drawable.ic_check_circle);
                         c4 = false;
                         percentageComplete(PERCENT);
-                        changeGoalStatus(view, url, "changeGoalStatus", STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null), GOAL_4.getText().toString(), "0");
+                        changeGoalStatus(
+                                view,
+                                url,
+                                "changeGoalStatus",
+                                STUDENT.getString("ucid", null),
+                                MENTOR.getString("ucid", null),
+                                GOAL_4.getText().toString(), "0"
+                        );
                         postToast("0");
                         break;
                     }
@@ -252,8 +309,6 @@ public class Goals extends Fragment implements View.OnClickListener
                 default:
                     break;
             }
-        } else {
-
         }
     }
 

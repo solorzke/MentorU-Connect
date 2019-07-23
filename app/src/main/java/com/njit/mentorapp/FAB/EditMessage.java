@@ -19,6 +19,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.njit.mentorapp.Model.Service.NotificationText;
+import com.njit.mentorapp.Model.Service.PushMessageToFCM;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.Model.Service.WebServer;
 import com.squareup.picasso.Picasso;
@@ -31,6 +33,7 @@ public class EditMessage extends AppCompatActivity
     ImageView avi;
     EditText msg;
     String fname, lname;
+    String [] notifyMessageText;
     SharedPreferences mentee, mentor, USER_TYPE;
 
     @Override
@@ -60,10 +63,14 @@ public class EditMessage extends AppCompatActivity
         if(!isStudent(USER_TYPE)){
             fname = mentee.getString("fname", null);
             lname = mentee.getString("lname", null);
+            String ucid = mentor.getString("ucid", null);
+            notifyMessageText = NotificationText.message(ucid);
         }
         else {
             fname = mentor.getString("fname", null);
             lname = mentor.getString("lname", null);
+            String ucid = mentee.getString("ucid", null);
+            notifyMessageText = NotificationText.message(ucid);
         }
 
         msg.addTextChangedListener(new TextWatcher() {
@@ -98,8 +105,12 @@ public class EditMessage extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 String message = msg.getText().toString();
-                if(!isStudent(USER_TYPE)){ updateMessage("updateFeedback", mentor, mentee, message); }
-                else{ updateMessage("updateFeedback", mentee, mentor, message); }
+                if(!isStudent(USER_TYPE))
+                    updateMessage("updateFeedback", mentor, mentee, message);
+                else
+                    updateMessage("updateFeedback", mentee, mentor, message);
+
+                PushMessageToFCM.send(getApplicationContext(), notifyMessageText[0], notifyMessageText[1]);
                 postToast();
                 onBackPressed();
                 finish();

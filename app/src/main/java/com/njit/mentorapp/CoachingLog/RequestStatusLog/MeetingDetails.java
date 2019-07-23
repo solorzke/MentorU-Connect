@@ -23,6 +23,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.njit.mentorapp.Model.Service.NotificationText;
+import com.njit.mentorapp.Model.Service.PushMessageToFCM;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.Model.Tools.DateTimeFormat;
 import com.njit.mentorapp.Model.Service.WebServer;
@@ -34,7 +36,8 @@ import java.util.Map;
 
 public class MeetingDetails extends Fragment
 {
-    String type;
+    String type, responder;
+    String [] notifyResponse;
     EditText title, location, purpose, date, s_time, e_time;
     TextView meeting_with;
     View view;
@@ -59,6 +62,7 @@ public class MeetingDetails extends Fragment
         respond = view.findViewById(R.id.respond);
         meeting_request = getActivity().getIntent().getStringArrayListExtra("meeting_details");
         type = getActivity().getIntent().getExtras().getString("type");
+        responder = getActivity().getIntent().getExtras().getString("responder");
         return view;
     }
 
@@ -124,23 +128,28 @@ public class MeetingDetails extends Fragment
         AlertDialog alert = new AlertDialog.Builder(getActivity()).create();
         alert.setTitle("Response");
         alert.setMessage("Do you wish to accept this meeting request?");
-        alert.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "Accept",
+        alert.setButton(AlertDialog.BUTTON_POSITIVE, "Accept",
                 new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                confirmMeeting(view, WebServer.getQueryLink(), meeting_request.get(0), "1");
-                respond.setVisibility(View.GONE);
-                toast = Toast.makeText(getContext(), "Meeting Accepted", Toast.LENGTH_SHORT);
-                toast.show();
-                dialog.dismiss();
-                createEvent(meeting_request);
-            }
-        });
+                    public void onClick(DialogInterface dialog, int which) {
+                        confirmMeeting(view, WebServer.getQueryLink(), meeting_request.get(0), "1");
+                        notifyResponse = NotificationText.meetingResponse(responder, "accepted");
+                        PushMessageToFCM.send(getContext(), notifyResponse[0], notifyResponse[1]);
+                        respond.setVisibility(View.GONE);
+                        toast = Toast.makeText(getContext(), "Meeting Accepted", Toast.LENGTH_SHORT);
+                        toast.show();
+                        dialog.dismiss();
+                        createEvent(meeting_request);
+                    }
+                }
+        );
 
-        alert.setButton(android.support.v7.app.AlertDialog.BUTTON_NEGATIVE, "Decline",
+        alert.setButton(AlertDialog.BUTTON_NEGATIVE, "Decline",
                 new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 confirmMeeting(view, WebServer.getQueryLink(), meeting_request.get(0), "2");
+                notifyResponse = NotificationText.meetingResponse(responder, "declined");
+                PushMessageToFCM.send(getContext(), notifyResponse[0], notifyResponse[1]);
                 respond.setVisibility(View.GONE);
                 toast = Toast.makeText(getContext(), "Meeting Declined", Toast.LENGTH_SHORT);
                 toast.show();

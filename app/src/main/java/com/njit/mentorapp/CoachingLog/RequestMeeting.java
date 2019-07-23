@@ -24,6 +24,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.njit.mentorapp.Model.Service.NotificationText;
+import com.njit.mentorapp.Model.Service.PushMessageToFCM;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.Model.Tools.DateTimeFormat;
 import com.njit.mentorapp.Model.Service.WebServer;
@@ -41,6 +43,7 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
     private TimePickerDialog timePickerDialog;
     private Calendar calendar;
     int hour, min;
+    String [] notifyRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -64,11 +67,13 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
         {
             sender = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
             receiver = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+            notifyRequest = NotificationText.requestMeeting(sender.getString("ucid", null));
         }
         else
         {
             sender = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
             receiver = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
+            notifyRequest = NotificationText.requestMeeting(sender.getString("ucid", null));
         }
     }
 
@@ -148,6 +153,7 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(RequestMeeting.this, text, duration);
                     toast.show();
+                    PushMessageToFCM.send(getApplicationContext(), notifyRequest[0], notifyRequest[1]);
                     onBackPressed();
                     finish();
                 }

@@ -21,6 +21,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.njit.mentorapp.Login;
+import com.njit.mentorapp.Model.Service.FireBaseServer;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.SideBar;
 import com.njit.mentorapp.Model.Service.MySingleton;
@@ -33,7 +34,7 @@ import java.util.Map;
 
 public class JSON extends AppCompatActivity
 {
-    private String ucid, confirm;
+    private String ucid;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
@@ -41,7 +42,8 @@ public class JSON extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_json);
         ucid = getIntent().getExtras().getString("com.example.mentorapp.UCID");
-        confirm = getIntent().getExtras().getString("com.example.mentorapp.CONFIRM");
+        String confirm = getIntent().getExtras().getString("com.example.mentorapp.CONFIRM");
+        FireBaseServer.subscribeToTopic(FireBaseServer.getTopicID(ucid));
         defineUserType(confirm);
         loadUser(confirm);
     }
@@ -140,6 +142,7 @@ public class JSON extends AppCompatActivity
                             MENTOR.putString("age", mentor.getString("age"));
                             MENTOR.putString("birthday", mentor.getString("birthday"));
                             MENTOR.putString("avi", mentor.getString("avi"));
+                            MENTOR.putString("firstEntry", "true");
                             MENTOR.apply();
 
                             startActivity(new Intent(getApplicationContext(), SideBar.class));
