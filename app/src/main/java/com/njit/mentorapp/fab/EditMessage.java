@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -54,10 +53,6 @@ public class EditMessage extends AppCompatActivity
         add = findViewById(R.id.add);
         avi = findViewById(R.id.avi);
         msg = findViewById(R.id.message);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        toolbar.setTitle("Send Message");
     }
 
     @Override
