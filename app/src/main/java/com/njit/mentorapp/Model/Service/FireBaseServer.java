@@ -19,13 +19,27 @@ public class FireBaseServer
 
     private static String TOPIC_ID = null;
 
+    private static boolean IN_THE_DB = false;
+
     public static String getFCM_API() { return FCM_API; }
 
     public static String getSERVER_KEY() { return SERVER_KEY; }
 
-    public static void subscribeToTopic(String TOPIC)
+    /* Check if the user signing in belongs to the topic registered with the device. */
+    public static boolean topicValidation(String USER)
     {
-        FirebaseMessaging.getInstance().subscribeToTopic(TOPIC)
+        String id = getTopicID(USER);
+        if(!id.equals("null"))
+            return true;
+        return false;
+    }
+
+    /* Have the user subscribed to the topic id */
+    public static void subscribeToTopic(String TOPIC_ID)
+    {
+        FirebaseMessaging
+                .getInstance()
+                .subscribeToTopic(TOPIC_ID)
                 .addOnCompleteListener(new OnCompleteListener<Void>()
                 {
                     @Override
@@ -68,7 +82,7 @@ public class FireBaseServer
     }
 
     /* Unregister pairing  */
-    public static void unRegisterToDB(final String ucid_1, final String ucid_2)
+    public static void unRegisterToDB(final String UCID)
     {
         final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Communication");
         db.addValueEventListener(new ValueEventListener() {
@@ -80,7 +94,7 @@ public class FireBaseServer
 
                     for(DataSnapshot user : data.getChildren())
 
-                        if(user.getValue().equals(ucid_1) || user.getValue().equals(ucid_2))
+                        if(user.getValue().equals(UCID))
                         {
                             Log.d("DEBUG_OUTPUT", data.getKey().toString());
                             db.child(data.getKey()).setValue(null);
@@ -95,9 +109,9 @@ public class FireBaseServer
         });
     }
 
-    public static String getTopicID(final String ucid_1, final String ucid_2)
+    /* Return the topic id between two users */
+    public static String getTopicID(final String UCID)
     {
-
         final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Communication");
         db.addValueEventListener(new ValueEventListener() {
             @Override
@@ -106,9 +120,9 @@ public class FireBaseServer
                 for(DataSnapshot data : dataSnapshot.getChildren())
 
                     for(DataSnapshot user : data.getChildren())
-                        if(user.getValue().equals(ucid_1) || user.getValue().equals(ucid_2))
+                        if(user.getValue().equals(UCID))
                         {
-                            TOPIC_ID = user.child("topic_id").getValue().toString();
+                            TOPIC_ID = data.child("topic_id").getValue().toString();
                             break loop;
                         }
             }
@@ -123,5 +137,31 @@ public class FireBaseServer
             return TOPIC_ID;
         else
             return "null";
+    }
+
+    /* Verify if the user is registered in the FireBase database child 'Communication' */
+    public static boolean inTheDB(final String UCID)
+    {
+        final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Communication");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                loop:
+                for(DataSnapshot data : dataSnapshot.getChildren())
+
+                    for(DataSnapshot user : data.getChildren())
+                        if(user.getValue().equals(UCID))
+                        {
+                            IN_THE_DB = true;
+                            break loop;
+                        }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("DEBUG_OUTPUT", databaseError.getMessage());
+            }
+        });
+
+        return IN_THE_DB;
     }
 }
