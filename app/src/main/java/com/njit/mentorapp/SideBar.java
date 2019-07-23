@@ -33,6 +33,8 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.CoachingLog.LogFragment;
 import com.njit.mentorapp.Events.AddEvent;
 import com.njit.mentorapp.Home.HomeFrag;
+import com.njit.mentorapp.Model.Service.FireBaseServer;
+import com.njit.mentorapp.Model.users.User;
 import com.njit.mentorapp.Report.ReportActivity;
 import com.njit.mentorapp.Settings.SettingsFragment;
 import com.njit.mentorapp.Model.Service.WebServer;
@@ -43,12 +45,12 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 {
     private DrawerLayout drawer;
     public TextView user_name, user_email;
-    SharedPreferences SESSION, USER_TYPE;
-    SharedPreferences.Editor editor;
+    SharedPreferences USER_TYPE;
     AlertDialog RETURN_TO_LOGIN;
     public Toolbar toolbar;
     public static NavigationView navigationView;
     public static int position;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -58,37 +60,42 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         navigationView = findViewById(R.id.nav_view);
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
 
-        //ADD IF/ELSE STATEMENT TO CHECK IF THE PERSON SIGNED IN IS MENTOR/STUDENT TO INITIALIZE THE
-        //SESSION SHARED PREFS INSTANCE
+        /* Define who the user is, pass their shared prefs to the User class */
         defineUserType(USER_TYPE);
 
-        /* CALENDAR DROP DOWN MENU */
+        /* Calendar Drop-Down Menu */
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         toolbar.setTitle("Home");
 
-        /* UPDATE HEADER NAME AND EMAIL OF THE USER IN SESSION */
+        /* Set full name and email address to the side-bar header */
         View headerView = navigationView.getHeaderView(0);
-        user_name = (TextView) headerView.findViewById(R.id.header_name);
-        String header_name = SESSION.getString("fname", null) + " " +
-                SESSION.getString("lname", null);
+        user_name = headerView.findViewById(R.id.header_name);
+        String header_name = user.getFname() + " " + user.getLname();
         user_name.setText(header_name);
-        user_email = (TextView) headerView.findViewById(R.id.header_email);
-        String header_email = SESSION.getString("email", null);
-        user_email.setText(header_email);
+        user_email = headerView.findViewById(R.id.header_email);
+        user_email.setText(user.getEmail());
 
-        /* SET ACTION_BAR HAMBURGER TO TOGGLE THE SIDEBAR NAVIGATION WHEN PRESSED */
+        /* Set Hamburger Icon to toggle and open/close side-bar drawer  */
         drawer = findViewById(R.id.drawer_layout);
         navigationView.setNavigationItemSelectedListener(this);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar,
-                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,
+                drawer,
+                toolbar,
+                R.string.navigation_drawer_open,
+                R.string.navigation_drawer_close
+        );
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        /* THIS IS THE DEFAULT FRAGMENT TO OPEN INTO WHEN YOU LOGIN IN - HOME */
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                new HomeFrag()).addToBackStack(null).commit();
+        /* Set default fragment to Home after signing in */
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragment_container, new HomeFrag())
+                .addToBackStack(null)
+                .commit();
         navigationView.setCheckedItem(R.id.home_item);
 
         /* Switch to another specific fragment if the intent comes from an activity. */
@@ -108,16 +115,13 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onResume() {
         super.onResume();
-        String header_name = SESSION.getString("fname", null) + " " +
-                SESSION.getString("lname", null);
+        String header_name = user.getFname() + " " + user.getLname();
         user_name.setText(header_name);
-        String header_email = SESSION.getString("email", null);
-        user_email.setText(header_email);
+        user_email.setText(user.getEmail());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-
         getMenuInflater().inflate(R.menu.mini_menu, menu);
         return true;
     }
@@ -147,7 +151,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         return true;
     }
 
-    /* OPEN A FRAGMENT IF A MENU ITEM IS SELECTED FROM THE SIDE BAR MENU */
+    /* Open the fragment whenever the menu item is selected from the side-bar */
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         switch (menuItem.getItemId()){
@@ -167,7 +171,8 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 Intent intent = new Intent(this, Login.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                signOutRequest(SESSION);
+                signOutRequest();
+                FireBaseServer.unsubcribeToTopic(FireBaseServer.getTopicID(user.getUcid()));
                 getSupportFragmentManager().popBackStack();
                 startActivity(intent);
                 finish();
@@ -199,13 +204,13 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         return true;
     }
 
-    /* CLOSE SIDE_BAR DRAWER IF OPENED W/ BACK_BUTTON */
+    /* Close drawer if the back button is pressed or sign out if not. */
     @Override
     public void onBackPressed() {
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         }
-        else if (SESSION.getString("firstEntry", null).equals("true")) {
+        else if (user.getEntry().equals("true")) {
             RETURN_TO_LOGIN = new AlertDialog.Builder(this).create();
             RETURN_TO_LOGIN.setTitle("Alert");
             RETURN_TO_LOGIN.setMessage("You're about to sign out back to the sign in screen. Do you " +
@@ -213,7 +218,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             RETURN_TO_LOGIN.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
-                    signOutRequest(SESSION);
+                    signOutRequest();
                     Intent intent = new Intent(SideBar.this, Login.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -244,17 +249,17 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     {
         if(type.getString("type", null).equals("student"))
         {
-            SESSION = getSharedPreferences("STUDENT", MODE_PRIVATE);
+            user = new User(getApplicationContext(), "Mentee");
         }
         else if(type.getString("type", null).equals("mentor"))
         {
-            SESSION = getSharedPreferences("MENTOR", MODE_PRIVATE);
+            user = new User(getApplicationContext(), "Mentor");
         }
     }
 
-    private void signOutRequest(SharedPreferences USER)
+    private void signOutRequest()
     {
-        final String user = USER.getString("ucid", null);
+        final String user = this.user.getUcid();
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
