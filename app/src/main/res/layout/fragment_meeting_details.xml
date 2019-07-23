@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:windowSoftInputMode="adjustNothing"
-    tools:context=".CoachingLog.RequestStatusLog.MeetingStatus">
+    tools:context=".coaching_log.request_status_log.MeetingStatus">
 
     <ScrollView
         android:layout_width="match_parent"

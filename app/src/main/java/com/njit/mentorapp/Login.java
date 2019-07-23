@@ -13,16 +13,16 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.njit.mentorapp.Model.Tools.JSON;
-import com.njit.mentorapp.Model.Service.WebServer;
-import com.njit.mentorapp.Model.Tools.Validate;
+import com.njit.mentorapp.model.tools.JSON;
+import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.tools.Validate;
 import java.util.HashMap;
 import java.util.Map;
 import me.ibrahimsn.particle.ParticleView;
@@ -36,6 +36,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     boolean asAMentor = false;
     private Switch toggle;
     private EditText ucid_et, pw_et;
+    AlertDialog alert;
     ParticleView particleView;
 
     @Override
@@ -173,25 +174,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                 return params;
             }
         };
-        stringRequest.setRetryPolicy(new RetryPolicy()
-        {
-            @Override
-            public int getCurrentTimeout() {
-                return 5000;
-            }
-
-            @Override
-            public int getCurrentRetryCount() {
-                return 5000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError
-            {
-                error.printStackTrace();
-                alertMessage("Request Timed Out.", "Try Again.", "OK");
-            }
-        });
 
         queue.add(stringRequest);
     }
@@ -213,7 +195,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
     private void alertMessage(String title, String message, String button)
     {
         /* Create Alert Message */
-        AlertDialog alert = new AlertDialog.Builder(Login.this).create();
+        alert = new AlertDialog.Builder(Login.this).create();
         alert.setTitle(title);
         alert.setMessage(message);
         alert.setButton(AlertDialog.BUTTON_NEUTRAL, button, new DialogInterface.OnClickListener() {

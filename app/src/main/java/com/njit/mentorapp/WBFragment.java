@@ -11,7 +11,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import com.njit.mentorapp.Model.Service.WebServer;
+import com.njit.mentorapp.model.service.WebServer;
 
 public class WBFragment extends Fragment {
 
