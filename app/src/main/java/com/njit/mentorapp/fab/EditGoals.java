@@ -2,7 +2,6 @@ package com.njit.mentorapp.fab;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -21,6 +20,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.users.Mentee;
+import com.njit.mentorapp.model.users.Mentor;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +32,8 @@ public class EditGoals extends AppCompatActivity
     RelativeLayout r1, r2, r3, r4;
     String[] goals = new String [4];
     EditText[] group;
-    SharedPreferences MENTOR, STUDENT;
+    private Mentor mentor;
+    private Mentee mentee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,8 +50,8 @@ public class EditGoals extends AppCompatActivity
         r4 = findViewById(R.id.r4);
         cancel = findViewById(R.id.cancel);
         save = findViewById(R.id.save);
-        MENTOR = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
-        STUDENT = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
+        mentor = new Mentor(getApplicationContext());
+        mentee = new Mentee(getApplicationContext());
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
@@ -77,12 +79,10 @@ public class EditGoals extends AppCompatActivity
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i < 4; i++) {
+                for (int i = 0; i < 4; i++)
                     goals[i] = group[i].getText().toString();
-                }
-                String mentor = MENTOR.getString("ucid", null);
-                String student = STUDENT.getString("ucid", null);
-                updateGoals("updateGoals", mentor, student, goals);
+
+                updateGoals("updateGoals", mentor.getUcid(), mentee.getUcid(), goals);
                 postToast();
                 onBackPressed();
                 finish();

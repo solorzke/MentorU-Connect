@@ -32,6 +32,8 @@ import com.njit.mentorapp.R;
 import com.njit.mentorapp.SendEmail;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.users.Mentee;
+import com.njit.mentorapp.model.users.Mentor;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -39,7 +41,7 @@ import java.util.Map;
 
 public class Goals extends Fragment implements View.OnClickListener
 {
-    SharedPreferences STUDENT, MENTOR, USER_TYPE;
+    SharedPreferences USER_TYPE;
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
     FloatingActionButton fab;
     TextView GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER, GOALS, M_TITLE, WEEKS, ACCOUNT, EMAIL, PERCENT;
@@ -48,17 +50,19 @@ public class Goals extends Fragment implements View.OnClickListener
     AlertDialog dialog;
     Boolean c1 = false, c2 = false, c3 = false, c4 = false;
     View view;
+    private Mentee mentee;
+    private Mentor mentor;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.fragment_goals, container, false);
-        STUDENT = getActivity().getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-        MENTOR = getActivity().getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+        mentee = new Mentee(view.getContext());
+        mentor = new Mentor(view.getContext());
         USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
         fab = view.findViewById(R.id.m_fab);
-        notifyText = NotificationText.goal(STUDENT.getString("ucid", null));
+        notifyText = NotificationText.goal(mentee.getUcid());
 
         CHECKMARK_1 = (ImageView) view.findViewById(R.id.checkmark1);
         CHECKMARK_2 = (ImageView) view.findViewById(R.id.checkmark2);
@@ -117,10 +121,10 @@ public class Goals extends Fragment implements View.OnClickListener
                     public void onResponse(String response) {
                         Log.d("DEBUG_OUTPUT","Server Response: "+response);
                         if (response.equals("empty")) {
-                            GOAL_1.setText("No new goals from " + MENTOR.getString("fname", null));
-                            GOAL_2.setText("No new goals from " + MENTOR.getString("fname", null));
-                            GOAL_3.setText("No new goals from " + MENTOR.getString("fname", null));
-                            GOAL_4.setText("No new goals from " + MENTOR.getString("fname", null));
+                            GOAL_1.setText("No new goals from " + mentor.getFname());
+                            GOAL_2.setText("No new goals from " + mentor.getFname());
+                            GOAL_3.setText("No new goals from " + mentor.getFname());
+                            GOAL_4.setText("No new goals from " + mentor.getFname());
                             CHECKMARK_1.setEnabled(false);
                             CHECKMARK_2.setEnabled(false);
                             CHECKMARK_3.setEnabled(false);
@@ -145,8 +149,8 @@ public class Goals extends Fragment implements View.OnClickListener
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("action", "getGoals");
-                params.put("ucid", STUDENT.getString("ucid", null));
-                params.put("mentor", MENTOR.getString("ucid", null));
+                params.put("ucid", mentee.getUcid());
+                params.put("mentor", mentor.getUcid());
                 return params;
             }
         };
@@ -179,8 +183,8 @@ public class Goals extends Fragment implements View.OnClickListener
                                 view,
                                 url,
                                 "changeGoalStatus",
-                                STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null),
+                                mentee.getUcid(),
+                                mentor.getUcid(),
                                 GOAL_1.getText().toString(), "1"
                         );
                         PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
@@ -194,8 +198,8 @@ public class Goals extends Fragment implements View.OnClickListener
                                 view,
                                 url,
                                 "changeGoalStatus",
-                                STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null),
+                                mentee.getUcid(),
+                                mentor.getUcid(),
                                 GOAL_1.getText().toString(), "0"
                         );
                         postToast("0");
@@ -210,8 +214,8 @@ public class Goals extends Fragment implements View.OnClickListener
                                 view,
                                 url,
                                 "changeGoalStatus",
-                                STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null),
+                                mentee.getUcid(),
+                                mentor.getUcid(),
                                 GOAL_2.getText().toString(), "1"
                         );
                         PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
@@ -225,8 +229,8 @@ public class Goals extends Fragment implements View.OnClickListener
                                 view,
                                 url,
                                 "changeGoalStatus",
-                                STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null),
+                                mentee.getUcid(),
+                                mentor.getUcid(),
                                 GOAL_2.getText().toString(), "0"
                         );
                         postToast("0");
@@ -242,8 +246,8 @@ public class Goals extends Fragment implements View.OnClickListener
                                 view,
                                 url,
                                 "changeGoalStatus",
-                                STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null),
+                                mentee.getUcid(),
+                                mentor.getUcid(),
                                 GOAL_3.getText().toString(), "1"
                         );
                         PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
@@ -257,8 +261,8 @@ public class Goals extends Fragment implements View.OnClickListener
                                 view,
                                 url,
                                 "changeGoalStatus",
-                                STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null),
+                                mentee.getUcid(),
+                                mentor.getUcid(),
                                 GOAL_3.getText().toString(), "0"
                         );
                         postToast("0");
@@ -273,8 +277,8 @@ public class Goals extends Fragment implements View.OnClickListener
                                 view,
                                 url,
                                 "changeGoalStatus",
-                                STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null),
+                                mentee.getUcid(),
+                                mentor.getUcid(),
                                 GOAL_4.getText().toString(), "1"
                         );
                         PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
@@ -288,8 +292,8 @@ public class Goals extends Fragment implements View.OnClickListener
                                 view,
                                 url,
                                 "changeGoalStatus",
-                                STUDENT.getString("ucid", null),
-                                MENTOR.getString("ucid", null),
+                                mentee.getUcid(),
+                                mentor.getUcid(),
                                 GOAL_4.getText().toString(), "0"
                         );
                         postToast("0");

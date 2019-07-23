@@ -18,9 +18,9 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
-
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
+import com.njit.mentorapp.model.users.User;
 
 import java.util.Calendar;
 
@@ -28,7 +28,8 @@ public class AddEvent extends AppCompatActivity {
 
     EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
     TextView add_event, cancel;
-    private SharedPreferences SESSION, RECEIVER, USER_TYPE;
+    private SharedPreferences USER_TYPE;
+    private User sender, receiver;
     private DatePickerDialog dialog;
     private DatePickerDialog.OnDateSetListener mDateSetListener;
     private TimePickerDialog timePickerDialog;
@@ -135,7 +136,7 @@ public class AddEvent extends AppCompatActivity {
             public void onClick(View v) {
                 EditText[] event = {event_title, event_location, event_date, event_start_time,
                         event_end_time, event_purpose};
-                String email = RECEIVER.getString("email", null);
+                String email = receiver.getEmail();
                 String title = event_title.getText().toString();
                 String location = event_location.getText().toString();
                 String purpose = event_purpose.getText().toString();
@@ -230,13 +231,13 @@ public class AddEvent extends AppCompatActivity {
     {
         if(type.getString("type", null).equals("student"))
         {
-            SESSION = getSharedPreferences("STUDENT", MODE_PRIVATE);
-            RECEIVER = getSharedPreferences("MENTOR", MODE_PRIVATE);
+            sender = new User(getApplicationContext(), "Mentee");
+            receiver = new User(getApplicationContext(), "Mentor");
         }
         else if(type.getString("type", null).equals("mentor"))
         {
-            SESSION = getSharedPreferences("MENTOR", MODE_PRIVATE);
-            RECEIVER = getSharedPreferences("STUDENT", MODE_PRIVATE);
+            sender = new User(getApplicationContext(), "Mentor");
+            receiver = new User(getApplicationContext(), "Mentee");
         }
     }
 }

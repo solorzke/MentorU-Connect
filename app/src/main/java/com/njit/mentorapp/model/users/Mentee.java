@@ -5,100 +5,90 @@ import android.content.SharedPreferences;
 
 public class Mentee
 {
-    private String ucid, fname, lname, email, degree, age, birthday, grade, grad_date;
-    private SharedPreferences USER;
+    private SharedPreferences user;
 
     public Mentee(Context context)
     {
-        this.USER = context.getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-        this.ucid = USER.getString("ucid", null);
-        this.fname = USER.getString("fname", null);
-        this.lname = USER.getString("lname", null);
-        this.email = USER.getString("email", null);
-        this.degree = USER.getString("degree", null);
-        this.age = USER.getString("age", null);
-        this.birthday = USER.getString("birthday", null);
-        this.grade = USER.getString("grade", null);
-        this.grad_date = USER.getString("grad_date", null);
+        this.user = context.getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
     }
 
     public String getUcid() {
-        return ucid;
+        return user.getString("ucid", null);
     }
 
     public void setUcid(String ucid) {
-        this.ucid = ucid;
+        user.edit().putString("ucid", ucid).apply();
     }
 
     public String getFname() {
-        return fname;
+        return user.getString("fname", null);
     }
 
     public void setFname(String fname) {
-        this.fname = fname;
+        user.edit().putString("fname", fname).apply();
     }
 
     public String getLname() {
-        return lname;
+        return user.getString("lname", null);
     }
 
     public void setLname(String lname) {
-        this.lname = lname;
+        user.edit().putString("lname", lname).apply();
     }
 
     public String getEmail() {
-        return email;
+        return user.getString("email", null);
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        user.edit().putString("email", email).apply();
     }
 
     public String getDegree() {
-        return degree;
+        return user.getString("degree", null);
     }
 
     public void setDegree(String degree) {
-        this.degree = degree;
+        user.edit().putString("degree", degree).apply();
     }
 
     public String getAge() {
-        return age;
+        return user.getString("age", null);
     }
 
     public void setAge(String age) {
-        this.age = age;
+        user.edit().putString("age", age).apply();
     }
 
     public String getBirthday() {
-        return birthday;
+        return user.getString("birthday", null);
     }
 
     public void setBirthday(String birthday) {
-        this.birthday = birthday;
+        user.edit().putString("birthday", birthday).apply();
     }
 
     public String getGrade() {
-        return grade;
+        return user.getString("grade", null);
     }
 
     public void setGrade(String grade) {
-        this.grade = grade;
+        user.edit().putString("grade", grade).apply();
     }
 
     public String getGrad_date() {
-        return grad_date;
+        return user.getString("grad_date", null);
     }
 
     public void setGrad_date(String grad_date) {
-        this.grad_date = grad_date;
+        user.edit().putString("grad_date", grad_date).apply();
     }
 
     public SharedPreferences getUSER() {
-        return USER;
+        return user;
     }
 
-    public void setUSER(SharedPreferences USER) {
-        this.USER = USER;
+    public void setUSER(SharedPreferences user) {
+        this.user = user;
     }
 }

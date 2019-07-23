@@ -27,6 +27,7 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.users.Mentee;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -34,8 +35,8 @@ import java.util.Map;
 
 public class StudentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
-    SharedPreferences account, CL, USER_TYPE;
-    SharedPreferences.Editor editor;
+    private Mentee mentee;
+    SharedPreferences USER_TYPE;
     TextView edit, done, ucid, full_name;
     EditText name, email, degree, age, bday, grad_date;
     ImageView avi;
@@ -50,8 +51,7 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_student_beta);
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
-        account = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-        editor = account.edit();
+        mentee = new Mentee(getApplicationContext());
         edit = findViewById(R.id.edit_acc_btn);
         done = findViewById(R.id.done_acc_btn);
         name = findViewById(R.id.acc_stu_name_1);
@@ -78,18 +78,16 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Mentee");
 
-        String fname = account.getString("fname", null);
-        String lname = account.getString("lname", null);
-        String fullname = fname + " " + lname;
+        String fullname = mentee.getFname() + " " + mentee.getLname();
         name.setText(fullname);
         full_name.setText(fullname);
-        ucid.setText(account.getString("ucid", null));
-        email.setText(account.getString("email", null));
-        degree.setText(account.getString("degree", null));
-        age.setText(account.getString("age", null));
-        bday.setText(DateTimeFormat.formatDate(account.getString("birthday", null)));
-        setDefaultGradeLevel(account);
-        grad_date.setText(DateTimeFormat.formatDate(account.getString("grad_date", null)));
+        ucid.setText(mentee.getUcid());
+        email.setText(mentee.getEmail());
+        degree.setText(mentee.getDegree());
+        age.setText(mentee.getAge());
+        bday.setText(DateTimeFormat.formatDate(mentee.getBirthday()));
+        setDefaultGradeLevel(mentee);
+        grad_date.setText(DateTimeFormat.formatDate(mentee.getGrad_date()));
         //Picasso.get().load(account.getString("avi", null)).into(avi);
     }
 
@@ -155,8 +153,8 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                     done.setVisibility(View.INVISIBLE);
                     edit.setVisibility(View.VISIBLE);
                     disableEditAccText(editable);
-                    updateUserSession(editor);
-                    sendAccRequest(WebServer.getQueryLink(), "updateRecord", account);
+                    updateUserSession(mentee);
+                    sendAccRequest(WebServer.getQueryLink(), "updateRecord");
                     postToast("Account Updated");
                 }
             });
@@ -214,26 +212,22 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
     }
 
 
-    private void updateUserSession(SharedPreferences.Editor editor)
+    private void updateUserSession(Mentee mentee)
     {
         String [] name = this.name.getText().toString().split(" ");
-        editor.putString("fname", name[0]);
-        editor.putString("lname", name[1]);
-        editor.putString("email", email.getText().toString());
-        editor.putString("degree", degree.getText().toString());
-        editor.putString("age", age.getText().toString());
-        editor.putString("birthday", DateTimeFormat.formatDateSQL(bday.getText().toString()));
-        editor.putString("grade", spinner.getSelectedItem().toString());
-        editor.putString("grad_date", DateTimeFormat.formatDateSQL(grad_date.getText().toString()));
-        editor.apply();
+        mentee.setFname(name[0]);
+        mentee.setLname(name[1]);
+        mentee.setEmail(email.getText().toString());
+        mentee.setDegree(degree.getText().toString());
+        mentee.setAge(age.getText().toString());
+        mentee.setBirthday(DateTimeFormat.formatDateSQL(bday.getText().toString()));
+        mentee.setGrade(spinner.getSelectedItem().toString());
+        mentee.setGrad_date(DateTimeFormat.formatDateSQL(grad_date.getText().toString()));
         full_name.setText(name[0] + " " + name[1]);
     }
 
-    private void sendAccRequest(String url, final String action, final SharedPreferences ACC)
+    private void sendAccRequest(String url, final String action)
     {
-        final String format_b = ACC.getString("birthday", null);
-        final String format_g = ACC.getString("grad_date", null);
-
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -250,15 +244,15 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("action", action);
-                params.put("ucid", ACC.getString("ucid", null));
-                params.put("fname", ACC.getString("fname", null));
-                params.put("lname", ACC.getString("lname", null));
-                params.put("email", ACC.getString("email", null));
-                params.put("degree", ACC.getString("degree", null));
-                params.put("age", ACC.getString("age", null));
-                params.put("birthday", format_b);
-                params.put("grade", ACC.getString("grade", null));
-                params.put("grad_date", format_g);
+                params.put("ucid", mentee.getUcid());
+                params.put("fname", mentee.getFname());
+                params.put("lname", mentee.getLname());
+                params.put("email", mentee.getEmail());
+                params.put("degree", mentee.getDegree());
+                params.put("age", mentee.getAge());
+                params.put("birthday", mentee.getBirthday());
+                params.put("grade", mentee.getGrade());
+                params.put("grad_date", mentee.getGrad_date());
                 return params;
             }
         };
@@ -290,9 +284,9 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
     @Override
     public void onNothingSelected(AdapterView<?> parent) {  }
 
-    private void setDefaultGradeLevel(SharedPreferences acc)
+    private void setDefaultGradeLevel(Mentee acc)
     {
-        switch (acc.getString("grade", null))
+        switch (acc.getGrade())
         {
             case "Freshman":
                 this.spinner.setSelection(0);

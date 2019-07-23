@@ -30,6 +30,8 @@ import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.Validate;
+import com.njit.mentorapp.model.users.User;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +40,8 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
 {
     EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
     private TextView submit, cancel;
-    private SharedPreferences sender, receiver, user_type;
+    private SharedPreferences user_type;
+    private User sender, receiver;
     private DatePickerDialog date;
     private TimePickerDialog timePickerDialog;
     private Calendar calendar;
@@ -65,15 +68,15 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
 
         if(Validate.isStudent(user_type))
         {
-            sender = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-            receiver = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
-            notifyRequest = NotificationText.requestMeeting(sender.getString("ucid", null));
+            sender = new User(getApplicationContext(), "Mentee");
+            receiver = new User(getApplicationContext(), "Mentor");
+            notifyRequest = NotificationText.requestMeeting(sender.getUcid());
         }
         else
         {
-            sender = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
-            receiver = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-            notifyRequest = NotificationText.requestMeeting(sender.getString("ucid", null));
+            sender = new User(getApplicationContext(), "Mentor");
+            receiver = new User(getApplicationContext(), "Mentee");
+            notifyRequest = NotificationText.requestMeeting(sender.getUcid());
         }
     }
 
@@ -143,8 +146,8 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
             case R.id.create_event_submit:
                 EditText [] event = {event_title, event_location, event_date, event_start_time,
                         event_end_time, event_purpose};
-                String student = sender.getString("ucid", null);
-                String mentor = receiver.getString("ucid", null);
+                String student = sender.getUcid();
+                String mentor = receiver.getUcid();
 
                 if(Validate.checkForm(event))
                 {

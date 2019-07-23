@@ -28,6 +28,8 @@ import com.njit.mentorapp.model.service.PushMessageToFCM;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.users.Mentee;
+import com.njit.mentorapp.model.users.Mentor;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -198,15 +200,10 @@ public class MeetingDetails extends Fragment
 
     private String getEmail()
     {
-        if(meeting_with.getText().toString().equals(getActivity().getSharedPreferences("MENTOR",
-                Context.MODE_PRIVATE).getString("ucid", null)))
-        {
-            return getActivity().getSharedPreferences("MENTOR",
-                    Context.MODE_PRIVATE).getString("email", null);
-        }
+        if(meeting_with.getText().toString().equals(new Mentor(view.getContext()).getEmail()))
+            return new Mentor(view.getContext()).getEmail();
         else
-            return getActivity().getSharedPreferences("STUDENT",
-                    Context.MODE_PRIVATE).getString("email", null);
+            return new Mentee(view.getContext()).getEmail();
     }
 
 

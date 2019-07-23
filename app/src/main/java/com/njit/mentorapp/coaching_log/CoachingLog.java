@@ -2,7 +2,6 @@ package com.njit.mentorapp.coaching_log;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.Validate;
+import com.njit.mentorapp.model.users.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +37,7 @@ public class CoachingLog extends AppCompatActivity
 {
     private ArrayList <ArrayList<String>> meetings = new ArrayList<>();
     private ListView listview;
-    private SharedPreferences user;
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -48,9 +48,9 @@ public class CoachingLog extends AppCompatActivity
 
         /* Define the SharedPrefs based on what the user type */
         if (Validate.isStudent(getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE)))
-            user = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
+            user = new User(getApplicationContext(), "Mentee");
         else
-            user = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+            user = new User(getApplicationContext(), "Mentor");
 
         /* Set the toolbar */
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -89,7 +89,7 @@ public class CoachingLog extends AppCompatActivity
         RequestQueue rq = Volley.newRequestQueue(this);
         Map<String, String> params = new HashMap<String, String>();
         params.put("action", "getAcceptedMeetings");
-        params.put("user", user.getString("ucid", null));
+        params.put("user", user.getUcid());
         JSONObject parameters = new JSONObject(params);
 
         JsonObjectRequest jReq = new JsonObjectRequest(Request.Method.POST, WebServer.getQueryLink(), parameters, new

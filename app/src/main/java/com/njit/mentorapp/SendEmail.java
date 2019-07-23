@@ -11,12 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import com.njit.mentorapp.model.users.User;
 
 public class SendEmail extends AppCompatActivity {
 
     EditText TO, SUBJECT, BODY;
     ImageView send;
-    SharedPreferences RECIPIENT, USER_TYPE;
+    SharedPreferences USER_TYPE;
+    private User user;
     boolean done = false;
 
     @Override
@@ -34,12 +36,10 @@ public class SendEmail extends AppCompatActivity {
         toolbar.setTitle("Send Email");
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
 
-        if(isStudent(USER_TYPE)){
-            RECIPIENT = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-        }
-        else{
-            RECIPIENT = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
-        }
+        if(isStudent(USER_TYPE))
+            user = new User(getApplicationContext(), "Mentee");
+        else
+            user = new User(getApplicationContext(), "Mentor");
     }
 
     /* After onCreateView(), collect the form data and send an intent to their preferred email

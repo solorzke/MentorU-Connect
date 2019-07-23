@@ -1,6 +1,5 @@
 package com.njit.mentorapp.coaching_log.request_status_log;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.CalendarContract;
@@ -16,6 +15,8 @@ import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.tools.TabAdapter;
+import com.njit.mentorapp.model.users.Mentee;
+import com.njit.mentorapp.model.users.Mentor;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -123,15 +124,12 @@ public class RequestTabLayout extends AppCompatActivity
 
     private String getEmail()
     {
-        if(meeting_with.equals(getSharedPreferences("MENTOR",
-                Context.MODE_PRIVATE).getString("ucid", null)))
+        if(meeting_with.equals(new Mentor(getApplicationContext()).getEmail()))
         {
-            return getSharedPreferences("MENTOR",
-                    Context.MODE_PRIVATE).getString("email", null);
+            return new Mentor(getApplicationContext()).getEmail();
         }
         else
-            return getSharedPreferences("STUDENT",
-                    Context.MODE_PRIVATE).getString("email", null);
+            return new Mentee(getApplicationContext()).getEmail();
     }
 
 }

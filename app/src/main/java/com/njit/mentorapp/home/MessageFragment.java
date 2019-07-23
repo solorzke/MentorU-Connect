@@ -29,6 +29,8 @@ import com.njit.mentorapp.FAQFragment;
 import com.njit.mentorapp.model.service.NotificationText;
 import com.njit.mentorapp.model.service.PushMessageToFCM;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.users.Mentee;
+import com.njit.mentorapp.model.users.Mentor;
 import com.njit.mentorapp.report.ReportActivity;
 import com.njit.mentorapp.SendEmail;
 import com.njit.mentorapp.SideBar;
@@ -39,19 +41,19 @@ import java.util.Map;
 
 public class MessageFragment extends Fragment implements View.OnClickListener
 {
-    SharedPreferences STUDENT, MENTOR, USER_TYPE;
+    SharedPreferences USER_TYPE;
     String [] notifyLikesText, notifyDislikesText;
     FloatingActionButton FAB;
     TextView FEEDBACK, messenger, date, contact_user, account_info, help_center, report;
     ImageView messenger_img, thumbs_up, thumbs_down, share;
     View view;
+    private Mentor mentor;
+    private Mentee mentee;
     boolean up = false, down = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.fragment_message, container, false);
-        STUDENT = getActivity().getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-        MENTOR = getActivity().getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
         USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
         FAB = view.findViewById(R.id.m_fab);
         messenger_img = view.findViewById(R.id.messenger_img);
@@ -65,7 +67,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         FEEDBACK = view.findViewById(R.id.feedback);
         report = view.findViewById(R.id.report);
         share = view.findViewById(R.id.share);
-
+        mentor = new Mentor(view.getContext());
+        mentee = new Mentee(view.getContext());
         return view;
     }
 
@@ -84,23 +87,21 @@ public class MessageFragment extends Fragment implements View.OnClickListener
 
         if(isStudent(USER_TYPE))
         {
-            String fname = MENTOR.getString("fname", null);
-            String lname = MENTOR.getString("lname", null);
-            String ucid = STUDENT.getString("ucid", null);
-            messenger.setText(fname + " " + lname);
+            String full_name = mentor.getFname() + " " + mentor.getLname();
+            String ucid = mentee.getUcid();
+            messenger.setText(full_name);
             notifyLikesText = NotificationText.likes(ucid);
             notifyDislikesText = NotificationText.dislikes(ucid);
-            getMessage(STUDENT, MENTOR, view);
+            getMessage(mentee.getUcid(), mentor.getUcid(), view);
         }
         else
-            {
-            String fname = STUDENT.getString("fname", null);
-            String lname = STUDENT.getString("lname", null);
-            String ucid = MENTOR.getString("ucid", null);
-            messenger.setText(fname + " " + lname);
+        {
+            String full_name = mentee.getFname() + " " + mentee.getLname();
+            String ucid = mentor.getUcid();
+            messenger.setText(full_name);
             notifyLikesText = NotificationText.likes(ucid);
             notifyDislikesText = NotificationText.dislikes(ucid);
-            getMessage(MENTOR, STUDENT, view);
+            getMessage(mentor.getUcid(), mentee.getUcid(), view);
         }
     }
 
@@ -110,16 +111,14 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         super.onResume();
         if(isStudent(USER_TYPE))
         {
-            String fname = MENTOR.getString("fname", null);
-            String lname = MENTOR.getString("lname", null);
-            messenger.setText(fname + " " + lname);
-            getMessage(STUDENT, MENTOR, view);
+            String full_name = mentor.getFname() + " " + mentor.getLname();
+            messenger.setText(full_name);
+            getMessage(mentee.getUcid(), mentor.getUcid(), view);
         }
         else {
-            String fname = STUDENT.getString("fname", null);
-            String lname = STUDENT.getString("lname", null);
-            messenger.setText(fname + " " + lname);
-            getMessage(MENTOR, STUDENT, view);
+            String full_name = mentee.getFname() + " " + mentee.getLname();
+            messenger.setText(full_name);
+            getMessage(mentor.getUcid(), mentee.getUcid(), view);
         }
     }
 
@@ -129,16 +128,14 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         super.onPause();
         if(isStudent(USER_TYPE))
         {
-            String fname = MENTOR.getString("fname", null);
-            String lname = MENTOR.getString("lname", null);
-            messenger.setText(fname + " " + lname);
-            getMessage(STUDENT, MENTOR, view);
+            String full_name = mentor.getFname() + " " + mentor.getLname();
+            messenger.setText(full_name);
+            getMessage(mentee.getUcid(), mentor.getUcid(), view);
         }
         else {
-            String fname = STUDENT.getString("fname", null);
-            String lname = STUDENT.getString("lname", null);
-            messenger.setText(fname + " " + lname);
-            getMessage(MENTOR, STUDENT, view);
+            String full_name = mentee.getFname() + " " + mentee.getLname();
+            messenger.setText(full_name);
+            getMessage(mentor.getUcid(), mentee.getUcid(), view);
         }
     }
 
@@ -151,7 +148,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    private void getMessage(final SharedPreferences RECEIVER, final SharedPreferences SENDER, View view)
+    private void getMessage(final String RECEIVER, final String SENDER, View view)
     {
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
         StringRequest stringRequest_1 = new StringRequest(Request.Method.POST, WebServer.getQueryLink(),
@@ -161,7 +158,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                         Log.d("DEBUG_OUTPUT","Server Response: "+response);
                         String [] reply = response.split("\\|");
                         if (reply[0].equals("empty")) {
-                            FEEDBACK.setText("No new feedback from " + SENDER.getString("fname", null));
+                            FEEDBACK.setText("No new feedback from " + SENDER);
                             date.setText("Date: N/A");
 
                         } else {
@@ -181,8 +178,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("action", "getFeedback");
-                params.put("receiver", RECEIVER.getString("ucid", null));
-                params.put("sender", SENDER.getString("ucid", null));  //Change this later <------
+                params.put("receiver", RECEIVER);
+                params.put("sender", SENDER);  //Change this later <------
 
                 return params;
             }
@@ -204,7 +201,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 if(up){
                     up = false;
                     thumbs_up.setImageResource(R.drawable.ic_thumb_up);
-                    likeOrDislike(STUDENT, MENTOR, view, "0", FEEDBACK);
+                    likeOrDislike(mentee.getUcid(), mentor.getUcid(), view, "0", FEEDBACK);
                 }
                 else{
                     up = true;
@@ -212,7 +209,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                     thumbs_down.setImageResource(R.drawable.ic_thumb_down);
                     thumbs_up.setImageResource(R.drawable.ic_thumb_up_green);
                     postToast("up");
-                    likeOrDislike(STUDENT, MENTOR, view, "1", FEEDBACK);
+                    likeOrDislike(mentee.getUcid(), mentor.getUcid(), view, "1", FEEDBACK);
                     PushMessageToFCM.send(getContext(), notifyLikesText[0], notifyLikesText[1]);
                 }
                 break;
@@ -221,7 +218,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 if(down){
                     down = false;
                     thumbs_down.setImageResource(R.drawable.ic_thumb_down);
-                    likeOrDislike(STUDENT, MENTOR, view, "0", FEEDBACK);
+                    likeOrDislike(mentee.getUcid(), mentor.getUcid(), view, "0", FEEDBACK);
                 }
                 else{
                     down = true;
@@ -229,7 +226,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                     thumbs_up.setImageResource(R.drawable.ic_thumb_up);
                     thumbs_down.setImageResource(R.drawable.ic_thumb_down_red);
                     postToast("down");
-                    likeOrDislike(STUDENT, MENTOR, view, "2", FEEDBACK);
+                    likeOrDislike(mentee.getUcid(), mentor.getUcid(), view, "2", FEEDBACK);
                     PushMessageToFCM.send(getContext(), notifyDislikesText[0], notifyDislikesText[1]);
                 }
                 break;
@@ -298,7 +295,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    private void likeOrDislike(final SharedPreferences STUDENT, final SharedPreferences MENTOR, View view,
+    private void likeOrDislike(final String STUDENT, final String MENTOR, View view,
                                final String status, final TextView msg)
     {
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
@@ -318,8 +315,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("action", "liking");
-                params.put("student", STUDENT.getString("ucid", null));
-                params.put("mentor", MENTOR.getString("ucid", null));
+                params.put("student", STUDENT);
+                params.put("mentor", MENTOR);
                 params.put("msg", msg.getText().toString());
                 params.put("status", status);
 

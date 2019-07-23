@@ -23,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.users.Mentor;
 import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -30,7 +31,7 @@ import java.util.Map;
 
 public class MentorActivity extends AppCompatActivity  {
 
-    SharedPreferences MENTOR, USER_TYPE;
+    SharedPreferences USER_TYPE;
     SharedPreferences.Editor editor;
     ImageView AVI;
     EditText MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY;
@@ -38,15 +39,14 @@ public class MentorActivity extends AppCompatActivity  {
     EditText [] list;
     Calendar calendar;
     DatePickerDialog date;
+    private Mentor mentor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.account_mentor);
-        MENTOR = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
-
         AVI = findViewById(R.id.picasso);
         MTR_NAME = findViewById(R.id.acc_mtr_name);
         MTR_EMAIL = findViewById(R.id.acc_mtr_email);
@@ -60,6 +60,7 @@ public class MentorActivity extends AppCompatActivity  {
         AGE = findViewById(R.id.age);
         BDAY = findViewById(R.id.bday);
         full_name = findViewById(R.id.fullname);
+        mentor = new Mentor(getApplicationContext());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -67,19 +68,17 @@ public class MentorActivity extends AppCompatActivity  {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Mentor");
 
-        Picasso.get().load(MENTOR.getString("avi", null)).into(AVI);
-        MTR_NAME.setText(MENTOR.getString("fname", null) + " " + MENTOR.getString(
-                "lname", null));
-        full_name.setText(MENTOR.getString("fname", null) + " " + MENTOR.getString(
-                "lname", null));
-        MTR_EMAIL.setText(MENTOR.getString("email", null));
-        MTR_UCID.setText(MENTOR.getString("ucid", null));
-        MTR_DATE.setText(DateTimeFormat.formatDate(MENTOR.getString("grad_date", null)));
-        MTR_DEGREE.setText(MENTOR.getString("degree", null));
-        MTR_OCC.setText(MENTOR.getString("occupation", null));
-        MTR_MENTEE.setText(MENTOR.getString("mentee", null));
-        AGE.setText(MENTOR.getString("age", null));
-        BDAY.setText(DateTimeFormat.formatDate(MENTOR.getString("birthday", null)));
+        Picasso.get().load(mentor.getAvi()).into(AVI);
+        MTR_NAME.setText(mentor.getFname() + " " + mentor.getLname());
+        full_name.setText(mentor.getFname() + " " + mentor.getLname());
+        MTR_EMAIL.setText(mentor.getEmail());
+        MTR_UCID.setText(mentor.getUcid());
+        MTR_DATE.setText(DateTimeFormat.formatDate(mentor.getGrad_date()));
+        MTR_DEGREE.setText(mentor.getDegree());
+        MTR_OCC.setText(mentor.getOccupation());
+        MTR_MENTEE.setText(mentor.getMentee());
+        AGE.setText(mentor.getAge());
+        BDAY.setText(DateTimeFormat.formatDate(mentor.getBirthday()));
 
         list = new EditText [] {MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY};
     }
@@ -144,8 +143,8 @@ public class MentorActivity extends AppCompatActivity  {
                     DONE.setVisibility(View.INVISIBLE);
                     EDIT.setVisibility(View.VISIBLE);
                     editText(list, false);
-                    updateSharedPrefs(editor, list);
-                    updateChanges(MENTOR, WebServer.getQueryLink(), "updateMentorRecord");
+                    updateSharedPrefs(mentor, list);
+                    updateChanges(mentor, WebServer.getQueryLink(), "updateMentorRecord");
                     postToast();
                 }
             });
@@ -198,27 +197,22 @@ public class MentorActivity extends AppCompatActivity  {
         }
     }
 
-    private void updateSharedPrefs(SharedPreferences.Editor e, EditText [] texts)
+    private void updateSharedPrefs(Mentor mentor, EditText [] texts)
     {
-        e = MENTOR.edit();
         String [] name = texts[0].getText().toString().split(" ");
-        e.putString("fname", name[0]);
-        e.putString("lname", name[1]);
-        e.putString("email", texts[1].getText().toString());
-        e.putString("grad_date", DateTimeFormat.formatDateSQL(texts[2].getText().toString()));
-        e.putString("occupation", texts[3].getText().toString());
-        e.putString("degree", texts[4].getText().toString());
-        e.putString("age", texts[5].getText().toString());
-        e.putString("birthday", DateTimeFormat.formatDateSQL(texts[6].getText().toString()));
-        e.apply();
+        mentor.setFname(name[0]);
+        mentor.setLname(name[1]);
+        mentor.setEmail(texts[1].getText().toString());
+        mentor.setGrad_date(DateTimeFormat.formatDateSQL(texts[2].getText().toString()));
+        mentor.setOccupation(texts[3].getText().toString());
+        mentor.setDegree(texts[4].getText().toString());
+        mentor.setAge(texts[5].getText().toString());
+        mentor.setBirthday(DateTimeFormat.formatDateSQL(texts[6].getText().toString()));
         full_name.setText(name[0] + " " + name[1]);
     }
 
-    private void updateChanges(final SharedPreferences list, String url, final String action)
+    private void updateChanges(final Mentor mentor, String url, final String action)
     {
-        final String format_b = list.getString("birthday", null);
-        final String format_g = list.getString("grad_date", null);
-
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
             @Override
@@ -235,15 +229,15 @@ public class MentorActivity extends AppCompatActivity  {
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("action", action);
-                params.put("mentor", list.getString("ucid", null));
-                params.put("fname", list.getString("fname", null));
-                params.put("lname", list.getString("lname", null));
-                params.put("email", list.getString("email", null));
-                params.put("grad_date", format_g);
-                params.put("occupation", list.getString("occupation", null));
-                params.put("degree", list.getString("degree", null));
-                params.put("age", list.getString("age", null));
-                params.put("bday", format_b);
+                params.put("mentor", mentor.getUcid());
+                params.put("fname", mentor.getFname());
+                params.put("lname", mentor.getLname());
+                params.put("email", mentor.getEmail());
+                params.put("grad_date", mentor.getGrad_date());
+                params.put("occupation", mentor.getOccupation());
+                params.put("degree", mentor.getDegree());
+                params.put("age", mentor.getAge());
+                params.put("bday", mentor.getBirthday());
                 return params;
             }
         };

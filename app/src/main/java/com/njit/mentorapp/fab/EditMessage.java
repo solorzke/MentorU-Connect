@@ -23,6 +23,8 @@ import com.njit.mentorapp.model.service.NotificationText;
 import com.njit.mentorapp.model.service.PushMessageToFCM;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.users.Mentee;
+import com.njit.mentorapp.model.users.Mentor;
 import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,16 +36,18 @@ public class EditMessage extends AppCompatActivity
     EditText msg;
     String fname, lname;
     String [] notifyMessageText;
-    SharedPreferences mentee, mentor, USER_TYPE;
+    SharedPreferences USER_TYPE;
+    private Mentor mentor;
+    private Mentee mentee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_message);
-        mentee = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-        mentor = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+        mentor = new Mentor(getApplicationContext());
+        mentee = new Mentee(getApplicationContext());
         char_count = findViewById(R.id.char_count);
         recipient = findViewById(R.id.name);
         cancel = findViewById(R.id.cancel);
@@ -61,16 +65,14 @@ public class EditMessage extends AppCompatActivity
         super.onStart();
 
         if(!isStudent(USER_TYPE)){
-            fname = mentee.getString("fname", null);
-            lname = mentee.getString("lname", null);
-            String ucid = mentor.getString("ucid", null);
-            notifyMessageText = NotificationText.message(ucid);
+            fname = mentee.getFname();
+            lname = mentee.getLname();
+            notifyMessageText = NotificationText.message(mentor.getUcid());
         }
         else {
-            fname = mentor.getString("fname", null);
-            lname = mentor.getString("lname", null);
-            String ucid = mentee.getString("ucid", null);
-            notifyMessageText = NotificationText.message(ucid);
+            fname = mentor.getFname();
+            lname = mentor.getLname();
+            notifyMessageText = NotificationText.message(mentee.getUcid());
         }
 
         msg.addTextChangedListener(new TextWatcher() {
@@ -81,7 +83,8 @@ public class EditMessage extends AppCompatActivity
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                char_count.setText("Char Count: " + s.toString().trim().length());
+                String counter = "Char Count: " + s.toString().trim().length();
+                char_count.setText(counter);
             }
 
             @Override
@@ -106,10 +109,19 @@ public class EditMessage extends AppCompatActivity
             public void onClick(View v) {
                 String message = msg.getText().toString();
                 if(!isStudent(USER_TYPE))
-                    updateMessage("updateFeedback", mentor, mentee, message);
+                    updateMessage(
+                            "updateFeedback",
+                            mentor.getUcid(),
+                            mentee.getUcid(),
+                            message
+                    );
                 else
-                    updateMessage("updateFeedback", mentee, mentor, message);
-
+                    updateMessage(
+                            "updateFeedback",
+                            mentee.getUcid(),
+                            mentor.getUcid(),
+                            message
+                    );
                 PushMessageToFCM.send(getApplicationContext(), notifyMessageText[0], notifyMessageText[1]);
                 postToast();
                 onBackPressed();
@@ -118,10 +130,7 @@ public class EditMessage extends AppCompatActivity
         });
     }
 
-    private void updateMessage(final String action, SharedPreferences sen, SharedPreferences rec, final String msg) {
-        final String sender = sen.getString("ucid", null);
-        final String receiver = rec.getString("ucid", null);
-
+    private void updateMessage(final String action, final String sender, final String receiver, final String msg) {
         RequestQueue queue = Volley.newRequestQueue(EditMessage.this);
         StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
             @Override

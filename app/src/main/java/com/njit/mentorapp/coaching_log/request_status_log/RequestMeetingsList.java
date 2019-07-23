@@ -2,7 +2,6 @@ package com.njit.mentorapp.coaching_log.request_status_log;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -24,6 +23,7 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.Validate;
+import com.njit.mentorapp.model.users.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +39,7 @@ public class RequestMeetingsList extends AppCompatActivity
     TextView p_none, r_none;
     ArrayList<ArrayList<String>> pendingArray = new ArrayList<>();
     ArrayList<ArrayList<String>> receivingArray = new ArrayList<>();
-    SharedPreferences user;
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -57,9 +57,9 @@ public class RequestMeetingsList extends AppCompatActivity
 
         /* Define the SharedPrefs based on what the user type */
         if (Validate.isStudent(getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE)))
-            user = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
+            user = new User(getApplicationContext(), "Mentee");
         else
-            user = getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+            user = new User(getApplicationContext(), "Mentor");
 
         /* Set the toolbar */
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -93,7 +93,7 @@ public class RequestMeetingsList extends AppCompatActivity
                     Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
                     intent.putStringArrayListExtra("meeting_details", findArrayList(title, purpose));
                     intent.putExtra("type", "sender");
-                    intent.putExtra("responder", user.getString("ucid", null));
+                    intent.putExtra("responder", user.getUcid());
                     startActivity(intent);
                 }
             }
@@ -124,7 +124,7 @@ public class RequestMeetingsList extends AppCompatActivity
         RequestQueue rq = Volley.newRequestQueue(this);
         Map<String, String> params = new HashMap<String, String>();
         params.put("action", "getRequests");
-        params.put("user", user.getString("ucid", null));
+        params.put("user", user.getUcid());
         JSONObject parameters = new JSONObject(params);
 
         JsonObjectRequest jReq = new JsonObjectRequest(Request.Method.POST, WebServer.getQueryLink(), parameters, new

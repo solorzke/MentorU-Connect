@@ -28,6 +28,8 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.Validate;
+import com.njit.mentorapp.model.users.Mentee;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -40,7 +42,8 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
     ImageView add, cancel;
     TextView semester, mentee;
     ListView list;
-    SharedPreferences courses, mte;
+    SharedPreferences courses;
+    private Mentee mte;
     SharedPreferences.Editor e;
     String fname, lname;
     EditText c_num, c_title;
@@ -77,9 +80,9 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
 
         /* Set sharedPrefs and full name */
         courses = getSharedPreferences("COURSES", Context.MODE_PRIVATE);
-        mte = getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-        fname = mte.getString("fname", null);
-        lname = mte.getString("lname", null);
+        mte = new Mentee(getApplicationContext());
+        fname = mte.getFname();
+        lname = mte.getLname();
 
         /* Register the context menu for editing/removal list item when performing long clicks */
         registerForContextMenu(list);
