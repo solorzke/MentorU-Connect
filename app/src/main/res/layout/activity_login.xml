@@ -65,7 +65,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_capture_photo"
-        app:srcCompat="@drawable/mentor_u_connect" />
+        app:srcCompat="@drawable/circle_cropped" />
 
     <EditText
         android:id="@+id/ucidText"
