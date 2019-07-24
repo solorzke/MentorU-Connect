@@ -112,6 +112,7 @@ public class RequestMeetingsList extends AppCompatActivity
                     Intent intent = new Intent(getApplicationContext(), RequestTabLayout.class);
                     intent.putExtra("meeting_details", findArrayList(title, purpose));
                     intent.putExtra("type", "receiver");
+                    intent.putExtra("responder", user.getUcid());
                     startActivity(intent);
                 }
             }
@@ -191,25 +192,26 @@ public class RequestMeetingsList extends AppCompatActivity
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         View v = info.targetView;
         String t = ((TextView)(v.findViewById(R.id.text1))).getText().toString();
-        if(t.equals("No New Meeting Requests"))
-            return super.onContextItemSelected(item);
-
-        switch (item.getItemId())
+        if(!t.equals("No New Meeting Requests"))
         {
-            /* Allow the user to remove the course from the listview */
-            case R.id.remove:
-                View view = info.targetView;
-                String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
-                String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
-                deleteRequest(findArrayList(title, purpose));
-                pendingArray.clear();
-                receivingArray.clear();
-                getRequests();
-                return false;
+            switch (item.getItemId())
+            {
+                /* Allow the user to remove the course from the listview */
+                case R.id.remove:
+                    View view = info.targetView;
+                    String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
+                    String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
+                    deleteRequest(findArrayList(title, purpose));
+                    pendingArray.clear();
+                    receivingArray.clear();
+                    getRequests();
+                    return false;
 
-            default:
-                return super.onContextItemSelected(item);
+                default:
+                    return super.onContextItemSelected(item);
+            }
         }
+        return false;
     }
 
     /* Add all remaining requests (titles & purposes) from ArrayList to the hashmap */
