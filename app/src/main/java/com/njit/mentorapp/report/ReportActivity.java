@@ -8,14 +8,15 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.SideBar;
 
 public class ReportActivity extends AppCompatActivity implements View.OnClickListener {
 
-    TextView NEXT, CANCEL, REPORTED_USER, ACTIVITY, HELP_CENTER;
-    EditText user_input;
+    TextView NEXT, CANCEL, REPORTED_USER, HELP_CENTER;
+    EditText other_input, ACTIVITY;
     ImageView th_1, th_2, th_3, th_other;
     LinearLayout reason_1, reason_2, reason_3, other;
     boolean r1, r2, r3, oth;
@@ -38,7 +39,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         th_2 = findViewById(R.id.th_2);
         th_3 = findViewById(R.id.th_3);
         th_other = findViewById(R.id.th_other);
-        user_input = findViewById(R.id.user_input);
+        other_input = findViewById(R.id.other_input);
         r1 = false;
         r2 = false;
         r3 = false;
@@ -49,9 +50,8 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onStart() {
         super.onStart();
-
         //Set Reported User & activity
-        user_input.setVisibility(View.GONE);
+        other_input.setVisibility(View.GONE);
         REPORTED_USER.setText(name);
         ACTIVITY.setText(intentExtras);
         NEXT.setOnClickListener(this);
@@ -68,14 +68,25 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
 
             case R.id.next:
-                boolean [] list = {r1, r2, r3, oth};
-                Intent goToNext = new Intent(getApplicationContext(), VerifyReportActivity.class);
-                goToNext.putExtra("name", REPORTED_USER.getText().toString());
-                goToNext.putExtra("msg", ACTIVITY.getText().toString());
-                goToNext.putExtra("reasons", list);
-                goToNext.putExtra("other_detail", user_input.getText().toString());
-                startActivity(goToNext);
-                finish();
+                if(!isOtherBlank(oth))
+                {
+                    boolean [] list = {r1, r2, r3, oth};
+                    Intent goToNext = new Intent(getApplicationContext(), VerifyReportActivity.class);
+                    goToNext.putExtra("name", REPORTED_USER.getText().toString());
+                    goToNext.putExtra("msg", ACTIVITY.getText().toString());
+                    goToNext.putExtra("reasons", list);
+                    goToNext.putExtra("other_detail", other_input.getText().toString());
+                    startActivity(goToNext);
+                    finish();
+                }
+                else
+                {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Fill in Other",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                }
                 break;
 
             case R.id.cancel:
@@ -126,13 +137,13 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                 if (oth) {
                     this.oth = false;
                     this.th_other.setImageResource(android.R.drawable.radiobutton_off_background);
-                    user_input.setVisibility(View.GONE);
+                    other_input.setVisibility(View.GONE);
                 }
                 /* If radio button isn't pressed already */
                 else {
                     this.oth = true;
                     this.th_other.setImageResource(android.R.drawable.radiobutton_on_background);
-                    user_input.setVisibility(View.VISIBLE);
+                    other_input.setVisibility(View.VISIBLE);
                 }
                 break;
 
@@ -147,4 +158,18 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                 break;
         }
     }
+
+    private boolean isOtherBlank(boolean value)
+    {
+        if(value)
+        {
+            if(other_input.length() > 0)
+                return false;
+            else
+                return true;
+        }
+        return false;
+    }
+
+
 }

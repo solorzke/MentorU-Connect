@@ -69,14 +69,17 @@
             android:text="You are reporting this user for the following activity:"
             android:textColor="#000000" />
 
-        <TextView
+        <EditText
             android:id="@+id/activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="start"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt "
-            android:textSize="20sp" />
+            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+            android:inputType="textMultiLine"
+            android:maxLength="195"
+            android:textSize="20sp"
+            android:hint="Required"/>
 
         <View
             android:layout_width="match_parent"
@@ -178,7 +181,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/user_input"
+            android:id="@+id/other_input"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

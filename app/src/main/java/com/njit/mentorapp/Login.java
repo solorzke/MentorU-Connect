@@ -89,6 +89,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         switch (v.getId())
         {
             case R.id.signInBtn:
+                Log.d("DEBUG_OUTPUT", WebServer.getLoginLink());
                 ucid = ucid_et.getText().toString();
                 pw = pw_et.getText().toString();
                 Validate validation = new Validate(ucid, pw);
@@ -155,18 +156,20 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
                         {
                             Log.d("DEBUG_OUTPUT","Server Response: Connection to PHP script was " +
                                     "successful but returned false");
-                            alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
+                            //alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
+                //alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
             }
         }) {
             @Override
             protected Map<String, String> getParams()
             {
+                Log.d("DEBUG_OUTPUT", ucid + " " + pw + " " + user_type);
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("tableName", user_type);
                 params.put("username", ucid);
@@ -176,6 +179,10 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
         };
 
         queue.add(stringRequest);
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
     @Override
