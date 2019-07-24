@@ -118,4 +118,8 @@ public class User
     public void setEntry(){
         user.edit().putString("firstEntry", "true").apply();
     }
+
+    public String getFullName(){
+        return getFname() + " " + getLname();
+    }
 }

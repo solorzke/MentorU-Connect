@@ -17,8 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".settings.AboutUs"></activity>
+        <activity android:name=".settings.AboutUs" />
         <activity android:name=".FirebaseTest" />
+
         <service
             android:name=".model.service.FireBaseInstanceService"
             android:enabled="true"
@@ -27,6 +28,7 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+
         <activity android:name=".coaching_log.HowTo" />
         <activity android:name=".coaching_log.CoachingLog" />
         <activity android:name=".coaching_log.request_status_log.RequestMeetingsList" />

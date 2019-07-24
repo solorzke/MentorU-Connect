@@ -34,6 +34,8 @@ import com.njit.mentorapp.coaching_log.LogFragment;
 import com.njit.mentorapp.events.AddEvent;
 import com.njit.mentorapp.home.HomeFrag;
 import com.njit.mentorapp.model.service.FireBaseServer;
+import com.njit.mentorapp.model.users.Mentee;
+import com.njit.mentorapp.model.users.Mentor;
 import com.njit.mentorapp.model.users.User;
 import com.njit.mentorapp.report.ReportActivity;
 import com.njit.mentorapp.settings.SettingsFragment;
@@ -51,6 +53,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     public static NavigationView navigationView;
     public static int position;
     private User user;
+    private String oppo_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -143,7 +146,9 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 startActivity(go2);
                 break;
             case R.id.report:
-                startActivity(new Intent(getApplicationContext(), ReportActivity.class));
+                startActivity(new Intent(getApplicationContext(), ReportActivity.class)
+                        .putExtra("com.example.mentorapp.Report.activity", "")
+                        .putExtra("com.example.mentorapp.Report.name", oppo_user));
                 break;
             default:
                 break;
@@ -250,10 +255,12 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         if(type.getString("type", null).equals("student"))
         {
             user = new User(getApplicationContext(), "Mentee");
+            oppo_user = new Mentor(getApplicationContext()).getFullName();
         }
         else if(type.getString("type", null).equals("mentor"))
         {
             user = new User(getApplicationContext(), "Mentor");
+            oppo_user = new Mentee(getApplicationContext()).getFullName();
         }
     }
 

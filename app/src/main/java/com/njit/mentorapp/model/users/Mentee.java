@@ -91,4 +91,8 @@ public class Mentee
     public void setUSER(SharedPreferences user) {
         this.user = user;
     }
+
+    public String getFullName(){
+        return getFname() + " " + getLname();
+    }
 }

@@ -7,8 +7,7 @@ public class Mentor
 {
     private SharedPreferences user;
 
-    public Mentor(Context context)
-    {
+    public Mentor(Context context){
         this.user = context.getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
     }
 
@@ -98,5 +97,9 @@ public class Mentor
 
     public void setAvi(String avi) {
         user.edit().putString("avi", avi).apply();
+    }
+
+    public String getFullName(){
+        return getFname() + " " + getLname();
     }
 }
