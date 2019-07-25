@@ -3,6 +3,7 @@ package com.njit.mentorapp.report;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -54,6 +55,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         other_input.setVisibility(View.GONE);
         REPORTED_USER.setText(name);
         ACTIVITY.setText(intentExtras);
+        enableEdit(isBlank(true, ACTIVITY));
         NEXT.setOnClickListener(this);
         CANCEL.setOnClickListener(this);
         reason_1.setOnClickListener(this);
@@ -61,6 +63,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         reason_3.setOnClickListener(this);
         HELP_CENTER.setOnClickListener(this);
         other.setOnClickListener(this);
+        Log.d("DEBUG_OUTPUT", String.valueOf(anyReasonChecked(r1, r2, r3, oth)));
     }
 
     @Override
@@ -68,7 +71,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         switch (v.getId()) {
 
             case R.id.next:
-                if(!isOtherBlank(oth))
+                if(anyReasonChecked(r1, r2, r3, oth))
                 {
                     boolean [] list = {r1, r2, r3, oth};
                     Intent goToNext = new Intent(getApplicationContext(), VerifyReportActivity.class);
@@ -83,7 +86,7 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
                 {
                     Toast.makeText(
                             getApplicationContext(),
-                            "Fill in Other",
+                            "Fill in the fields",
                             Toast.LENGTH_SHORT
                     ).show();
                 }
@@ -159,11 +162,11 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    private boolean isOtherBlank(boolean value)
+    private boolean isBlank(boolean value, EditText input)
     {
         if(value)
         {
-            if(other_input.length() > 0)
+            if(input.length() > 0)
                 return false;
             else
                 return true;
@@ -171,5 +174,29 @@ public class ReportActivity extends AppCompatActivity implements View.OnClickLis
         return false;
     }
 
+    private void enableEdit(boolean value)
+    {
+        if(value)
+            ACTIVITY.setEnabled(true);
+        else
+            ACTIVITY.setEnabled(false);
+    }
 
+    private boolean anyReasonChecked(boolean r1, boolean r2, boolean r3, boolean oth)
+    {
+        if(ACTIVITY.length() == 0)
+            return false;
+
+        if(r1 || r2 || r3 || oth)
+        {
+            if((r1 || r2 || r3) && !oth)
+                return true;
+            else if(isBlank(oth, other_input))
+                return false;
+            else
+                return true;
+        }
+        else
+            return false;
+    }
 }
