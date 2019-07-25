@@ -10,12 +10,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.Switch;
+import android.widget.Toast;
 
 import com.njit.mentorapp.account.Courses;
 import com.njit.mentorapp.account.MentorActivity;
 import com.njit.mentorapp.account.StudentActivity;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.SideBar;
+import com.njit.mentorapp.model.users.Mentee;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener
 {
@@ -64,11 +66,25 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
                 break;
 
             case R.id.mentee:
-                startActivity(new Intent(getContext(), StudentActivity.class));
+                if(!new Mentee(view.getContext()).notRegistered())
+                    startActivity(new Intent(getContext(), StudentActivity.class));
+                else
+                    Toast.makeText(
+                            view.getContext(),
+                            "Mentee Information not available",
+                            Toast.LENGTH_SHORT
+                    ).show();
                 break;
 
             case R.id.courses:
-                startActivity(new Intent(getContext(), Courses.class));
+                if(!new Mentee(view.getContext()).notRegistered())
+                    startActivity(new Intent(getContext(), Courses.class));
+                else
+                    Toast.makeText(
+                            view.getContext(),
+                            "Mentee Information not available",
+                            Toast.LENGTH_SHORT
+                    ).show();
                 break;
 
             case R.id.mentor:

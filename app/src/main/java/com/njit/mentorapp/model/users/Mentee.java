@@ -95,4 +95,11 @@ public class Mentee
     public String getFullName(){
         return getFname() + " " + getLname();
     }
+
+    public boolean notRegistered() {
+        if(getUcid().equals("N/A"))
+            return true;
+        else
+            return false;
+    }
 }
