@@ -41,6 +41,7 @@
                 android:background="@android:color/black" />
 
             <LinearLayout
+                android:id="@+id/goal_layout_1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -78,6 +79,7 @@
                 android:background="@android:color/black"/>
 
             <LinearLayout
+                android:id="@+id/goal_layout_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -114,6 +116,7 @@
                 android:background="@android:color/black" />
 
             <LinearLayout
+                android:id="@+id/goal_layout_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -150,6 +153,7 @@
                 android:background="@android:color/black" />
 
             <LinearLayout
+                android:id="@+id/goal_layout_4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">

@@ -47,7 +47,6 @@ public class Goals extends Fragment implements View.OnClickListener
     TextView GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER, GOALS, M_TITLE, WEEKS, ACCOUNT, EMAIL, PERCENT;
     String url = WebServer.getQueryLink();
     String [] notifyText;
-    AlertDialog dialog;
     Boolean c1 = false, c2 = false, c3 = false, c4 = false;
     View view;
     private Mentee mentee;
@@ -86,27 +85,6 @@ public class Goals extends Fragment implements View.OnClickListener
 
         ACCOUNT.setOnClickListener(this);
         EMAIL.setOnClickListener(this);
-
-        dialog = new AlertDialog.Builder(getContext()).create();
-        dialog.setTitle("Choose Option");
-        dialog.setMessage("Select option to add/edit");
-        dialog.setButton(AlertDialog.BUTTON_POSITIVE, "Goals", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                Intent intent = new Intent(getContext(), EditGoals.class);
-                intent.putExtra("goal1", GOAL_1.getText().toString());
-                intent.putExtra("goal2", GOAL_2.getText().toString());
-                intent.putExtra("goal3", GOAL_3.getText().toString());
-                intent.putExtra("goal4", GOAL_4.getText().toString());
-                startActivity(intent);
-            }
-        });
-        dialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Message", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                startActivity(new Intent(getContext(), EditMessage.class));
-            }
-        });
         return view;
     }
 
@@ -162,7 +140,12 @@ public class Goals extends Fragment implements View.OnClickListener
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    dialog.show();
+                    Intent intent = new Intent(getContext(), EditGoals.class);
+                    intent.putExtra("goal1", GOAL_1.getText().toString());
+                    intent.putExtra("goal2", GOAL_2.getText().toString());
+                    intent.putExtra("goal3", GOAL_3.getText().toString());
+                    intent.putExtra("goal4", GOAL_4.getText().toString());
+                    startActivity(intent);
                 }
             });
         }

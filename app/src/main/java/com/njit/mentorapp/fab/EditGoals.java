@@ -52,10 +52,6 @@ public class EditGoals extends AppCompatActivity
         save = findViewById(R.id.save);
         mentor = new Mentor(getApplicationContext());
         mentee = new Mentee(getApplicationContext());
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        toolbar.setTitle("Edit Goals");
     }
 
     @Override
@@ -82,42 +78,21 @@ public class EditGoals extends AppCompatActivity
                 for (int i = 0; i < 4; i++)
                     goals[i] = group[i].getText().toString();
 
-                updateGoals("updateGoals", mentor.getUcid(), mentee.getUcid(), goals);
-                postToast();
-                onBackPressed();
-                finish();
+                if(!isBlank(goals))
+                {
+                    updateGoals("updateGoals", mentor.getUcid(), mentee.getUcid(), goals);
+                    postToast();
+                    onBackPressed();
+                    finish();
+                }
+                else
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Provide 4 goals please",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         });
-
-        r1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertMsg(g1, g2, g3, g4);
-            }
-        });
-
-        r2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertMsg(g2, g1, g3, g4);
-            }
-        });
-
-        r3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertMsg(g3, g2, g1, g4);
-            }
-        });
-
-        r4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                alertMsg(g4, g2, g3, g1);
-            }
-        });
-
-
     }
 
     private void updateGoals(final String action, final String mentor, final String student, final String[] goals)
@@ -150,29 +125,6 @@ public class EditGoals extends AppCompatActivity
         queue.add(request);
     }
 
-    private void alertMsg(final EditText cur_goal, final EditText goal1, final EditText goal2, final EditText goal3)
-    {
-        AlertDialog dialog = new AlertDialog.Builder(this).create();
-        dialog.setTitle("Goal Action");
-        dialog.setMessage("Select option to edit/remove");
-        dialog.setButton(android.app.AlertDialog.BUTTON_POSITIVE, "Edit", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                cur_goal.setEnabled(true);
-                goal1.setEnabled(false);
-                goal2.setEnabled(false);
-                goal3.setEnabled(false);
-            }
-        });
-        dialog.setButton(AlertDialog.BUTTON_NEUTRAL, "Remove", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-                cur_goal.setText("");
-            }
-        });
-        dialog.show();
-    }
-
     private void postToast()
     {
         Context context = getApplicationContext();
@@ -180,6 +132,15 @@ public class EditGoals extends AppCompatActivity
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(context, text, duration);
         toast.show();
+    }
+
+    private boolean isBlank(String [] goals)
+    {
+        for(String goal : goals)
+            if(goal.equals("") || goal.equals(" "))
+                return true;
+
+        return false;
     }
 
 }
