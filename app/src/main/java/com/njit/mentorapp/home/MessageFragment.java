@@ -97,6 +97,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         else
         {
             String full_name = mentee.getFname() + " " + mentee.getLname();
+            if(mentee.notRegistered())
+                full_name = mentee.getUcid();
             String ucid = mentor.getUcid();
             messenger.setText(full_name);
             notifyLikesText = NotificationText.likes(ucid);

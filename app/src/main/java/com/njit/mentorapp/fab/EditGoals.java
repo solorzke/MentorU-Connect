@@ -1,11 +1,9 @@
 package com.njit.mentorapp.fab;
 
 import android.content.Context;
-import android.content.DialogInterface;
-import android.support.v7.app.AlertDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -19,6 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.SideBar;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.users.Mentee;
 import com.njit.mentorapp.model.users.Mentor;
@@ -82,7 +81,7 @@ public class EditGoals extends AppCompatActivity
                 {
                     updateGoals("updateGoals", mentor.getUcid(), mentee.getUcid(), goals);
                     postToast();
-                    onBackPressed();
+                    startActivity(new Intent(getApplicationContext(), SideBar.class));
                     finish();
                 }
                 else
@@ -142,5 +141,4 @@ public class EditGoals extends AppCompatActivity
 
         return false;
     }
-
 }
