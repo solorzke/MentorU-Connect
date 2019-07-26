@@ -57,10 +57,10 @@ public class EditGoals extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
-        g1.setText(getIntent().getExtras().getString("goal1"));
-        g2.setText(getIntent().getExtras().getString("goal2"));
-        g3.setText(getIntent().getExtras().getString("goal3"));
-        g4.setText(getIntent().getExtras().getString("goal4"));
+        g1.setHint(getIntent().getExtras().getString("goal1"));
+        g2.setHint(getIntent().getExtras().getString("goal2"));
+        g3.setHint(getIntent().getExtras().getString("goal3"));
+        g4.setHint(getIntent().getExtras().getString("goal4"));
         group = new EditText[]{g1, g2, g3, g4};
 
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +136,7 @@ public class EditGoals extends AppCompatActivity
     private boolean isBlank(String [] goals)
     {
         for(String goal : goals)
-            if(goal.equals("") || goal.equals(" "))
+            if(goal.equals("") || goal.equals(" ") || goal.contains("No new goals from"))
                 return true;
 
         return false;
