@@ -35,161 +35,181 @@
                 android:textSize="25sp"
                 app:fontFamily="@font/open_sans" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/black" />
+            <TextView
+                android:id="@+id/no_goals"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Welcome to the Goals page. Currently there are no goals available. "
+                android:gravity="center_horizontal"
+                android:textSize="20sp"
+                android:textColor="@android:color/black"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:visibility="gone"/>
 
             <LinearLayout
-                android:id="@+id/goal_layout_1"
+                android:id="@+id/goals"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
-                <RelativeLayout
-                    android:layout_width="wrap_content"
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/black" />
+
+                <LinearLayout
+                    android:id="@+id/goal_layout_1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/holo_red_dark">
+                    android:orientation="horizontal">
 
-                    <ImageView
-                        android:id="@+id/checkmark1"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/ic_check_circle" />
-                </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_red_dark">
 
-                <TextView
-                    android:id="@+id/goal1"
-                    android:layout_width="wrap_content"
+                        <ImageView
+                            android:id="@+id/checkmark1"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/ic_check_circle" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/goal1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="25dp"
+                        android:text="N/A"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/open_sans" />
+                </LinearLayout>
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/black"/>
+
+                <LinearLayout
+                    android:id="@+id/goal_layout_2"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="25dp"
-                    android:text="N/A"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    app:fontFamily="@font/open_sans" />
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_red_dark">
+
+                        <ImageView
+                            android:id="@+id/checkmark2"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/ic_check_circle" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/goal2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="25dp"
+                        android:text="N/A"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/open_sans" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/black" />
+
+                <LinearLayout
+                    android:id="@+id/goal_layout_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_red_dark">
+
+                        <ImageView
+                            android:id="@+id/checkmark3"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/ic_check_circle" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/goal3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="25dp"
+                        android:text="N/A"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/open_sans" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/black" />
+
+                <LinearLayout
+                    android:id="@+id/goal_layout_4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RelativeLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@android:color/holo_red_dark">
+
+                        <ImageView
+                            android:id="@+id/checkmark4"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_marginTop="10dp"
+                            android:layout_marginBottom="10dp"
+                            android:src="@drawable/ic_check_circle" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/goal4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginTop="25dp"
+                        android:text="N/A"
+                        android:textColor="#000000"
+                        android:textSize="15sp"
+                        app:fontFamily="@font/open_sans" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="2dp"
+                    android:background="@android:color/black" />
+
             </LinearLayout>
-
-            <View
-                android:id="@+id/view2"
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/black"/>
-
-            <LinearLayout
-                android:id="@+id/goal_layout_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/holo_red_dark">
-
-                    <ImageView
-                        android:id="@+id/checkmark2"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/ic_check_circle" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/goal2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="25dp"
-                    android:text="N/A"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    app:fontFamily="@font/open_sans" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/black" />
-
-            <LinearLayout
-                android:id="@+id/goal_layout_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/holo_red_dark">
-
-                    <ImageView
-                        android:id="@+id/checkmark3"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/ic_check_circle" />
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/goal3"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="25dp"
-                    android:text="N/A"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    app:fontFamily="@font/open_sans" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/black" />
-
-            <LinearLayout
-                android:id="@+id/goal_layout_4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <RelativeLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@android:color/holo_red_dark">
-
-                    <ImageView
-                        android:id="@+id/checkmark4"
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:src="@drawable/ic_check_circle" />
-
-                </RelativeLayout>
-
-                <TextView
-                    android:id="@+id/goal4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="25dp"
-                    android:text="N/A"
-                    android:textColor="#000000"
-                    android:textSize="15sp"
-                    app:fontFamily="@font/open_sans" />
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="2dp"
-                android:background="@android:color/black" />
 
             <LinearLayout
                 android:layout_width="match_parent"

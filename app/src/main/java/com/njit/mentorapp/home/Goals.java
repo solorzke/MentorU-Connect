@@ -1,8 +1,6 @@
 package com.njit.mentorapp.home;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -25,7 +24,6 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.account.MentorActivity;
 import com.njit.mentorapp.fab.EditGoals;
-import com.njit.mentorapp.fab.EditMessage;
 import com.njit.mentorapp.model.service.NotificationText;
 import com.njit.mentorapp.model.service.PushMessageToFCM;
 import com.njit.mentorapp.R;
@@ -44,11 +42,12 @@ public class Goals extends Fragment implements View.OnClickListener
     SharedPreferences USER_TYPE;
     ImageView CHECKMARK_1, CHECKMARK_2, CHECKMARK_3, CHECKMARK_4;
     FloatingActionButton fab;
-    TextView GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER, GOALS, M_TITLE, WEEKS, ACCOUNT, EMAIL, PERCENT;
+    TextView no_goals, GOAL_1, GOAL_2, GOAL_3, GOAL_4, SEMESTER, WEEKS, ACCOUNT, EMAIL, PERCENT;
     String url = WebServer.getQueryLink();
     String [] notifyText;
     Boolean c1 = false, c2 = false, c3 = false, c4 = false;
     View view;
+    LinearLayout goals_layout;
     private Mentee mentee;
     private Mentor mentor;
 
@@ -73,6 +72,7 @@ public class Goals extends Fragment implements View.OnClickListener
         CHECKMARK_3.setOnClickListener(this);
         CHECKMARK_4.setOnClickListener(this);
 
+        no_goals = view.findViewById(R.id.no_goals);
         GOAL_1 = view.findViewById(R.id.goal1);
         GOAL_2 = view.findViewById(R.id.goal2);
         GOAL_3 = view.findViewById(R.id.goal3);
@@ -82,7 +82,7 @@ public class Goals extends Fragment implements View.OnClickListener
         ACCOUNT = view.findViewById(R.id.account);
         EMAIL = view.findViewById(R.id.sendEmail);
         PERCENT = view.findViewById(R.id.percent);
-
+        goals_layout = view.findViewById(R.id.goals);
         ACCOUNT.setOnClickListener(this);
         EMAIL.setOnClickListener(this);
         return view;
@@ -103,11 +103,15 @@ public class Goals extends Fragment implements View.OnClickListener
                             GOAL_2.setText("No new goals from " + mentor.getFname());
                             GOAL_3.setText("No new goals from " + mentor.getFname());
                             GOAL_4.setText("No new goals from " + mentor.getFname());
+                            goals_layout.setVisibility(View.GONE);
+                            no_goals.setVisibility(View.VISIBLE);
                             CHECKMARK_1.setEnabled(false);
                             CHECKMARK_2.setEnabled(false);
                             CHECKMARK_3.setEnabled(false);
                             CHECKMARK_4.setEnabled(false);
                         } else {
+                            no_goals.setVisibility(View.GONE);
+                            goals_layout.setVisibility(View.VISIBLE);
                             String[] goals = response.split("\\|");
                             c1 = loadGoal(goals[0], GOAL_1, CHECKMARK_1);
                             c2 = loadGoal(goals[1], GOAL_2, CHECKMARK_2);
@@ -463,4 +467,3 @@ public class Goals extends Fragment implements View.OnClickListener
 
     }
 }
-
