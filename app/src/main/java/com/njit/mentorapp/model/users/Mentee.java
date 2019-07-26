@@ -97,7 +97,7 @@ public class Mentee
     }
 
     public boolean notRegistered() {
-        if(getUcid().equals("N/A"))
+        if(getFname().equals("N/A"))
             return true;
         else
             return false;

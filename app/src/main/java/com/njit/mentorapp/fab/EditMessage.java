@@ -58,7 +58,6 @@ public class EditMessage extends AppCompatActivity
     @Override
     protected void onStart() {
         super.onStart();
-
         if(!isStudent(USER_TYPE)){
             fname = mentee.getFname();
             lname = mentee.getLname();
@@ -88,9 +87,12 @@ public class EditMessage extends AppCompatActivity
             }
         });
 
-        recipient.setText(fname + " " + lname);
-        Picasso.get().load("https://tinyurl.com/yyt8bga6").into(avi);
+        if(mentee.notRegistered())
+            recipient.setText(mentee.getUcid());
+        else
+            recipient.setText(fname + " " + lname);
 
+        Picasso.get().load("https://tinyurl.com/yyt8bga6").into(avi);
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

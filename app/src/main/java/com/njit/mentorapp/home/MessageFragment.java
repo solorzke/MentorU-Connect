@@ -119,6 +119,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }
         else {
             String full_name = mentee.getFname() + " " + mentee.getLname();
+            if(mentee.notRegistered())
+                full_name = mentee.getUcid();
             messenger.setText(full_name);
             getMessage(mentor.getUcid(), mentee.getUcid(), view);
         }
@@ -136,6 +138,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }
         else {
             String full_name = mentee.getFname() + " " + mentee.getLname();
+            if(mentee.notRegistered())
+                full_name = mentee.getUcid();
             messenger.setText(full_name);
             getMessage(mentor.getUcid(), mentee.getUcid(), view);
         }
