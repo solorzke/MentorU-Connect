@@ -81,14 +81,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginRight="10dp"
                 android:background="#dbdde0" />
 
             <android.support.constraint.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="330dp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
@@ -96,21 +96,22 @@
 
                 <TextView
                     android:id="@+id/feedback"
-                    android:layout_width="280dp"
-                    android:layout_height="220dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
+                    android:layout_margin="10dp"
                     android:gravity="start"
                     android:maxLength="210"
                     android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet,"
                     android:textAlignment="textStart"
                     android:textColor="#000000"
-                    android:textSize="15sp"
+                    android:textSize="17sp"
                     app:fontFamily="casual"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.358" />
+                    app:layout_constraintVertical_bias="0.114" />
 
             </android.support.constraint.ConstraintLayout>
 
