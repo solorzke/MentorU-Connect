@@ -1,301 +1,304 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Alerts"
-                android:textSize="15sp"/>
-
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="#dbdde0"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
-        </LinearLayout>
-
-       <LinearLayout
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:orientation="horizontal"
-           android:layout_margin="10dp">
-
-           <ImageView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:src="@android:drawable/ic_popup_reminder"
-               android:tint="@android:color/holo_orange_light"
-               android:layout_marginLeft="10dp"/>
-
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:text="Notifications"
-               android:textSize="20sp"
-               app:fontFamily="@font/open_sans"
-               android:layout_marginLeft="30dp"
-               android:textColor="@android:color/background_dark"/>
-           <Space
-               android:layout_width="120dp"
-               android:layout_height="match_parent" />
-
-           <Switch
-               android:id="@+id/switcher"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content" />
-
-       </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Accounts"
-                android:textSize="15sp"/>
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
 
-            <View
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Alerts"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#dbdde0" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="#dbdde0"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/mentee"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_account"
-                android:tint="@android:color/holo_orange_light"
-                android:layout_marginLeft="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Mentee"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp"
-                app:fontFamily="@font/open_sans"
-                android:layout_marginLeft="30dp"/>
-        </LinearLayout>
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/courses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:src="@android:drawable/ic_popup_reminder"
+                    android:tint="@android:color/holo_orange_light" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@android:drawable/ic_menu_sort_by_size"
-                android:tint="@android:color/holo_orange_light"
-                android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Notifications"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/open_sans" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Course Schedule"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp"
-                app:fontFamily="@font/open_sans"
-                android:layout_marginLeft="30dp"/>
-        </LinearLayout>
+                <Space
+                    android:layout_width="120dp"
+                    android:layout_height="match_parent" />
 
-        <LinearLayout
-            android:id="@+id/mentor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
+                <Switch
+                    android:id="@+id/switcher"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_account"
-                android:tint="@android:color/holo_orange_light"
-                android:layout_marginLeft="10dp"/>
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mentor"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp"
-                app:fontFamily="@font/open_sans"
-                android:layout_marginLeft="30dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Office"
-                android:textSize="15sp"/>
-
-            <View
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="#dbdde0"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/office"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@android:drawable/ic_menu_call"
-                android:tint="@android:color/holo_orange_light"
-                android:layout_marginLeft="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Contact Office"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp"
-                app:fontFamily="@font/open_sans"
-                android:layout_marginLeft="30dp"/>
-        </LinearLayout>
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/about"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accounts"
+                    android:textSize="15sp" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/ic_business"
-                android:tint="@android:color/holo_orange_light"
-                android:layout_marginLeft="10dp"/>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#dbdde0" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="About Us"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp"
-                app:fontFamily="@font/open_sans"
-                android:layout_marginLeft="30dp"/>
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Terms and Conditions"
-                android:textSize="15sp"/>
-
-            <View
+            <LinearLayout
+                android:id="@+id/mentee"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_gravity="center"
-                android:background="#dbdde0"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/privacy"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
-
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@android:drawable/ic_lock_idle_lock"
-                android:tint="@android:color/holo_orange_light"
-                android:layout_marginLeft="10dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Privacy Policy"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp"
-                app:fontFamily="@font/open_sans"
-                android:layout_marginLeft="30dp"/>
-        </LinearLayout>
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:id="@+id/terms"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="10dp">
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_account"
+                    android:tint="@android:color/holo_orange_light" />
 
-            <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@android:drawable/ic_menu_info_details"
-                android:tint="@android:color/holo_orange_light"
-                android:layout_marginLeft="10dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Mentee"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/open_sans" />
+            </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/courses"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Terms and Conditions"
-                android:textColor="@android:color/background_dark"
-                android:textSize="20sp"
-                app:fontFamily="@font/open_sans"
-                android:layout_marginLeft="30dp"/>
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@android:drawable/ic_menu_sort_by_size"
+                    android:tint="@android:color/holo_orange_light" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Course Schedule"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/open_sans" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/mentor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_account"
+                    android:tint="@android:color/holo_orange_light" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Mentor"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/open_sans" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Office"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#dbdde0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/office"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@android:drawable/ic_menu_call"
+                    android:tint="@android:color/holo_orange_light" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Contact Office"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/open_sans" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/about"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/ic_business"
+                    android:tint="@android:color/holo_orange_light" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="About Us"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/open_sans" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Terms and Conditions"
+                    android:textSize="15sp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#dbdde0" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/privacy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@android:drawable/ic_lock_idle_lock"
+                    android:tint="@android:color/holo_orange_light" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Privacy Policy"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/open_sans" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/terms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@android:drawable/ic_menu_info_details"
+                    android:tint="@android:color/holo_orange_light" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:text="Terms and Conditions"
+                    android:textColor="@android:color/background_dark"
+                    android:textSize="20sp"
+                    app:fontFamily="@font/open_sans" />
+            </LinearLayout>
         </LinearLayout>
-
-
-    </LinearLayout>
-
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>
