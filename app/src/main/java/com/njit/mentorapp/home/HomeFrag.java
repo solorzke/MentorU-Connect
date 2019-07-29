@@ -34,7 +34,6 @@ public class HomeFrag extends Fragment {
         adapter.addFragment(new MessageFragment(), "Messages");
         adapter.addFragment(new VectorFeedFragment(), "Feed");
         viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new CubeOutTransformer());
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(tabIcons[0]);
         tabLayout.getTabAt(1).setIcon(tabIcons[1]);
