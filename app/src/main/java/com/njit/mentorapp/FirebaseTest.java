@@ -18,6 +18,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.njit.mentorapp.model.service.FireBaseCallback;
 import com.njit.mentorapp.model.service.FireBaseServer;
 import com.njit.mentorapp.model.service.MySingleton;
 
@@ -35,6 +36,7 @@ public class FirebaseTest extends AppCompatActivity {
     private DatabaseReference db;
     private JSONObject notification, notifcationBody;
     final private String FCM_API = "https://fcm.googleapis.com/fcm/send";
+    String pairedUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +46,12 @@ public class FirebaseTest extends AppCompatActivity {
         db = FirebaseDatabase.getInstance().getReference().child("Communication");
         txt = findViewById(R.id.editText);
         txt2 = findViewById(R.id.editText2);
-        //FireBaseServer.registerToDB("kas58", "ppp43");
-
-        /*
-        FirebaseMessaging.getInstance().subscribeToTopic("kas58ppp43")
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        String msg = "Message Delivered";
-                        if (!task.isSuccessful()) {
-                            msg = "Message Delivered";
-                        }
-                        Toast.makeText(FirebaseTest.this, msg, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                */
+        FireBaseServer.findReceivingUser("ppp43", "mentor", new FireBaseCallback() {
+            @Override
+            public void onCallback(String value) {
+                Toast.makeText(getApplicationContext(), value, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -67,71 +59,10 @@ public class FirebaseTest extends AppCompatActivity {
         super.onStart();
         b.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick (View v) {
+            public void onClick(View v) {
 
-                final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Communication");
-                db.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        loop:
-                        for(DataSnapshot data : dataSnapshot.getChildren())
-
-                            for(DataSnapshot user : data.getChildren())
-                                if(user.getValue().equals("kas58"))
-                                {
-                                    String TOPIC_ID = data.child("topic_id").getValue().toString();
-                                    Log.d("DEBUG_OUTPUT", TOPIC_ID);
-                                    break loop;
-                                }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        Log.d("DEBUG_OUTPUT", databaseError.getMessage());
-                    }
-                });
-
-
-
-                //FireBaseServer.unRegisterToDB("kas58","ppp43");
-                /*db.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        for(DataSnapshot data : dataSnapshot.getChildren())
-                        {
-                            if(data.getValue().toString().equals("kas58"))
-                            {
-                                txt.setText(data.getValue().toString());
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-                        databaseError.getMessage();
-                    }
-                });
-                */
-                setJsonObjects(txt.getText().toString(), txt2.getText().toString());
-                sendNotification(notification);
             }
         });
-
-        /*
-        FirebaseInstanceId.getInstance()
-        .getInstanceId()
-        .addOnSuccessListener(
-            FirebaseTest.this,
-            new OnSuccessListener<InstanceIdResult>()
-            {
-                @Override
-                public void onSuccess(InstanceIdResult instanceIdResult) {
-                    token = instanceIdResult.getToken();
-                    Log.e("Token",token);
-                }
-            });
-            */
-
     }
 
     private void setJsonObjects(String NOTIFICATION_TITLE, String NOTIFICATION_MESSAGE)
