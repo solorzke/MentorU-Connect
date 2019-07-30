@@ -10,6 +10,7 @@ import android.support.v4.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.users.UserType;
 import java.util.Map;
 import java.util.Random;
 
@@ -17,16 +18,36 @@ public class FireBaseInstanceService extends FirebaseMessagingService
 {
     // TODO(developer): Handle FCM messages here.
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage)
+    public void onMessageReceived(final RemoteMessage remoteMessage)
     {
         super.onMessageReceived(remoteMessage);
+        UserType userType = new UserType(getApplicationContext());
+        String paired_user = userType.getPairedUser();
+        String type = userType.getPairedType();
         if(remoteMessage.getData().isEmpty())
-            showNotification(
-                remoteMessage.getNotification().getTitle(),
-                remoteMessage.getNotification().getBody()
-            );
-        else {
-            showNotification(remoteMessage.getData());
+        {
+            final String body = remoteMessage.getNotification().getBody();
+            FireBaseServer.findReceivingUser(paired_user, type, new FireBaseCallback() {
+                @Override
+                public void onCallback(String value) {
+                    if(body.contains(value))
+                        showNotification(
+                                remoteMessage.getNotification().getTitle(),
+                                remoteMessage.getNotification().getBody()
+                        );
+                }
+            });
+        }
+        else
+        {
+            final String body = remoteMessage.getData().get("message");
+            FireBaseServer.findReceivingUser(paired_user, type, new FireBaseCallback() {
+                @Override
+                public void onCallback(String value) {
+                    if(body.contains(value))
+                        showNotification(remoteMessage.getData());
+                }
+            });
         }
     }
 
