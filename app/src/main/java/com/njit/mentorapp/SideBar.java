@@ -24,6 +24,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -33,6 +34,7 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.coaching_log.LogFragment;
 import com.njit.mentorapp.events.AddEvent;
 import com.njit.mentorapp.home.HomeFrag;
+import com.njit.mentorapp.model.service.FireBaseCallback;
 import com.njit.mentorapp.model.service.FireBaseServer;
 import com.njit.mentorapp.model.users.Mentee;
 import com.njit.mentorapp.model.users.Mentor;
@@ -177,7 +179,19 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 signOutRequest();
-                FireBaseServer.unsubcribeToTopic(FireBaseServer.getTopicID(user.getUcid()));
+                FireBaseServer.getTopicID(new FireBaseCallback() {
+                    @Override
+                    public void onCallback(String value) {
+                        if(!value.isEmpty())
+                            FireBaseServer.unsubcribeToTopic(value);
+                        else
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "Could not unsubscribe topic",
+                                    Toast.LENGTH_SHORT
+                            ).show();
+                    }
+                }, user.getUcid());
                 getSupportFragmentManager().popBackStack();
                 startActivity(intent);
                 finish();

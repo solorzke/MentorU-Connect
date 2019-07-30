@@ -15,12 +15,15 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.Toast;
+
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.njit.mentorapp.Login;
+import com.njit.mentorapp.model.service.FireBaseCallback;
 import com.njit.mentorapp.model.service.FireBaseServer;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.SideBar;
@@ -43,7 +46,19 @@ public class JSON extends AppCompatActivity
         setContentView(R.layout.activity_json);
         ucid = getIntent().getExtras().getString("com.example.mentorapp.UCID");
         String confirm = getIntent().getExtras().getString("com.example.mentorapp.CONFIRM");
-        FireBaseServer.subscribeToTopic(FireBaseServer.getTopicID(ucid));
+        FireBaseServer.getTopicID(new FireBaseCallback() {
+            @Override
+            public void onCallback(String value) {
+                if(!value.isEmpty())
+                    FireBaseServer.subscribeToTopic(value);
+                else
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Couldn't subscribe to Topic",
+                            Toast.LENGTH_SHORT
+                    ).show();
+            }
+        }, ucid);
         defineUserType(confirm);
         loadUser(confirm);
     }

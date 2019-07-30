@@ -17,22 +17,11 @@ public class FireBaseServer
 
     final private static String FCM_API = "https://fcm.googleapis.com/fcm/send";
 
-    private static String TOPIC_ID = null;
-
     private static boolean IN_THE_DB = false;
 
     public static String getFCM_API() { return FCM_API; }
 
     public static String getSERVER_KEY() { return SERVER_KEY; }
-
-    /* Check if the user signing in belongs to the topic registered with the device. */
-    public static boolean topicValidation(String USER)
-    {
-        String id = getTopicID(USER);
-        if(!id.equals("null"))
-            return true;
-        return false;
-    }
 
     /* Have the user subscribed to the topic id */
     public static void subscribeToTopic(String TOPIC_ID)
@@ -110,7 +99,7 @@ public class FireBaseServer
     }
 
     /* Return the topic id between two users */
-    public static String getTopicID(final String UCID)
+    public static void getTopicID(final FireBaseCallback callback, final String UCID)
     {
         final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Communication");
         db.addValueEventListener(new ValueEventListener() {
@@ -122,7 +111,7 @@ public class FireBaseServer
                     for(DataSnapshot user : data.getChildren())
                         if(user.getValue().equals(UCID))
                         {
-                            TOPIC_ID = data.child("topic_id").getValue().toString();
+                            callback.onCallback(data.child("topic_id").getValue().toString());
                             break loop;
                         }
             }
@@ -132,11 +121,6 @@ public class FireBaseServer
                 Log.d("DEBUG_OUTPUT", databaseError.getMessage());
             }
         });
-
-        if(TOPIC_ID != null)
-            return TOPIC_ID;
-        else
-            return "null";
     }
 
     /* Verify if the user is registered in the FireBase database child 'Communication' */
