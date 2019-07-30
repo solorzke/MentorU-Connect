@@ -72,13 +72,13 @@ public class FireBaseServer
     }
 
     /* Single-Use only per pairing */
-    public static void registerToDB(String ucid_1, String ucid_2)
+    public static void registerToDB(String mentee, String mentor)
     {
         DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Communication");
         String key = db.push().getKey();
-        db.child(key).child("user_1").setValue(ucid_1);
-        db.child(key).child("user_2").setValue(ucid_2);
-        db.child(key).child("topic_id").setValue(ucid_1+ucid_2);
+        db.child(key).child("mentee").setValue(mentee);
+        db.child(key).child("mentor").setValue(mentor);
+        db.child(key).child("topic_id").setValue(mentee+mentor);
     }
 
     /* Unregister pairing  */
