@@ -13,13 +13,17 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.njit.mentorapp.model.service.Connectivity;
 import com.njit.mentorapp.model.tools.JSON;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.Validate;
@@ -27,8 +31,8 @@ import java.util.HashMap;
 import java.util.Map;
 import me.ibrahimsn.particle.ParticleView;
 
-public class Login extends AppCompatActivity implements View.OnClickListener{
-
+public class Login extends AppCompatActivity implements View.OnClickListener
+{
     private String ucid;
     private String pw;
     private TextView forgotPassword, help;
@@ -163,7 +167,18 @@ public class Login extends AppCompatActivity implements View.OnClickListener{
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                //alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         }) {
             @Override
