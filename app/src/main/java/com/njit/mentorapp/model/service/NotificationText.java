@@ -4,7 +4,7 @@ public class NotificationText
 {
     public static String [] goal(String ucid)
     {
-        return new String [] {"Goal Update", ucid + " has completed a goal!"};
+        return new String [] {"Goal Complete", ucid + " has completed a goal!"};
     }
 
     public static String [] message(String ucid)
