@@ -164,4 +164,27 @@ public class FireBaseServer
 
         return IN_THE_DB;
     }
+
+    /* Return the Receiving User ucid/username that belongs to the current user */
+    public static void findReceivingUser(final String pairedUser, final String type, final FireBaseCallback callback)
+    {
+        final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Communication");
+        db.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot data : dataSnapshot.getChildren()){
+                    String value = data.child(type).getValue().toString();
+                    if(value.equals(pairedUser)) {
+                        callback.onCallback(value);
+                        break;
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                Log.d("DEBUG_OUTPUT", databaseError.getMessage());
+            }
+        });
+    }
 }
