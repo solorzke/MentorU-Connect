@@ -93,22 +93,26 @@ public class Login extends AppCompatActivity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.signInBtn:
-                Log.d("DEBUG_OUTPUT", WebServer.getLoginLink());
-                ucid = ucid_et.getText().toString();
-                pw = pw_et.getText().toString();
-                Validate validation = new Validate(ucid, pw);
-                if (validation.validation())
-                {
-                    if (asAMentor)
-                        signIn("Mentors", "mentor");
-                    else
-                        signIn("Students", "student");
+                if(Connectivity.checkService(getApplicationContext())){
+                    ucid = ucid_et.getText().toString();
+                    pw = pw_et.getText().toString();
+                    Validate validation = new Validate(ucid, pw);
+                    if (validation.validation()) {
+                        if (asAMentor)
+                            signIn("Mentors", "mentor");
+                        else
+                            signIn("Students", "student");
+                    } else {
+                        Log.d("DEBUG_OUTPUT", "Validation did not go through");
+                        alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
+                    }
                 }
                 else
-                {
-                    Log.d("DEBUG_OUTPUT","Validation did not go through");
-                    alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
-                }
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Unable to connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
                 break;
 
             /* Head to Register page for new mentees to register */
