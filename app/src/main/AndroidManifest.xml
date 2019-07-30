@@ -17,8 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".settings.AboutUs" />
-        <activity android:name=".FirebaseTest" />
+        <activity
+            android:name=".settings.AboutUs"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".FirebaseTest"
+            android:screenOrientation="portrait" />
 
         <service
             android:name=".model.service.FireBaseInstanceService"
@@ -29,13 +33,27 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".coaching_log.HowTo" />
-        <activity android:name=".coaching_log.CoachingLog" />
-        <activity android:name=".coaching_log.request_status_log.RequestMeetingsList" />
-        <activity android:name=".settings.TermsAndConditions" />
-        <activity android:name=".settings.PrivacyPolicy" />
-        <activity android:name=".settings.ContactOffice" />
-        <activity android:name=".coaching_log.request_status_log.RequestTabLayout" />
+        <activity
+            android:name=".coaching_log.HowTo"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".coaching_log.CoachingLog"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".coaching_log.request_status_log.RequestMeetingsList"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".settings.TermsAndConditions"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".settings.PrivacyPolicy"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".settings.ContactOffice"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".coaching_log.request_status_log.RequestTabLayout"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".coaching_log.Meeting"
             android:screenOrientation="portrait"
