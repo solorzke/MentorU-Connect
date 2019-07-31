@@ -126,25 +126,6 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    @Override
-    public void onPause()
-    {
-        super.onPause();
-        if(isStudent(USER_TYPE))
-        {
-            String full_name = mentor.getFname() + " " + mentor.getLname();
-            messenger.setText(full_name);
-            getMessage(mentee.getUcid(), mentor.getUcid(), view);
-        }
-        else {
-            String full_name = mentee.getFname() + " " + mentee.getLname();
-            if(mentee.notRegistered())
-                full_name = mentee.getUcid();
-            messenger.setText(full_name);
-            getMessage(mentor.getUcid(), mentee.getUcid(), view);
-        }
-    }
-
     private boolean isStudent(SharedPreferences type)
     {
         if (type.getString("type", null).equals("student")) {

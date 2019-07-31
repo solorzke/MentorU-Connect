@@ -129,7 +129,7 @@ public class Mentee
     }
 
     public boolean notRegistered() {
-        if(getFname().equals("N/A"))
+        if(getFname().equals("N/A") || getFname() == null)
             return true;
         else
             return false;
