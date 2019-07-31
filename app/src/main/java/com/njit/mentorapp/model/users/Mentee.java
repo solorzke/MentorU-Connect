@@ -2,14 +2,38 @@ package com.njit.mentorapp.model.users;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Mentee
 {
     private SharedPreferences user;
 
-    public Mentee(Context context)
+    public Mentee(Context context) {
+        this.user = context.getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
+    }
+
+    public Mentee(Context context, JSONObject object)
     {
         this.user = context.getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
+        try
+        {
+            clearSharedPrefs();
+            setUcid(object.getString("ucid"));
+            setFname(object.getString("fname"));
+            setLname(object.getString("lname"));
+            setEmail(object.getString("email"));
+            setDegree(object.getString("degree"));
+            setAge(object.getString("age"));
+            setBirthday(object.getString("birthday"));
+            setGrade(object.getString("grade"));
+            setGrad_date(object.getString("grad_date"));
+            setEntry("true");
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String getUcid() {
@@ -84,6 +108,14 @@ public class Mentee
         user.edit().putString("grad_date", grad_date).apply();
     }
 
+    public String getEntry(){
+        return user.getString("firstEntry", null);
+    }
+
+    public void setEntry(String entry){
+        user.edit().putString("firstEntry", "true").apply();
+    }
+
     public SharedPreferences getUSER() {
         return user;
     }
@@ -101,5 +133,9 @@ public class Mentee
             return true;
         else
             return false;
+    }
+
+    public void clearSharedPrefs(){
+        user.edit().clear().apply();
     }
 }

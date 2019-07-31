@@ -2,6 +2,8 @@ package com.njit.mentorapp.model.users;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class Mentor
 {
@@ -9,6 +11,31 @@ public class Mentor
 
     public Mentor(Context context){
         this.user = context.getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+    }
+
+    public Mentor(Context context, JSONObject object)
+    {
+        this.user = context.getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+        try
+        {
+            clearSharedPrefs();
+            setUcid(object.getString("ucid"));
+            setFname(object.getString("fname"));
+            setLname(object.getString("lname"));
+            setEmail(object.getString("email"));
+            setDegree(object.getString("degree"));
+            setAge(object.getString("age"));
+            setBirthday(object.getString("birthday"));
+            setOccupation(object.getString("occupation"));
+            setGrad_date(object.getString("grad_date"));
+            setMentee(object.getString("mentee"));
+            setAvi(object.getString("avi"));
+            setEntry("true");
+        }
+        catch (JSONException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     public String getUcid() {
@@ -101,5 +128,17 @@ public class Mentor
 
     public String getFullName(){
         return getFname() + " " + getLname();
+    }
+
+    public String getEntry(){
+        return user.getString("firstEntry", null);
+    }
+
+    public void setEntry(String entry){
+        user.edit().putString("firstEntry", "true").apply();
+    }
+
+    public void clearSharedPrefs(){
+        user.edit().clear().apply();
     }
 }

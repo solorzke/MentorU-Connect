@@ -59,6 +59,8 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     public static int position;
     private User user;
     private String oppo_user;
+    private Mentor mentor;
+    private Mentee mentee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -70,6 +72,8 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
         /* Define who the user is, pass their shared prefs to the User class */
         defineUserType(USER_TYPE);
+        mentor = new Mentor(getApplicationContext());
+        mentee = new Mentee(getApplicationContext());
 
         /* Calendar Drop-Down Menu */
         toolbar = findViewById(R.id.toolbar);
@@ -192,6 +196,8 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                     }
                 }, user.getUcid());
                 getSupportFragmentManager().popBackStack();
+                mentor.clearSharedPrefs();
+                mentee.clearSharedPrefs();
                 startActivity(intent);
                 finish();
                 break;
@@ -268,12 +274,12 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         if(type.getString("type", null).equals("student"))
         {
             user = new User(getApplicationContext(), "Mentee");
-            oppo_user = new Mentor(getApplicationContext()).getFullName();
+            oppo_user = mentor.getFullName();
         }
         else if(type.getString("type", null).equals("mentor"))
         {
             user = new User(getApplicationContext(), "Mentor");
-            oppo_user = new Mentee(getApplicationContext()).getFullName();
+            oppo_user = mentee.getFullName();
         }
     }
 
@@ -303,5 +309,4 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         };
         queue.add(request);
     }
-
 }

@@ -52,4 +52,8 @@ public class UserType
     {
         return this.pairedType;
     }
+
+    public void clearSharedPrefs(){
+        context.getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE).edit().clear().apply();
+    }
 }
