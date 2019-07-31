@@ -1,4 +1,4 @@
-package com.njit.mentorapp;
+package com.njit.mentorapp.sidebar;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -11,9 +11,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.sidebar.SideBar;
 
-public class SocialCapitalFragment extends Fragment {
+public class AcademicsFragment extends Fragment {
 
     WebView webView;
 
@@ -21,14 +23,14 @@ public class SocialCapitalFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        final View view = inflater.inflate(R.layout.fragment_socialcapital, container, false);
+        final View view = inflater.inflate(R.layout.fragment_academics, container, false);
         webView = (WebView) view.findViewById(R.id.webView);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl(WebServer.getSocialCapitalLink());
+        webView.loadUrl(WebServer.getAcademicsLink());
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
         SideBar side = (SideBar) getActivity();
-        side.toolbar.setTitle("Social Capital");
+        side.toolbar.setTitle("Academics");
         return view;
     }
 }

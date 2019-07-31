@@ -1,4 +1,4 @@
-package com.njit.mentorapp;
+package com.njit.mentorapp.toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.users.User;
 
 public class SendEmail extends AppCompatActivity {

@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.SideBar;
+import com.njit.mentorapp.sidebar.SideBar;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.users.Mentee;
 import com.njit.mentorapp.model.users.Mentor;

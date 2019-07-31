@@ -1,4 +1,4 @@
-package com.njit.mentorapp;
+package com.njit.mentorapp.toolbar;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,6 +8,8 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.njit.mentorapp.R;
 
 public class WV extends AppCompatActivity {
     private WebView webView;

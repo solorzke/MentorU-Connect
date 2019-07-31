@@ -27,7 +27,7 @@ import com.njit.mentorapp.fab.EditGoals;
 import com.njit.mentorapp.model.service.NotificationText;
 import com.njit.mentorapp.model.service.PushMessageToFCM;
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.SendEmail;
+import com.njit.mentorapp.toolbar.SendEmail;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.users.Mentee;

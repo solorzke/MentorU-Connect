@@ -4,7 +4,7 @@
  * pages and serves as the main point of navigation across the application.
  */
 
-package com.njit.mentorapp;
+package com.njit.mentorapp.sidebar;
 
 import android.app.AlertDialog;
 import android.content.Context;
@@ -31,6 +31,10 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.njit.mentorapp.Login;
+import com.njit.mentorapp.R;
+import com.njit.mentorapp.toolbar.SendEmail;
+import com.njit.mentorapp.toolbar.WV;
 import com.njit.mentorapp.coaching_log.LogFragment;
 import com.njit.mentorapp.events.AddEvent;
 import com.njit.mentorapp.home.HomeFrag;

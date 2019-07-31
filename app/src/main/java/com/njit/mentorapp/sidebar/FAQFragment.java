@@ -1,4 +1,4 @@
-package com.njit.mentorapp;
+package com.njit.mentorapp.sidebar;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.njit.mentorapp.R;
+import com.njit.mentorapp.sidebar.SideBar;
 
 public class FAQFragment extends Fragment
 {

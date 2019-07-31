@@ -7,9 +7,9 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.ToxicBakery.viewpager.transforms.CubeOutTransformer;
+
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.SideBar;
+import com.njit.mentorapp.sidebar.SideBar;
 import com.njit.mentorapp.model.tools.TabAdapter;
 
 public class HomeFrag extends Fragment {

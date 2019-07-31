@@ -1,4 +1,4 @@
-package com.njit.mentorapp;
+package com.njit.mentorapp.sidebar;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import com.njit.mentorapp.R;
+import com.njit.mentorapp.sidebar.SideBar;
 
 public class SMFragment extends Fragment {
 

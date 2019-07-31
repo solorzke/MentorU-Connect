@@ -26,7 +26,7 @@ import com.njit.mentorapp.Login;
 import com.njit.mentorapp.model.service.FireBaseCallback;
 import com.njit.mentorapp.model.service.FireBaseServer;
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.SideBar;
+import com.njit.mentorapp.sidebar.SideBar;
 import com.njit.mentorapp.model.service.MySingleton;
 import com.njit.mentorapp.model.service.WebServer;
 import org.json.JSONArray;

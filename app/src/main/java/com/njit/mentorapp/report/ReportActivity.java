@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.SideBar;
+import com.njit.mentorapp.sidebar.SideBar;
 
 public class ReportActivity extends AppCompatActivity implements View.OnClickListener {
 

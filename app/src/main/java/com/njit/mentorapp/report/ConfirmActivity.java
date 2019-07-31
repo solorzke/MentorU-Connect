@@ -7,7 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.SideBar;
+import com.njit.mentorapp.sidebar.SideBar;
 
 public class ConfirmActivity extends AppCompatActivity
 {

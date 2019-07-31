@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 import com.njit.mentorapp.coaching_log.request_status_log.RequestMeetingsList;
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.SideBar;
+import com.njit.mentorapp.sidebar.SideBar;
 
 public class LogFragment extends Fragment implements View.OnClickListener
 {

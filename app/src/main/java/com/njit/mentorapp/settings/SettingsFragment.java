@@ -16,7 +16,7 @@ import com.njit.mentorapp.account.Courses;
 import com.njit.mentorapp.account.MentorActivity;
 import com.njit.mentorapp.account.StudentActivity;
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.SideBar;
+import com.njit.mentorapp.sidebar.SideBar;
 import com.njit.mentorapp.model.users.Mentee;
 
 public class SettingsFragment extends Fragment implements View.OnClickListener
