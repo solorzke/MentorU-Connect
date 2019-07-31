@@ -36,7 +36,6 @@ import com.njit.mentorapp.R;
 import com.njit.mentorapp.toolbar.SendEmail;
 import com.njit.mentorapp.toolbar.WV;
 import com.njit.mentorapp.coaching_log.LogFragment;
-import com.njit.mentorapp.events.AddEvent;
 import com.njit.mentorapp.home.HomeFrag;
 import com.njit.mentorapp.model.service.FireBaseCallback;
 import com.njit.mentorapp.model.service.FireBaseServer;
@@ -139,10 +138,6 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     public boolean onOptionsItemSelected(MenuItem item) {
 
         switch (item.getItemId()){
-            case R.id.createevent:
-                Intent go = new Intent(getApplicationContext(), AddEvent.class);
-                startActivity(go);
-                break;
             case R.id.sendEmail:
                 Intent go1 = new Intent(getApplicationContext(), SendEmail.class);
                 startActivity(go1);
