@@ -119,10 +119,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_gravity="center"
-                android:layout_margin="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="10dp"
                 android:background="#dbdde0" />
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -223,14 +226,15 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:layout_gravity="center"
-                    android:layout_margin="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
                     android:background="#dbdde0" />
 
                 <TextView

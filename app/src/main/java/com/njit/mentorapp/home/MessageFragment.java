@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -49,6 +50,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
     View view;
     private Mentor mentor;
     private Mentee mentee;
+    private ConstraintLayout bar;
     boolean up = false, down = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -67,6 +69,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         FEEDBACK = view.findViewById(R.id.feedback);
         report = view.findViewById(R.id.report);
         share = view.findViewById(R.id.share);
+        bar = view.findViewById(R.id.bar);
         mentor = new Mentor(view.getContext());
         mentee = new Mentee(view.getContext());
         return view;
@@ -147,9 +150,11 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                         if (reply[0].equals("empty")) {
                             FEEDBACK.setText("No new feedback from " + SENDER);
                             date.setText("Date: N/A");
+                            setBar(FEEDBACK, bar);
 
                         } else {
                             FEEDBACK.setText(reply[0]);
+                            setBar(FEEDBACK, bar);
                             String d = DateTimeFormat.formatDate(reply[1]);
                             date.setText("Date: " + d);
                             setLiking(reply[2]);
@@ -338,6 +343,15 @@ public class MessageFragment extends Fragment implements View.OnClickListener
             this.up = false;
             this.down = true;
         }
+    }
+
+    private void setBar(TextView feedback, ConstraintLayout layout)
+    {
+        String feed = feedback.getText().toString();
+        if(feed.contains("No new feedback from "))
+            layout.setVisibility(View.GONE);
+        else
+            layout.setVisibility(View.VISIBLE);
     }
 }
 
