@@ -9,7 +9,7 @@ public class NotificationText
 
     public static String [] message(String ucid)
     {
-        return new String [] {"New Message", ucid + "Message from " + ucid + "!"};
+        return new String [] {"New Message", "Message from " + ucid + "!"};
     }
 
     public static String [] goalChange(String ucid)
