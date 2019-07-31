@@ -71,9 +71,9 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
 
         /* Define who the user is, pass their shared prefs to the User class */
-        defineUserType(USER_TYPE);
         mentor = new Mentor(getApplicationContext());
         mentee = new Mentee(getApplicationContext());
+        defineUserType(USER_TYPE);
 
         /* Calendar Drop-Down Menu */
         toolbar = findViewById(R.id.toolbar);
