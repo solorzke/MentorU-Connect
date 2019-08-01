@@ -70,7 +70,7 @@ public class RequestMeetingsList extends AppCompatActivity
 
         /* Register the context menu for editing/removal list item when performing long clicks */
         registerForContextMenu(pendingList);
-        //registerForContextMenu(receivedList);
+        registerForContextMenu(receivedList);
     }
 
     @Override
@@ -220,6 +220,7 @@ public class RequestMeetingsList extends AppCompatActivity
         HashMap<String, String> map = new HashMap<>();
         for(ArrayList <String> row : rows)
         {
+            Log.d("DEBUG_OUTPUTT", row.get(3) + row.get(8));
             map.put(row.get(3), row.get(8));
         }
 
@@ -274,26 +275,12 @@ public class RequestMeetingsList extends AppCompatActivity
     private ArrayList <String> findArrayList(String n1, String n2)
     {
         for(ArrayList<String> row : pendingArray)
-        {
-            for(int i = 0; i < row.size(); i++)
-            {
-                if(row.get(i).equals(n1) || row.get(i).equals(n2))
-                {
-                    return row;
-                }
-            }
-        }
+            if(row.get(3).equals(n1) && row.get(8).equals(n2))
+                return row;
 
         for(ArrayList<String> row : receivingArray)
-        {
-            for(int i = 0; i < row.size(); i++)
-            {
-                if(row.get(i).equals(n1) || row.get(i).equals(n2))
-                {
-                    return row;
-                }
-            }
-        }
+            if(row.get(3).equals(n1) && row.get(8).equals(n2))
+                return row;
 
         return null;
     }
