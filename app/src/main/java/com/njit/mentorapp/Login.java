@@ -1,9 +1,7 @@
 package com.njit.mentorapp;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,7 +38,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener
     boolean asAMentor = false;
     private Switch toggle;
     private EditText ucid_et, pw_et;
-    AlertDialog alert;
     ParticleView particleView;
 
     @Override
@@ -104,7 +101,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener
                             signIn("Students", "student");
                     } else {
                         Log.d("DEBUG_OUTPUT", "Validation did not go through");
-                        alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
+                        Toast.makeText(
+                                getApplicationContext(),
+                                "You've entered the incorrect UCID/Password. Try again.",
+                                Toast.LENGTH_SHORT
+                        ).show();
                     }
                 }
                 else
@@ -128,7 +129,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener
                 if (goToForgotPw.resolveActivity(getPackageManager()) != null)
                     startActivity(goToForgotPw);
                 else
-                    alertMessage("Alert", "No browser detected. Please install an internet browser", "OK");
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "No browser detected. Please install an internet browser",
+                            Toast.LENGTH_SHORT
+                    ).show();
                 break;
 
             /* Head to FAQ page for questions and answers */
@@ -164,7 +169,11 @@ public class Login extends AppCompatActivity implements View.OnClickListener
                         {
                             Log.d("DEBUG_OUTPUT","Server Response: Connection to PHP script was " +
                                     "successful but returned false");
-                            //alertMessage("Alert", "You've entered the incorrect UCID/Password. Try again.", "OK");
+                            Toast.makeText(
+                                    getApplicationContext(),
+                                    "You've entered the incorrect UCID/Password. Try again.",
+                                    Toast.LENGTH_SHORT
+                            ).show();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -188,7 +197,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener
             @Override
             protected Map<String, String> getParams()
             {
-                Log.d("DEBUG_OUTPUT", ucid + " " + pw + " " + user_type);
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("tableName", user_type);
                 params.put("username", ucid);
@@ -216,19 +224,5 @@ public class Login extends AppCompatActivity implements View.OnClickListener
     {
         super.onPause();
         particleView.pause();
-    }
-
-    private void alertMessage(String title, String message, String button)
-    {
-        /* Create Alert Message */
-        alert = new AlertDialog.Builder(Login.this).create();
-        alert.setTitle(title);
-        alert.setMessage(message);
-        alert.setButton(AlertDialog.BUTTON_NEUTRAL, button, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        alert.show();
     }
 }
