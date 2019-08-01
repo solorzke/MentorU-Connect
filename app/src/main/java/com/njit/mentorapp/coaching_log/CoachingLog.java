@@ -13,9 +13,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -136,6 +140,18 @@ public class CoachingLog extends AppCompatActivity
             public void onErrorResponse(VolleyError error) {
                 Log.d("DEBUG_OUTPUT","Volley Error: "+error);
                 error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         }) {
             @Override
@@ -148,6 +164,11 @@ public class CoachingLog extends AppCompatActivity
             }
         };
         queue.add(request);
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 
     @Override

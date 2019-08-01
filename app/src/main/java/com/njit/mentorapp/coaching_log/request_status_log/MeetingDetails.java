@@ -1,7 +1,6 @@
 package com.njit.mentorapp.coaching_log.request_status_log;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +16,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -30,7 +32,6 @@ import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.users.Mentee;
 import com.njit.mentorapp.model.users.Mentor;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -98,7 +99,7 @@ public class MeetingDetails extends Fragment
 
     /* Sends a web server request to change the meeting request status to approved */
 
-    private void confirmMeeting(View v, String url, final String row_id, final String status)
+    private void confirmMeeting(final View v, String url, final String row_id, final String status)
     {
         RequestQueue queue = Volley.newRequestQueue(v.getContext());
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -111,6 +112,19 @@ public class MeetingDetails extends Fragment
             public void onErrorResponse(VolleyError error) {
                 Log.d("DEBUG_OUTPUT","Volley Error: " + error);
                 error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            v.getContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            v.getContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         }) {
             @Override
@@ -123,6 +137,11 @@ public class MeetingDetails extends Fragment
             }
         };
         queue.add(request);
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 
     private void sendAlert()

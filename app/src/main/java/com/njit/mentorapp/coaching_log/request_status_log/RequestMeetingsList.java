@@ -329,6 +329,18 @@ public class RequestMeetingsList extends AppCompatActivity
             public void onErrorResponse(VolleyError error) {
                 Log.d("DEBUG_OUTPUT","Volley Error: "+error);
                 error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         }) {
             @Override
@@ -341,5 +353,10 @@ public class RequestMeetingsList extends AppCompatActivity
             }
         };
         queue.add(request);
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 }

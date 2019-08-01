@@ -17,9 +17,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -138,7 +141,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    private void getMessage(final String RECEIVER, final String SENDER, View view)
+    private void getMessage(final String RECEIVER, final String SENDER, final View view)
     {
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
         StringRequest stringRequest_1 = new StringRequest(Request.Method.POST, WebServer.getQueryLink(),
@@ -164,6 +167,19 @@ public class MessageFragment extends Fragment implements View.OnClickListener
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("DEBUG_OUTPUT","Volley Error: "+error);
+                error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         }) {
             @Override
@@ -172,12 +188,16 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 params.put("action", "getFeedback");
                 params.put("receiver", RECEIVER);
                 params.put("sender", SENDER);  //Change this later <------
-
                 return params;
             }
         };
 
         queue.add(stringRequest_1);
+        stringRequest_1.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 
     @Override
@@ -287,7 +307,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    private void likeOrDislike(final String STUDENT, final String MENTOR, View view,
+    private void likeOrDislike(final String STUDENT, final String MENTOR, final View view,
                                final String status, final TextView msg)
     {
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
@@ -301,6 +321,19 @@ public class MessageFragment extends Fragment implements View.OnClickListener
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("DEBUG_OUTPUT","Volley Error: "+error);
+                error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         }) {
             @Override
@@ -311,12 +344,16 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 params.put("mentor", MENTOR);
                 params.put("msg", msg.getText().toString());
                 params.put("status", status);
-
                 return params;
             }
         };
 
         queue.add(stringRequest);
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 
     private void setLiking(String status)

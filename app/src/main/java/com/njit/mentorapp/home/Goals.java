@@ -16,9 +16,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -62,10 +65,10 @@ public class Goals extends Fragment implements View.OnClickListener
         fab = view.findViewById(R.id.m_fab);
         notifyText = NotificationText.goal(mentee.getUcid());
 
-        CHECKMARK_1 = (ImageView) view.findViewById(R.id.checkmark1);
-        CHECKMARK_2 = (ImageView) view.findViewById(R.id.checkmark2);
-        CHECKMARK_3 = (ImageView) view.findViewById(R.id.checkmark3);
-        CHECKMARK_4 = (ImageView) view.findViewById(R.id.checkmark4);
+        CHECKMARK_1 = view.findViewById(R.id.checkmark1);
+        CHECKMARK_2 = view.findViewById(R.id.checkmark2);
+        CHECKMARK_3 = view.findViewById(R.id.checkmark3);
+        CHECKMARK_4 = view.findViewById(R.id.checkmark4);
 
         CHECKMARK_1.setOnClickListener(this);
         CHECKMARK_2.setOnClickListener(this);
@@ -123,8 +126,22 @@ public class Goals extends Fragment implements View.OnClickListener
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
                 Log.d("DEBUG_OUTPUT","Volley Error: "+error);
+                error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         }) {
             @Override
@@ -138,6 +155,11 @@ public class Goals extends Fragment implements View.OnClickListener
         };
 
         queue.add(stringRequest_2);
+        stringRequest_2.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
 
         if (!isStudent(USER_TYPE)) {
             fab.show();
@@ -347,6 +369,19 @@ public class Goals extends Fragment implements View.OnClickListener
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("DEBUG_OUTPUT","Volley Error: "+error);
+                error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         }) {
             @Override
@@ -361,6 +396,11 @@ public class Goals extends Fragment implements View.OnClickListener
             }
         };
         queue.add(request);
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 
     /* Post a toast message after toggling the check marks */
@@ -453,6 +493,19 @@ public class Goals extends Fragment implements View.OnClickListener
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("DEBUG_OUTPUT","Volley Error: "+error);
+                error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         }) {
             @Override
@@ -464,6 +517,10 @@ public class Goals extends Fragment implements View.OnClickListener
             }
         };
         queue.add(request);
-
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 }
