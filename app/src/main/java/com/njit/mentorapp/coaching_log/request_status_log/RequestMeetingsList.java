@@ -13,14 +13,19 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.service.MySingleton;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.Validate;
 import com.njit.mentorapp.model.users.User;
@@ -128,8 +133,11 @@ public class RequestMeetingsList extends AppCompatActivity
         params.put("user", user.getUcid());
         JSONObject parameters = new JSONObject(params);
 
-        JsonObjectRequest jReq = new JsonObjectRequest(Request.Method.POST, WebServer.getQueryLink(), parameters, new
-                Response.Listener<JSONObject>() {
+        JsonObjectRequest jReq = new JsonObjectRequest(
+                Request.Method.POST,
+                WebServer.getQueryLink(),
+                parameters,
+                new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         try
@@ -153,12 +161,31 @@ public class RequestMeetingsList extends AppCompatActivity
                     }
                 }, new Response.ErrorListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
+            public void onErrorResponse(VolleyError error)
+            {
+                error.printStackTrace();
                 Log.d("DEBUG_OUTPUT","Volley Error: " + error);
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Request timed out.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Can't connect to the internet.",
+                            Toast.LENGTH_SHORT
+                    ).show();
             }
         });
 
-        rq.add(jReq);
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jReq);
+        jReq.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 
     /* When clicking the back button, go back to the last page. */
