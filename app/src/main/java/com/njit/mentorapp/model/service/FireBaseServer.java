@@ -1,7 +1,18 @@
 package com.njit.mentorapp.model.service;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.Toast;
+import com.android.volley.DefaultRetryPolicy;
+import com.android.volley.NetworkError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DataSnapshot;
@@ -10,6 +21,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.njit.mentorapp.model.tools.VolleyCallback;
+import com.njit.mentorapp.model.users.ReceivingUser;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class FireBaseServer
 {
@@ -98,7 +114,7 @@ public class FireBaseServer
         });
     }
 
-    /* Return the topic id between two users */
+    /* Return the topic id between two users from 'FireBase' only */
     public static void getTopicID(final FireBaseCallback callback, final String UCID)
     {
         final DatabaseReference db = FirebaseDatabase.getInstance().getReference().child("Communication");
@@ -118,7 +134,7 @@ public class FireBaseServer
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Log.d("DEBUG_OUTPUT", databaseError.getMessage());
+                Log.d("DEBUG_OUTPUTt", databaseError.getMessage());
             }
         });
     }
@@ -170,5 +186,110 @@ public class FireBaseServer
                 Log.d("DEBUG_OUTPUT", databaseError.getMessage());
             }
         });
+    }
+
+    /* Methods below are for accessing the server's SQL database. Here is where managing the topics
+     * and inserting new users occurs. This is the current way to set up notification channels
+     * between two users. */
+
+    /* Retrieve the topic id that belongs to the user pair from the server. */
+    public static void getTopicID(final Context context, final String [] data, final VolleyCallback callback)
+    {
+        RequestQueue rq = Volley.newRequestQueue(context);
+        StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callback.onCallback(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG_OUTPUT", error.toString());
+                error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            context,
+                            "Request timed out. Try Again.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            context,
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("action", "getTopicID");
+                params.put("mentee", data[0]);
+                params.put("mentor", data[1]);
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
+        rq.add(request);
+    }
+
+    /* Add new user pairing to the DB, then create a unique topic_id identifier to use to sub-
+     * scribe to FireBase to send/receive notification messages*/
+    public static void setTopicID(final Context context, final String [] data, final VolleyCallback callback)
+    {
+        RequestQueue queue = Volley.newRequestQueue(context);
+        StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                callback.onCallback(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG_OUTPUT", error.toString());
+                error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            context,
+                            "Request timed out. Try Again.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            context,
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
+
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("action", "getTopicID");
+                params.put("mentee", data[0]);
+                params.put("mentor", data[1]);
+                return params;
+            }
+        };
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
+        queue.add(request);
+
+    }
+
+    /* Return the receiving user username/ucid that is meant to receive the incoming notification
+     * transmission */
+    public static String getReceivingUser(Context context)
+    {
+        return new ReceivingUser(context).getReceivingUser();
     }
 }

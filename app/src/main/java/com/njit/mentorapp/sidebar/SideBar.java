@@ -34,8 +34,10 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.firebase.auth.FirebaseAuth;
 import com.njit.mentorapp.Login;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.tools.VolleyCallback;
 import com.njit.mentorapp.toolbar.SendEmail;
 import com.njit.mentorapp.toolbar.WV;
 import com.njit.mentorapp.coaching_log.LogFragment;
@@ -141,6 +143,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         return true;
     }
 
+    /* Options Menu listener with options to send email message, view the RoadMap, and report activities */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
@@ -185,19 +188,18 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 signOutRequest();
-                FireBaseServer.getTopicID(new FireBaseCallback() {
-                    @Override
-                    public void onCallback(String value) {
-                        if(!value.isEmpty())
-                            FireBaseServer.unsubcribeToTopic(value);
-                        else
-                            Toast.makeText(
-                                    getApplicationContext(),
-                                    "Could not unsubscribe topic",
-                                    Toast.LENGTH_SHORT
-                            ).show();
-                    }
-                }, user.getUcid());
+                FireBaseServer.getTopicID(
+                        getApplicationContext(),
+                        new String [] {mentee.getUcid(), mentor.getUcid()},
+                        new VolleyCallback() {
+                            @Override
+                            public void onCallback(String callback) {
+                                if(!callback.equals("Topic ID not found!"))
+                                    FireBaseServer.unsubcribeToTopic(callback);
+                                else
+                                    Log.d("DEBUG_OUTPUT", callback);
+                            }
+                });
                 getSupportFragmentManager().popBackStack();
                 mentor.clearSharedPrefs();
                 mentee.clearSharedPrefs();
@@ -286,6 +288,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         }
     }
 
+    /* Disconnect the DB connection from the query scripts on the server */
     private void signOutRequest()
     {
         final String user = this.user.getUcid();
