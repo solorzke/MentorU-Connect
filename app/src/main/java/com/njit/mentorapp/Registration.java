@@ -1,3 +1,12 @@
+/* Registration is only used for Mentee type users. Mentors should be registered through the program
+ * itself since they go through a vastly different interview process before they're accepted compared
+ * to mentees.
+ *
+ * The mentee MUST be assigned to a mentor already before registering or else registration
+ * will be denied. Same with Login process. The Mentor U Program determines which mentee the mentor
+ * will be assigned to before pairing them together on the DB by the Administrator.
+ * The class below searches for their mentor info before registering below.*/
+
 package com.njit.mentorapp;
 
 import android.app.DatePickerDialog;
@@ -23,6 +32,7 @@ import com.njit.mentorapp.model.service.FireBaseServer;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.tools.JSON;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.tools.VolleyCallback;
 import android.content.Intent;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -139,6 +149,10 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         });
     }
 
+    /* Register with the data entered, and analyze the response from the server. If successful,
+     * it should've created an account and created 6 empty courses to fill in later, plus create
+     * a topic id (id for their notification channel used with) FireBase only for setting its
+     * notification channel with mentor. */
     private void register()
     {
         final String format_b = DateTimeFormat.formatDateSQL(bday);
@@ -153,7 +167,15 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 if (response.contains("REGISTERED"))
                 {
                     String mentor = response.split("\\|")[1];
-                    FireBaseServer.registerToDB(ucid, mentor);
+                    FireBaseServer.setTopicID(getApplicationContext(), new String[]{ucid, mentor}, new VolleyCallback() {
+                        @Override
+                        public void onCallback(String callback) {
+                            if(callback.equals("Topic ID created!"))
+                                Log.d("DEBUG_OUTPUT", callback);
+                            else
+                                Log.d("DEBUG_OUTPUT", callback);
+                        }
+                    });
                     Intent gth = new Intent(getApplicationContext(), JSON.class);
                     gth.putExtra("com.example.mentorapp.CONFIRM", "student");
                     gth.putExtra("com.example.mentorapp.UCID", ucid);
