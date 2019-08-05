@@ -2,6 +2,7 @@ package com.njit.mentorapp.account;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.tools.SetAviActivity;
 import com.njit.mentorapp.model.users.Mentee;
 import com.squareup.picasso.Picasso;
 import java.util.Calendar;
@@ -160,6 +162,13 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                     updateUserSession(mentee);
                     sendAccRequest(WebServer.getQueryLink(), "updateRecord");
                     postToast("Account Updated");
+                }
+            });
+
+            avi.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getApplicationContext(), SetAviActivity.class));
                 }
             });
         }

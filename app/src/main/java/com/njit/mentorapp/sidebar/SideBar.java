@@ -139,6 +139,8 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         String header_name = user.getFname() + " " + user.getLname();
         user_name.setText(header_name);
         user_email.setText(user.getEmail());
+        if(!user.getAvi().equals(""))
+            Picasso.get().load(user.getAvi()).into(avi);
     }
 
     @Override

@@ -56,7 +56,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
 
                 <android.support.constraint.ConstraintLayout
@@ -65,34 +65,26 @@
                     android:layout_marginBottom="10dp"
                     android:background="#424242">
 
-                    <Space
-                        android:id="@+id/space"
-                        android:layout_width="match_parent"
-                        android:layout_height="300dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
+                    <com.mikhaellopez.circularimageview.CircularImageView
+                        android:id="@+id/avi"
+                        android:layout_width="183dp"
+                        android:layout_height="183dp"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="5dp"
+                        android:src="@android:drawable/sym_def_app_icon"
+                        app:civ_border_color="#d44242"
+                        app:civ_border_width="4dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <ImageView
-                        android:id="@+id/avi"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@android:drawable/sym_def_app_icon"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.498"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.359" />
-
                     <TextView
                         android:id="@+id/fullname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginBottom="20dp"
                         android:fontFamily="@android:"
                         android:gravity="center_horizontal"
                         android:text="John Doe"
@@ -100,12 +92,11 @@
                         android:textSize="25sp"
                         android:textStyle="bold"
                         app:fontFamily="@font/open_sans"
-                        app:layout_constraintBottom_toBottomOf="@+id/space"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintHorizontal_bias="0.5"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/avi"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintTop_toBottomOf="@+id/avi" />
 
                 </android.support.constraint.ConstraintLayout>
 
