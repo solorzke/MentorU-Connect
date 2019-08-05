@@ -6,13 +6,18 @@ import android.content.SharedPreferences;
 public class User
 {
     private SharedPreferences user;
+    private String type;
 
     public User(Context context, String type)
     {
-        if(type.equals("Mentee"))
+        if(type.equals("Mentee")) {
             user = context.getSharedPreferences("STUDENT", Context.MODE_PRIVATE);
-        else if(type.equals("Mentor"))
+            setType("Students");
+        }
+        else if(type.equals("Mentor")) {
             user = context.getSharedPreferences("MENTOR", Context.MODE_PRIVATE);
+            setType("Mentors");
+        }
     }
 
     public String getUcid() {
@@ -128,5 +133,13 @@ public class User
             return true;
         else
             return false;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

@@ -28,6 +28,7 @@ public class Mentee
             setBirthday(object.getString("birthday"));
             setGrade(object.getString("grade"));
             setGrad_date(object.getString("grad_date"));
+            setAvi(object.getString("avi"));
             setEntry("true");
         }
         catch (JSONException e)
@@ -106,6 +107,14 @@ public class Mentee
 
     public void setGrad_date(String grad_date) {
         user.edit().putString("grad_date", grad_date).apply();
+    }
+
+    public String getAvi() {
+        return user.getString("avi", null);
+    }
+
+    public void setAvi(String avi) {
+        user.edit().putString("avi", avi).apply();
     }
 
     public String getEntry(){
