@@ -174,7 +174,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                         final AlertDialog alert = new AlertDialog.Builder(Courses.this).create();
                         alert.setTitle("Blank Fields");
                         alert.setMessage("Please don't leave blanks and fill in the fields before adding.");
-                        alert.setButton(AlertDialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
+                        alert.setButton(AlertDialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 alert.dismiss();
@@ -247,7 +247,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                 AlertDialog error = new AlertDialog.Builder(Courses.this).create();
                 error.setTitle("Reached Course Limit");
                 error.setMessage("Only a maximum of 6 courses can be added.");
-                error.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener() {
+                error.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.dismiss();
@@ -406,7 +406,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                     final AlertDialog alert = new AlertDialog.Builder(Courses.this).create();
                     alert.setTitle("Blank Fields");
                     alert.setMessage("Please don't leave blanks and fill in the fields before saving.");
-                    alert.setButton(AlertDialog.BUTTON_NEUTRAL, "Ok", new DialogInterface.OnClickListener() {
+                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             alert.dismiss();

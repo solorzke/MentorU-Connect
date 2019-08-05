@@ -250,7 +250,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             RETURN_TO_LOGIN.setTitle("Alert");
             RETURN_TO_LOGIN.setMessage("You're about to sign out back to the sign in screen. Do you " +
                     "want to proceed?");
-            RETURN_TO_LOGIN.setButton(AlertDialog.BUTTON_NEUTRAL, "Yes", new DialogInterface.OnClickListener() {
+            RETURN_TO_LOGIN.setButton(AlertDialog.BUTTON_POSITIVE, "Yes", new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                     signOutRequest();

@@ -46,7 +46,7 @@ public class SMFragment extends Fragment {
                     alert = new AlertDialog.Builder(view.getContext()).create();
                     alert.setTitle("Alert");
                     alert.setMessage("No browser detected. Please install an internet browser");
-                    alert.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener(){
+                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog, int which){
                             dialog.dismiss();
                         }
@@ -68,7 +68,7 @@ public class SMFragment extends Fragment {
                     alert = new AlertDialog.Builder(view.getContext()).create();
                     alert.setTitle("Alert");
                     alert.setMessage("No browser detected. Please install an internet browser");
-                    alert.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener(){
+                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog, int which){
                             dialog.dismiss();
                         }
@@ -90,7 +90,7 @@ public class SMFragment extends Fragment {
                     alert = new AlertDialog.Builder(view.getContext()).create();
                     alert.setTitle("Alert");
                     alert.setMessage("No browser detected. Please install an internet browser");
-                    alert.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener(){
+                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog, int which){
                             dialog.dismiss();
                         }
@@ -112,7 +112,7 @@ public class SMFragment extends Fragment {
                     alert = new AlertDialog.Builder(view.getContext()).create();
                     alert.setTitle("Alert");
                     alert.setMessage("No browser detected. Please install an internet browser");
-                    alert.setButton(AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener(){
+                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
                         public void onClick(DialogInterface dialog, int which){
                             dialog.dismiss();
                         }

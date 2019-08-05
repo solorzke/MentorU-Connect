@@ -232,7 +232,7 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
         AlertDialog alert = new AlertDialog.Builder(RequestMeeting.this).create();
         alert.setTitle("Incomplete Form");
         alert.setMessage("Please complete all the fields.");
-        alert.setButton(android.support.v7.app.AlertDialog.BUTTON_NEUTRAL, "OK", new DialogInterface.OnClickListener(){
+        alert.setButton(android.support.v7.app.AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which){
                 dialog.dismiss();
             }
