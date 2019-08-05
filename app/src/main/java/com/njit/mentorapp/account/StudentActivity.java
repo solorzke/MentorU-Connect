@@ -31,6 +31,7 @@ import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.users.Mentee;
+import com.squareup.picasso.Picasso;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,7 +91,8 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         bday.setText(DateTimeFormat.formatDate(mentee.getBirthday()));
         setDefaultGradeLevel(mentee);
         grad_date.setText(DateTimeFormat.formatDate(mentee.getGrad_date()));
-        //Picasso.get().load(account.getString("avi", null)).into(avi);
+        if(!mentee.getAvi().equals(""))
+            Picasso.get().load(mentee.getAvi()).into(avi);
     }
 
     @Override
@@ -181,6 +183,13 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(!mentee.getAvi().equals(""))
+            Picasso.get().load(mentee.getAvi()).into(avi);
     }
 
     private void disableEditAccText(EditText [] editables)

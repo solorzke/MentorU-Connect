@@ -2,6 +2,7 @@ package com.njit.mentorapp.account;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -11,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
@@ -23,9 +23,11 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
+import com.njit.mentorapp.model.tools.SetAviActivity;
 import com.njit.mentorapp.model.users.Mentor;
 import com.squareup.picasso.Picasso;
 import java.util.Calendar;
@@ -36,7 +38,7 @@ public class MentorActivity extends AppCompatActivity  {
 
     SharedPreferences USER_TYPE;
     SharedPreferences.Editor editor;
-    ImageView AVI;
+    private CircularImageView AVI;
     EditText MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY;
     TextView EDIT, DONE, MTR_UCID, full_name, MTR_MENTEE;
     EditText [] list;
@@ -71,7 +73,8 @@ public class MentorActivity extends AppCompatActivity  {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         toolbar.setTitle("Mentor");
 
-        Picasso.get().load(mentor.getAvi()).into(AVI);
+        if(!mentor.getAvi().equals(""))
+            Picasso.get().load(mentor.getAvi()).into(AVI);
         MTR_NAME.setText(mentor.getFname() + " " + mentor.getLname());
         full_name.setText(mentor.getFname() + " " + mentor.getLname());
         MTR_EMAIL.setText(mentor.getEmail());
@@ -151,6 +154,13 @@ public class MentorActivity extends AppCompatActivity  {
                     postToast();
                 }
             });
+
+            AVI.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    startActivity(new Intent(getApplicationContext(), SetAviActivity.class));
+                }
+            });
         }
         else{
             EDIT.setVisibility(View.INVISIBLE);
@@ -171,6 +181,13 @@ public class MentorActivity extends AppCompatActivity  {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        if(!mentor.getAvi().equals(""))
+            Picasso.get().load(mentor.getAvi()).into(AVI);
     }
 
     private void editText(EditText [] texts, boolean edit)
