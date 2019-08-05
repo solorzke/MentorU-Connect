@@ -34,7 +34,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.firebase.auth.FirebaseAuth;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.njit.mentorapp.Login;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.tools.VolleyCallback;
@@ -42,7 +42,6 @@ import com.njit.mentorapp.toolbar.SendEmail;
 import com.njit.mentorapp.toolbar.WV;
 import com.njit.mentorapp.coaching_log.LogFragment;
 import com.njit.mentorapp.home.HomeFrag;
-import com.njit.mentorapp.model.service.FireBaseCallback;
 import com.njit.mentorapp.model.service.FireBaseServer;
 import com.njit.mentorapp.model.users.Mentee;
 import com.njit.mentorapp.model.users.Mentor;
@@ -50,6 +49,7 @@ import com.njit.mentorapp.model.users.User;
 import com.njit.mentorapp.report.ReportActivity;
 import com.njit.mentorapp.settings.SettingsFragment;
 import com.njit.mentorapp.model.service.WebServer;
+import com.squareup.picasso.Picasso;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,6 +66,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     private String oppo_user;
     private Mentor mentor;
     private Mentee mentee;
+    private CircularImageView avi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -86,8 +87,11 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         toolbar.setTitle("Home");
 
-        /* Set full name and email address to the side-bar header */
+        /* Set AVI, full name and email address to the side-bar header */
         View headerView = navigationView.getHeaderView(0);
+        avi = headerView.findViewById(R.id.photo);
+        if(!user.getAvi().equals(""))
+            Picasso.get().load(user.getAvi()).into(avi);
         user_name = headerView.findViewById(R.id.header_name);
         String header_name = user.getFname() + " " + user.getLname();
         user_name.setText(header_name);
