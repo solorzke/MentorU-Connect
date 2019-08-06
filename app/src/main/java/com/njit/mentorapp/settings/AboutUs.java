@@ -1,5 +1,6 @@
 package com.njit.mentorapp.settings;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,6 +11,7 @@ import android.webkit.WebViewClient;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.service.WebServer;
 
+@SuppressLint("SetJavaScriptEnabled")
 public class AboutUs extends AppCompatActivity
 {
     private WebView webview;
@@ -24,8 +26,10 @@ public class AboutUs extends AppCompatActivity
         /* Set Toolbar and back button */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setTitle("About Us");
     }
 
@@ -39,6 +43,8 @@ public class AboutUs extends AppCompatActivity
                 onBackPressed();
                 finish();
                 return true;
+            case 999999999:
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }
