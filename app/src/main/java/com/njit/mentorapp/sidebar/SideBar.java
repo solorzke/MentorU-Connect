@@ -56,12 +56,9 @@ import java.util.Map;
 public class SideBar extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener
 {
     private DrawerLayout drawer;
-    public TextView user_name, user_email;
-    SharedPreferences USER_TYPE;
-    AlertDialog RETURN_TO_LOGIN;
+    private TextView user_name, user_email;
     public Toolbar toolbar;
-    public static NavigationView navigationView;
-    public static int position;
+    public NavigationView navigationView;
     private User user;
     private String oppo_user;
     private Mentor mentor;
@@ -74,7 +71,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sidebar);
         navigationView = findViewById(R.id.nav_view);
-        USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+        SharedPreferences USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
 
         /* Define who the user is, pass their shared prefs to the User class */
         mentor = new Mentor(getApplicationContext());
@@ -84,9 +81,9 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         /* Calendar Drop-Down Menu */
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        if(getSupportActionBar() != null)
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
         toolbar.setTitle("Home");
-
         /* Set AVI, full name and email address to the side-bar header */
         View headerView = navigationView.getHeaderView(0);
         avi = headerView.findViewById(R.id.photo);
@@ -120,13 +117,15 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         navigationView.setCheckedItem(R.id.home_item);
 
         /* Switch to another specific fragment if the intent comes from an activity. */
-        position = getIntent().getIntExtra("pos", 0);
+        int position = getIntent().getIntExtra("pos", 0);
         switch (position)
         {
             case 1:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FAQFragment()).addToBackStack(null).commit();
                 navigationView.setCheckedItem(R.id.faq);
+                break;
+            case 99:
                 break;
             default:
                 break;
@@ -246,7 +245,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             drawer.closeDrawer(GravityCompat.START);
         }
         else if (user.getEntry().equals("true")) {
-            RETURN_TO_LOGIN = new AlertDialog.Builder(this).create();
+            AlertDialog RETURN_TO_LOGIN = new AlertDialog.Builder(this).create();
             RETURN_TO_LOGIN.setTitle("Alert");
             RETURN_TO_LOGIN.setMessage("You're about to sign out back to the sign in screen. Do you " +
                     "want to proceed?");
@@ -326,7 +325,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("user", user);
                 params.put("action", "sign_out");
                 return params;

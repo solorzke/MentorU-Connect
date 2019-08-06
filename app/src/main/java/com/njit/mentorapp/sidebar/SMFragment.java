@@ -16,22 +16,20 @@ import android.widget.RelativeLayout;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.sidebar.SideBar;
 
-public class SMFragment extends Fragment {
-
-    RelativeLayout FB, TWITTER, IG, REDDIT;
-    AlertDialog alert;
-
+public class SMFragment extends Fragment
+{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_sm, container, false);
-        FB = view.findViewById(R.id.rl_facebook);
-        IG = view.findViewById(R.id.rl_ig);
-        TWITTER = view.findViewById(R.id.rl_twitter);
-        REDDIT = view.findViewById(R.id.rl_reddit);
+        RelativeLayout FB = view.findViewById(R.id.rl_facebook);
+        RelativeLayout IG = view.findViewById(R.id.rl_ig);
+        RelativeLayout TWITTER = view.findViewById(R.id.rl_twitter);
+        RelativeLayout REDDIT = view.findViewById(R.id.rl_reddit);
         SideBar side = (SideBar) getActivity();
-        side.toolbar.setTitle("Social Media");
+        if(side != null)
+            side.toolbar.setTitle("Social Media");
 
         FB.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -39,18 +37,19 @@ public class SMFragment extends Fragment {
                 String url = "https://www.facebook.com/NewJerseyInstituteofTechnology/";
                 Uri link = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, link);
-                if(intent.resolveActivity(getActivity().getPackageManager()) != null){
-                    startActivity(intent);
-                }
-                else{
-                    alert = new AlertDialog.Builder(view.getContext()).create();
-                    alert.setTitle("Alert");
-                    alert.setMessage("No browser detected. Please install an internet browser");
-                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int which){
-                            dialog.dismiss();
-                        }
-                    });
+                if(getActivity() != null) {
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        AlertDialog alert = new AlertDialog.Builder(view.getContext()).create();
+                        alert.setTitle("Alert");
+                        alert.setMessage("No browser detected. Please install an internet browser");
+                        alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -61,18 +60,19 @@ public class SMFragment extends Fragment {
                 String url = "https://www.instagram.com/instanjit/";
                 Uri link = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, link);
-                if(intent.resolveActivity(getActivity().getPackageManager()) != null){
-                    startActivity(intent);
-                }
-                else{
-                    alert = new AlertDialog.Builder(view.getContext()).create();
-                    alert.setTitle("Alert");
-                    alert.setMessage("No browser detected. Please install an internet browser");
-                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int which){
-                            dialog.dismiss();
-                        }
-                    });
+                if(getActivity() != null) {
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        AlertDialog alert = new AlertDialog.Builder(view.getContext()).create();
+                        alert.setTitle("Alert");
+                        alert.setMessage("No browser detected. Please install an internet browser");
+                        alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -83,18 +83,19 @@ public class SMFragment extends Fragment {
                 String url = "https://twitter.com/NJIT";
                 Uri link = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, link);
-                if(intent.resolveActivity(getActivity().getPackageManager()) != null){
-                    startActivity(intent);
-                }
-                else{
-                    alert = new AlertDialog.Builder(view.getContext()).create();
-                    alert.setTitle("Alert");
-                    alert.setMessage("No browser detected. Please install an internet browser");
-                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int which){
-                            dialog.dismiss();
-                        }
-                    });
+                if(getActivity() != null) {
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        AlertDialog alert = new AlertDialog.Builder(view.getContext()).create();
+                        alert.setTitle("Alert");
+                        alert.setMessage("No browser detected. Please install an internet browser");
+                        alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -105,18 +106,19 @@ public class SMFragment extends Fragment {
                 String url = "https://www.reddit.com/r/NJTech/";
                 Uri link = Uri.parse(url);
                 Intent intent = new Intent(Intent.ACTION_VIEW, link);
-                if(intent.resolveActivity(getActivity().getPackageManager()) != null){
-                    startActivity(intent);
-                }
-                else{
-                    alert = new AlertDialog.Builder(view.getContext()).create();
-                    alert.setTitle("Alert");
-                    alert.setMessage("No browser detected. Please install an internet browser");
-                    alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener(){
-                        public void onClick(DialogInterface dialog, int which){
-                            dialog.dismiss();
-                        }
-                    });
+                if(getActivity() != null) {
+                    if (intent.resolveActivity(getActivity().getPackageManager()) != null) {
+                        startActivity(intent);
+                    } else {
+                        AlertDialog alert = new AlertDialog.Builder(view.getContext()).create();
+                        alert.setTitle("Alert");
+                        alert.setMessage("No browser detected. Please install an internet browser");
+                        alert.setButton(AlertDialog.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                    }
                 }
             }
         });

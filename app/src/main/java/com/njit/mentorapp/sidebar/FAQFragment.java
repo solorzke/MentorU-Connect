@@ -7,9 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.sidebar.SideBar;
 
 public class FAQFragment extends Fragment
 {
@@ -17,7 +15,8 @@ public class FAQFragment extends Fragment
     {
         final View view = inflater.inflate(R.layout.fragment_faq, container, false);
         SideBar side = (SideBar) getActivity();
-        side.toolbar.setTitle("FAQ");
+        if(side != null)
+            side.toolbar.setTitle("FAQ");
         return view;
     }
 }
