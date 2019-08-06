@@ -40,22 +40,17 @@ import java.util.Map;
 
 public class RequestMeeting extends AppCompatActivity implements View.OnClickListener
 {
-    EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
+    private EditText event_location, event_title, event_purpose, event_start_time, event_end_time, event_date;
     private TextView submit, cancel;
-    private SharedPreferences user_type;
     private User sender, receiver;
-    private DatePickerDialog date;
-    private TimePickerDialog timePickerDialog;
-    private Calendar calendar;
-    int hour, min;
-    String [] notifyRequest;
+    private String [] notifyRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_meeting);
-        user_type = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+        SharedPreferences user_type = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
         event_location = findViewById(R.id.event_location);
         event_title = findViewById(R.id.event_title);
         event_purpose = findViewById(R.id.event_purpose);
@@ -66,7 +61,8 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
         cancel = findViewById(R.id.cancel);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+        if(getSupportActionBar() != null)
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
 
         if(Validate.isStudent(user_type))
         {
@@ -96,6 +92,10 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onClick(View v)
     {
+        Calendar calendar;
+        int hour, min;
+        TimePickerDialog timePickerDialog;
+        DatePickerDialog date;
         switch (v.getId())
         {
             case R.id.event_date:
@@ -107,7 +107,8 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
                 date = new DatePickerDialog(RequestMeeting.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        event_date.setText((month + 1)+"/"+dayOfMonth+"/"+year);
+                        String d = (month + 1) + "/" + dayOfMonth + "/" + year;
+                        event_date.setText(d);
                     }
                 }, year, month, day);
                 date.show();
@@ -122,11 +123,14 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 String [] data = DateTimeFormat.format12HourTime(selectedHour, selectedMinute);
-                                event_start_time.setText(data[0] + ":" + data[1] + " " + data[2]);
+                                String time = data[0] + ":" + data[1] + " " + data[2];
+                                event_start_time.setText(time);
                             }
                         }, hour, min, false);
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
-                timePickerDialog.show();
+                if(timePickerDialog.getWindow() != null) {
+                    timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
+                    timePickerDialog.show();
+                }
                 break;
 
             case R.id.event_end_time:
@@ -138,11 +142,14 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
                             @Override
                             public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
                                 String [] data = DateTimeFormat.format12HourTime(selectedHour, selectedMinute);
-                                event_end_time.setText(data[0] + ":" + data[1] + " " + data[2]);
+                                String time = data[0] + ":" + data[1] + " " + data[2];
+                                event_end_time.setText(time);
                             }
                         }, hour, min, false);
-                timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
-                timePickerDialog.show();
+                if(timePickerDialog.getWindow() != null) {
+                    timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.GRAY));
+                    timePickerDialog.show();
+                }
                 break;
 
             case R.id.create_event_submit:
@@ -153,7 +160,7 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
 
                 if(Validate.checkForm(event))
                 {
-                    sendMeetingRequest(WebServer.getQueryLink(), "requestMeeting", event, student, mentor);
+                    sendMeetingRequest(WebServer.getQueryLink(), event, student, mentor);
                     CharSequence text = "Request Sent!";
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(RequestMeeting.this, text, duration);
@@ -173,10 +180,10 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
             default:
                 break;
         }
-
     }
 
-    private void sendMeetingRequest(String url, final String action, final EditText [] event,
+    /* Send a Volley request with the data to the Web server to submit the request. */
+    private void sendMeetingRequest(String url, final EditText [] event,
                                   final String currentUser, final String otherUser)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -206,14 +213,14 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("title", event[0].getText().toString());
                 params.put("location", event[1].getText().toString());
                 params.put("date", DateTimeFormat.formatDateSQL(event[2].getText().toString()));
                 params.put("s_time", event[3].getText().toString());
                 params.put("e_time", event[4].getText().toString());
                 params.put("purpose", event[5].getText().toString());
-                params.put("action", action);
+                params.put("action", "requestMeeting");
                 params.put("currentUser", currentUser);
                 params.put("otherUser", otherUser);
                 return params;
@@ -227,6 +234,7 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
         );
     }
 
+    /* Send an alert dialog to the user */
     private void sendAlert()
     {
         AlertDialog alert = new AlertDialog.Builder(RequestMeeting.this).create();
