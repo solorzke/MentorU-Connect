@@ -39,7 +39,7 @@
                 android:id="@+id/no_goals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Welcome to the Goals page. Currently there are no goals available. "
+                android:text="@string/no_goals_entered"
                 android:gravity="center_horizontal"
                 android:textSize="20sp"
                 android:textColor="@android:color/black"
@@ -82,9 +82,10 @@
                         android:id="@+id/goal1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="25dp"
-                        android:text="N/A"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/no_goal"
                         android:textColor="#000000"
                         android:textSize="15sp"
                         app:fontFamily="@font/open_sans" />
@@ -120,9 +121,10 @@
                         android:id="@+id/goal2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="25dp"
-                        android:text="N/A"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/no_goal"
                         android:textColor="#000000"
                         android:textSize="15sp"
                         app:fontFamily="@font/open_sans" />
@@ -157,9 +159,10 @@
                         android:id="@+id/goal3"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="25dp"
-                        android:text="N/A"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/no_goal"
                         android:textColor="#000000"
                         android:textSize="15sp"
                         app:fontFamily="@font/open_sans" />
@@ -195,9 +198,10 @@
                         android:id="@+id/goal4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="25dp"
-                        android:text="N/A"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/no_goal"
                         android:textColor="#000000"
                         android:textSize="15sp"
                         app:fontFamily="@font/open_sans" />
@@ -220,7 +224,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Stats"
+                    android:text="@string/stats"
                     app:fontFamily="@font/open_sans" />
 
                 <View
@@ -248,7 +252,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Semester ends in "
+                    android:text="@string/semester_ends"
                     android:textColor="@android:color/background_dark"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
@@ -257,7 +261,9 @@
                     android:id="@+id/weeks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="00 Weeks"
+                    android:text="@string/semester_ends_def"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
@@ -280,7 +286,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Goals completed:"
+                    android:text="@string/goals_completed"
                     android:textColor="@android:color/background_dark"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
@@ -289,7 +295,7 @@
                     android:id="@+id/percent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=" 0 %"
+                    android:text="@string/goals_completed_perc"
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
@@ -304,7 +310,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Contact"
+                    android:text="@string/contact"
                     app:fontFamily="@font/open_sans" />
 
                 <View
@@ -333,7 +339,7 @@
                     android:id="@+id/sendEmail"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Have questions about the goals?"
+                    android:text="@string/send_email"
                     android:textColor="#1b9af7"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
@@ -357,7 +363,7 @@
                     android:id="@+id/account"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="View Mentor Account"
+                    android:text="@string/view_mentor_account"
                     android:textColor="#1b9af7"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
