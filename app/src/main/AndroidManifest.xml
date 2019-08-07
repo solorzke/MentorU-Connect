@@ -20,9 +20,6 @@
         <activity
             android:name=".settings.AboutUs"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".FirebaseTest"
-            android:screenOrientation="portrait" />
 
         <service
             android:name=".model.service.FireBaseInstanceService"
