@@ -76,13 +76,13 @@ public class MeetingStatus extends Fragment
                 check.check();
                 if (type.equals("sender"))
                 {
-                    t1.setText("Your meeting request was accepted.");
-                    t2.setText("View the meeting info.");
+                    t1.setText(R.string.sender_1_t);
+                    t2.setText(R.string.sender_1_s);
                 }
                 else if (type.equals("receiver"))
                 {
-                    t1.setText("You've accepted the meeting request.");
-                    t2.setText("View the details on the next page.");
+                    t1.setText(R.string.receiver_1_t);
+                    t2.setText(R.string.receiver_1_s);
                 }
                 break;
 
@@ -92,13 +92,13 @@ public class MeetingStatus extends Fragment
                 declined.setVisibility(View.VISIBLE);
                 if (type.equals("sender"))
                 {
-                    t1.setText("The meeting request was canceled.");
-                    t2.setText("Schedule a new meeting.");
+                    t1.setText(R.string.sender_2_t);
+                    t2.setText(R.string.sender_2_s);
                 }
                 else if (type.equals("receiver"))
                 {
-                    t1.setText("You canceled the meeting request.");
-                    t2.setText("Schedule a new one!");
+                    t1.setText(R.string.receiver_2_t);
+                    t2.setText(R.string.receiver_2_s);
                 }
                 break;
 
@@ -106,13 +106,13 @@ public class MeetingStatus extends Fragment
             case "3":
                 if (type.equals("sender"))
                 {
-                    t1.setText("Your request is waiting to be approved!");
-                    t2.setText("Check back later.");
+                    t1.setText(R.string.sender_3_t);
+                    t2.setText(R.string.sender_3_s);
                 }
                 else if (type.equals("receiver"))
                 {
-                    t1.setText("You've received a meeting request!");
-                    t2.setText("Check the details.");
+                    t1.setText(R.string.receiver_3_t);
+                    t2.setText(R.string.receiver_3_s);
                 }
                 break;
 

@@ -41,14 +41,14 @@ import java.util.Map;
 public class StudentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     private Mentee mentee;
-    SharedPreferences USER_TYPE;
-    TextView edit, done, ucid, full_name;
-    EditText name, email, degree, age, bday, grad_date;
-    ImageView avi;
-    EditText [] editable = new EditText[6];
-    Calendar calendar;
-    DatePickerDialog date;
-    Spinner spinner;
+    private SharedPreferences USER_TYPE;
+    private TextView edit, done, ucid, full_name;
+    private EditText name, email, degree, age, bday, grad_date;
+    private ImageView avi;
+    private EditText [] editable = new EditText[6];
+    private Calendar calendar;
+    private DatePickerDialog date;
+    private Spinner spinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -79,8 +79,10 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(this);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setTitle("Mentee");
 
         String fullname = mentee.getFname() + " " + mentee.getLname();
@@ -115,7 +117,8 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                     date = new DatePickerDialog(StudentActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            bday.setText((month + 1)+"/"+dayOfMonth+"/"+year);
+                            String day = (month + 1)+"/"+dayOfMonth+"/"+year;
+                            bday.setText(day);
                         }
                     }, year, month, day);
                     date.show();
@@ -133,7 +136,8 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                     date = new DatePickerDialog(StudentActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            grad_date.setText((month + 1)+"/"+dayOfMonth+"/"+year);
+                            String day = (month + 1)+"/"+dayOfMonth+"/"+year;
+                            grad_date.setText(day);
                         }
                     }, year, month, day);
                     date.show();
@@ -160,8 +164,8 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                     edit.setVisibility(View.VISIBLE);
                     disableEditAccText(editable);
                     updateUserSession(mentee);
-                    sendAccRequest(WebServer.getQueryLink(), "updateRecord");
-                    postToast("Account Updated");
+                    sendAccRequest(WebServer.getQueryLink());
+                    postToast();
                 }
             });
 
@@ -189,6 +193,8 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                 onBackPressed();
                 finish();
                 return true;
+            case 999999999:
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -234,19 +240,28 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
 
     private void updateUserSession(Mentee mentee)
     {
-        String [] name = this.name.getText().toString().split(" ");
-        mentee.setFname(name[0]);
-        mentee.setLname(name[1]);
-        mentee.setEmail(email.getText().toString());
-        mentee.setDegree(degree.getText().toString());
-        mentee.setAge(age.getText().toString());
-        mentee.setBirthday(DateTimeFormat.formatDateSQL(bday.getText().toString()));
-        mentee.setGrade(spinner.getSelectedItem().toString());
-        mentee.setGrad_date(DateTimeFormat.formatDateSQL(grad_date.getText().toString()));
-        full_name.setText(name[0] + " " + name[1]);
+        if(this.name.getText().toString().contains(" "))
+        {
+            String[] name = this.name.getText().toString().split(" ");
+            mentee.setFname(name[0]);
+            mentee.setLname(name[1]);
+            mentee.setEmail(email.getText().toString());
+            mentee.setDegree(degree.getText().toString());
+            mentee.setAge(age.getText().toString());
+            mentee.setBirthday(DateTimeFormat.formatDateSQL(bday.getText().toString()));
+            mentee.setGrade(spinner.getSelectedItem().toString());
+            mentee.setGrad_date(DateTimeFormat.formatDateSQL(grad_date.getText().toString()));
+            full_name.setText(mentee.getFullName());
+        }
+        else
+            Toast.makeText(
+                    getApplicationContext(),
+                    "Fill in a space between first and last name",
+                    Toast.LENGTH_SHORT
+            ).show();
     }
 
-    private void sendAccRequest(String url, final String action)
+    private void sendAccRequest(String url)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -275,8 +290,8 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("action", action);
+                Map<String, String> params = new HashMap<>();
+                params.put("action", "updateRecord");
                 params.put("ucid", mentee.getUcid());
                 params.put("fname", mentee.getFname());
                 params.put("lname", mentee.getLname());
@@ -297,9 +312,9 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         );
     }
 
-    private void postToast(String msg)
+    private void postToast()
     {
-        CharSequence text = msg;
+        CharSequence text = "Account Updated";
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(this, text, duration);
         toast.show();
@@ -307,13 +322,7 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
 
     private boolean isStudent(SharedPreferences type)
     {
-        if(type.getString("type", null).equals("student"))
-        {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return type.getString("type", null).equals("student");
     }
 
     @Override

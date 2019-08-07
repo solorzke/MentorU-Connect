@@ -1,5 +1,6 @@
 package com.njit.mentorapp.coaching_log;
 
+import android.annotation.SuppressLint;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -10,16 +11,15 @@ import android.webkit.WebViewClient;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.service.WebServer;
 
+@SuppressLint("SetJavaScriptEnabled")
 public class HowTo extends AppCompatActivity
 {
-    private WebView webview;
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_how_to);
-        webview = findViewById(R.id.webview);
+        WebView webview = findViewById(R.id.webview);
         webview.setWebViewClient(new WebViewClient());
         webview.loadUrl(WebServer.getHowToLink());
         WebSettings webSettings = webview.getSettings();
@@ -28,8 +28,10 @@ public class HowTo extends AppCompatActivity
         /* Set the toolbar */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setTitle("How To");
     }
 
@@ -43,7 +45,8 @@ public class HowTo extends AppCompatActivity
                 onBackPressed();
                 finish();
                 return true;
-
+            case 999999999:
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }

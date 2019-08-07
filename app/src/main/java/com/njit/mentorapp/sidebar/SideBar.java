@@ -58,7 +58,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     private DrawerLayout drawer;
     private TextView user_name, user_email;
     public Toolbar toolbar;
-    public NavigationView navigationView;
+    public static NavigationView navigationView;
     private User user;
     private String oppo_user;
     private Mentor mentor;

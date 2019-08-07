@@ -33,12 +33,12 @@ import java.util.Map;
 
 public class EditMessage extends AppCompatActivity
 {
-    TextView char_count, recipient, cancel, add;
-    ImageView avi;
-    EditText msg;
-    String fname, lname;
-    String [] notifyMessageText;
-    SharedPreferences USER_TYPE;
+    private TextView char_count, recipient, cancel, add;
+    private ImageView avi;
+    private EditText msg;
+    private String fname, lname;
+    private String [] notifyMessageText;
+    private SharedPreferences USER_TYPE;
     private Mentor mentor;
     private Mentee mentee;
 
@@ -93,7 +93,10 @@ public class EditMessage extends AppCompatActivity
         if(mentee.notRegistered())
             recipient.setText(mentee.getUcid());
         else
-            recipient.setText(fname + " " + lname);
+        {
+            String name = fname + " " + lname;
+            recipient.setText(name);
+        }
 
         Picasso.get().load("https://tinyurl.com/yyt8bga6").into(avi);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -110,14 +113,12 @@ public class EditMessage extends AppCompatActivity
                 String message = msg.getText().toString();
                 if(!isStudent(USER_TYPE))
                     updateMessage(
-                            "updateFeedback",
                             mentor.getUcid(),
                             mentee.getUcid(),
                             message
                     );
                 else
                     updateMessage(
-                            "updateFeedback",
                             mentee.getUcid(),
                             mentor.getUcid(),
                             message
@@ -130,7 +131,7 @@ public class EditMessage extends AppCompatActivity
         });
     }
 
-    private void updateMessage(final String action, final String sender, final String receiver, final String msg)
+    private void updateMessage(final String sender, final String receiver, final String msg)
     {
         RequestQueue queue = Volley.newRequestQueue(EditMessage.this);
         StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
@@ -159,8 +160,8 @@ public class EditMessage extends AppCompatActivity
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("action", action);
+                Map<String, String> params = new HashMap<>();
+                params.put("action", "updateFeedback");
                 params.put("sender", sender);
                 params.put("receiver", receiver);
                 params.put("feedback", msg);
@@ -184,10 +185,6 @@ public class EditMessage extends AppCompatActivity
     }
 
     private boolean isStudent(SharedPreferences type) {
-        if (type.getString("type", null).equals("student")) {
-            return true;
-        } else {
-            return false;
-        }
+        return type.getString("type", null).equals("student");
     }
 }

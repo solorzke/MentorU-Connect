@@ -59,8 +59,10 @@ public class CoachingLog extends AppCompatActivity
         /* Set the toolbar */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setTitle("Coaching Log");
 
         /* Register the context menu for editing/removal list item when performing long clicks */
@@ -216,7 +218,8 @@ public class CoachingLog extends AppCompatActivity
                 onBackPressed();
                 finish();
                 return true;
-
+            case 999999999:
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }

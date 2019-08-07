@@ -42,17 +42,15 @@ import java.util.Map;
 
 public class Courses extends AppCompatActivity implements View.OnClickListener
 {
-    ImageView add, cancel;
-    TextView semester, mentee;
-    ListView list;
-    SharedPreferences courses;
-    private Mentee mte;
-    SharedPreferences.Editor e;
-    String fname, lname;
-    EditText c_num, c_title;
-    EditText new_id,new_title;
-    boolean toggle = false;
-    String row_id;
+    private ImageView add, cancel;
+    private TextView semester, mentee;
+    private ListView list;
+    private SharedPreferences courses;
+    private String full_name;
+    private EditText c_num, c_title;
+    private EditText new_id,new_title;
+    private boolean toggle = false;
+    private String row_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -63,8 +61,10 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         /* Set Toolbar and back button */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setTitle("Courses");
 
         /* Set the UI components to their respective ID's */
@@ -83,9 +83,8 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
 
         /* Set sharedPrefs and full name */
         courses = getSharedPreferences("COURSES", Context.MODE_PRIVATE);
-        mte = new Mentee(getApplicationContext());
-        fname = mte.getFname();
-        lname = mte.getLname();
+        Mentee mte = new Mentee(getApplicationContext());
+        full_name = mte.getFullName();
 
         /* Register the context menu for editing/removal list item when performing long clicks */
         registerForContextMenu(list);
@@ -95,7 +94,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
     protected void onStart()
     {
         super.onStart();
-        mentee.setText(fname + " " + lname);
+        mentee.setText(full_name);
         add.setOnClickListener(this);
         cancel.setOnClickListener(this);
         changeSemesterYear(semester);
@@ -131,7 +130,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                 View view2 = info.targetView;
                 String remove_id = ((TextView)(view2.findViewById(R.id.text1))).getText().toString();
                 String id = getRowId(courses, remove_id);
-                removeCourse(e, id);
+                removeCourse(id);
                 updateCourseDB("", "", id);
                 loadCourses(loadHashMap());
                 return false;
@@ -185,7 +184,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
 
                     else
                     {
-                        addNewCourse(id, title, e);
+                        addNewCourse(id, title);
                         loadCourses(loadHashMap());
                         c_num.getText().clear();
                         c_title.getText().clear();
@@ -218,25 +217,27 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                 onBackPressed();
                 finish();
                 return true;
+            case 999999999:
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
     /* Add new course id and title to the SharedPrefs by finding a blank record inside */
-    private void addNewCourse(String c_id, String c_title, SharedPreferences.Editor e)
+    private void addNewCourse(String c_id, String c_title)
     {
-        e = courses.edit();
+        SharedPreferences.Editor e = courses.edit();
         for(int i = 0; i < 6; i++)
         {
-            String id = this.courses.getString("row_id"+Integer.toString(i), null);
-            String num = this.courses.getString("id" + Integer.toString(i), null);
-            String title = this.courses.getString("title" + Integer.toString(i), null);
+            String id = this.courses.getString("row_id" + i, null);
+            String num = this.courses.getString("id" + i, null);
+            String title = this.courses.getString("title" + i, null);
 
             if (num.equals("") && title.equals("")) {
                 this.row_id = id;
-                e.putString("id"+Integer.toString(i), c_id);
-                e.putString("title"+Integer.toString(i), c_title);
+                e.putString("id" + i, c_id);
+                e.putString("title" + i, c_title);
                 e.apply();
                 updateCourseDB(c_id, c_title, this.row_id);
                 break;
@@ -255,9 +256,6 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                 });
                 error.show();
                 break;
-            }
-            else {
-                continue;
             }
         }
     }
@@ -292,7 +290,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("action", "updateCourses");
                 params.put("c_id", c_id);
                 params.put("c_title", c_title);
@@ -309,15 +307,15 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
     }
 
     /* Remove course from the shared prefs */
-    private void removeCourse(SharedPreferences.Editor e, String row_id)
+    private void removeCourse(String row_id)
     {
-        e = courses.edit();
+        SharedPreferences.Editor e = courses.edit();
         for (int i = 0; i < 6; i++)
         {
-            if(this.courses.getString("row_id"+Integer.toString(i), null).equals(row_id))
+            if(this.courses.getString("row_id" + i, null).equals(row_id))
             {
-                e.putString("id" + Integer.toString(i), "");
-                e.putString("title" + Integer.toString(i), "");
+                e.putString("id" + i, "");
+                e.putString("title" + i, "");
                 e.apply();
                 break;
             }
@@ -331,13 +329,15 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         int month = cal.get(Calendar.MONTH);
         String year = Integer.toString(cal.get(Calendar.YEAR));
         Log.d("DEBUG_OUTPUT","Current Year: "+year);
-
         if (month > 7) {
-            semester.setText("Fall " + year);
+            String sem = "Fall " + year;
+            semester.setText(sem);
         } else if (month < 5) {
-            semester.setText("Spring " + year);
+            String sem = "Spring " + year;
+            semester.setText(sem);
         } else if (4 < month || month < 8) {
-            semester.setText("Summer " + year);
+            String sem = "Summer " + year;
+            semester.setText(sem);
         }
     }
 
@@ -348,17 +348,12 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
 
         for (int i = 0; i < 6; i++)
         {
-            String c_num = this.courses.getString("id" + Integer.toString(i), null);
-            String c_title = this.courses.getString("title" + Integer.toString(i), null);
+            String c_num = this.courses.getString("id" + i, null);
+            String c_title = this.courses.getString("title" + i, null);
 
-            if (c_num.equals("") && c_title.equals("")) {
-                continue;
-            }
-            else {
+            if (!c_num.equals("") && !c_title.equals(""))
                 map.put(c_num, c_title);
-            }
         }
-
         return map;
     }
 
@@ -383,7 +378,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
 
     /* Display the dialog layout for editing an existing course item in the list view.
      * Save the changes, update the SharedPrefs, update the DB, and reload the List view.  */
-    public void showInputBox(final String old_id, String old_title)
+    private void showInputBox(final String old_id, String old_title)
     {
         final Dialog dialog = new Dialog(Courses.this);
         dialog.setTitle("Edit Course");
@@ -418,7 +413,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
                 else
                 {
                     String row_id = getRowId(courses, old_id);
-                    updateCourse(new_id.getText().toString(), new_title.getText().toString(), row_id, e);
+                    updateCourse(new_id.getText().toString(), new_title.getText().toString(), row_id);
                     updateCourseDB(new_id.getText().toString(), new_title.getText().toString(), row_id);
                     loadCourses(loadHashMap());
                     dialog.dismiss();
@@ -432,30 +427,22 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
     private String getRowId(SharedPreferences prefs, String c_id)
     {
         for(int i = 0; i < 6; i++)
-        {
-            if (c_id.equals(prefs.getString("id"+Integer.toString(i), null)))
-            {
-                return prefs.getString("row_id"+Integer.toString(i), null);
-            }
-        }
-
+            if (c_id.equals(prefs.getString("id"+i, null)))
+                return prefs.getString("row_id"+i, null);
         return null;
     }
 
     /* Update course item by using the row_id associated with the item to update the title and course id  */
-    private void updateCourse(String c_id, String c_title, String row_id, SharedPreferences.Editor e)
+    private void updateCourse(String c_id, String c_title, String row_id)
     {
-        e = courses.edit();
+        SharedPreferences.Editor e = courses.edit();
         for(int i = 0; i < 6; i++)
-        {
-            if(this.courses.getString("row_id"+Integer.toString(i), null).equals(row_id))
+            if(this.courses.getString("row_id"+i, null).equals(row_id))
             {
-                e.putString("id"+Integer.toString(i), c_id);
-                e.putString("title"+Integer.toString(i), c_title);
+                e.putString("id"+i, c_id);
+                e.putString("title"+i, c_title);
                 e.apply();
                 break;
             }
-        }
     }
-
 }

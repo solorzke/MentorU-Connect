@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class Meeting extends AppCompatActivity
 {
     private ArrayList<String> meeting = new ArrayList<>();
-    TextView users;
-    EditText title, location, date, s_time, e_time, purpose;
+    private TextView users;
+    private EditText title, location, date, s_time, e_time, purpose;
     /* array = ['id', 'sender', 'receiver', 'title', 'e_date', 'start_time', 'end_time',
                     'location', 'purpose', 'status'] */
 
@@ -24,7 +24,8 @@ public class Meeting extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.meeting);
-        meeting = getIntent().getExtras().getStringArrayList("meeting_details");
+        if(getIntent().getExtras() != null)
+            meeting = getIntent().getExtras().getStringArrayList("meeting_details");
         title = findViewById(R.id.event_title);
         location = findViewById(R.id.event_location);
         purpose = findViewById(R.id.event_purpose);
@@ -35,8 +36,10 @@ public class Meeting extends AppCompatActivity
         /* Set the toolbar */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setTitle("Meeting Details");
     }
 
@@ -44,7 +47,8 @@ public class Meeting extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
-        users.setText(meeting.get(1) + " & " + meeting.get(2));
+        String party = meeting.get(1) + " & " + meeting.get(2);
+        users.setText(party);
         title.setText(meeting.get(3));
         location.setText(meeting.get(7));
         purpose.setText(meeting.get(8));
@@ -63,7 +67,8 @@ public class Meeting extends AppCompatActivity
                 onBackPressed();
                 finish();
                 return true;
-
+            case 999999999:
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }

@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
@@ -29,11 +28,10 @@ import java.util.Map;
 
 public class EditGoals extends AppCompatActivity
 {
-    EditText g1, g2, g3, g4;
-    TextView cancel, save;
-    RelativeLayout r1, r2, r3, r4;
-    String[] goals = new String [4];
-    EditText[] group;
+    private EditText g1, g2, g3, g4;
+    private TextView cancel, save;
+    private String[] goals = new String [4];
+    private EditText[] group;
     private Mentor mentor;
     private Mentee mentee;
 
@@ -46,10 +44,6 @@ public class EditGoals extends AppCompatActivity
         g2 = findViewById(R.id.g2);
         g3 = findViewById(R.id.g3);
         g4 = findViewById(R.id.g4);
-        r1 = findViewById(R.id.r1);
-        r2 = findViewById(R.id.r2);
-        r3 = findViewById(R.id.r3);
-        r4 = findViewById(R.id.r4);
         cancel = findViewById(R.id.cancel);
         save = findViewById(R.id.save);
         mentor = new Mentor(getApplicationContext());
@@ -60,11 +54,13 @@ public class EditGoals extends AppCompatActivity
     protected void onStart()
     {
         super.onStart();
-        g1.setHint(getIntent().getExtras().getString("goal1"));
-        g2.setHint(getIntent().getExtras().getString("goal2"));
-        g3.setHint(getIntent().getExtras().getString("goal3"));
-        g4.setHint(getIntent().getExtras().getString("goal4"));
-        group = new EditText[]{g1, g2, g3, g4};
+        if(getIntent().getExtras() != null) {
+            g1.setHint(getIntent().getExtras().getString("goal1"));
+            g2.setHint(getIntent().getExtras().getString("goal2"));
+            g3.setHint(getIntent().getExtras().getString("goal3"));
+            g4.setHint(getIntent().getExtras().getString("goal4"));
+            group = new EditText[]{g1, g2, g3, g4};
+        }
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,7 +78,7 @@ public class EditGoals extends AppCompatActivity
 
                 if(!isBlank(goals))
                 {
-                    updateGoals("updateGoals", mentor.getUcid(), mentee.getUcid(), goals);
+                    updateGoals(mentor.getUcid(), mentee.getUcid(), goals);
                     postToast();
                     startActivity(new Intent(getApplicationContext(), SideBar.class));
                     finish();
@@ -97,7 +93,8 @@ public class EditGoals extends AppCompatActivity
         });
     }
 
-    private void updateGoals(final String action, final String mentor, final String student, final String[] goals)
+    /* Update the goal text changes to the database via server */
+    private void updateGoals(final String mentor, final String student, final String[] goals)
     {
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
         StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(), new Response.Listener<String>() {
@@ -127,8 +124,8 @@ public class EditGoals extends AppCompatActivity
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("action", action);
+                Map<String, String> params = new HashMap<>();
+                params.put("action", "updateGoals");
                 params.put("mentor", mentor);
                 params.put("student", student);
                 params.put("g1", goals[0]);
@@ -160,7 +157,6 @@ public class EditGoals extends AppCompatActivity
         for(String goal : goals)
             if(goal.equals("") || goal.equals(" ") || goal.contains("No new goals from"))
                 return true;
-
         return false;
     }
 }

@@ -34,16 +34,15 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class MentorActivity extends AppCompatActivity  {
-
-    SharedPreferences USER_TYPE;
-    SharedPreferences.Editor editor;
+public class MentorActivity extends AppCompatActivity
+{
+    private SharedPreferences USER_TYPE;
     private CircularImageView AVI;
-    EditText MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY;
-    TextView EDIT, DONE, MTR_UCID, full_name, MTR_MENTEE;
-    EditText [] list;
-    Calendar calendar;
-    DatePickerDialog date;
+    private EditText MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY;
+    private TextView EDIT, DONE, MTR_UCID, full_name, MTR_MENTEE;
+    private EditText [] list;
+    private Calendar calendar;
+    private DatePickerDialog date;
     private Mentor mentor;
 
     @Override
@@ -69,14 +68,16 @@ public class MentorActivity extends AppCompatActivity  {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         toolbar.setTitle("Mentor");
 
         if(!mentor.getAvi().equals(""))
             Picasso.get().load(mentor.getAvi()).into(AVI);
-        MTR_NAME.setText(mentor.getFname() + " " + mentor.getLname());
-        full_name.setText(mentor.getFname() + " " + mentor.getLname());
+        MTR_NAME.setText(mentor.getFullName());
+        full_name.setText(mentor.getFullName());
         MTR_EMAIL.setText(mentor.getEmail());
         MTR_UCID.setText(mentor.getUcid());
         MTR_DATE.setText(DateTimeFormat.formatDate(mentor.getGrad_date()));
@@ -109,7 +110,8 @@ public class MentorActivity extends AppCompatActivity  {
                     date = new DatePickerDialog(MentorActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            BDAY.setText((month + 1)+"/"+dayOfMonth+"/"+year);
+                            String day = (month + 1)+"/"+dayOfMonth+"/"+year;
+                            BDAY.setText(day);
                         }
                     }, year, month, day);
                     date.show();
@@ -127,7 +129,8 @@ public class MentorActivity extends AppCompatActivity  {
                     date = new DatePickerDialog(MentorActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                            MTR_DATE.setText((month + 1)+"/"+dayOfMonth+"/"+year);
+                            String day = (month + 1)+"/"+dayOfMonth+"/"+year;
+                            MTR_DATE.setText(day);
                         }
                     }, year, month, day);
                     date.show();
@@ -150,7 +153,7 @@ public class MentorActivity extends AppCompatActivity  {
                     EDIT.setVisibility(View.VISIBLE);
                     editText(list, false);
                     updateSharedPrefs(mentor, list);
-                    updateChanges(mentor, WebServer.getQueryLink(), "updateMentorRecord");
+                    updateChanges(mentor, WebServer.getQueryLink());
                     postToast();
                 }
             });
@@ -178,6 +181,8 @@ public class MentorActivity extends AppCompatActivity  {
                 onBackPressed();
                 finish();
                 return true;
+            case 999999999:
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -192,29 +197,17 @@ public class MentorActivity extends AppCompatActivity  {
 
     private void editText(EditText [] texts, boolean edit)
     {
-
         if(edit)
-        {
-            for(int i = 0; i < texts.length; i++){
-                texts[i].setEnabled(true);
-            }
-        }
-        else{
-            for(int i = 0; i < texts.length; i++){
-                texts[i].setEnabled(false);
-            }
-        }
+            for(EditText text : texts)
+                text.setEnabled(true);
+        else
+            for(EditText text : texts)
+                text.setEnabled(false);
     }
 
     private boolean isMentor(SharedPreferences type)
     {
-        if(type.getString("type", null).equals("mentor"))
-        {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return type.getString("type", null).equals("mentor");
     }
 
     private void updateSharedPrefs(Mentor mentor, EditText [] texts)
@@ -228,10 +221,10 @@ public class MentorActivity extends AppCompatActivity  {
         mentor.setDegree(texts[4].getText().toString());
         mentor.setAge(texts[5].getText().toString());
         mentor.setBirthday(DateTimeFormat.formatDateSQL(texts[6].getText().toString()));
-        full_name.setText(name[0] + " " + name[1]);
+        full_name.setText(mentor.getFullName());
     }
 
-    private void updateChanges(final Mentor mentor, String url, final String action)
+    private void updateChanges(final Mentor mentor, String url)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
@@ -260,8 +253,8 @@ public class MentorActivity extends AppCompatActivity  {
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("action", action);
+                Map<String, String> params = new HashMap<>();
+                params.put("action", "updateMentorRecord");
                 params.put("mentor", mentor.getUcid());
                 params.put("fname", mentor.getFname());
                 params.put("lname", mentor.getLname());
