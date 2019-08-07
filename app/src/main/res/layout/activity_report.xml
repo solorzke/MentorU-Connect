@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginRight="20dp"
-                android:text="Next"
+                android:text="@string/next"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp" />
 
@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="20dp"
                 android:gravity="start"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:textColor="@android:color/white"
                 android:textSize="15sp" />
 
@@ -51,6 +51,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description"
                 android:src="@android:mipmap/sym_def_app_icon" />
 
             <TextView
@@ -58,7 +59,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Reported User"
+                android:text="@string/reported_user"
                 android:textColor="#000000" />
         </LinearLayout>
 
@@ -66,7 +67,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="You are reporting this user for the following activity:"
+            android:text="@string/you_are_reporting"
             android:textColor="#000000" />
 
         <EditText
@@ -75,11 +76,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="start"
-            android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt"
+            android:hint="@string/required"
             android:inputType="textMultiLine"
             android:maxLength="195"
-            android:textSize="20sp"
-            android:hint="Required"/>
+            android:textSize="20sp" />
 
         <View
             android:layout_width="match_parent"
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Select the reason(s) for why you're reporting:"
+            android:text="@string/select_reason"
             android:textColor="@android:color/holo_red_dark" />
 
         <LinearLayout
@@ -106,13 +106,14 @@
                 android:id="@+id/th_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description"
                 android:src="@android:drawable/radiobutton_off_background" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="It's suspicious or spam"
+                android:text="@string/spam"
                 android:textColor="#000000" />
         </LinearLayout>
 
@@ -127,13 +128,14 @@
                 android:id="@+id/th_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description"
                 android:src="@android:drawable/radiobutton_off_background" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="It's threatening to you or someone else"
+                android:text="@string/threat"
                 android:textColor="#000000" />
         </LinearLayout>
 
@@ -148,13 +150,14 @@
                 android:id="@+id/th_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description"
                 android:src="@android:drawable/radiobutton_off_background" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="It's insensitive/rude to you or something related"
+                android:text="@string/insensitive"
                 android:textColor="#000000" />
         </LinearLayout>
 
@@ -169,13 +172,14 @@
                 android:id="@+id/th_other"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/content_description"
                 android:src="@android:drawable/radiobutton_off_background" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="Other"
+                android:text="@string/other"
                 android:textColor="#000000" />
 
         </LinearLayout>
@@ -186,9 +190,10 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            android:hint="@string/enter_reason"
+            android:inputType="text"
             android:maxLength="50"
-            android:hint="Enter reason here: 50 Chars Max"
-            android:textSize="15sp"/>
+            android:textSize="15sp" />
 
         <View
             android:layout_width="match_parent"
@@ -202,7 +207,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Learn more about our terms and violations here."
+            android:text="@string/learn_terms"
             android:textColor="@android:color/holo_blue_dark" />
 
     </LinearLayout>

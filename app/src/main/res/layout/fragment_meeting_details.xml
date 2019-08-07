@@ -13,7 +13,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <LinearLayout
@@ -24,75 +24,75 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Party: "
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans"
                         android:paddingLeft="10dp"
-                        android:textColor="@android:color/background_dark"/>
+                        android:text="@string/party"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
 
                     <TextView
                         android:id="@+id/meeting_user"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="User #2"
+                        android:text="@string/user_2"
+                        android:textColor="@android:color/holo_red_dark"
                         android:textSize="20sp"
-                        app:fontFamily="@font/open_sans"
-                        android:textColor="@android:color/holo_red_dark"/>
+                        app:fontFamily="@font/open_sans" />
 
                 </LinearLayout>
 
 
                 <EditText
-                    android:textColor="@android:color/background_dark"
                     android:id="@+id/event_title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:drawableLeft="@android:drawable/ic_menu_info_details"
-                    android:hint="Title:"
                     android:enabled="false"
+                    android:hint="@string/title_text"
                     android:inputType="textCapWords"
-                    app:fontFamily="@font/open_sans"/>
+                    android:textColor="@android:color/background_dark"
+                    app:fontFamily="@font/open_sans" />
 
                 <EditText
-                    android:textColor="@android:color/background_dark"
                     android:id="@+id/event_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:drawableLeft="@android:drawable/ic_menu_myplaces"
-                    android:hint="Location:"
-                    android:inputType="textCapWords"
                     android:enabled="false"
-                    app:fontFamily="@font/open_sans"/>
+                    android:hint="@string/location"
+                    android:inputType="textCapWords"
+                    android:textColor="@android:color/background_dark"
+                    app:fontFamily="@font/open_sans" />
 
 
                 <EditText
-                    android:textColor="@android:color/background_dark"
                     android:id="@+id/event_date"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:cursorVisible="false"
                     android:drawableLeft="@android:drawable/ic_menu_today"
+                    android:enabled="false"
                     android:focusableInTouchMode="false"
                     android:gravity="center_vertical"
+                    android:hint="@string/date_text"
                     android:inputType="date"
-                    android:hint=" Date:"
-                    android:enabled="false"
-                    app:fontFamily="@font/open_sans"/>
+                    android:textColor="@android:color/background_dark"
+                    app:fontFamily="@font/open_sans" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
                     <RelativeLayout
                         android:layout_width="200dp"
@@ -100,17 +100,17 @@
                         android:layout_marginBottom="5dp">
 
                         <EditText
-                            android:textColor="@android:color/background_dark"
                             android:id="@+id/event_start_time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:cursorVisible="false"
-                            android:inputType="time"
                             android:drawableLeft="@android:drawable/ic_menu_recent_history"
-                            android:focusableInTouchMode="false"
-                            android:hint="Start Time:"
                             android:enabled="false"
-                            app:fontFamily="@font/open_sans"/>
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/start_time"
+                            android:inputType="time"
+                            android:textColor="@android:color/background_dark"
+                            app:fontFamily="@font/open_sans" />
                     </RelativeLayout>
 
                     <RelativeLayout
@@ -119,17 +119,17 @@
                         android:layout_marginBottom="5dp">
 
                         <EditText
-                            android:textColor="@android:color/background_dark"
                             android:id="@+id/event_end_time"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:cursorVisible="false"
-                            android:inputType="time"
                             android:drawableLeft="@android:drawable/ic_menu_recent_history"
-                            android:focusableInTouchMode="false"
-                            android:hint="End Time:"
                             android:enabled="false"
-                            app:fontFamily="@font/open_sans"/>
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/end_time"
+                            android:inputType="time"
+                            android:textColor="@android:color/background_dark"
+                            app:fontFamily="@font/open_sans" />
                     </RelativeLayout>
                 </LinearLayout>
 
@@ -140,19 +140,19 @@
                     android:padding="10dp">
 
                     <EditText
-                        android:textColor="@android:color/background_dark"
                         android:id="@+id/event_purpose"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="top|left"
-                        android:hint="Purpose:"
+                        android:enabled="false"
+                        android:gravity="top|start"
+                        android:hint="@string/purpose"
                         android:inputType="textMultiLine"
                         android:lines="8"
                         android:maxLines="10"
                         android:minLines="1"
                         android:scrollbars="vertical"
-                        android:enabled="false"
-                        app:fontFamily="@font/open_sans"/>
+                        android:textColor="@android:color/background_dark"
+                        app:fontFamily="@font/open_sans" />
                 </RelativeLayout>
             </LinearLayout>
 
@@ -160,12 +160,12 @@
                 android:id="@+id/respond"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Respond"
-                android:background="#50c878"
-                android:textColor="@android:color/background_light"
+                android:layout_gravity="center"
                 android:layout_margin="10dp"
-                android:textSize="15sp"
-                android:layout_gravity="center"/>
+                android:background="#50c878"
+                android:text="@string/respond"
+                android:textColor="@android:color/background_light"
+                android:textSize="15sp" />
 
         </LinearLayout>
 

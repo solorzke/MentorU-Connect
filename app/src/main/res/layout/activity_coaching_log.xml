@@ -30,7 +30,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your meetings: "
+                android:text="@string/your_meetings"
                 android:layout_margin="10dp" />
 
             <View

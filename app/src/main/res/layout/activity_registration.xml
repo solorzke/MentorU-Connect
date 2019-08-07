@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
     tools:context=".Registration">
 
     <LinearLayout
@@ -17,8 +16,9 @@
             android:layout_height="wrap_content">
 
             <ImageView
+                android:contentDescription="@string/content_description"
                 android:id="@+id/btn_capture_photo"
-                android:layout_width="451dp"
+                android:layout_width="match_parent"
                 android:layout_height="117dp"
                 android:src="@drawable/rectangle"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -29,6 +29,7 @@
                 app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
+                android:contentDescription="@string/content_description"
                 android:id="@+id/imageView"
                 android:layout_width="88dp"
                 android:layout_height="94dp"
@@ -39,6 +40,7 @@
                 app:srcCompat="@drawable/mentor_u" />
 
             <ImageView
+                android:contentDescription="@string/content_description"
                 android:id="@+id/back"
                 android:layout_width="45dp"
                 android:layout_height="48dp"
@@ -59,7 +61,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:orientation="vertical">
 
@@ -70,7 +72,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
-                    android:hint="Your Name"
+                    android:hint="@string/your_name"
                     android:inputType="textEmailAddress"
                     android:textColor="#000000" />
 
@@ -80,7 +82,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
-                    android:hint="UCID"
+                    android:hint="@string/ucid"
                     android:inputType="textEmailAddress" />
 
                 <EditText
@@ -89,7 +91,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
-                    android:hint="Password"
+                    android:hint="@string/password"
                     android:inputType="textPassword" />
 
                 <EditText
@@ -98,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
-                    android:hint="Email "
+                    android:hint="@string/email_hint"
                     android:inputType="textEmailAddress" />
 
                 <EditText
@@ -107,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
-                    android:hint="Major"
+                    android:hint="@string/major_hint"
                     android:inputType="textPersonName" />
 
                 <EditText
@@ -116,7 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
-                    android:hint="Age"
+                    android:hint="@string/age_hint"
                     android:inputType="number"
                     android:maxLength="2" />
 
@@ -128,7 +130,7 @@
                     android:cursorVisible="false"
                     android:ems="10"
                     android:focusableInTouchMode="false"
-                    android:hint="Birthday"
+                    android:hint="@string/bday_hint"
                     android:inputType="date" />
 
 
@@ -141,7 +143,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Grade Level: "
+                        android:text="@string/grade_level_hint"
                         android:textSize="20sp" />
 
                     <TextView
@@ -165,7 +167,7 @@
                     android:cursorVisible="false"
                     android:ems="10"
                     android:focusableInTouchMode="false"
-                    android:hint="Grad Date"
+                    android:hint="@string/grad_date_hint"
                     android:inputType="date" />
 
                 <Button
@@ -174,7 +176,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:background="#071D49"
-                    android:text="Register"
+                    android:text="@string/register"
                     android:textColor="@android:color/white" />
 
             </LinearLayout>

@@ -37,7 +37,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingLeft="10dp"
-                android:text="Part Members: "
+                android:text="@string/members"
                 android:textColor="@android:color/background_dark"
                 android:textSize="15sp"
                 app:fontFamily="@font/open_sans" />
@@ -46,7 +46,7 @@
                 android:id="@+id/party"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="User 1 and User 2"
+                android:text="@string/user1_user2"
                 android:textColor="@android:color/holo_red_dark"
                 android:textSize="15sp"
                 app:fontFamily="@font/open_sans" />
@@ -61,7 +61,7 @@
             android:layout_margin="10dp"
             android:drawableLeft="@android:drawable/ic_menu_info_details"
             android:enabled="false"
-            android:hint="Title:"
+            android:hint="@string/title_text"
             android:inputType="textCapWords"
             android:textColor="@android:color/background_dark"
             app:fontFamily="@font/open_sans" />
@@ -73,7 +73,7 @@
             android:layout_margin="10dp"
             android:drawableLeft="@android:drawable/ic_menu_myplaces"
             android:enabled="false"
-            android:hint="Location:"
+            android:hint="@string/location"
             android:inputType="textCapWords"
             android:textColor="@android:color/background_dark"
             app:fontFamily="@font/open_sans" />
@@ -89,7 +89,7 @@
             android:enabled="false"
             android:focusableInTouchMode="false"
             android:gravity="center_vertical"
-            android:hint=" Date:"
+            android:hint="@string/date_text"
             android:inputType="date"
             android:textColor="@android:color/background_dark"
             app:fontFamily="@font/open_sans" />
@@ -113,7 +113,7 @@
                     android:drawableLeft="@android:drawable/ic_menu_recent_history"
                     android:enabled="false"
                     android:focusableInTouchMode="false"
-                    android:hint="Start Time:"
+                    android:hint="@string/start_time"
                     android:inputType="time"
                     android:textColor="@android:color/background_dark"
                     app:fontFamily="@font/open_sans" />
@@ -132,7 +132,7 @@
                     android:drawableLeft="@android:drawable/ic_menu_recent_history"
                     android:enabled="false"
                     android:focusableInTouchMode="false"
-                    android:hint="End Time:"
+                    android:hint="@string/end_time"
                     android:inputType="time"
                     android:textColor="@android:color/background_dark"
                     app:fontFamily="@font/open_sans" />
@@ -150,8 +150,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="109dp"
                 android:enabled="false"
-                android:gravity="top|left"
-                android:hint="Purpose:"
+                android:gravity="top|start"
+                android:hint="@string/purpose"
                 android:inputType="textMultiLine"
                 android:lines="8"
                 android:maxLines="10"

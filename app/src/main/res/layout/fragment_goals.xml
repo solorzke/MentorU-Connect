@@ -15,7 +15,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,13 +39,13 @@
                 android:id="@+id/no_goals"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/no_goals_entered"
-                android:gravity="center_horizontal"
-                android:textSize="20sp"
-                android:textColor="@android:color/black"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:visibility="gone"/>
+                android:gravity="center_horizontal"
+                android:text="@string/no_goals_entered"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:visibility="gone" />
 
             <LinearLayout
                 android:id="@+id/goals"
@@ -75,6 +75,7 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
+                            android:contentDescription="@string/content_description"
                             android:src="@drawable/ic_check_circle" />
                     </RelativeLayout>
 
@@ -95,7 +96,7 @@
                     android:id="@+id/view2"
                     android:layout_width="match_parent"
                     android:layout_height="2dp"
-                    android:background="@android:color/black"/>
+                    android:background="@android:color/black" />
 
                 <LinearLayout
                     android:id="@+id/goal_layout_2"
@@ -114,6 +115,7 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
+                            android:contentDescription="@string/content_description"
                             android:src="@drawable/ic_check_circle" />
                     </RelativeLayout>
 
@@ -152,6 +154,7 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
+                            android:contentDescription="@string/content_description"
                             android:src="@drawable/ic_check_circle" />
                     </RelativeLayout>
 
@@ -190,6 +193,7 @@
                             android:layout_height="50dp"
                             android:layout_marginTop="10dp"
                             android:layout_marginBottom="10dp"
+                            android:contentDescription="@string/content_description"
                             android:src="@drawable/ic_check_circle" />
 
                     </RelativeLayout>
@@ -246,6 +250,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="bottom"
                     android:layout_marginRight="10dp"
+                    android:contentDescription="@string/content_description"
                     android:src="@drawable/ic_event"
                     android:tint="@android:color/holo_red_dark" />
 
@@ -261,9 +266,9 @@
                     android:id="@+id/weeks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/semester_ends_def"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:text="@string/semester_ends_def"
                     android:textColor="@android:color/holo_red_dark"
                     android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
@@ -280,6 +285,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="bottom"
                     android:layout_marginRight="10dp"
+                    android:contentDescription="@string/content_description"
                     android:src="@drawable/ic_pie"
                     android:tint="@android:color/holo_red_dark" />
 
@@ -332,6 +338,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="bottom"
                     android:layout_marginRight="10dp"
+                    android:contentDescription="@string/content_description"
                     android:src="@drawable/ic_send"
                     android:tint="@android:color/holo_red_dark" />
 
@@ -356,6 +363,7 @@
                     android:layout_height="30dp"
                     android:layout_gravity="bottom"
                     android:layout_marginRight="10dp"
+                    android:contentDescription="@string/content_description"
                     android:src="@drawable/ic_account"
                     android:tint="@android:color/holo_red_dark" />
 
@@ -378,6 +386,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:clickable="true"
+        android:focusable="true"
         android:src="@drawable/ic_add"
         android:visibility="invisible"
         app:backgroundTint="@android:color/holo_red_dark"

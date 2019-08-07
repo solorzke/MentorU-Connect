@@ -25,7 +25,7 @@
                 android:id="@+id/cancel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cancel"
+                android:text="@string/cancel"
                 android:textColor="@android:color/background_light"
                 app:fontFamily="@font/open_sans"
                 android:textSize="15sp"
@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text="Send"
+                android:text="@string/send"
                 android:layout_marginRight="15dp"
                 android:textSize="15sp"
                 android:textColor="@android:color/background_light"
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:drawableLeft="@android:drawable/ic_menu_info_details"
-                android:hint="Title:"
+                android:hint="@string/title_text"
                 android:inputType="textCapWords"
                 app:fontFamily="@font/open_sans"/>
 
@@ -67,7 +67,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:drawableLeft="@android:drawable/ic_menu_myplaces"
-                android:hint="Location:"
+                android:hint="@string/location"
                 android:inputType="textCapWords"
                 app:fontFamily="@font/open_sans"/>
 
@@ -83,7 +83,7 @@
                 android:focusableInTouchMode="false"
                 android:gravity="center_vertical"
                 android:inputType="date"
-                android:hint=" Date:"
+                android:hint="@string/date_text"
                 app:fontFamily="@font/open_sans"/>
 
             <LinearLayout
@@ -106,7 +106,7 @@
                         android:inputType="time"
                         android:drawableLeft="@android:drawable/ic_menu_recent_history"
                         android:focusableInTouchMode="false"
-                        android:hint="Start Time:"
+                        android:hint="@string/start_time"
                         app:fontFamily="@font/open_sans"/>
                 </RelativeLayout>
 
@@ -124,7 +124,7 @@
                         android:inputType="time"
                         android:drawableLeft="@android:drawable/ic_menu_recent_history"
                         android:focusableInTouchMode="false"
-                        android:hint="End Time:"
+                        android:hint="@string/end_time"
                         app:fontFamily="@font/open_sans"/>
                 </RelativeLayout>
             </LinearLayout>
@@ -147,7 +147,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="top|left"
-                    android:hint="Purpose:"
+                    android:hint="@string/purpose"
                     android:inputType="textMultiLine"
                     android:lines="8"
                     android:maxLines="10"

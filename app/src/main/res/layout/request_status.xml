@@ -19,7 +19,7 @@
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add To Calendar"
+            android:text="@string/add_calendar"
             android:textColor="@android:color/white"
             app:fontFamily="@font/open_sans"
             android:layout_gravity="end"

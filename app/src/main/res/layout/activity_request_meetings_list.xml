@@ -31,7 +31,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your Pending Requests"
+                android:text="@string/pending_requests"
                 android:textSize="15sp" />
 
             <View
@@ -48,7 +48,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="No requests remaining."
+            android:text="@string/no_pending_requests"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="15sp"
             android:visibility="gone" />
@@ -78,7 +78,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Received Requests"
+                android:text="@string/received_requests"
                 android:textSize="15sp" />
 
             <View
@@ -95,7 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="No requests remaining."
+            android:text="@string/no_requests_remaining"
             android:textColor="@android:color/holo_red_dark"
             android:textSize="15sp"
             android:visibility="gone" />

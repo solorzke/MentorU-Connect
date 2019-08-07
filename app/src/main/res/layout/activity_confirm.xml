@@ -26,7 +26,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginRight="20dp"
-                android:text="Exit"
+                android:text="@string/exit"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp" />
 
@@ -37,7 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center_horizontal"
-            android:text="Report Was Submitted!"
+            android:text="@string/report_submitted"
             android:textColor="@android:color/black"
             android:textSize="25sp" />
 
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="start"
-            android:text="Your report was sent and is currently under review by our staff."
+            android:text="@string/report_sent_desc"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
@@ -62,7 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="start"
-            android:text="We'll notify you about our progress as we continue investigating the matter."
+            android:text="@string/notify_prog"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
@@ -70,7 +70,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Here is your confirmation no."
+            android:text="@string/confirm_no"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
@@ -79,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="confirmation number"
+            android:text="@string/confirmation"
             android:textColor="@android:color/holo_red_dark" />
 
         <View
@@ -93,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="We at Mentor U take report claims very seriously to ensure you are getting the best service."
+            android:text="@string/take_serious"
             android:textColor="@android:color/black"
             android:textSize="15sp" />
 
@@ -102,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="You can also contact us via email or at our office for more information."
+            android:text="@string/contact_us_email"
             android:textColor="@android:color/holo_blue_dark"
             android:textSize="15sp" />
 

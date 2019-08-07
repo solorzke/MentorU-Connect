@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -30,9 +29,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="Edit"
+                    android:text="@string/edit"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     app:fontFamily="@font/open_sans" />
 
                 <TextView
@@ -40,9 +39,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:text="Done"
+                    android:text="@string/done"
                     android:textColor="@android:color/white"
-                    android:textSize="20sp"
+                    android:textSize="17sp"
                     android:visibility="invisible"
                     app:fontFamily="@font/open_sans" />
 
@@ -87,7 +86,7 @@
                         android:layout_marginBottom="20dp"
                         android:fontFamily="@android:"
                         android:gravity="center_horizontal"
-                        android:text="John Doe"
+                        android:text="@string/john"
                         android:textColor="@android:color/background_light"
                         android:textSize="25sp"
                         android:textStyle="bold"
@@ -109,16 +108,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Name: "
+                        android:text="@string/name_text"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
 
                     <EditText
+                        android:inputType="text"
                         android:id="@+id/acc_stu_name_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="John Doe"
+                        android:hint="@string/john"
                         android:textSize="20sp" />
 
                 </LinearLayout>
@@ -138,7 +138,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Age: "
+                        android:text="@string/age_text"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
@@ -147,7 +147,7 @@
                         android:id="@+id/age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:hint="00"
+                        android:hint="@string/num_def"
                         android:inputType="number"
                         android:textSize="20sp" />
 
@@ -168,7 +168,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="UCID: "
+                        android:text="@string/ucid_text"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
@@ -197,18 +197,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Birthday: "
+                        android:text="@string/birthday"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
 
                     <EditText
+                        android:inputType="text"
                         android:id="@+id/bday"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:cursorVisible="false"
                         android:focusableInTouchMode="false"
-                        android:hint="MM/DD/YYYY"
+                        android:hint="@string/date"
                         android:textSize="20sp" />
 
                 </LinearLayout>
@@ -229,16 +230,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Email: "
+                        android:text="@string/email_text"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
 
                     <EditText
+                        android:inputType="textEmailAddress"
                         android:id="@+id/acc_stu_email_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="email@njit.edu"
+                        android:hint="@string/email"
                         android:textSize="20sp" />
 
                 </LinearLayout>
@@ -258,16 +260,17 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Degree: "
+                        android:text="@string/degree"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
 
                     <EditText
+                        android:inputType="text"
                         android:id="@+id/acc_stu_degree_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="Current Degree"
+                        android:hint="@string/current_deg"
                         android:textSize="20sp" />
 
                 </LinearLayout>
@@ -287,7 +290,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Grade Level: "
+                        android:text="@string/grade_level_hint"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp" />
 
@@ -320,18 +323,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Grad Date: "
+                        android:text="@string/grad_date_text"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
 
                     <EditText
+                        android:inputType="text"
                         android:id="@+id/grad_date"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:cursorVisible="false"
                         android:focusableInTouchMode="false"
-                        android:hint="MM/YYYY"
+                        android:hint="@string/grad_date"
                         android:textSize="20sp" />
 
                 </LinearLayout>

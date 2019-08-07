@@ -6,16 +6,18 @@
     android:padding="20dp">
 
     <EditText
+        android:inputType="text"
         android:id="@+id/c_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course ID" />
+        android:hint="@string/course_id" />
 
     <EditText
+        android:inputType="text"
         android:id="@+id/c_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Course Title" />
+        android:hint="@string/course_title" />
 
 
     <Button
@@ -25,6 +27,6 @@
         android:layout_margin="20dp"
         android:background="@android:color/holo_blue_dark"
         android:textColor="@android:color/white"
-        android:text="Save Changes" />
+        android:text="@string/save_changes" />
 
 </LinearLayout>

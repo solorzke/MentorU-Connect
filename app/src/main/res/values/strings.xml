@@ -2,6 +2,8 @@
     <string name="app_name">Mentor U Connect</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Sidebar -->
     <string name="menu_item_home">Home</string>
     <string name="menu_item_coachinglog">Coaching Log</string>
     <string name="menu_item_settings">Settings</string>
@@ -21,11 +23,16 @@
     <string name="menu_item_student_resources">Resources</string>
     <string name="menu_item_media">Media</string>
     <string name="menu_item_faq">FAQ</string>
+
+    <!-- Social Media -->
     <string name="sm_twitter">NJIT Twitter</string>
     <string name="sm_ig">NJIT Instagram</string>
     <string name="sm_reddit">NJIT Reddit</string>
     <string name="sm_fb">NJIT Facebook</string>
     <string name="butt">Button</string>
+
+    <!-- FAQ Text -->
+    <string name="faq">Frequently Asked Questions</string>
     <string name="q1">Why can\'t I login into the app?</string>
     <string name="a1">You must be assigned a mentor before you log in. If that\'s not the case then re-enter your login credentials.</string>
     <string name="q2">How do I request a meeting with my mentor?</string>
@@ -40,4 +47,192 @@
     <string name="a6">Mentor U Connect was created with input from both students and faculty, all seeking more invested mentoring relationships at NJIT. Mentor U Connect allows students to search for mentors in dimensions that are not strictly academic or scholastic.</string>
     <string name="q7">I have a question that was not answered here. How do I contact the Mentor Connect team?</string>
     <string name="a7">You can contact the team at mentoruconnect@njit.edu for any other questions/concerns you may have with the app/program.</string>
+
+    <!-- Meeting Request -->
+    <string name="sender_1_t">Your meeting request was accepted.</string>
+    <string name="sender_1_s">View the meeting info.</string>
+    <string name="receiver_1_t">You\'ve accepted the meeting request.</string>
+    <string name="receiver_1_s">View the details on the next page.</string>
+
+    <string name="sender_2_t">The meeting request was canceled.</string>
+    <string name="sender_2_s">Schedule a new meeting.</string>
+    <string name="receiver_2_t">You canceled the meeting request.</string>
+    <string name="receiver_2_s">Schedule a new one!</string>
+
+    <string name="sender_3_t">Your request is waiting to be approved!</string>
+    <string name="sender_3_s">Check back later.</string>
+    <string name="receiver_3_t">You\'ve received a meeting request!</string>
+    <string name="receiver_3_s">Check the details.</string>
+    
+    <string name="title_text">Title:</string>
+    <string name="location">Location:</string>
+    <string name="date_text">Date:</string>
+    <string name="start_time">Start Time:</string>
+    <string name="end_time">End Time:</string>
+    <string name="purpose">Purpose:</string>
+    <string name="respond">Respond</string>
+    <string name="add_calendar">Add To Calendar</string>
+    
+    <string name="pending_requests">Your Pending Requests</string>
+    <string name="no_pending_requests">No requests remaining.</string>
+    <string name="received_requests">Received Requests</string>
+    <string name="no_requests_remaining">No requests remaining.</string>
+    <string name="to">To:</string>
+    <string name="recipient_email">Enter recipient\'s email adderss</string>
+    <string name="subject">Subject:</string>
+    <string name="body">Body:</string>
+    <string name="enter_msg">Enter Message</string>
+    <string name="party">Party: </string>
+    <string name="user_2">User #2</string>
+
+    <string name="status_title">You haven\'t received/sent a meeting request yet!</string>
+    <string name="status_subtitle">Schedule one!</string>
+
+    <string name="members">Party Members: </string>
+    <string name="user1_user2">User 1 and User 2</string>
+
+
+    <!-- Goals text -->
+    <string name="no_goal">No goal available</string>
+    <string name="goal_label">Goal</string>
+    <string name="no_goals_entered">Welcome to the Goals page. Currently there are no goals available.</string>
+    <string name="semester_ends">Semester ends in:</string>
+    <string name="semester_ends_def">00 Weeks</string>
+    <string name="goals_completed">Goals completed:</string>
+    <string name="goals_completed_perc"> 0 %</string>
+    <string name="stats">Stats</string>
+    <string name="contact">Contact</string>
+    <string name="send_email">Have questions about the goals?</string>
+    <string name="view_mentor_account">View Mentor Account</string>
+
+    <!-- Toolbar text button labels here -->
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="done">Done</string>
+    <string name="edit">Edit</string>
+    <string name="confirm">Confirm</string>
+    <string name="exit">Exit</string>
+    <string name="add">Add</string>
+    <string name="next">Next</string>
+    <string name="send">Send</string>
+
+    <!-- Courses -->
+    <string name="course_id">Course ID</string>
+    <string name="course_title">Course Title</string>
+
+    <!-- John and Jane Doe's -->
+    <string name="john">John Doe</string>
+    <string name="jane">Jane Doe</string>
+
+    <!-- Account info -->
+    <string name="date">MM/DD/YYYY</string>
+    <string name="birthday">Birthday: </string>
+    <string name="birthday_text">Birthday: </string>
+    <string name="email">email@njit.edu</string>
+    <string name="email_text">Email: </string>
+    <string name="grad_date">MM/YYYY</string>
+    <string name="occupation">Occupation: </string>
+    <string name="grad_date_text">Grad Date: </string>
+    <string name="current_deg">Current Degree</string>
+    <string name="degree">Degree: </string>
+    <string name="mentee">Mentee</string>
+    <string name="mentor">Mentor</string>
+    <string name="mentee_text">Mentee: </string>
+    <string name="ucid_text">UCID: </string>
+
+    <!-- Login -->
+    <string name="text_on">Yes</string>
+    <string name="text_off">No</string>
+    <string name="as_mentor">Sign In As Mentor</string>
+    <string name="sign_in">Sign In</string>
+    <string name="register">Register</string>
+    <string name="forgot">Forgot Password?</string>
+    <string name="help">Help Center</string>
+    <string name="copyright">NJIT ©2019</string>
+    <string name="or">Or</string>
+    <string name="password"> Password</string>
+    <string name="ucid"> UCID</string>
+    <string name="num_def">00</string>
+    <string name="age_text">Age: </string>
+    <string name="name_text">Name: </string>
+    <string name="take_pic">Take Picture</string>
+
+    <!-- Content Description -->
+    <string name="content_description">#</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet, Lorem ipsum dolor sit amet,"</string>
+
+    <!-- Messaging -->
+    <string name="enter_sub">Enter Subject</string>
+    <string name="msg_for">New Message For:</string>
+    <string name="recipient">Recipient Name</string>
+    <string name="char_count">Char Count:</string>
+    <string name="char_limit">Enter Message: Max 195 Chars</string>
+    <string name="like">Like</string>
+    <string name="dislike">Dislike</string>
+    <string name="share">Share</string>
+    <string name="report">Report</string>
+    <string name="contact_user">Contact User</string>
+    <string name="acc_info">Account Information</string>
+
+    <!-- Report -->
+    <string name="learn_terms">Learn more about our terms and violations here.</string>
+    <string name="describe_detail">Describe more in detail the event that occurred: (optional)</string>
+    <string name="more_than_once">Has this occurred more than once?</string>
+    <string name="all_apply">Select all that apply:</string>
+    <string name="reported_user">Reported User</string>
+    <string name="required">Required</string>
+    <string name="select_reason">Select the reason(s) for why you\'re reporting:</string>
+    <string name="spam">It\'s suspicious or spam</string>
+    <string name="threat">It\'s threatening to you or someone else</string>
+    <string name="insensitive">It\'s insensitive/rude to you or something related</string>
+    <string name="other">Other</string>
+    <string name="enter_reason">Enter reason here: 50 Chars Max</string>
+    <string name="you_are_reporting">You are reporting this user for the following activity:</string>
+    <string name="report_submitted">Report Was Submitted!</string>
+    <string name="report_sent_desc">Your report was sent and is currently under review by our staff.</string>
+    <string name="notify_prog">We\'ll notify you about our progress as we continue investigating the matter.</string>
+    <string name="confirm_no">Here is your confirmation no.</string>
+    <string name="confirmation">confirmation number</string>
+    <string name="take_serious">We at Mentor U take report claims very seriously to ensure you are getting the best service.</string>
+    <string name="contact_us_email">You can also contact us via email or at our office for more information.</string>
+
+    <!-- Yes/No -->
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+
+    <!-- Coaching Log -->
+    <string name="your_meetings">Your meetings: </string>
+    <string name="meet_event">Meetings and Events</string>
+    <string name="req_meet">Request Meeting</string>
+    <string name="status">Meeting Request Status</string>
+    <string name="logs">Meeting Logs</string>
+    <string name="meeting_how">How To Schedule A Meeting</string>
+
+    <!-- Courses -->
+    <string name="schedule">Course Schedule</string>
+    <string name="semester">Fall 2019</string>
+    <string name="course_hint_id">Course ID: i.e. CS 100</string>
+    <string name="course_hint_desc">Course Title: i.e. Intro to Computer Science</string>
+
+    <!-- Registration -->
+    <string name="your_name">Your Name</string>
+    <string name="email_hint">Email</string>
+    <string name="major_hint">Major</string>
+    <string name="age_hint">Age</string>
+    <string name="bday_hint">Birthday</string>
+    <string name="grade_level_hint">Grade Level: </string>
+    <string name="grad_date_hint">Grad Date</string>
+
+    <!-- Settings -->
+    <string name="alerts">Alerts</string>
+    <string name="notifs">Notifications</string>
+    <string name="accounts">Accounts</string>
+    <string name="office">Office</string>
+    <string name="contact_office">Contact Office</string>
+    <string name="about_us">About Us</string>
+    <string name="terms_and_cond">Terms and Conditions</string>
+    <string name="privacy">Privacy Policy</string>
+
+
 </resources>

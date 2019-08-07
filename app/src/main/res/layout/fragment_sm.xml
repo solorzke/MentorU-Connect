@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -27,10 +26,12 @@
                 android:layout_marginBottom="5dp">
 
                 <ImageView
+                    android:contentDescription="@string/content_description"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:background="@android:drawable/dialog_holo_light_frame" />
                 <ImageView
+                    android:contentDescription="@string/content_description"
                     android:id="@+id/fb"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -56,10 +57,12 @@
                 android:layout_marginBottom="5dp">
 
                 <ImageView
+                    android:contentDescription="@string/content_description"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:background="@android:drawable/dialog_holo_light_frame" />
                 <ImageView
+                    android:contentDescription="@string/content_description"
                     android:id="@+id/twitter"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -85,10 +88,12 @@
                 android:layout_marginBottom="5dp">
 
                 <ImageView
+                    android:contentDescription="@string/content_description"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:background="@android:drawable/dialog_holo_light_frame" />
                 <ImageView
+                    android:contentDescription="@string/content_description"
                     android:id="@+id/ig"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
@@ -114,10 +119,12 @@
                 android:layout_marginBottom="5dp">
 
                 <ImageView
+                    android:contentDescription="@string/content_description"
                     android:layout_width="match_parent"
                     android:layout_height="110dp"
                     android:background="@android:drawable/dialog_holo_light_frame" />
                 <ImageView
+                    android:contentDescription="@string/content_description"
                     android:id="@+id/reddit"
                     android:layout_width="70dp"
                     android:layout_height="55dp"
@@ -145,7 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Social Media"
+        android:text="@string/menu_item_social_media"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"

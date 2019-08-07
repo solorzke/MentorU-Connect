@@ -19,7 +19,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Meetings and Events"
+                android:text="@string/meet_event"
                 android:textSize="15sp" />
 
             <View
@@ -43,6 +43,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="10dp"
+                android:contentDescription="@string/content_description"
                 android:src="@drawable/ic_event"
                 android:tint="@android:color/holo_orange_light" />
 
@@ -50,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:text="Request Meeting"
+                android:text="@string/req_meet"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20sp"
                 app:fontFamily="@font/open_sans" />
@@ -68,6 +69,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
+                android:contentDescription="@string/content_description"
                 android:src="@drawable/ic_request"
                 android:tint="@android:color/holo_orange_light" />
 
@@ -75,7 +77,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:text="Meeting Request Status"
+                android:text="@string/status"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20sp"
                 app:fontFamily="@font/open_sans" />
@@ -92,6 +94,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
+                android:contentDescription="@string/content_description"
                 android:src="@drawable/ic_log"
                 android:tint="@android:color/holo_orange_light" />
 
@@ -99,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:text="Meeting Logs"
+                android:text="@string/logs"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20sp"
                 app:fontFamily="@font/open_sans" />
@@ -117,6 +120,7 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="10dp"
+                android:contentDescription="@string/content_description"
                 android:src="@drawable/ic_help"
                 android:tint="@android:color/holo_orange_light" />
 
@@ -124,7 +128,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:text="How To Schedule A Meeting"
+                android:text="@string/meeting_how"
                 android:textColor="@android:color/background_dark"
                 android:textSize="20sp"
                 app:fontFamily="@font/open_sans" />

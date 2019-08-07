@@ -26,7 +26,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
                 android:layout_marginRight="20dp"
-                android:background="@drawable/ic_send" />
+                android:background="@drawable/ic_send"
+                android:contentDescription="@string/content_description" />
         </android.support.v7.widget.Toolbar>
 
         <RelativeLayout
@@ -38,8 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_weight="1"
-                android:text="To:"
+                android:text="@string/to"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </RelativeLayout>
@@ -54,7 +54,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:hint="Enter recipient's email adderss" />
+                android:hint="@string/recipient_email"
+                android:inputType="textEmailAddress" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -66,8 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_weight="1"
-                android:text="Subject:"
+                android:text="@string/subject"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </RelativeLayout>
@@ -77,13 +77,14 @@
             android:layout_height="wrap_content">
 
             <EditText
-                android:id="@+id/email_subject"
+                android:id="@+id/e_subject"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:hint="Enter Subject"
-                android:maxLength="30"/>
+                android:hint="@string/enter_sub"
+                android:inputType="text"
+                android:maxLength="30" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -95,8 +96,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="30dp"
-                android:layout_weight="1"
-                android:text="Body:"
+                android:text="@string/body"
                 android:textColor="@android:color/black"
                 android:textSize="15sp" />
         </RelativeLayout>
@@ -106,19 +106,19 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/email_body"
+                android:id="@+id/e_body"
                 android:layout_width="348dp"
                 android:layout_height="175dp"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
-                android:gravity="top|left"
-                android:hint="Enter Message"
+                android:gravity="top|start"
+                android:hint="@string/enter_msg"
                 android:inputType="textMultiLine"
                 android:lines="10"
                 android:maxLines="10"
                 android:minLines="1"
                 android:scrollbars="vertical"
-                android:textSize="15sp"/>
+                android:textSize="15sp" />
         </RelativeLayout>
 
     </LinearLayout>

@@ -28,8 +28,8 @@ public class SendEmail extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_email);
         TO = findViewById(R.id.to_email);
-        SUBJECT = findViewById(R.id.email_subject);
-        BODY = findViewById(R.id.email_body);
+        SUBJECT = findViewById(R.id.e_subject);
+        BODY = findViewById(R.id.e_body);
         send = findViewById(R.id.sendEmail);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
