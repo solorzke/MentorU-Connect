@@ -38,12 +38,12 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StudentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
+public class MenteeActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
     private Mentee mentee;
     private SharedPreferences USER_TYPE;
     private TextView edit, done, ucid, full_name;
-    private EditText name, email, degree, age, bday, grad_date;
+    private EditText fname, lname, email, degree, age, bday, grad_date;
     private ImageView avi;
     private EditText [] editable = new EditText[6];
     private Calendar calendar;
@@ -54,12 +54,13 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_student_beta);
+        setContentView(R.layout.activity_mentee);
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
         mentee = new Mentee(getApplicationContext());
         edit = findViewById(R.id.edit_acc_btn);
         done = findViewById(R.id.done_acc_btn);
-        name = findViewById(R.id.acc_stu_name_1);
+        fname = findViewById(R.id.fname);
+        lname = findViewById(R.id.lname);
         ucid = findViewById(R.id.acc_stu_ucid_1);
         email = findViewById(R.id.acc_stu_email_1);
         degree = findViewById(R.id.acc_stu_degree_1);
@@ -86,8 +87,9 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
         toolbar.setTitle("Mentee");
 
         String fullname = mentee.getFname() + " " + mentee.getLname();
-        name.setText(fullname);
-        full_name.setText(fullname);
+        fname.setText(mentee.getFname());
+        lname.setText(mentee.getLname());
+        this.full_name.setText(fullname);
         ucid.setText(mentee.getUcid());
         email.setText(mentee.getEmail());
         degree.setText(mentee.getDegree());
@@ -103,7 +105,7 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
     public void onStart()
     {
         super.onStart();
-        editable = new EditText[]{name, email, degree, age, bday, grad_date};
+        editable = new EditText[]{fname, lname, email, degree, age, bday, grad_date};
         if(isStudent(USER_TYPE))
         {
             bday.setOnClickListener(new View.OnClickListener() {
@@ -114,7 +116,7 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                     int month = calendar.get(Calendar.MONTH);
                     int year = calendar.get(Calendar.YEAR);
 
-                    date = new DatePickerDialog(StudentActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    date = new DatePickerDialog(MenteeActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             String day = (month + 1)+"/"+dayOfMonth+"/"+year;
@@ -133,7 +135,7 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
                     int month = calendar.get(Calendar.MONTH);
                     int year = calendar.get(Calendar.YEAR);
 
-                    date = new DatePickerDialog(StudentActivity.this, new DatePickerDialog.OnDateSetListener() {
+                    date = new DatePickerDialog(MenteeActivity.this, new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                             String day = (month + 1)+"/"+dayOfMonth+"/"+year;
@@ -240,25 +242,15 @@ public class StudentActivity extends AppCompatActivity implements AdapterView.On
 
     private void updateUserSession(Mentee mentee)
     {
-        if(this.name.getText().toString().contains(" "))
-        {
-            String[] name = this.name.getText().toString().split(" ");
-            mentee.setFname(name[0]);
-            mentee.setLname(name[1]);
-            mentee.setEmail(email.getText().toString());
-            mentee.setDegree(degree.getText().toString());
-            mentee.setAge(age.getText().toString());
-            mentee.setBirthday(DateTimeFormat.formatDateSQL(bday.getText().toString()));
-            mentee.setGrade(spinner.getSelectedItem().toString());
-            mentee.setGrad_date(DateTimeFormat.formatDateSQL(grad_date.getText().toString()));
-            full_name.setText(mentee.getFullName());
-        }
-        else
-            Toast.makeText(
-                    getApplicationContext(),
-                    "Fill in a space between first and last name",
-                    Toast.LENGTH_SHORT
-            ).show();
+        mentee.setFname(fname.getText().toString());
+        mentee.setLname(lname.getText().toString());
+        mentee.setEmail(email.getText().toString());
+        mentee.setDegree(degree.getText().toString());
+        mentee.setAge(age.getText().toString());
+        mentee.setBirthday(DateTimeFormat.formatDateSQL(bday.getText().toString()));
+        mentee.setGrade(spinner.getSelectedItem().toString());
+        mentee.setGrad_date(DateTimeFormat.formatDateSQL(grad_date.getText().toString()));
+        full_name.setText(mentee.getFullName());
     }
 
     private void sendAccRequest(String url)

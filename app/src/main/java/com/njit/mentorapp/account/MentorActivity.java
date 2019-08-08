@@ -38,7 +38,7 @@ public class MentorActivity extends AppCompatActivity
 {
     private SharedPreferences USER_TYPE;
     private CircularImageView AVI;
-    private EditText MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY;
+    private EditText FNAME, LNAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY;
     private TextView EDIT, DONE, MTR_UCID, full_name, MTR_MENTEE;
     private EditText [] list;
     private Calendar calendar;
@@ -49,10 +49,11 @@ public class MentorActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.account_mentor);
+        setContentView(R.layout.activity_mentor);
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
         AVI = findViewById(R.id.picasso);
-        MTR_NAME = findViewById(R.id.acc_mtr_name);
+        FNAME = findViewById(R.id.fname);
+        LNAME = findViewById(R.id.lname);
         MTR_EMAIL = findViewById(R.id.acc_mtr_email);
         MTR_UCID = findViewById(R.id.mtr_ucid1);
         MTR_DATE = findViewById(R.id.mtr_date1);
@@ -76,7 +77,8 @@ public class MentorActivity extends AppCompatActivity
 
         if(!mentor.getAvi().equals(""))
             Picasso.get().load(mentor.getAvi()).into(AVI);
-        MTR_NAME.setText(mentor.getFullName());
+        FNAME.setText(mentor.getFname());
+        LNAME.setText(mentor.getLname());
         full_name.setText(mentor.getFullName());
         MTR_EMAIL.setText(mentor.getEmail());
         MTR_UCID.setText(mentor.getUcid());
@@ -87,7 +89,7 @@ public class MentorActivity extends AppCompatActivity
         AGE.setText(mentor.getAge());
         BDAY.setText(DateTimeFormat.formatDate(mentor.getBirthday()));
 
-        list = new EditText [] {MTR_NAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY};
+        list = new EditText [] {FNAME, LNAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY};
     }
 
     @Override
@@ -212,15 +214,14 @@ public class MentorActivity extends AppCompatActivity
 
     private void updateSharedPrefs(Mentor mentor, EditText [] texts)
     {
-        String [] name = texts[0].getText().toString().split(" ");
-        mentor.setFname(name[0]);
-        mentor.setLname(name[1]);
-        mentor.setEmail(texts[1].getText().toString());
-        mentor.setGrad_date(DateTimeFormat.formatDateSQL(texts[2].getText().toString()));
-        mentor.setOccupation(texts[3].getText().toString());
-        mentor.setDegree(texts[4].getText().toString());
-        mentor.setAge(texts[5].getText().toString());
-        mentor.setBirthday(DateTimeFormat.formatDateSQL(texts[6].getText().toString()));
+        mentor.setFname(texts[0].getText().toString());
+        mentor.setLname(texts[1].getText().toString());
+        mentor.setEmail(texts[2].getText().toString());
+        mentor.setGrad_date(DateTimeFormat.formatDateSQL(texts[3].getText().toString()));
+        mentor.setOccupation(texts[4].getText().toString());
+        mentor.setDegree(texts[5].getText().toString());
+        mentor.setAge(texts[6].getText().toString());
+        mentor.setBirthday(DateTimeFormat.formatDateSQL(texts[7].getText().toString()));
         full_name.setText(mentor.getFullName());
     }
 

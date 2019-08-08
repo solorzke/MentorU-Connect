@@ -39,6 +39,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
                     android:text="@string/done"
                     android:textColor="@android:color/white"
                     android:textSize="17sp"
@@ -108,18 +109,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/name_text"
+                        android:text="@string/fname"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
 
                     <EditText
-                        android:inputType="text"
-                        android:id="@+id/acc_stu_name_1"
+                        android:id="@+id/fname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/john"
-                        android:textSize="20sp" />
+                        android:hint="@string/fname_hint"
+                        android:textSize="20sp"
+                        android:enabled="false"
+                        android:inputType="text"/>
 
                 </LinearLayout>
 
@@ -138,18 +140,19 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/age_text"
+                        android:text="@string/lname"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
 
                     <EditText
-                        android:id="@+id/age"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/lname"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/num_def"
-                        android:inputType="number"
-                        android:textSize="20sp" />
+                        android:hint="@string/lname_hint"
+                        android:textSize="20sp"
+                        android:enabled="false"
+                        android:inputType="text"/>
 
                 </LinearLayout>
 

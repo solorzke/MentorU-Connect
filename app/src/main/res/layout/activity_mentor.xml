@@ -40,6 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
+                    android:layout_marginEnd="10dp"
                     android:text="@string/done"
                     android:textColor="@android:color/white"
                     android:textSize="17sp"
@@ -109,16 +110,47 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/name_text"
+                        android:text="@string/fname"
                         android:textColor="@android:color/background_dark"
                         android:textSize="20sp"
                         app:fontFamily="@font/open_sans" />
 
                     <EditText
-                        android:id="@+id/acc_mtr_name"
+                        android:id="@+id/fname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/john"
+                        android:hint="@string/fname_hint"
+                        android:textSize="20sp"
+                        android:enabled="false"
+                        android:inputType="text"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lname"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
+
+                    <EditText
+                        android:id="@+id/lname"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/lname_hint"
                         android:textSize="20sp"
                         android:enabled="false"
                         android:inputType="text"/>
@@ -180,6 +212,8 @@
                         android:id="@+id/mtr_ucid1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:text="@string/ucid"
                         android:textSize="20sp"
                         android:enabled="false"/>
 
@@ -209,6 +243,7 @@
                         android:id="@+id/mtr_mentee1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
                         android:hint="@string/mentee"
                         android:textSize="20sp"
                         android:enabled="false"/>

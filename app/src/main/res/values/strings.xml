@@ -140,6 +140,10 @@
     <string name="mentor">Mentor</string>
     <string name="mentee_text">Mentee: </string>
     <string name="ucid_text">UCID: </string>
+    <string name="fname">First Name:</string>
+    <string name="lname">Last Name:</string>
+    <string name="fname_hint">First Name</string>
+    <string name="lname_hint">Last Name</string>
 
     <!-- Login -->
     <string name="text_on">Yes</string>
