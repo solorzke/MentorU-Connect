@@ -102,10 +102,11 @@ public class Goals extends Fragment implements View.OnClickListener
                     public void onResponse(String response) {
                         Log.d("DEBUG_OUTPUT","Server Response: "+response);
                         if (response.equals("empty")) {
-                            GOAL_1.setText("No new goals from " + mentor.getFname());
-                            GOAL_2.setText("No new goals from " + mentor.getFname());
-                            GOAL_3.setText("No new goals from " + mentor.getFname());
-                            GOAL_4.setText("No new goals from " + mentor.getFname());
+                            String no_goal = "No new goals from " + mentor.getFname();
+                            GOAL_1.setText(no_goal);
+                            GOAL_2.setText(no_goal);
+                            GOAL_3.setText(no_goal);
+                            GOAL_4.setText(no_goal);
                             goals_layout.setVisibility(View.GONE);
                             no_goals.setVisibility(View.VISIBLE);
                             CHECKMARK_1.setEnabled(false);
@@ -146,7 +147,7 @@ public class Goals extends Fragment implements View.OnClickListener
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("action", "getGoals");
                 params.put("ucid", mentee.getUcid());
                 params.put("mentor", mentor.getUcid());
@@ -309,17 +310,23 @@ public class Goals extends Fragment implements View.OnClickListener
                         break;
                     }
 
-                case R.id.account:
-                    startActivity(new Intent(getContext(), MentorActivity.class));
-                    break;
-
-                case R.id.sendEmail:
-                    startActivity(new Intent(getContext(), SendEmail.class));
-                    break;
-
                 default:
                     break;
             }
+        }
+
+        switch (v.getId())
+        {
+            case R.id.account:
+                startActivity(new Intent(getContext(), MentorActivity.class));
+                break;
+
+            case R.id.sendEmail:
+                startActivity(new Intent(getContext(), SendEmail.class));
+                break;
+
+            default:
+                break;
         }
     }
 
@@ -327,31 +334,36 @@ public class Goals extends Fragment implements View.OnClickListener
     private boolean loadGoal(String goal, TextView tv_goal, ImageView ck)
     {
         boolean s = false;
-        String[] data = goal.split("\\\\");
+        String [] data = goal.split("\\\\");
         tv_goal.setText(data[0]);
-        if (data[1].equals("1"))
-        {
-            s = true;
-            tv_goal.setVisibility(View.VISIBLE);
-            ck.setVisibility(View.VISIBLE);
-            ck.setImageResource(R.drawable.ic_check_green);
-            ck.setEnabled(true);
-        }
-        else if (data[1].equals("0"))
-        {
-            s = false;
-            tv_goal.setVisibility(View.VISIBLE);
-            ck.setVisibility(View.VISIBLE);
-            ck.setImageResource(R.drawable.ic_check_circle);
-            ck.setEnabled(true);
-        }
-        else if (data[1].equals("3"))
-        {
-            s = false;
-            tv_goal.setVisibility(View.INVISIBLE);
-            ck.setVisibility(View.INVISIBLE);
-        }
 
+        switch(data[1])
+        {
+            case "1":
+                s = true;
+                tv_goal.setVisibility(View.VISIBLE);
+                ck.setVisibility(View.VISIBLE);
+                ck.setImageResource(R.drawable.ic_check_green);
+                ck.setEnabled(true);
+                break;
+
+            case "0":
+                s = false;
+                tv_goal.setVisibility(View.VISIBLE);
+                ck.setVisibility(View.VISIBLE);
+                ck.setImageResource(R.drawable.ic_check_circle);
+                ck.setEnabled(true);
+                break;
+
+            case "3":
+                s = false;
+                tv_goal.setVisibility(View.INVISIBLE);
+                ck.setVisibility(View.INVISIBLE);
+                break;
+
+            default:
+                break;
+        }
         return s;
     }
 
@@ -386,7 +398,7 @@ public class Goals extends Fragment implements View.OnClickListener
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("action", action);
                 params.put("currentUser", currentUser);
                 params.put("otherUser", otherUser);
@@ -435,28 +447,25 @@ public class Goals extends Fragment implements View.OnClickListener
 
         if (month > 7)
         {
-            semester.setText("Fall " + year);
+            String sem = "Fall " + year;
+            semester.setText(sem);
         }
         else if (month < 5)
         {
-            semester.setText("Spring " + year);
+            String sem = "Spring " + year;
+            semester.setText(sem);
         }
         else if (4 < month || month < 8)
         {
-            semester.setText("Summer " + year);
+            String sem = "Summer " + year;
+            semester.setText(sem);
         }
     }
 
     /* Verify the user type who's viewing this page */
     private boolean isStudent(SharedPreferences type)
     {
-        if (type.getString("type", null).equals("student"))
-        {
-            return true;
-        }
-        else {
-            return false;
-        }
+        return type.getString("type", null).equals("student");
     }
 
     /* Set the percentage of goals completed, update real-time as user updates their status */
@@ -473,7 +482,8 @@ public class Goals extends Fragment implements View.OnClickListener
             }
         }
         String per = Integer.toString(p);
-        percent.setText(" " + per + " %");
+        String percent_text = " " + per + " %";
+        percent.setText(percent_text);
     }
 
     /* Set remaining amount of weeks left until the semester's conclusion */
@@ -510,7 +520,7 @@ public class Goals extends Fragment implements View.OnClickListener
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("action", "weeksLeft");
                 params.put("date", date);
                 return params;
