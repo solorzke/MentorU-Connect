@@ -22,61 +22,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/alerts"
-                    android:textSize="15sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"
-                    android:background="#dbdde0" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:contentDescription="@string/content_description"
-                    android:src="@android:drawable/ic_popup_reminder"
-                    android:tint="@android:color/holo_orange_light" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:text="@string/notifs"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="20sp"
-                    app:fontFamily="@font/open_sans" />
-
-                <Space
-                    android:layout_width="120dp"
-                    android:layout_height="match_parent" />
-
-                <Switch
-                    android:id="@+id/switcher"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="@string/accounts"
                     android:textSize="15sp" />
 
@@ -99,7 +44,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:contentDescription="@string/content_description"
                     android:src="@drawable/ic_account"
                     android:tint="@android:color/holo_orange_light" />
@@ -107,7 +52,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:text="@string/mentee"
                     android:textColor="@android:color/background_dark"
                     android:textSize="20sp"
@@ -124,7 +69,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:contentDescription="@string/content_description"
                     android:src="@android:drawable/ic_menu_sort_by_size"
                     android:tint="@android:color/holo_orange_light" />
@@ -132,7 +77,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:text="@string/schedule"
                     android:textColor="@android:color/background_dark"
                     android:textSize="20sp"
@@ -149,7 +94,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:contentDescription="@string/content_description"
                     android:src="@drawable/ic_account"
                     android:tint="@android:color/holo_orange_light" />
@@ -157,7 +102,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:text="@string/mentor"
                     android:textColor="@android:color/background_dark"
                     android:textSize="20sp"
@@ -195,7 +140,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:contentDescription="@string/content_description"
                     android:src="@android:drawable/ic_menu_call"
                     android:tint="@android:color/holo_orange_light" />
@@ -203,7 +148,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:text="@string/contact_office"
                     android:textColor="@android:color/background_dark"
                     android:textSize="20sp"
@@ -220,7 +165,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:contentDescription="@string/content_description"
                     android:src="@drawable/ic_business"
                     android:tint="@android:color/holo_orange_light" />
@@ -228,7 +173,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:text="@string/about_us"
                     android:textColor="@android:color/background_dark"
                     android:textSize="20sp"
@@ -268,7 +213,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:contentDescription="@string/content_description"
                     android:src="@android:drawable/ic_lock_idle_lock"
                     android:tint="@android:color/holo_orange_light" />
@@ -276,7 +221,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:text="@string/privacy"
                     android:textColor="@android:color/background_dark"
                     android:textSize="20sp"
@@ -293,7 +238,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginStart="10dp"
                     android:contentDescription="@string/content_description"
                     android:src="@android:drawable/ic_menu_info_details"
                     android:tint="@android:color/holo_orange_light" />
@@ -301,7 +246,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
+                    android:layout_marginStart="30dp"
                     android:text="@string/terms_and_cond"
                     android:textColor="@android:color/background_dark"
                     android:textSize="20sp"

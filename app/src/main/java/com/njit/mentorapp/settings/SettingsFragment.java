@@ -9,9 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Switch;
 import android.widget.Toast;
-
 import com.njit.mentorapp.account.Courses;
 import com.njit.mentorapp.account.MentorActivity;
 import com.njit.mentorapp.account.MenteeActivity;
@@ -23,12 +21,10 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
 {
     View view;
     LinearLayout mentor, mentee, courses, office, terms, privacy, about;
-    Switch notifications;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.fragment_settings, container, false);
-        notifications = view.findViewById(R.id.switcher);
         mentor = view.findViewById(R.id.mentor);
         mentee = view.findViewById(R.id.mentee);
         courses = view.findViewById(R.id.courses);
@@ -37,7 +33,8 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
         privacy = view.findViewById(R.id.privacy);
         about = view.findViewById(R.id.about);
         SideBar bar = (SideBar) getActivity();
-        bar.toolbar.setTitle("Settings");
+        if(bar != null)
+            bar.toolbar.setTitle("Settings");
         return view;
     }
 
@@ -45,7 +42,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
     public void onStart()
     {
         super.onStart();
-        notifications.setOnClickListener(this);
         mentor.setOnClickListener(this);
         mentee.setOnClickListener(this);
         courses.setOnClickListener(this);
@@ -60,11 +56,6 @@ public class SettingsFragment extends Fragment implements View.OnClickListener
     {
         switch (v.getId())
         {
-            case R.id.switcher:
-                /* Toggle the swticher on or off
-                * Notifications aren't set yet, come back later. */
-                break;
-
             case R.id.mentee:
                 if(!new Mentee(view.getContext()).notRegistered())
                     startActivity(new Intent(getContext(), MenteeActivity.class));
