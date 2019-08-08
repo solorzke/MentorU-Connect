@@ -28,7 +28,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.njit.mentorapp.account.MentorActivity;
-import com.njit.mentorapp.account.StudentActivity;
+import com.njit.mentorapp.account.MenteeActivity;
 import com.njit.mentorapp.fab.EditMessage;
 import com.njit.mentorapp.sidebar.FAQFragment;
 import com.njit.mentorapp.model.service.NotificationText;
@@ -261,7 +261,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 else
                 {
                     if(!new Mentee(view.getContext()).notRegistered())
-                        startActivity(new Intent(getContext(), StudentActivity.class));
+                        startActivity(new Intent(getContext(), MenteeActivity.class));
                     else
                         Toast.makeText(
                                 view.getContext(),
