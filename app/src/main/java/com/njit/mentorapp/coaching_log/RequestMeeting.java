@@ -228,7 +228,7 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
         };
         queue.add(request);
         request.setRetryPolicy(new DefaultRetryPolicy(
-                3000,
+                5000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
         );
