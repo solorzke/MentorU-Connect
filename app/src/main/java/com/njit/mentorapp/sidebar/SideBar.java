@@ -150,9 +150,10 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
 
     /* Options Menu listener with options to send email message, view the RoadMap, and report activities */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        switch (item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+        switch (item.getItemId())
+        {
             case R.id.sendEmail:
                 Intent go1 = new Intent(getApplicationContext(), SendEmail.class);
                 startActivity(go1);
@@ -162,9 +163,16 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
                 startActivity(go2);
                 break;
             case R.id.report:
-                startActivity(new Intent(getApplicationContext(), ReportActivity.class)
-                        .putExtra("com.example.mentorapp.Report.activity", "")
-                        .putExtra("com.example.mentorapp.Report.name", oppo_user));
+                if(!new Mentee(getApplicationContext()).notRegistered())
+                    startActivity(new Intent(getApplicationContext(), ReportActivity.class)
+                            .putExtra("com.example.mentorapp.Report.activity", "")
+                            .putExtra("com.example.mentorapp.Report.name", oppo_user));
+                else
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Mentee hasn't registered yet",
+                            Toast.LENGTH_SHORT
+                    ).show();
                 break;
             default:
                 break;
@@ -218,7 +226,6 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.academics:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new AcademicsFragment()).addToBackStack(null).commit();
-
                 break;
             case R.id.social_capital:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
@@ -231,7 +238,6 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
             case R.id.faq:
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
                         new FAQFragment()).addToBackStack(null).commit();
-
                 break;
         }
         drawer.closeDrawer(GravityCompat.START);
