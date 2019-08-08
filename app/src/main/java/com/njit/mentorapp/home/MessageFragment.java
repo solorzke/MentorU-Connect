@@ -259,7 +259,16 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 if(isStudent(USER_TYPE))
                     startActivity(new Intent(getActivity(), MentorActivity.class));
                 else
-                    startActivity(new Intent(getActivity(), StudentActivity.class));
+                {
+                    if(!new Mentee(view.getContext()).notRegistered())
+                        startActivity(new Intent(getContext(), StudentActivity.class));
+                    else
+                        Toast.makeText(
+                                view.getContext(),
+                                "Mentee Information not available",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                }
                 break;
 
             case R.id.help:
