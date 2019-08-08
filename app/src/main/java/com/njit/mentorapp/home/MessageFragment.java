@@ -26,6 +26,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.njit.mentorapp.account.MentorActivity;
 import com.njit.mentorapp.account.StudentActivity;
 import com.njit.mentorapp.fab.EditMessage;
@@ -40,6 +41,8 @@ import com.njit.mentorapp.toolbar.SendEmail;
 import com.njit.mentorapp.sidebar.SideBar;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
+import com.squareup.picasso.Picasso;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -49,7 +52,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
     String [] notifyLikesText, notifyDislikesText;
     FloatingActionButton FAB;
     TextView FEEDBACK, messenger, date, contact_user, account_info, help_center, report;
-    ImageView messenger_img, thumbs_up, thumbs_down, share;
+    ImageView thumbs_up, thumbs_down, share;
+    CircularImageView messenger_img;
     View view;
     private Mentor mentor;
     private Mentee mentee;
@@ -59,7 +63,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
         view = inflater.inflate(R.layout.fragment_message, container, false);
-        USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
+        if(getActivity() != null)
+            USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
         FAB = view.findViewById(R.id.m_fab);
         messenger_img = view.findViewById(R.id.messenger_img);
         messenger = view.findViewById(R.id.messenger);
@@ -96,6 +101,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
             String full_name = mentor.getFname() + " " + mentor.getLname();
             String ucid = mentee.getUcid();
             messenger.setText(full_name);
+            if(!mentor.getAvi().equals("N/A"))
+                Picasso.get().load(mentor.getAvi()).into(messenger_img);
             notifyLikesText = NotificationText.likes(ucid);
             notifyDislikesText = NotificationText.dislikes(ucid);
             getMessage(mentee.getUcid(), mentor.getUcid(), view);
@@ -107,6 +114,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 full_name = mentee.getUcid();
             String ucid = mentor.getUcid();
             messenger.setText(full_name);
+            if(!mentee.getAvi().equals("N/A"))
+                Picasso.get().load(mentee.getAvi()).into(messenger_img);
             notifyLikesText = NotificationText.likes(ucid);
             notifyDislikesText = NotificationText.dislikes(ucid);
             getMessage(mentor.getUcid(), mentee.getUcid(), view);
@@ -134,11 +143,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
 
     private boolean isStudent(SharedPreferences type)
     {
-        if (type.getString("type", null).equals("student")) {
-            return true;
-        } else {
-            return false;
-        }
+        return type.getString("type", null).equals("student");
     }
 
     private void getMessage(final String RECEIVER, final String SENDER, final View view)
@@ -151,15 +156,18 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                         Log.d("DEBUG_OUTPUT","Server Response: "+response);
                         String [] reply = response.split("\\|");
                         if (reply[0].equals("empty")) {
-                            FEEDBACK.setText("No new feedback from " + SENDER);
-                            date.setText("Date: N/A");
+                            String msg = "No new feedback from " + SENDER;
+                            String day = "Date: Not Available";
+                            FEEDBACK.setText(msg);
+                            date.setText(day);
                             setBar(FEEDBACK, bar);
 
                         } else {
                             FEEDBACK.setText(reply[0]);
                             setBar(FEEDBACK, bar);
                             String d = DateTimeFormat.formatDate(reply[1]);
-                            date.setText("Date: " + d);
+                            String day = "Date: " + d;
+                            date.setText(day);
                             setLiking(reply[2]);
                         }
                     }
@@ -184,7 +192,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("action", "getFeedback");
                 params.put("receiver", RECEIVER);
                 params.put("sender", SENDER);  //Change this later <------
@@ -249,23 +257,22 @@ public class MessageFragment extends Fragment implements View.OnClickListener
 
             case R.id.acc_info:
                 if(isStudent(USER_TYPE))
-                {
                     startActivity(new Intent(getActivity(), MentorActivity.class));
-                }
                 else
-                {
                     startActivity(new Intent(getActivity(), StudentActivity.class));
-                }
                 break;
 
             case R.id.help:
                 Fragment help = new FAQFragment();
-                FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
-                transaction2.replace(R.id.fragment_container, help);
-                transaction2.addToBackStack(null);
-                // Commit the transaction
-                transaction2.commit();
-                SideBar.navigationView.setCheckedItem(R.id.faq);
+                if(getFragmentManager() != null)
+                {
+                    FragmentTransaction transaction2 = getFragmentManager().beginTransaction();
+                    transaction2.replace(R.id.fragment_container, help);
+                    transaction2.addToBackStack(null);
+                    // Commit the transaction
+                    transaction2.commit();
+                    SideBar.navigationView.setCheckedItem(R.id.faq);
+                }
                 break;
 
             case R.id.report:
@@ -338,7 +345,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("action", "liking");
                 params.put("student", STUDENT);
                 params.put("mentor", MENTOR);
@@ -358,27 +365,30 @@ public class MessageFragment extends Fragment implements View.OnClickListener
 
     private void setLiking(String status)
     {
-        if(status.equals("0"))
+        switch (status)
         {
-            this.thumbs_up.setImageResource(R.drawable.ic_thumb_up);
-            this.thumbs_down.setImageResource(R.drawable.ic_thumb_down);
-            this.up = false;
-            this.down = false;
-        }
-        else if(status.equals("1"))
-        {
-            this.thumbs_up.setImageResource(R.drawable.ic_thumb_up_green);
-            this.thumbs_down.setImageResource(R.drawable.ic_thumb_down);
-            this.up = true;
-            this.down = false;
-        }
+            case "0":
+                this.thumbs_up.setImageResource(R.drawable.ic_thumb_up);
+                this.thumbs_down.setImageResource(R.drawable.ic_thumb_down);
+                this.up = false;
+                this.down = false;
+                break;
 
-        else if(status.equals("2"))
-        {
-            this.thumbs_up.setImageResource(R.drawable.ic_thumb_up);
-            this.thumbs_down.setImageResource(R.drawable.ic_thumb_down_red);
-            this.up = false;
-            this.down = true;
+            case "1":
+                this.thumbs_up.setImageResource(R.drawable.ic_thumb_up_green);
+                this.thumbs_down.setImageResource(R.drawable.ic_thumb_down);
+                this.up = true;
+                this.down = false;
+                break;
+
+            case "2":
+                this.thumbs_up.setImageResource(R.drawable.ic_thumb_up);
+                this.thumbs_down.setImageResource(R.drawable.ic_thumb_down_red);
+                this.up = false;
+                this.down = true;
+
+            default:
+                break;
         }
     }
 

@@ -29,10 +29,13 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.mikhaellopez.circularimageview.CircularImageView;
 import com.njit.mentorapp.R;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.Validate;
 import com.njit.mentorapp.model.users.Mentee;
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -43,6 +46,7 @@ import java.util.Map;
 public class Courses extends AppCompatActivity implements View.OnClickListener
 {
     private ImageView add, cancel;
+    private CircularImageView avi;
     private TextView semester, mentee;
     private ListView list;
     private SharedPreferences courses;
@@ -75,6 +79,7 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
         c_num = findViewById(R.id.c_id);
         c_title = findViewById(R.id.c_title);
         cancel = findViewById(R.id.cancel);
+        avi = findViewById(R.id.picasso);
 
         /* Set visibility for the edit text fields and other buttons */
         c_num.setVisibility(View.GONE);
@@ -88,6 +93,9 @@ public class Courses extends AppCompatActivity implements View.OnClickListener
 
         /* Register the context menu for editing/removal list item when performing long clicks */
         registerForContextMenu(list);
+        if(!mte.getAvi().equals(""))
+            Picasso.get().load(mte.getAvi()).into(avi);
+
     }
 
     @Override
