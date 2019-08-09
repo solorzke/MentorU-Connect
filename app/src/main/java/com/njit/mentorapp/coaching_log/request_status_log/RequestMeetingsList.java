@@ -208,7 +208,9 @@ public class RequestMeetingsList extends AppCompatActivity
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo)
     {
         super.onCreateContextMenu(menu, v, menuInfo);
-        getMenuInflater().inflate(R.menu.delete_menu, menu);
+        String t = ((TextView)(v.findViewById(R.id.text1))).getText().toString();
+        if(!t.equals("No New Meeting Requests"))
+            getMenuInflater().inflate(R.menu.delete_menu, menu);
     }
 
     /* Retrieve the information from the list item selected, present a context menu with option
@@ -217,28 +219,25 @@ public class RequestMeetingsList extends AppCompatActivity
     public boolean onContextItemSelected(MenuItem item)
     {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
-        View v = info.targetView;
-        String t = ((TextView)(v.findViewById(R.id.text1))).getText().toString();
-        if(!t.equals("No New Meeting Requests"))
+        switch (item.getItemId())
         {
-            switch (item.getItemId())
-            {
-                /* Allow the user to remove the course from the listview */
-                case R.id.remove:
-                    View view = info.targetView;
-                    String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
-                    String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
-                    deleteRequest(findArrayList(title, purpose));
-                    pendingArray.clear();
-                    receivingArray.clear();
-                    getRequests();
-                    return false;
+            /* Allow the user to remove the course from the listview */
+            case R.id.remove:
+                View view = info.targetView;
+                String title = ((TextView)(view.findViewById(R.id.text1))).getText().toString();
+                String purpose = ((TextView)(view.findViewById(R.id.text2))).getText().toString();
+                deleteRequest(findArrayList(title, purpose));
+                pendingArray.clear();
+                receivingArray.clear();
+                getRequests();
+                return false;
 
-                default:
-                    return super.onContextItemSelected(item);
-            }
+            case 999999999:
+                return false;
+
+            default:
+                return super.onContextItemSelected(item);
         }
-        return false;
     }
 
     /* Add all remaining requests (titles & purposes) from ArrayList to the hashmap */
