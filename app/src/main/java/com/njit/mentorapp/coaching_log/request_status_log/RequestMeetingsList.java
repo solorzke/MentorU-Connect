@@ -199,6 +199,9 @@ public class RequestMeetingsList extends AppCompatActivity
                 finish();
                 return true;
 
+            case 999999999:
+                return false;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -309,6 +312,23 @@ public class RequestMeetingsList extends AppCompatActivity
                 return row;
 
         return null;
+    }
+
+    /* Remove arraylist from the ArrayList collection */
+    private boolean removeArrayList(ArrayList <String> list)
+    {
+        for(ArrayList<String> row : pendingArray)
+            if(row.equals(list)) {
+                pendingArray.remove(row);
+                return true;
+            }
+
+        for(ArrayList<String> row : receivingArray)
+            if(row.equals(list)) {
+                receivingArray.remove(row);
+                return true;
+            }
+        return false;
     }
 
     /* Remove a request from the Request Log via DB */
