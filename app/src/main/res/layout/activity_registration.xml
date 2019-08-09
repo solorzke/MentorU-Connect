@@ -67,12 +67,22 @@
 
 
                 <EditText
-                    android:id="@+id/Name"
+                    android:id="@+id/fname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="20dp"
                     android:ems="10"
-                    android:hint="@string/your_name"
+                    android:hint="@string/fname_hint"
+                    android:inputType="textEmailAddress"
+                    android:textColor="#000000" />
+
+                <EditText
+                    android:id="@+id/lname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="20dp"
+                    android:ems="10"
+                    android:hint="@string/lname_hint"
                     android:inputType="textEmailAddress"
                     android:textColor="#000000" />
 

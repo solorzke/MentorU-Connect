@@ -44,10 +44,9 @@ import java.util.Map;
 
 public class Registration extends AppCompatActivity implements AdapterView.OnItemSelectedListener
 {
-    String name,email,ucid,password,degree,age,bday,grade,grad_date;
+    String email,ucid,password,degree,age,bday,grade,grad_date, f_nam, l_nam;
     ImageView back;
-    String[] arr;
-    EditText nam, em, id, pass, dg, ag, by, gd_dte;
+    EditText  em, id, pass, dg, ag, by, gd_dte, fname, lname;
     TextView gde;
     Button reg;
     Calendar calendar;
@@ -61,7 +60,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_registration);
         reg = findViewById(R.id.button);
         back = findViewById(R.id.back);
-        nam = findViewById(R.id.Name);
+        fname = findViewById(R.id.fname);
+        lname = findViewById(R.id.lname);
         em = findViewById(R.id.Email);
         id = findViewById(R.id.UCID);
         pass = findViewById(R.id.Pass);
@@ -126,8 +126,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View v) {
                 //--------------------
-                name = nam.getText().toString();
-                arr = name.split(" ");
+                f_nam = fname.getText().toString();
+                l_nam = lname.getText().toString();
                 email = em.getText().toString();
                 ucid = id.getText().toString();
                 password = pass.getText().toString();
@@ -228,8 +228,8 @@ public class Registration extends AppCompatActivity implements AdapterView.OnIte
                 params.put("tableName", "Students");
                 params.put("username", ucid);
                 params.put("password", password);
-                params.put("fname", arr[0]);
-                params.put("lname", arr[1]);
+                params.put("fname", f_nam);
+                params.put("lname", l_nam);
                 params.put("email", email);
                 params.put("degree", degree);
                 params.put("age", age);
