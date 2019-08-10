@@ -165,7 +165,11 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
                     int duration = Toast.LENGTH_SHORT;
                     Toast toast = Toast.makeText(RequestMeeting.this, text, duration);
                     toast.show();
-                    PushMessageToFCM.send(getApplicationContext(), notifyRequest[0], notifyRequest[1]);
+                    PushMessageToFCM.send(
+                            getApplicationContext(),
+                            sender.getTopicID(getApplicationContext()),
+                            notifyRequest[0],
+                            notifyRequest[1]);
                     onBackPressed();
                     finish();
                 }

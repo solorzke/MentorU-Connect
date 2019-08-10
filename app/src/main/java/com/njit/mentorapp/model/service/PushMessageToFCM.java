@@ -35,9 +35,9 @@ public class PushMessageToFCM
      */
     private static JSONObject notification, notifcationBody;
 
-    private static void setJsonObjects(String NOTIFICATION_TITLE, String NOTIFICATION_MESSAGE)
+    private static void setJsonObjects(String TOPIC_ID, String NOTIFICATION_TITLE, String NOTIFICATION_MESSAGE)
     {
-        String TOPIC = "/topics/kas58ppp43"; //topic must match with what the receiver subscribed to
+        String TOPIC = "/topics/" + TOPIC_ID; //topic must match with what the receiver subscribed to
         notification = new JSONObject();
         notifcationBody = new JSONObject();
         try
@@ -84,9 +84,9 @@ public class PushMessageToFCM
         MySingleton.getInstance(context).addToRequestQueue(jsonObjectRequest);
     }
 
-    public static void send(final Context context, String NOTIFICATION_TITLE, String NOTIFICATION_BODY)
+    public static void send(final Context context, String TOPIC_ID, String NOTIFICATION_TITLE, String NOTIFICATION_BODY)
     {
-        setJsonObjects(NOTIFICATION_TITLE, NOTIFICATION_BODY);
+        setJsonObjects(TOPIC_ID, NOTIFICATION_TITLE, NOTIFICATION_BODY);
         sendNotification(context);
     }
 

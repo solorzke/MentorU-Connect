@@ -229,8 +229,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                     thumbs_down.setImageResource(R.drawable.ic_thumb_down);
                     thumbs_up.setImageResource(R.drawable.ic_thumb_up_green);
                     postToast("up");
-                    likeOrDislike(mentee.getUcid(), mentor.getUcid(), view, "1", FEEDBACK);
-                    PushMessageToFCM.send(getContext(), notifyLikesText[0], notifyLikesText[1]);
+                    likeOrDislike(receiver, sender, view, "1", FEEDBACK);
+                    PushMessageToFCM.send(getContext(), mentor.getTopicID(), notifyLikesText[0], notifyLikesText[1]);
                 }
                 break;
 
@@ -246,8 +246,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                     thumbs_up.setImageResource(R.drawable.ic_thumb_up);
                     thumbs_down.setImageResource(R.drawable.ic_thumb_down_red);
                     postToast("down");
-                    likeOrDislike(mentee.getUcid(), mentor.getUcid(), view, "2", FEEDBACK);
-                    PushMessageToFCM.send(getContext(), notifyDislikesText[0], notifyDislikesText[1]);
+                    likeOrDislike(receiver, sender, view, "2", FEEDBACK);
+                    PushMessageToFCM.send(getContext(), mentor.getTopicID(), notifyDislikesText[0], notifyDislikesText[1]);
                 }
                 break;
 

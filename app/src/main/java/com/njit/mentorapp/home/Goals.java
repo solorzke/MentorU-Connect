@@ -197,7 +197,7 @@ public class Goals extends Fragment implements View.OnClickListener
                                 mentor.getUcid(),
                                 GOAL_1.getText().toString(), "1"
                         );
-                        PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
+                        PushMessageToFCM.send(getContext(), mentor.getTopicID(),  notifyText[0], notifyText[1]);
                         postToast("1");
                         break;
                     } else {
@@ -228,7 +228,7 @@ public class Goals extends Fragment implements View.OnClickListener
                                 mentor.getUcid(),
                                 GOAL_2.getText().toString(), "1"
                         );
-                        PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
+                        PushMessageToFCM.send(getContext(), mentor.getTopicID(), notifyText[0], notifyText[1]);
                         postToast("1");
                         break;
                     } else {
@@ -260,7 +260,7 @@ public class Goals extends Fragment implements View.OnClickListener
                                 mentor.getUcid(),
                                 GOAL_3.getText().toString(), "1"
                         );
-                        PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
+                        PushMessageToFCM.send(getContext(), mentor.getTopicID(), notifyText[0], notifyText[1]);
                         postToast("1");
                         break;
                     } else {
@@ -291,7 +291,7 @@ public class Goals extends Fragment implements View.OnClickListener
                                 mentor.getUcid(),
                                 GOAL_4.getText().toString(), "1"
                         );
-                        PushMessageToFCM.send(getContext(), notifyText[0], notifyText[1]);
+                        PushMessageToFCM.send(getContext(), mentor.getTopicID(), notifyText[0], notifyText[1]);
                         postToast("1");
                         break;
                     } else {

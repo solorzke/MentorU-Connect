@@ -123,7 +123,7 @@ public class EditMessage extends AppCompatActivity
                             mentor.getUcid(),
                             message
                     );
-                PushMessageToFCM.send(getApplicationContext(), notifyMessageText[0], notifyMessageText[1]);
+                PushMessageToFCM.send(getApplicationContext(), mentor.getTopicID(), notifyMessageText[0], notifyMessageText[1]);
                 postToast();
                 onBackPressed();
                 finish();

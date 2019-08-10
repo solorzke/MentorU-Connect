@@ -155,7 +155,7 @@ public class MeetingDetails extends Fragment
                     public void onClick(DialogInterface dialog, int which) {
                         confirmMeeting(view, WebServer.getQueryLink(), meeting_request.get(0), "1");
                         notifyResponse = NotificationText.meetingResponse(responder, "accepted");
-                        PushMessageToFCM.send(getContext(), notifyResponse[0], notifyResponse[1]);
+                        PushMessageToFCM.send(getContext(), new Mentor(view.getContext()).getTopicID(), notifyResponse[0], notifyResponse[1]);
                         respond.setVisibility(View.GONE);
                         toast = Toast.makeText(getContext(), "Meeting Accepted", Toast.LENGTH_SHORT);
                         toast.show();
@@ -171,7 +171,7 @@ public class MeetingDetails extends Fragment
             public void onClick(DialogInterface dialog, int which) {
                 confirmMeeting(view, WebServer.getQueryLink(), meeting_request.get(0), "2");
                 notifyResponse = NotificationText.meetingResponse(responder, "declined");
-                PushMessageToFCM.send(getContext(), notifyResponse[0], notifyResponse[1]);
+                PushMessageToFCM.send(getContext(), new Mentor(view.getContext()).getTopicID(), notifyResponse[0], notifyResponse[1]);
                 respond.setVisibility(View.GONE);
                 toast = Toast.makeText(getContext(), "Meeting Declined", Toast.LENGTH_SHORT);
                 toast.show();
