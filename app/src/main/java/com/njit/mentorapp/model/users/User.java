@@ -142,4 +142,7 @@ public class User
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getTopicID(Context context) { return new Mentor(context).getTopicID(); }
+
 }
