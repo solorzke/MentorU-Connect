@@ -57,6 +57,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
     View view;
     private Mentor mentor;
     private Mentee mentee;
+    private String sender, receiver;
     private ConstraintLayout bar;
     boolean up = false, down = false;
 
@@ -101,11 +102,13 @@ public class MessageFragment extends Fragment implements View.OnClickListener
             String full_name = mentor.getFname() + " " + mentor.getLname();
             String ucid = mentee.getUcid();
             messenger.setText(full_name);
-            if(!mentor.getAvi().equals("N/A"))
+            if(!mentor.getAvi().equals("N/A") && !mentor.getAvi().equals(""))
                 Picasso.get().load(mentor.getAvi()).into(messenger_img);
             notifyLikesText = NotificationText.likes(ucid);
             notifyDislikesText = NotificationText.dislikes(ucid);
             getMessage(mentee.getUcid(), mentor.getUcid(), view);
+            sender = mentee.getUcid();
+            receiver = mentor.getUcid();
         }
         else
         {
@@ -114,11 +117,13 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 full_name = mentee.getUcid();
             String ucid = mentor.getUcid();
             messenger.setText(full_name);
-            if(!mentee.getAvi().equals("N/A"))
+            if(!mentee.getAvi().equals("N/A") && !mentee.getAvi().equals(""))
                 Picasso.get().load(mentee.getAvi()).into(messenger_img);
             notifyLikesText = NotificationText.likes(ucid);
             notifyDislikesText = NotificationText.dislikes(ucid);
             getMessage(mentor.getUcid(), mentee.getUcid(), view);
+            sender = mentor.getUcid();
+            receiver = mentee.getUcid();
         }
     }
 
@@ -221,7 +226,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 if(up){
                     up = false;
                     thumbs_up.setImageResource(R.drawable.ic_thumb_up);
-                    likeOrDislike(mentee.getUcid(), mentor.getUcid(), view, "0", FEEDBACK);
+                    likeOrDislike(receiver, sender, view, "0", FEEDBACK);
                 }
                 else{
                     up = true;
@@ -238,7 +243,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
                 if(down){
                     down = false;
                     thumbs_down.setImageResource(R.drawable.ic_thumb_down);
-                    likeOrDislike(mentee.getUcid(), mentor.getUcid(), view, "0", FEEDBACK);
+                    likeOrDislike(receiver, sender, view, "0", FEEDBACK);
                 }
                 else{
                     down = true;
@@ -323,7 +328,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         }
     }
 
-    private void likeOrDislike(final String STUDENT, final String MENTOR, final View view,
+    private void likeOrDislike(final String sender, final String receiver, final View view,
                                final String status, final TextView msg)
     {
         RequestQueue queue = Volley.newRequestQueue(view.getContext());
@@ -356,8 +361,8 @@ public class MessageFragment extends Fragment implements View.OnClickListener
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 params.put("action", "liking");
-                params.put("student", STUDENT);
-                params.put("mentor", MENTOR);
+                params.put("sender", sender);
+                params.put("receiver", receiver);
                 params.put("msg", msg.getText().toString());
                 params.put("status", status);
                 return params;
