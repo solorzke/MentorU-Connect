@@ -110,7 +110,7 @@ public class JSON extends AppCompatActivity
 
                             /* Store Mentee data into SharedPrefs */
                             JSONObject student = array.getJSONObject(0);
-                            Mentee mentee = new Mentee(getApplicationContext(), student);
+                            final Mentee mentee = new Mentee(getApplicationContext(), student);
                             users[0] = mentee.getUcid();
 
                             /* Store Student Schedule Preferences */
@@ -127,7 +127,7 @@ public class JSON extends AppCompatActivity
 
                             /* Store Mentor Record Data */
                             JSONObject mentor = m_record.getJSONObject(0);
-                            Mentor mento = new Mentor(getApplicationContext(), mentor);
+                            final Mentor mento = new Mentor(getApplicationContext(), mentor);
                             users[1] = mento.getUcid();
 
                             /* Subscribe to Topic */
@@ -135,6 +135,7 @@ public class JSON extends AppCompatActivity
                                 @Override
                                 public void onCallback(String callback) {
                                     if(!callback.equals("Topic ID not found!")) {
+                                        mento.setTopicID(callback);
                                         FireBaseServer.subscribeToTopic(callback);
                                     }
                                     else
