@@ -271,7 +271,7 @@ public class FireBaseServer
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("action", "getTopicID");
+                params.put("action", "setTopicID");
                 params.put("mentee", data[0]);
                 params.put("mentor", data[1]);
                 return params;
