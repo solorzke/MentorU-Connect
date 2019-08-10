@@ -141,4 +141,12 @@ public class Mentor
     public void clearSharedPrefs(){
         user.edit().clear().apply();
     }
+
+    public String getTopicID() {
+        return user.getString("topic_id", null);
+    }
+
+    public void setTopicID(String topic_id) {
+        user.edit().putString("topic_id", topic_id).apply();
+    }
 }
