@@ -164,7 +164,6 @@ public class Login extends AppCompatActivity implements View.OnClickListener
                             startActivity(goToHome);
                             ucid_et.getText().clear();
                             pw_et.getText().clear();
-                            finish();
                         }
                         else if (response.contains("BADSTUDENT") || response.contains("BADMENTOR"))
                         {

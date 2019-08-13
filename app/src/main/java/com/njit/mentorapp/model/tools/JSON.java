@@ -19,6 +19,7 @@ import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.NetworkError;
 import com.android.volley.Request;
 import com.android.volley.Response;
+import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
@@ -50,21 +51,19 @@ public class JSON extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_json);
-        ucid = getIntent().getExtras().getString("com.example.mentorapp.UCID");
-        String confirm = getIntent().getExtras().getString("com.example.mentorapp.CONFIRM");
-        //Subscribe to topic here
-        defineUserType(confirm, ucid);
-        loadUser(confirm);
-    }
-
-    @Override
-    public void onBackPressed()
-    {
-        /* Can't go back here */
+        if(getIntent().getExtras() != null) {
+            ucid = getIntent().getExtras().getString("com.example.mentorapp.UCID");
+            String confirm = getIntent().getExtras().getString("com.example.mentorapp.CONFIRM");
+            //Subscribe to topic here
+            if(confirm != null) {
+                defineUserType(confirm);
+                loadUser(confirm);
+            }
+        }
     }
 
     /* Define the user type into the shared preferences */
-    private void defineUserType(String type, String ucid)
+    private void defineUserType(String type)
     {
         if(type.equals("student"))
         {
@@ -87,7 +86,7 @@ public class JSON extends AppCompatActivity
     /* Retrieve the user's info and their mentorship partner's info and save it into a new SharedPrefs */
     private void loadUser(final String type)
     {
-        Map<String, String> params = new HashMap<String, String>();
+        Map<String, String> params = new HashMap<>();
         params.put("signedIn", "true");
         params.put("asWho", type);
         params.put("UCID", ucid);
@@ -119,9 +118,9 @@ public class JSON extends AppCompatActivity
                             courseList.clear();
                             for(int i = 0; i < courses.length(); i++){
                                 JSONObject course = courses.getJSONObject(i);
-                                courseList.putString("row_id"+Integer.toString(i), course.getString("id"));
-                                courseList.putString("id"+Integer.toString(i), course.getString("course_num"));
-                                courseList.putString("title"+Integer.toString(i), course.getString("course_title"));
+                                courseList.putString("row_id"+i, course.getString("id"));
+                                courseList.putString("id"+i, course.getString("course_num"));
+                                courseList.putString("title"+i, course.getString("course_title"));
                             }
                             courseList.apply();
 
@@ -172,6 +171,14 @@ public class JSON extends AppCompatActivity
                     Toast.makeText(
                             getApplicationContext(),
                             "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    onBackPressed();
+                }
+                else if(error instanceof ServerError) {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Unable to connect to server.",
                             Toast.LENGTH_SHORT
                     ).show();
                     onBackPressed();
