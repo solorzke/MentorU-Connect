@@ -2,6 +2,7 @@ package com.njit.mentorapp.model.tools;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.DefaultRetryPolicy;
@@ -42,6 +44,7 @@ import java.util.Map;
 public class SetAviActivity extends AppCompatActivity
 {
     private Button button;
+    private View progress;
     private TextView save, name;
     private CircularImageView image;
     private String full_name;
@@ -58,20 +61,32 @@ public class SetAviActivity extends AppCompatActivity
         image = findViewById(R.id.photo);
         save = findViewById(R.id.save);
         name = findViewById(R.id.name);
+
+        /* Set Progress bar layout */
+        progress = findViewById(R.id.progress);
+        progress.setVisibility(View.GONE);
+        RelativeLayout layout = progress.findViewById(R.id.prog_layout);
+        layout.setBackgroundColor(Color.parseColor("#EFEFEF"));
+        TextView subtitle = progress.findViewById(R.id.subtitle);
+        String text = "Uploading image";
+        subtitle.setText(text);
         save.setVisibility(View.INVISIBLE);
+
         UserType userType = new UserType(getApplicationContext());
-        if(userType.getCurrentType().equals("mentee"))
-            user = new User(getApplicationContext(), "Mentee");
-        else
-            user = new User(getApplicationContext(), "Mentor");
-        if(!user.getAvi().equals(""))
-            Picasso.get().load(user.getAvi()).into(image);
+        user = userType.getCurrentType().equals("mentee")
+                ? new User(getApplicationContext(), "Mentee")
+                : new User(getApplicationContext(), "Mentor");
+        if(!user.getAvi().equals("")) /* -> */ Picasso.get().load(user.getAvi()).into(image);
         full_name = user.getFullName();
+
+        /* Set the toolbar */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        toolbar.setTitle("Set Profile Picture");
+        if(getSupportActionBar() != null ) {
+            getSupportActionBar().setDisplayOptions(android.support.v7.app.ActionBar.DISPLAY_SHOW_CUSTOM);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            toolbar.setTitle("Set Profile Picture");
+        }
     }
 
     @Override
@@ -90,7 +105,7 @@ public class SetAviActivity extends AppCompatActivity
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSave(byteArray, ucid, user.getType());
+                onSave(byteArray, ucid, user.getType(), progress);
             }
         });
     }
@@ -105,6 +120,8 @@ public class SetAviActivity extends AppCompatActivity
                 onBackPressed();
                 finish();
                 return true;
+            case 999999999:
+                return false;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -115,26 +132,32 @@ public class SetAviActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
         super.onActivityResult(requestCode, resultCode, intent);
-        save.setVisibility(View.VISIBLE);
         switch (requestCode)
         {
             case 1:
                 if (resultCode == RESULT_OK && intent.hasExtra("data"))
                 {
+                    save.setVisibility(View.VISIBLE);
                     Bitmap bitmap = (Bitmap) intent.getExtras().get("data");
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                    byteArray = baos.toByteArray();
-                    image.setImageBitmap(bitmap);
+                    if(bitmap != null) {
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                        byteArray = baos.toByteArray();
+                        image.setImageBitmap(bitmap);
+                    }
                 }
                 break;
+
+            case 999999999:
+                break;
+
             default:
                 break;
         }
     }
 
     /* Upload the file_path to the Web Server */
-    private void setAviRequest(final String [] data)
+    private void setAviRequest(final String [] data, final View progress)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
         StringRequest request = new StringRequest(Request.Method.POST, WebServer.getQueryLink(),
@@ -142,6 +165,7 @@ public class SetAviActivity extends AppCompatActivity
             @Override
             public void onResponse(String response) {
                 Log.d("DEBUG_OUTPUT", response);
+                progress.setVisibility(View.GONE);
                 Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
                 onBackPressed();
                 finish();
@@ -150,6 +174,7 @@ public class SetAviActivity extends AppCompatActivity
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.d("DEBUG_OUTPUT", error.getMessage());
+                progress.setVisibility(View.GONE);
                 error.printStackTrace();
                 if(error instanceof TimeoutError)
                     Toast.makeText(
@@ -167,7 +192,7 @@ public class SetAviActivity extends AppCompatActivity
         }) {
             @Override
             protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("action", "setAVI");
                 params.put("path", data[1]); //https://tinyurl.com/yxpyc8jg
                 params.put("user", data[0]);
@@ -184,13 +209,12 @@ public class SetAviActivity extends AppCompatActivity
     }
 
     /* Save the picture to the FireBase Storage, and upload its file path to the Web Server */
-    private void onSave(byte [] byteArray, final String ucid, final String type)
+    private void onSave(byte [] byteArray, final String ucid, final String type, final View progress)
     {
+        progress.setVisibility(View.VISIBLE);
         ImageHandler.uploadFile(byteArray, ucid, new FireBaseCallback() {
             @Override
-            public void onCallback(String value) {
-
-            }
+            public void onCallback(String value) { }
             @Override
             public void onCallback(final StorageReference storageReference) {
                 storageReference.getDownloadUrl().addOnCompleteListener(new OnCompleteListener<Uri>() {
@@ -201,7 +225,7 @@ public class SetAviActivity extends AppCompatActivity
                             public void onSuccess(Uri uri) {
                                 user.setAvi(uri.toString());
                                 String [] data = new String [] {ucid, uri.toString(), type};
-                                setAviRequest(data);
+                                setAviRequest(data, progress);
                             }
                         });
                     }
