@@ -238,5 +238,10 @@
     <string name="terms_and_cond">Terms and Conditions</string>
     <string name="privacy">Privacy Policy</string>
 
+    <!-- Progress Bar -->
+    <string name="prog_title">Please Wait&#8230;</string>
+    <string name="prog_subtitle">Loading into Mentor U Connect</string>
+
+
 
 </resources>
