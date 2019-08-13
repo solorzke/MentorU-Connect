@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -49,6 +50,7 @@ public class MentorActivity extends AppCompatActivity
     private Calendar calendar;
     private DatePickerDialog date;
     private Mentor mentor;
+    private SwipeRefreshLayout refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -70,6 +72,7 @@ public class MentorActivity extends AppCompatActivity
         AGE = findViewById(R.id.age);
         BDAY = findViewById(R.id.bday);
         full_name = findViewById(R.id.fullname);
+        refresh = findViewById(R.id.refresh_layout);
         mentor = new Mentor(getApplicationContext());
 
         /* Set the toolbar */
@@ -165,6 +168,14 @@ public class MentorActivity extends AppCompatActivity
             EDIT.setVisibility(View.INVISIBLE);
             DONE.setVisibility(View.INVISIBLE);
         }
+
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getUserInfo(mentor.getUcid());
+                refresh.setRefreshing(false);
+            }
+        });
     }
 
     /* When clicking the back button, go back to the last page. */

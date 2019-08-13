@@ -4,382 +4,389 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ScrollView
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="match_parent">
 
-        <LinearLayout
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/semester"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="25dp"
-                android:gravity="right"
-                android:text=""
-                android:textColor="#000000"
-                android:textSize="25sp"
-                app:fontFamily="@font/open_sans" />
-
-            <TextView
-                android:id="@+id/no_goals"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:gravity="center_horizontal"
-                android:text="@string/no_goals_entered"
-                android:textColor="@android:color/black"
-                android:textSize="20sp"
-                android:visibility="gone" />
-
-            <LinearLayout
-                android:id="@+id/goals"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@android:color/black" />
-
-                <LinearLayout
-                    android:id="@+id/goal_layout_1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/holo_red_dark">
-
-                        <ImageView
-                            android:id="@+id/checkmark1"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:contentDescription="@string/content_description"
-                            android:src="@drawable/ic_check_circle" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/goal1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:text="@string/no_goal"
-                        android:textColor="#000000"
-                        android:textSize="15sp"
-                        app:fontFamily="@font/open_sans" />
-                </LinearLayout>
-
-                <View
-                    android:id="@+id/view2"
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@android:color/black" />
-
-                <LinearLayout
-                    android:id="@+id/goal_layout_2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/holo_red_dark">
-
-                        <ImageView
-                            android:id="@+id/checkmark2"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:contentDescription="@string/content_description"
-                            android:src="@drawable/ic_check_circle" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/goal2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:text="@string/no_goal"
-                        android:textColor="#000000"
-                        android:textSize="15sp"
-                        app:fontFamily="@font/open_sans" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@android:color/black" />
-
-                <LinearLayout
-                    android:id="@+id/goal_layout_3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/holo_red_dark">
-
-                        <ImageView
-                            android:id="@+id/checkmark3"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:contentDescription="@string/content_description"
-                            android:src="@drawable/ic_check_circle" />
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/goal3"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:text="@string/no_goal"
-                        android:textColor="#000000"
-                        android:textSize="15sp"
-                        app:fontFamily="@font/open_sans" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@android:color/black" />
-
-                <LinearLayout
-                    android:id="@+id/goal_layout_4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <RelativeLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@android:color/holo_red_dark">
-
-                        <ImageView
-                            android:id="@+id/checkmark4"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_marginTop="10dp"
-                            android:layout_marginBottom="10dp"
-                            android:contentDescription="@string/content_description"
-                            android:src="@drawable/ic_check_circle" />
-
-                    </RelativeLayout>
-
-                    <TextView
-                        android:id="@+id/goal4"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="5dp"
-                        android:layout_marginRight="5dp"
-                        android:text="@string/no_goal"
-                        android:textColor="#000000"
-                        android:textSize="15sp"
-                        app:fontFamily="@font/open_sans" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="2dp"
-                    android:background="@android:color/black" />
-
-            </LinearLayout>
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
+                android:layout_margin="5dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:id="@+id/semester"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/stats"
+                    android:layout_margin="25dp"
+                    android:gravity="right"
+                    android:text=""
+                    android:textColor="#000000"
+                    android:textSize="25sp"
                     app:fontFamily="@font/open_sans" />
 
-                <View
+                <TextView
+                    android:id="@+id/no_goals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/no_goals_entered"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/goals"
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@android:color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/goal_layout_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/holo_red_dark">
+
+                            <ImageView
+                                android:id="@+id/checkmark1"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:contentDescription="@string/content_description"
+                                android:src="@drawable/ic_check_circle" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/goal1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:text="@string/no_goal"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
+                            app:fontFamily="@font/open_sans" />
+                    </LinearLayout>
+
+                    <View
+                        android:id="@+id/view2"
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@android:color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/goal_layout_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/holo_red_dark">
+
+                            <ImageView
+                                android:id="@+id/checkmark2"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:contentDescription="@string/content_description"
+                                android:src="@drawable/ic_check_circle" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/goal2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:text="@string/no_goal"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
+                            app:fontFamily="@font/open_sans" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@android:color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/goal_layout_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/holo_red_dark">
+
+                            <ImageView
+                                android:id="@+id/checkmark3"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:contentDescription="@string/content_description"
+                                android:src="@drawable/ic_check_circle" />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/goal3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:text="@string/no_goal"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
+                            app:fontFamily="@font/open_sans" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@android:color/black" />
+
+                    <LinearLayout
+                        android:id="@+id/goal_layout_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <RelativeLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/holo_red_dark">
+
+                            <ImageView
+                                android:id="@+id/checkmark4"
+                                android:layout_width="50dp"
+                                android:layout_height="50dp"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                android:contentDescription="@string/content_description"
+                                android:src="@drawable/ic_check_circle" />
+
+                        </RelativeLayout>
+
+                        <TextView
+                            android:id="@+id/goal4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="5dp"
+                            android:layout_marginRight="5dp"
+                            android:text="@string/no_goal"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
+                            app:fontFamily="@font/open_sans" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:background="@android:color/black" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:background="#a6a6a6" />
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/stats"
+                        app:fontFamily="@font/open_sans" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_margin="10dp"
+                        android:background="#a6a6a6" />
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginRight="10dp"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_event"
-                    android:tint="@android:color/holo_red_dark" />
+                </LinearLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/semester_ends"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="17sp"
-                    app:fontFamily="@font/open_sans" />
-
-                <TextView
-                    android:id="@+id/weeks"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:text="@string/semester_ends_def"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textSize="17sp"
-                    app:fontFamily="@font/open_sans" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginRight="10dp"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_pie"
-                    android:tint="@android:color/holo_red_dark" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/goals_completed"
-                    android:textColor="@android:color/background_dark"
-                    android:textSize="17sp"
-                    app:fontFamily="@font/open_sans" />
-
-                <TextView
-                    android:id="@+id/percent"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/goals_completed_perc"
-                    android:textColor="@android:color/holo_red_dark"
-                    android:textSize="17sp"
-                    app:fontFamily="@font/open_sans" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/contact"
-                    app:fontFamily="@font/open_sans" />
-
-                <View
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="2dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:background="#a6a6a6" />
+                    android:orientation="horizontal">
 
-            </LinearLayout>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="@string/content_description"
+                        android:src="@drawable/ic_event"
+                        android:tint="@android:color/holo_red_dark" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/semester_ends"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="17sp"
+                        app:fontFamily="@font/open_sans" />
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginRight="10dp"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_send"
-                    android:tint="@android:color/holo_red_dark" />
+                    <TextView
+                        android:id="@+id/weeks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_marginRight="5dp"
+                        android:text="@string/semester_ends_def"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="17sp"
+                        app:fontFamily="@font/open_sans" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/sendEmail"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/send_email"
-                    android:textColor="#1b9af7"
-                    android:textSize="17sp"
-                    app:fontFamily="@font/open_sans" />
-            </LinearLayout>
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="@string/content_description"
+                        android:src="@drawable/ic_pie"
+                        android:tint="@android:color/holo_red_dark" />
 
-                <ImageView
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_gravity="bottom"
-                    android:layout_marginRight="10dp"
-                    android:contentDescription="@string/content_description"
-                    android:src="@drawable/ic_account"
-                    android:tint="@android:color/holo_red_dark" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/goals_completed"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="17sp"
+                        app:fontFamily="@font/open_sans" />
 
-                <TextView
-                    android:id="@+id/account"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/percent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/goals_completed_perc"
+                        android:textColor="@android:color/holo_red_dark"
+                        android:textSize="17sp"
+                        app:fontFamily="@font/open_sans" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/view_mentor_account"
-                    android:textColor="#1b9af7"
-                    android:textSize="17sp"
-                    app:fontFamily="@font/open_sans" />
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/contact"
+                        app:fontFamily="@font/open_sans" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_margin="10dp"
+                        android:background="#a6a6a6" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="@string/content_description"
+                        android:src="@drawable/ic_send"
+                        android:tint="@android:color/holo_red_dark" />
+
+                    <TextView
+                        android:id="@+id/sendEmail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/send_email"
+                        android:textColor="#1b9af7"
+                        android:textSize="17sp"
+                        app:fontFamily="@font/open_sans" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="bottom"
+                        android:layout_marginRight="10dp"
+                        android:contentDescription="@string/content_description"
+                        android:src="@drawable/ic_account"
+                        android:tint="@android:color/holo_red_dark" />
+
+                    <TextView
+                        android:id="@+id/account"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_mentor_account"
+                        android:textColor="#1b9af7"
+                        android:textSize="17sp"
+                        app:fontFamily="@font/open_sans" />
+                </LinearLayout>
+
+
             </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
 
-
-        </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/m_fab"

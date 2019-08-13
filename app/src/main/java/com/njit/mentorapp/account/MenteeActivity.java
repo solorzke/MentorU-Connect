@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -54,6 +55,7 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
     private Calendar calendar;
     private DatePickerDialog date;
     private Spinner spinner;
+    private SwipeRefreshLayout refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -76,6 +78,7 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
         Toolbar toolbar = findViewById(R.id.toolbar);
         spinner = findViewById(R.id.spinner);
         full_name = findViewById(R.id.fullname);
+        refresh = findViewById(R.id.refresh_layout);
 
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -170,11 +173,19 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
                 }
             });
         }
-        else {
+        else
+        {
             disableEditAccText(editable);
             edit.setVisibility(View.INVISIBLE);
             done.setVisibility(View.INVISIBLE);
         }
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getUserInfo(mentee.getUcid());
+                refresh.setRefreshing(false);
+            }
+        });
     }
 
     /* When clicking the back button, go back to the last page. */

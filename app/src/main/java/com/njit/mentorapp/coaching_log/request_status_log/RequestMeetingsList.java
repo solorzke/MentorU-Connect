@@ -2,6 +2,7 @@ package com.njit.mentorapp.coaching_log.request_status_log;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -45,6 +46,7 @@ public class RequestMeetingsList extends AppCompatActivity
     ArrayList<ArrayList<String>> pendingArray = new ArrayList<>();
     ArrayList<ArrayList<String>> receivingArray = new ArrayList<>();
     User user;
+    private SwipeRefreshLayout refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -55,16 +57,16 @@ public class RequestMeetingsList extends AppCompatActivity
         receivedList = findViewById(R.id.received);
         p_none = findViewById(R.id.pending_empty);
         r_none = findViewById(R.id.receiving_empty);
+        refresh = findViewById(R.id.refresh_layout);
 
         /* Set visibility for warnings */
         p_none.setVisibility(View.GONE);
         r_none.setVisibility(View.GONE);
 
         /* Define the SharedPrefs based on what the user type */
-        if (Validate.isStudent(getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE)))
-            user = new User(getApplicationContext(), "Mentee");
-        else
-            user = new User(getApplicationContext(), "Mentor");
+        user = Validate.isStudent(getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE))
+                ? new User(getApplicationContext(), "Mentee")
+                : new User(getApplicationContext(), "Mentor");
 
         /* Set the toolbar */
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -120,6 +122,16 @@ public class RequestMeetingsList extends AppCompatActivity
                     intent.putExtra("responder", user.getUcid());
                     startActivity(intent);
                 }
+            }
+        });
+
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                pendingArray.clear();
+                receivingArray.clear();
+                getRequests();
+                refresh.setRefreshing(false);
             }
         });
     }

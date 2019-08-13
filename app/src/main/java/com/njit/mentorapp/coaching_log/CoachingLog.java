@@ -2,6 +2,7 @@ package com.njit.mentorapp.coaching_log;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -42,6 +43,7 @@ public class CoachingLog extends AppCompatActivity
     private ArrayList <ArrayList<String>> meetings = new ArrayList<>();
     private ListView listview;
     private User user;
+    private SwipeRefreshLayout refresh;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -49,6 +51,7 @@ public class CoachingLog extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_coaching_log);
         listview = findViewById(R.id.list);
+        refresh = findViewById(R.id.refresh_layout);
 
         /* Define the SharedPrefs based on what the user type */
         if (Validate.isStudent(getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE)))
@@ -85,6 +88,15 @@ public class CoachingLog extends AppCompatActivity
                 Intent intent = new Intent(getApplicationContext(), Meeting.class);
                 intent.putStringArrayListExtra("meeting_details", findArrayList(title, purpose));
                 startActivity(intent);
+            }
+        });
+
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                meetings.clear();
+                getMeetings();
+                refresh.setRefreshing(false);
             }
         });
     }

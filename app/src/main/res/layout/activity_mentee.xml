@@ -50,345 +50,347 @@
 
         </android.support.v7.widget.Toolbar>
 
-        <ScrollView
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/refresh_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <android.support.v4.widget.NestedScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_height="match_parent">
 
-                <android.support.constraint.ConstraintLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="10dp"
-                    android:background="#424242">
+                    android:orientation="vertical">
 
-                    <com.mikhaellopez.circularimageview.CircularImageView
-                        android:id="@+id/avi"
-                        android:layout_width="183dp"
-                        android:layout_height="183dp"
-                        android:layout_centerInParent="true"
-                        android:layout_margin="5dp"
-                        android:src="@android:drawable/sym_def_app_icon"
-                        app:civ_border_color="@android:color/black"
-                        app:civ_border_width="4dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
-                        android:id="@+id/fullname"
+                    <android.support.constraint.ConstraintLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="20dp"
-                        android:fontFamily="@android:"
-                        android:gravity="center_horizontal"
-                        android:text="@string/john"
-                        android:textColor="@android:color/background_light"
-                        android:textSize="25sp"
-                        android:textStyle="bold"
-                        app:fontFamily="@font/open_sans"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/avi" />
+                        android:layout_marginBottom="10dp"
+                        android:background="#424242">
 
-                </android.support.constraint.ConstraintLayout>
+                        <com.mikhaellopez.circularimageview.CircularImageView
+                            android:id="@+id/avi"
+                            android:layout_width="183dp"
+                            android:layout_height="183dp"
+                            android:layout_centerInParent="true"
+                            android:layout_margin="5dp"
+                            android:src="@android:drawable/sym_def_app_icon"
+                            app:civ_border_color="@android:color/black"
+                            app:civ_border_width="4dp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
+                        <TextView
+                            android:id="@+id/fullname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginBottom="20dp"
+                            android:fontFamily="@android:"
+                            android:gravity="center_horizontal"
+                            android:text="@string/john"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="25sp"
+                            android:textStyle="bold"
+                            app:fontFamily="@font/open_sans"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/avi" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/fname"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans" />
+                    </android.support.constraint.ConstraintLayout>
 
-                    <EditText
-                        android:id="@+id/fname"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:hint="@string/fname_hint"
-                        android:textSize="20sp"
-                        android:enabled="false"
-                        android:inputType="text"/>
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/fname"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/open_sans" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#dbdde0" />
+                        <EditText
+                            android:id="@+id/fname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:enabled="false"
+                            android:hint="@string/fname_hint"
+                            android:inputType="text"
+                            android:textSize="20sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lname"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#dbdde0" />
 
-                    <EditText
-                        android:id="@+id/lname"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:hint="@string/lname_hint"
-                        android:textSize="20sp"
-                        android:enabled="false"
-                        android:inputType="text"/>
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/lname"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/open_sans" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#dbdde0" />
+                        <EditText
+                            android:id="@+id/lname"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:enabled="false"
+                            android:hint="@string/lname_hint"
+                            android:inputType="text"
+                            android:textSize="20sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/ucid_text"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#dbdde0" />
 
-                    <TextView
-                        android:id="@+id/acc_stu_ucid_1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:textSize="20sp" />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#dbdde0" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/age_text"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans" />
-
-                    <EditText
-                        android:id="@+id/age"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="@string/num_def"
-                        android:inputType="number"
-                        android:enabled="false"
-                        android:textSize="20sp"
-                        android:layout_marginStart="5dp" />
-
-                </LinearLayout>
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#dbdde0" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/birthday"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans" />
-
-                    <EditText
-                        android:inputType="text"
-                        android:id="@+id/bday"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:cursorVisible="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="@string/date"
-                        android:textSize="20sp"
-                        android:layout_marginStart="5dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#dbdde0" />
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/email_text"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans" />
-
-                    <EditText
-                        android:inputType="textEmailAddress"
-                        android:id="@+id/acc_stu_email_1"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/email"
-                        android:textSize="20sp"
-                        android:layout_marginStart="5dp"
-                        />
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/ucid_text"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/open_sans" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#dbdde0" />
+                        <TextView
+                            android:id="@+id/acc_stu_ucid_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:textSize="20sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/degree"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#dbdde0" />
 
-                    <EditText
-                        android:inputType="text"
-                        android:id="@+id/acc_stu_degree_1"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="@string/current_deg"
-                        android:textSize="20sp"
-                        android:layout_marginStart="5dp"
-                        />
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
 
-                </LinearLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/age_text"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/open_sans" />
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#dbdde0" />
+                        <EditText
+                            android:id="@+id/age"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:enabled="false"
+                            android:hint="@string/num_def"
+                            android:inputType="number"
+                            android:textSize="20sp" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
+                    </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/grade_level_hint"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp" />
 
-                    <TextView
-                        android:id="@+id/grade"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="20sp" />
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#dbdde0" />
 
-                    <Spinner
-                        android:id="@+id/spinner"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:clickable="false"
-                        android:layout_marginStart="5dp"
-                        />
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_gravity="center"
-                    android:background="#dbdde0" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/grad_date_text"
-                        android:textColor="@android:color/background_dark"
-                        android:textSize="20sp"
-                        app:fontFamily="@font/open_sans" />
-
-                    <EditText
-                        android:inputType="text"
-                        android:id="@+id/grad_date"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:cursorVisible="false"
-                        android:focusableInTouchMode="false"
-                        android:hint="@string/grad_date"
-                        android:textSize="20sp"
-                        android:layout_marginStart="5dp"
-                        />
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/birthday"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/open_sans" />
+
+                        <EditText
+                            android:id="@+id/bday"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:cursorVisible="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/date"
+                            android:inputType="text"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#dbdde0" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/email_text"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/open_sans" />
+
+                        <EditText
+                            android:id="@+id/acc_stu_email_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:hint="@string/email"
+                            android:inputType="textEmailAddress"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#dbdde0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/degree"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/open_sans" />
+
+                        <EditText
+                            android:id="@+id/acc_stu_degree_1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:hint="@string/current_deg"
+                            android:inputType="text"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#dbdde0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/grade_level_hint"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/grade"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="20sp" />
+
+                        <Spinner
+                            android:id="@+id/spinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:clickable="false" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_gravity="center"
+                        android:background="#dbdde0" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/grad_date_text"
+                            android:textColor="@android:color/background_dark"
+                            android:textSize="20sp"
+                            app:fontFamily="@font/open_sans" />
+
+                        <EditText
+                            android:id="@+id/grad_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="5dp"
+                            android:cursorVisible="false"
+                            android:focusableInTouchMode="false"
+                            android:hint="@string/grad_date"
+                            android:inputType="text"
+                            android:textSize="20sp" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
+            </android.support.v4.widget.NestedScrollView>
 
-            </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.SwipeRefreshLayout>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

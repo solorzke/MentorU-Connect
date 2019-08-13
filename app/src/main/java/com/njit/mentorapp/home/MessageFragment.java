@@ -10,6 +10,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,7 +43,6 @@ import com.njit.mentorapp.sidebar.SideBar;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
 import com.squareup.picasso.Picasso;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -59,6 +59,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
     private Mentee mentee;
     private String sender, receiver;
     private ConstraintLayout bar;
+    private SwipeRefreshLayout refresh;
     boolean up = false, down = false;
 
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
@@ -79,6 +80,7 @@ public class MessageFragment extends Fragment implements View.OnClickListener
         report = view.findViewById(R.id.report);
         share = view.findViewById(R.id.share);
         bar = view.findViewById(R.id.bar);
+        refresh = view.findViewById(R.id.refresh_layout);
         mentor = new Mentor(view.getContext());
         mentee = new Mentee(view.getContext());
         return view;
@@ -125,6 +127,14 @@ public class MessageFragment extends Fragment implements View.OnClickListener
             sender = mentor.getUcid();
             receiver = mentee.getUcid();
         }
+
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMessage(sender, receiver, view);
+                refresh.setRefreshing(false);
+            }
+        });
     }
 
     @Override

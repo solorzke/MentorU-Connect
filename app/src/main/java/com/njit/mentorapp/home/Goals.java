@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +54,7 @@ public class Goals extends Fragment implements View.OnClickListener
     LinearLayout goals_layout;
     private Mentee mentee;
     private Mentor mentor;
+    private SwipeRefreshLayout refresh;
 
     @Nullable
     @Override
@@ -63,6 +65,7 @@ public class Goals extends Fragment implements View.OnClickListener
         mentor = new Mentor(view.getContext());
         USER_TYPE = getActivity().getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
         fab = view.findViewById(R.id.m_fab);
+        refresh = view.findViewById(R.id.refresh_layout);
         notifyText = NotificationText.goal(mentee.getUcid());
 
         CHECKMARK_1 = view.findViewById(R.id.checkmark1);
@@ -95,73 +98,7 @@ public class Goals extends Fragment implements View.OnClickListener
     public void onStart() {
         super.onStart();
         changeSemesterYear(SEMESTER);
-        RequestQueue queue = Volley.newRequestQueue(view.getContext());
-        StringRequest stringRequest_2 = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Log.d("DEBUG_OUTPUT","Server Response: "+response);
-                        if (response.equals("empty")) {
-                            String no_goal = "No new goals from " + mentor.getFname();
-                            GOAL_1.setText(no_goal);
-                            GOAL_2.setText(no_goal);
-                            GOAL_3.setText(no_goal);
-                            GOAL_4.setText(no_goal);
-                            goals_layout.setVisibility(View.GONE);
-                            no_goals.setVisibility(View.VISIBLE);
-                            CHECKMARK_1.setEnabled(false);
-                            CHECKMARK_2.setEnabled(false);
-                            CHECKMARK_3.setEnabled(false);
-                            CHECKMARK_4.setEnabled(false);
-                        } else {
-                            no_goals.setVisibility(View.GONE);
-                            goals_layout.setVisibility(View.VISIBLE);
-                            String[] goals = response.split("\\|");
-                            c1 = loadGoal(goals[0], GOAL_1, CHECKMARK_1);
-                            c2 = loadGoal(goals[1], GOAL_2, CHECKMARK_2);
-                            c3 = loadGoal(goals[2], GOAL_3, CHECKMARK_3);
-                            c4 = loadGoal(goals[3], GOAL_4, CHECKMARK_4);
-                            Log.d("DEBUG_OUTPUT","Server Response: "+Arrays.toString(goals));
-                            percentageComplete(PERCENT);
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error)
-            {
-                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
-                error.printStackTrace();
-                if(error instanceof TimeoutError)
-                    Toast.makeText(
-                            view.getContext(),
-                            "Request timed out. Check your network settings.",
-                            Toast.LENGTH_SHORT
-                    ).show();
-                else if(error instanceof NetworkError)
-                    Toast.makeText(
-                            view.getContext(),
-                            "Can't connect to the internet",
-                            Toast.LENGTH_SHORT
-                    ).show();
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                params.put("action", "getGoals");
-                params.put("ucid", mentee.getUcid());
-                params.put("mentor", mentor.getUcid());
-                return params;
-            }
-        };
-
-        queue.add(stringRequest_2);
-        stringRequest_2.setRetryPolicy(new DefaultRetryPolicy(
-                3000,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
-        );
-
+        getGoals();
         if (!isStudent(USER_TYPE)) {
             fab.show();
             fab.setOnClickListener(new View.OnClickListener() {
@@ -178,6 +115,13 @@ public class Goals extends Fragment implements View.OnClickListener
         }
 
         weeksLeft(SEMESTER);
+        refresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getGoals();
+                refresh.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -528,6 +472,77 @@ public class Goals extends Fragment implements View.OnClickListener
         };
         queue.add(request);
         request.setRetryPolicy(new DefaultRetryPolicy(
+                3000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
+    }
+
+    /* Get the goals and status' for each goal from the server */
+    private void getGoals()
+    {
+        RequestQueue queue = Volley.newRequestQueue(view.getContext());
+        StringRequest stringRequest_2 = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        Log.d("DEBUG_OUTPUT","Server Response: "+response);
+                        if (response.equals("empty")) {
+                            String no_goal = "No new goals from " + mentor.getFname();
+                            GOAL_1.setText(no_goal);
+                            GOAL_2.setText(no_goal);
+                            GOAL_3.setText(no_goal);
+                            GOAL_4.setText(no_goal);
+                            goals_layout.setVisibility(View.GONE);
+                            no_goals.setVisibility(View.VISIBLE);
+                            CHECKMARK_1.setEnabled(false);
+                            CHECKMARK_2.setEnabled(false);
+                            CHECKMARK_3.setEnabled(false);
+                            CHECKMARK_4.setEnabled(false);
+                        } else {
+                            no_goals.setVisibility(View.GONE);
+                            goals_layout.setVisibility(View.VISIBLE);
+                            String[] goals = response.split("\\|");
+                            c1 = loadGoal(goals[0], GOAL_1, CHECKMARK_1);
+                            c2 = loadGoal(goals[1], GOAL_2, CHECKMARK_2);
+                            c3 = loadGoal(goals[2], GOAL_3, CHECKMARK_3);
+                            c4 = loadGoal(goals[3], GOAL_4, CHECKMARK_4);
+                            Log.d("DEBUG_OUTPUT","Server Response: "+Arrays.toString(goals));
+                            percentageComplete(PERCENT);
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
+                error.printStackTrace();
+                if(error instanceof TimeoutError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Request timed out. Check your network settings.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                else if(error instanceof NetworkError)
+                    Toast.makeText(
+                            view.getContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("action", "getGoals");
+                params.put("ucid", mentee.getUcid());
+                params.put("mentor", mentor.getUcid());
+                return params;
+            }
+        };
+
+        queue.add(stringRequest_2);
+        stringRequest_2.setRetryPolicy(new DefaultRetryPolicy(
                 3000,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
