@@ -26,14 +26,27 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.service.FireBaseServer;
+import com.njit.mentorapp.model.service.MySingleton;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.SetAviActivity;
+import com.njit.mentorapp.model.tools.VolleyCallback;
 import com.njit.mentorapp.model.users.Mentee;
+import com.njit.mentorapp.model.users.Mentor;
+import com.njit.mentorapp.model.users.ReceivingUser;
+import com.njit.mentorapp.model.users.UserType;
+import com.njit.mentorapp.sidebar.SideBar;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -85,20 +98,7 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
         toolbar.setTitle("Mentee");
-
-        String fullname = mentee.getFname() + " " + mentee.getLname();
-        fname.setText(mentee.getFname());
-        lname.setText(mentee.getLname());
-        this.full_name.setText(fullname);
-        ucid.setText(mentee.getUcid());
-        email.setText(mentee.getEmail());
-        degree.setText(mentee.getDegree());
-        age.setText(mentee.getAge());
-        bday.setText(DateTimeFormat.formatDate(mentee.getBirthday()));
-        setDefaultGradeLevel(mentee);
-        grad_date.setText(DateTimeFormat.formatDate(mentee.getGrad_date()));
-        if(!mentee.getAvi().equals(""))
-            Picasso.get().load(mentee.getAvi()).into(avi);
+        getUserInfo(mentee.getUcid());
     }
 
     @Override
@@ -211,7 +211,7 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
 
     private void disableEditAccText(EditText [] editables)
     {
-        /* Editable [] => ['name', 'email', 'degree', 'age', 'birthday', 'grad_date']; */
+        /* Editable [] => ['fname', 'lname', 'email', 'degree', 'age', 'bday', 'grad_date']; */
 
         for(EditText editable : editables)
         {
@@ -225,7 +225,7 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
 
     private void enableEditAccText(EditText [] editables)
     {
-        /* Editable [] => ['name', 'email', 'degree', 'age', 'birthday', 'grad_date']; */
+        /* Editable [] => ['fname', 'lname', 'email', 'degree', 'age', 'bday', 'grad_date']; */
 
         for(EditText editable : editables)
         {
@@ -234,8 +234,8 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
             editable.setCursorVisible(true);
             editable.setBackgroundColor(Color.TRANSPARENT);
         }
-        editables[4].setFocusableInTouchMode(false);
         editables[5].setFocusableInTouchMode(false);
+        editables[6].setFocusableInTouchMode(false);
         spinner.setClickable(true);
     }
 
@@ -346,5 +346,79 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
             default:
                 break;
         }
+    }
+
+    /* Retrieve the user's info and their mentorship partner's info and save it into a new SharedPrefs */
+    private void getUserInfo(final String user)
+    {
+        Map<String, String> params = new HashMap<>();
+        params.put("action", "getUserInfo");
+        params.put("user", user);
+
+        JSONObject parameters = new JSONObject(params);
+
+        JsonObjectRequest jReq = new JsonObjectRequest(
+                Request.Method.POST,
+                WebServer.getQueryLink(),
+                parameters,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            Log.d("DEBUG_OUTPUT","Server Response: "+response);
+                            JSONArray array = response.getJSONArray("record");
+
+                            /* Store Mentee data into SharedPrefs */
+                            JSONObject record = array.getJSONObject(0);
+                            Mentee mentee = new Mentee(getApplicationContext(), record);
+                            String fullname = mentee.getFname() + " " + mentee.getLname();
+                            fname.setText(mentee.getFname());
+                            lname.setText(mentee.getLname());
+                            full_name.setText(fullname);
+                            ucid.setText(mentee.getUcid());
+                            email.setText(mentee.getEmail());
+                            degree.setText(mentee.getDegree());
+                            age.setText(mentee.getAge());
+                            bday.setText(DateTimeFormat.formatDate(mentee.getBirthday()));
+                            setDefaultGradeLevel(mentee);
+                            grad_date.setText(DateTimeFormat.formatDate(mentee.getGrad_date()));
+                            if(!mentee.getAvi().equals(""))
+                                Picasso.get().load(mentee.getAvi()).into(avi);
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
+                error.printStackTrace();
+                if(error instanceof TimeoutError) {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Request timed out. Try Again.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    onBackPressed();
+                }
+                else if(error instanceof NetworkError) {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    onBackPressed();
+                }
+            }
+        });
+
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jReq);
+        jReq.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 }

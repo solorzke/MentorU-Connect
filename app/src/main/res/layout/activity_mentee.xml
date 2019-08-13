@@ -22,7 +22,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginRight="5dp">
+                android:layout_marginEnd="5dp">
 
                 <TextView
                     android:id="@+id/edit_acc_btn"
@@ -118,6 +118,7 @@
                         android:id="@+id/fname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:hint="@string/fname_hint"
                         android:textSize="20sp"
                         android:enabled="false"
@@ -149,6 +150,7 @@
                         android:id="@+id/lname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:hint="@string/lname_hint"
                         android:textSize="20sp"
                         android:enabled="false"
@@ -180,6 +182,7 @@
                         android:id="@+id/acc_stu_ucid_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
                         android:textSize="20sp" />
 
                 </LinearLayout>
@@ -190,6 +193,38 @@
                     android:layout_gravity="center"
                     android:background="#dbdde0" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/age_text"
+                        android:textColor="@android:color/background_dark"
+                        android:textSize="20sp"
+                        app:fontFamily="@font/open_sans" />
+
+                    <EditText
+                        android:id="@+id/age"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/num_def"
+                        android:inputType="number"
+                        android:enabled="false"
+                        android:textSize="20sp"
+                        android:layout_marginStart="5dp" />
+
+                </LinearLayout>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_gravity="center"
+                    android:background="#dbdde0" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -213,7 +248,9 @@
                         android:cursorVisible="false"
                         android:focusableInTouchMode="false"
                         android:hint="@string/date"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:layout_marginStart="5dp"
+                        />
 
                 </LinearLayout>
 
@@ -244,7 +281,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/email"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:layout_marginStart="5dp"
+                        />
 
                 </LinearLayout>
 
@@ -274,7 +313,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/current_deg"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:layout_marginStart="5dp"
+                        />
 
                 </LinearLayout>
 
@@ -307,7 +348,9 @@
                         android:id="@+id/spinner"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:clickable="false" />
+                        android:clickable="false"
+                        android:layout_marginStart="5dp"
+                        />
 
                 </LinearLayout>
 
@@ -339,7 +382,9 @@
                         android:cursorVisible="false"
                         android:focusableInTouchMode="false"
                         android:hint="@string/grad_date"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:layout_marginStart="5dp"
+                        />
 
                 </LinearLayout>
 
