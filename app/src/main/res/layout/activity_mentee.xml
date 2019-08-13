@@ -72,7 +72,7 @@
                         android:layout_centerInParent="true"
                         android:layout_margin="5dp"
                         android:src="@android:drawable/sym_def_app_icon"
-                        app:civ_border_color="#d44242"
+                        app:civ_border_color="@android:color/black"
                         app:civ_border_width="4dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
