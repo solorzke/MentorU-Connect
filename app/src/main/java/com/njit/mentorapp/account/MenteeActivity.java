@@ -30,23 +30,15 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.njit.mentorapp.R;
-import com.njit.mentorapp.model.service.FireBaseServer;
 import com.njit.mentorapp.model.service.MySingleton;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.SetAviActivity;
-import com.njit.mentorapp.model.tools.VolleyCallback;
 import com.njit.mentorapp.model.users.Mentee;
-import com.njit.mentorapp.model.users.Mentor;
-import com.njit.mentorapp.model.users.ReceivingUser;
-import com.njit.mentorapp.model.users.UserType;
-import com.njit.mentorapp.sidebar.SideBar;
 import com.squareup.picasso.Picasso;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -353,6 +345,7 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
     {
         Map<String, String> params = new HashMap<>();
         params.put("action", "getUserInfo");
+        params.put("type", "mentee");
         params.put("user", user);
 
         JSONObject parameters = new JSONObject(params);

@@ -21,15 +21,20 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.mikhaellopez.circularimageview.CircularImageView;
 import com.njit.mentorapp.R;
+import com.njit.mentorapp.model.service.MySingleton;
 import com.njit.mentorapp.model.tools.DateTimeFormat;
 import com.njit.mentorapp.model.service.WebServer;
 import com.njit.mentorapp.model.tools.SetAviActivity;
 import com.njit.mentorapp.model.users.Mentor;
 import com.squareup.picasso.Picasso;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -67,6 +72,7 @@ public class MentorActivity extends AppCompatActivity
         full_name = findViewById(R.id.fullname);
         mentor = new Mentor(getApplicationContext());
 
+        /* Set the toolbar */
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar() != null) {
@@ -75,20 +81,8 @@ public class MentorActivity extends AppCompatActivity
         }
         toolbar.setTitle("Mentor");
 
-        if(!mentor.getAvi().equals(""))
-            Picasso.get().load(mentor.getAvi()).into(AVI);
-        FNAME.setText(mentor.getFname());
-        LNAME.setText(mentor.getLname());
-        full_name.setText(mentor.getFullName());
-        MTR_EMAIL.setText(mentor.getEmail());
-        MTR_UCID.setText(mentor.getUcid());
-        MTR_DATE.setText(DateTimeFormat.formatDate(mentor.getGrad_date()));
-        MTR_DEGREE.setText(mentor.getDegree());
-        MTR_OCC.setText(mentor.getOccupation());
-        MTR_MENTEE.setText(mentor.getMentee());
-        AGE.setText(mentor.getAge());
-        BDAY.setText(DateTimeFormat.formatDate(mentor.getBirthday()));
-
+        /* Get the mentor's info from the DB */
+        getUserInfo(mentor.getUcid());
         list = new EditText [] {FNAME, LNAME, MTR_EMAIL, MTR_DATE, MTR_DEGREE, MTR_OCC, AGE, BDAY};
     }
 
@@ -190,6 +184,7 @@ public class MentorActivity extends AppCompatActivity
         }
     }
 
+    /* Check if the avi was changed recently */
     @Override
     protected void onRestart() {
         super.onRestart();
@@ -197,6 +192,7 @@ public class MentorActivity extends AppCompatActivity
             Picasso.get().load(mentor.getAvi()).into(AVI);
     }
 
+    /* Enable or disable editing based on the user type */
     private void editText(EditText [] texts, boolean edit)
     {
         if(edit)
@@ -207,11 +203,13 @@ public class MentorActivity extends AppCompatActivity
                 text.setEnabled(false);
     }
 
+    /* Define who the user type is */
     private boolean isMentor(SharedPreferences type)
     {
         return type.getString("type", null).equals("mentor");
     }
 
+    /* Update the shared preferences with the latest changes made */
     private void updateSharedPrefs(Mentor mentor, EditText [] texts)
     {
         mentor.setFname(texts[0].getText().toString());
@@ -225,6 +223,7 @@ public class MentorActivity extends AppCompatActivity
         full_name.setText(mentor.getFullName());
     }
 
+    /* Update the changes of the user info to the web server */
     private void updateChanges(final Mentor mentor, String url)
     {
         RequestQueue queue = Volley.newRequestQueue(this);
@@ -276,11 +275,88 @@ public class MentorActivity extends AppCompatActivity
         );
     }
 
+    /* Post a toast message */
     private void postToast()
     {
         CharSequence text = "Updated Changes.";
         int duration = Toast.LENGTH_SHORT;
         Toast toast = Toast.makeText(this, text, duration);
         toast.show();
+    }
+
+    /* Retrieve the user's info and their mentorship partner's info and save it into a new SharedPrefs */
+    private void getUserInfo(final String user)
+    {
+        Map<String, String> params = new HashMap<>();
+        params.put("action", "getUserInfo");
+        params.put("type", "mentor");
+        params.put("user", user);
+
+        JSONObject parameters = new JSONObject(params);
+
+        JsonObjectRequest jReq = new JsonObjectRequest(
+                Request.Method.POST,
+                WebServer.getQueryLink(),
+                parameters,
+                new Response.Listener<JSONObject>()
+                {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            Log.d("DEBUG_OUTPUT","Server Response: "+response);
+                            JSONArray array = response.getJSONArray("record_m");
+
+                            /* Store Mentee data into SharedPrefs */
+                            JSONObject record = array.getJSONObject(0);
+                            Mentor mentor = new Mentor(getApplicationContext(), record);
+                            /* Set the AVI and User Info */
+                            if(!mentor.getAvi().equals(""))
+                                Picasso.get().load(mentor.getAvi()).into(AVI);
+                            FNAME.setText(mentor.getFname());
+                            LNAME.setText(mentor.getLname());
+                            full_name.setText(mentor.getFullName());
+                            MTR_EMAIL.setText(mentor.getEmail());
+                            MTR_UCID.setText(mentor.getUcid());
+                            MTR_DATE.setText(DateTimeFormat.formatDate(mentor.getGrad_date()));
+                            MTR_DEGREE.setText(mentor.getDegree());
+                            MTR_OCC.setText(mentor.getOccupation());
+                            MTR_MENTEE.setText(mentor.getMentee());
+                            AGE.setText(mentor.getAge());
+                            BDAY.setText(DateTimeFormat.formatDate(mentor.getBirthday()));
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.d("DEBUG_OUTPUT","Volley Error: "+error);
+                error.printStackTrace();
+                if(error instanceof TimeoutError) {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Request timed out. Try Again.",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    onBackPressed();
+                }
+                else if(error instanceof NetworkError) {
+                    Toast.makeText(
+                            getApplicationContext(),
+                            "Can't connect to the internet",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    onBackPressed();
+                }
+            }
+        });
+
+        MySingleton.getInstance(getApplicationContext()).addToRequestQueue(jReq);
+        jReq.setRetryPolicy(new DefaultRetryPolicy(
+                5000,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT)
+        );
     }
 }
