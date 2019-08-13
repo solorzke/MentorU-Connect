@@ -68,6 +68,7 @@ public class SideBar extends AppCompatActivity implements NavigationView.OnNavig
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sidebar);
         navigationView = findViewById(R.id.nav_view);

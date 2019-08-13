@@ -41,6 +41,7 @@ public class VerifyReportActivity extends AppCompatActivity implements View.OnCl
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_report);
         q_1 = findViewById(R.id.q_1);

@@ -36,6 +36,7 @@ public class RequestTabLayout extends AppCompatActivity
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_status);
         viewPager = findViewById(R.id.viewPager);

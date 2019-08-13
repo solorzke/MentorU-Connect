@@ -38,6 +38,7 @@ public class EditGoals extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_goals);
         g1 = findViewById(R.id.g1);

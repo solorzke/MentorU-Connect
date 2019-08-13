@@ -48,6 +48,7 @@ public class RequestMeeting extends AppCompatActivity implements View.OnClickLis
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_request_meeting);
         SharedPreferences user_type = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);

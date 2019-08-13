@@ -17,6 +17,7 @@ public class TermsAndConditions extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_terms_and_conditions);
         webview = findViewById(R.id.webview);

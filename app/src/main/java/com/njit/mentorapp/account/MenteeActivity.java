@@ -60,6 +60,7 @@ public class MenteeActivity extends AppCompatActivity implements AdapterView.OnI
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mentee);
         USER_TYPE = getSharedPreferences("USER_TYPE", Context.MODE_PRIVATE);
