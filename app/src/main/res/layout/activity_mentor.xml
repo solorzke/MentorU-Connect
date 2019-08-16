@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginRight="5dp">
+                android:layout_marginEnd="5dp">
 
                 <TextView
                     android:id="@+id/m_edit"
@@ -71,6 +71,21 @@
                         android:layout_marginBottom="10dp"
                         android:background="#424242">
 
+                        <me.ibrahimsn.particle.ParticleView
+                            android:id="@+id/particleView"
+                            android:layout_width="match_parent"
+                            android:layout_height="250dp"
+                            app:backgroundColor="@android:color/holo_orange_light"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintHorizontal_bias="0.5"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:maxParticleRadius="12"
+                            app:minParticleRadius="5"
+                            app:particleColor="@android:color/white"
+                            app:particleCount="10" />
+
                         <com.mikhaellopez.circularimageview.CircularImageView
                             android:id="@+id/picasso"
                             android:layout_width="183dp"
@@ -94,7 +109,7 @@
                             android:fontFamily="@android:"
                             android:gravity="center_horizontal"
                             android:text="@string/john"
-                            android:textColor="@android:color/background_light"
+                            android:textColor="@android:color/holo_red_light"
                             android:textSize="25sp"
                             android:textStyle="bold"
                             app:fontFamily="@font/open_sans"
