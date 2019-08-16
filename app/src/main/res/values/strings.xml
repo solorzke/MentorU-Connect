@@ -63,7 +63,7 @@
     <string name="sender_3_s">Check back later.</string>
     <string name="receiver_3_t">You\'ve received a meeting request!</string>
     <string name="receiver_3_s">Check the details.</string>
-    
+
     <string name="title_text">Title:</string>
     <string name="location">Location:</string>
     <string name="date_text">Date:</string>
@@ -72,7 +72,7 @@
     <string name="purpose">Purpose:</string>
     <string name="respond">Respond</string>
     <string name="add_calendar">Add To Calendar</string>
-    
+
     <string name="pending_requests">Your Pending Requests</string>
     <string name="no_pending_requests">No requests remaining.</string>
     <string name="received_requests">Received Requests</string>
@@ -237,11 +237,32 @@
     <string name="about_us">About Us</string>
     <string name="terms_and_cond">Terms and Conditions</string>
     <string name="privacy">Privacy Policy</string>
+    <string name="delete_acc">Delete Account</string>
 
     <!-- Progress Bar -->
     <string name="prog_title">Please Wait&#8230;</string>
     <string name="prog_subtitle">Loading into Mentor U Connect</string>
 
+    <!-- Delete Account -->
+    <string name="delete_notice_1">
+        Understand that by deleting your account, you\'ll cease to communicate with your mentor/mentee
+        through the application again. Both parties will not be able to sign in again until they are paired
+        with a new mentor/mentee, effectively ending each other\'s use with the app until then.
+        If you wish to work with him/her again, you\'ll have to consult with Mentor U about it. Your
+        goals, messages, and meeting requests/confirmed meetings will not be backed up and cannot
+        be recovered.
+    </string>
+    <string name="delete_notice_2">
+        If you choose to delete your account, understand that you are removing your account from the
+        Mentor U Connect application, not the program itself. Your account with us is still active
+        unless you want to do a full account removal. Contact the Mentor U office/email address
+        for more information.
+    </string>
+    <string name="delete_notice_3">
+        We recommend you let your mentor/mentee know about the decision ahead of time to avoid
+        confusion. If you are sure you want to remove your account with our application, click below.
+    </string>
+    <string name="delete_btn">Delete Account</string>
 
 
 </resources>

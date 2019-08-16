@@ -17,6 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Launcher"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".settings.DeleteAccountActivity"></activity>
         <activity
             android:name=".settings.AboutUs"
             android:screenOrientation="portrait" />
